@@ -9,6 +9,52 @@
       Title="TeacherCreateTestPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="40,0,0,0">
+            <Label>Namn på provet</Label>
+            <TextBox Name="txtBoxTestName"/>
+            <Label>Fråga</Label>
+            <TextBox Name="txtBoxQuestion"/>
+            <Label>Hur ska svarsalternativen vara</Label>
+            <ComboBox>
+                <ComboBoxItem Content="Enval"/>
+                <ComboBoxItem Content="Flerval"/>
+                <ComboBoxItem Content="Rangordning"/>
+                <ComboBoxItem Content="Fritext"/>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Label>Alternativ 1</Label>
+                <Label Margin="100,0,0,0">Kryssa i rätta svaret</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="txtBoxOption1" Width="170"/>
+                <CheckBox  Margin="10,0,0,0"/>
+            </StackPanel>
+            <Label>Alternativ 2</Label>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="txtBoxOption2" Width="170"/>
+                <CheckBox Margin="10,0,0,0"/>
+             </StackPanel>
+            <Label>Alternativ 3</Label>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="txtBoxOption3" Width="170"/>
+                <CheckBox Margin="10,0,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <Label>Alternativ</Label>
+                <Button Name="btnAddOption" Content="+"/>
+                <Button Name="btnRemoveOption" Content="-" Margin="10,0,0,0"/>
+            </StackPanel>
+            <Button Content="Spara fråga" Width="70" Margin="0,40,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,20,0">
+            <Label>Frågor som är tillagda</Label>
+            <ListView Name="listViewAddedQuestions"></ListView>
+            <Button Content="Spara prov" Width="70" Margin="0,40,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>
