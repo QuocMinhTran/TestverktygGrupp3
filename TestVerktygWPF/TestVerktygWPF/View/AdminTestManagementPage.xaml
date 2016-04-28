@@ -9,6 +9,26 @@
       Title="AdminTestManagementPage">
 
     <Grid>
-        
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,25,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="24" Grid.Column="0" Content="Provnamn"></Label>
+            <Label FontSize="24" Grid.Column="1" Content="Lärare"></Label>
+            <Label FontSize="24" Grid.Column="2" Content="Kurs"></Label>
+            <Label FontSize="24" Grid.Column="3" Content="Datum"></Label>
+            <Label FontSize="24" Grid.Column="4" Content="Kommentar"></Label>
+            <Label FontSize="24" Grid.Column="5" Content="Klass/Elever"></Label>
+        </Grid>
     </Grid>
 </Page>

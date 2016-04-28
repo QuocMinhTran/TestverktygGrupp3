@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="Auto" MinWidth="400">
     <Grid Background="White">
+        <Menu>
+            <MenuItem Header="Startsida"></MenuItem>
+            <MenuItem Header="Hantera Användare"></MenuItem>
+            <MenuItem Header="Hantera Prov"></MenuItem>
+            <MenuItem Header="Statistik" ></MenuItem>
+        </Menu>
+        
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
