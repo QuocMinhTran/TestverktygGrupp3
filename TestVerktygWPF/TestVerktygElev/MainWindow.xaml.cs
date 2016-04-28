@@ -23,7 +23,7 @@ namespace TestVerktygElev
         public MainWindow()
         {
             InitializeComponent();
-            _frame.Navigate(new StatisticPage());
+            _frame.Navigate(new ElevTestPage());
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

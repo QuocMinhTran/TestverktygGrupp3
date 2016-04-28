@@ -8,7 +8,33 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ElevTestPage">
 
-    <Grid>
-        
+    <Grid Background="White">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0">
+            <TextBlock>Tests Namn</TextBlock>
+            <TextBlock>Tid</TextBlock>
+            <TextBlock>Antal frågor</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right">
+            <TextBlock>Tid kvar</TextBlock>
+            <TextBlock>Fråga 6</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock FontSize="30" HorizontalAlignment="Left">Fråga</TextBlock>
+            <StackPanel Name="splAnswers">
+                <RadioButton></RadioButton>
+                <RadioButton></RadioButton>
+                <RadioButton></RadioButton>
+                <RadioButton></RadioButton>
+            </StackPanel>
+            <StackPanel x:Name="dplButtons" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="100"  Margin="10,0,10,0" Content="Förgående"/>
+                
+                <Button Width="100"  Margin="10,0,10,0" Content="Nästa"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
