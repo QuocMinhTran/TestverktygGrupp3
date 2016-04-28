@@ -23,7 +23,11 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
             _Frame.Navigate(new MainPageTeacher());
+=======
+            _Frame.Navigate(new View.AdminUserManagementPage());
+>>>>>>> bbee70b1bcbb267ea5d06ead11ac60e8fc7dcb8b
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

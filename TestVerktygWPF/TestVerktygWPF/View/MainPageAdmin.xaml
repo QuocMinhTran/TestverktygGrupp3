@@ -16,12 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0">
-            <MenuItem Header="Startsida"></MenuItem>
-            <MenuItem Header="Hantera Användare"></MenuItem>
-            <MenuItem Header="Hantera Prov"></MenuItem>
-            <MenuItem Header="Statistik" ></MenuItem>
-        </Menu>
+
         <!--<Image Grid.Row="1" Width="100" Height="100" Source=""></Image>-->
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Välkommen"></TextBlock>
     </Grid>
