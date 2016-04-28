@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="Auto" MinWidth="400">
     <Grid Background="White">
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel Margin="10" Grid.Column="1" Grid.Row="1">
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>-->
+        <!--<StackPanel Margin="10" Grid.Column="1" Grid.Row="1">
             <Image Source="Assets/Images/NewtonLogo.png" HorizontalAlignment="Center" Grid.Row="0" Stretch="None" />
             <TextBlock Text="Välkommen till Newtons automatiska provtagare!" HorizontalAlignment="Center" FontSize="20" Margin="10,10"/>
             <Label Content="Användarnamn" Margin="10,10" FontSize="20"/>
@@ -24,6 +24,7 @@
             <Label Content="Lösenord" Margin="10,10" FontSize="20"/>
             <TextBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
             <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
-        </StackPanel>
+        </StackPanel>-->
+        <Frame x:Name="_Frame"></Frame>
     </Grid>
 </Window>
