@@ -23,8 +23,7 @@ namespace TestVerktygElev
         public MainWindow()
         {
             InitializeComponent();
-            //hej
-            _Frame.Navigate(new TestPage());
+            
         }
     }
 }

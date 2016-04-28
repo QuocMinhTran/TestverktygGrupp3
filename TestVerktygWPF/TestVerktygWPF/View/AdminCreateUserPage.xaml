@@ -9,6 +9,6 @@
       Title="AdminCreateUserPage">
 
     <Grid>
-        
+        <TextBox Text="hej"></TextBox>
     </Grid>
 </Page>
