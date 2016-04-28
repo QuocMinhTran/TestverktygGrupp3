@@ -14,16 +14,32 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
+        <TextBlock Name="TextBlockUserWelcome"
+                   Text="Välkommmen (elev)"
+                   FontSize="18"
+                   Grid.Column="0"
+                   Grid.Row="0" />
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
             <Label Content="Prov som ska göras" FontSize="14" />
             <DataGrid Name="IncompleteTests" Grid.Column="0" Grid.Row="0" />
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" />
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
+            <Label Content="Genomförda prov" FontSize="14" />
+            <DataGrid Name="CompletedTests"></DataGrid>
+        </StackPanel>
 
-        <Button Name="btnLogOut" Click="btnLogOut_Click" Content="Logga ut" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,10" />
+        <Button Name="btnLogOut" 
+                Click="btnLogOut_Click" 
+                Content="Logga ut" 
+                Grid.Column="0" 
+                Grid.Row="2" 
+                HorizontalAlignment="Left" 
+                Margin="10,10" />
     </Grid>
 </Page>
