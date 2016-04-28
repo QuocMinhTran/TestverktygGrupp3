@@ -23,6 +23,7 @@ namespace TestVerktygElev
         public MainWindow()
         {
             InitializeComponent();
+            //hej
         }
     }
 }
