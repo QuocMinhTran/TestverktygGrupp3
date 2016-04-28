@@ -25,5 +25,16 @@ namespace TestVerktygWPF
             InitializeComponent();
             _Frame.Navigate(new View.MainPageAdmin());
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: send UserName and Password to database and login if there is a match
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Enter))
+                btnLogin_Click(sender, e);
+        }
     }
 }
