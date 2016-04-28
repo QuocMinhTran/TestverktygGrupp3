@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestVerktygElev.View
+namespace TestVerktygElev
 {
     /// <summary>
-    /// Interaction logic for ElevTestDetailPage.xaml
+    /// Interaction logic for ElevTestPage.xaml
     /// </summary>
-    public partial class ElevTestDetailPage : Page
+    public partial class ElevTestPage : Page
     {
-        public ElevTestDetailPage()
+        public ElevTestPage()
         {
             InitializeComponent();
         }
