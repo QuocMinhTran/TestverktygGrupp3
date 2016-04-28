@@ -24,6 +24,7 @@ namespace TestVerktygElev
         {
             InitializeComponent();
             //hej
+            _Frame.Navigate(new TestPage());
         }
     }
 }
