@@ -5,10 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestVerktygElev"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <DockPanel>
-            <Frame x:Name="_Frame"></Frame>
-        </DockPanel>
+        Title="MainWindow" Height="Auto" MinWidth="400">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10" Grid.Column="1" Grid.Row="1">
+            <Image Source="Assets/Images/NewtonLogo.png" HorizontalAlignment="Center" Grid.Row="0" Stretch="None" />
+            <TextBlock Text="Välkommen till Newtons automatiska provtagare!" HorizontalAlignment="Center" />
+            <Label Content="Användarnamn" />
+            <TextBox Name="txtBoxUserNameInput" KeyDown="TextBlock_KeyDown" Width="Auto" />
+            <Label Content="Lösenord" />
+            <TextBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBlock_KeyDown" />
+            <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Window>
