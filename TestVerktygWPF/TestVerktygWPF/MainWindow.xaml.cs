@@ -24,7 +24,7 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
-            _Frame.Navigate(new View.StatistikDetailPage());
+            _Frame.Navigate(new View.AdminTestDetailManagementPage());
 
         }
 
