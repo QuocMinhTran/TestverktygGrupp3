@@ -23,6 +23,10 @@ namespace TestVerktygElev
         public ElevTestPage()
         {
             InitializeComponent();
+            var db = new Model1
+            {
+
+            };
         }
     }
 }

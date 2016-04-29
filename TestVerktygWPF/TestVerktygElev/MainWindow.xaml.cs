@@ -25,8 +25,9 @@ namespace TestVerktygElev
         {
             InitializeComponent();
 
-            _frame.Navigate(new MainPage());            
-
+            _frame.Navigate(new MainPage());
+            
+                
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
