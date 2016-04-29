@@ -9,6 +9,20 @@
       Title="AdminTestDetailManagementPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <TextBlock Name="TextBlockTestName" Text="Namn på provet"/>
+            <TextBlock Name="TextBlockCourse" Text="Kurs"/>
+            <TextBlock Name="TextBlockTeacherName" Text="Lärare"/>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <ListView Name="ListViewQuestionAndAnswer"/>
+                <TextBox Name="TextBoxAdminFeedback" Text="Admins Kommentarer"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Button Name="BtnSendBackToTeacher" Content="Skicka till Lärare"/>
+                <Button Name="BtnSendTestToStudent" Content="Skicka till Elever" Margin="10,0,0,0"/>
+            </StackPanel>
+        </StackPanel>
+
+
     </Grid>
 </Page>
