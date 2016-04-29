@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="Auto" MinWidth="400">
     <Grid Background="White">
-        <Menu>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
             <MenuItem Header="Startsida"></MenuItem>
             <MenuItem Header="Hantera Användare"></MenuItem>
             <MenuItem Header="Hantera Prov"></MenuItem>
@@ -32,6 +36,6 @@
             <TextBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
             <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
         </StackPanel>-->
-        <Frame x:Name="_Frame"></Frame>
+        <Frame Grid.Row="1" x:Name="_Frame"></Frame>
     </Grid>
 </Window>
