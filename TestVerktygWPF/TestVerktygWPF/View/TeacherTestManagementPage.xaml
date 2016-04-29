@@ -9,6 +9,32 @@
       Title="TeacherTestManagementPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="20,0,20,0">
+            <Label>Välj prov ur listan för att skicka till admin</Label>
+            <ListView Name="listViewTestToSend"></ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="20,0,20,0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label Content="Tidsbegränsning (min)"/>
+            <StackPanel Orientation="Horizontal">
+             <TextBlock Name="txtBoxTestTime" Margin="0,10,10,0" Text="1"/>
+                <StackPanel Orientation="Vertical">
+                    <Button Name="btnTimeUp" Content="+"/>
+                    <Button Name="btnTimeDown" Content="-"/>
+                </StackPanel>
+            </StackPanel>
+            <Label Content="Startdatum"/>
+            <DatePicker Name="DatePickerStartDate"/>
+            <Label Content="Slutdatum"/>
+            <DatePicker Name="DatePickerEndDate"/>
+            <Label Content="Välj klass"/>
+            <ComboBox Name="cbSelectClass"></ComboBox>
+            <Label Content="Välj elev"/>
+            <ComboBox Name="cbSelectStudent"></ComboBox>
+            <Button Name="btnSendTestToAdmin" Margin="0,10,0,0" Content="Skicka till Admin"/>
+        </StackPanel>
     </Grid>
 </Page>
