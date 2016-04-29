@@ -3,7 +3,7 @@ namespace TestVerktygWPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class hej : DbMigration
+    public partial class start : DbMigration
     {
         public override void Up()
         {
