@@ -8,7 +8,10 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="FeedBackPage">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Center" MaxWidth="500">
+        <RichTextBox Margin="10,10"></RichTextBox>
+        <Button Width="100" Margin="10,10">Okej</Button>
+        </StackPanel>
     </Grid>
 </Page>
