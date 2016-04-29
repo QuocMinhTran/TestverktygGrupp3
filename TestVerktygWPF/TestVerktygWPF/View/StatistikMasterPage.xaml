@@ -9,6 +9,35 @@
       Title="StatistikMasterPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ComboBox Grid.Row="0" HorizontalAlignment="Left" >
+            <ComboBoxItem Content="--Välj klass--" IsSelected="True"  />
+        </ComboBox>
+        <ComboBox Grid.Row="0" HorizontalAlignment="Right">
+            <ComboBoxItem Content="--Välj elev--" IsSelected="True"/>
+        </ComboBox>
+        <StackPanel x:Name="spClass" Grid.Row="1" Visibility="Hidden">
+            <TextBlock Text="Namn på provet:">
+                <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
+            </TextBlock>
+            <TextBlock Text="Genomsnitts tid på provet">
+                <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
+            </TextBlock>
+            <TextBlock Text="Elev och Betyg">
+                <TextBlock Text="Bind Elev och betyg"></TextBlock>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="spStudent" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock x:Name="tbTestName" Margin="10,0" Text="Provnamn"/>
+            <TextBlock x:Name="tbGrade" Margin="10,0" Text="Betyg"/>
+            <TextBlock x:Name="tbDate" Margin="10,0" Text="Datum"/>
+            <TextBlock x:Name="tbTime" Margin="10,0" Text="Tid"/>
+        </StackPanel>
     </Grid>
 </Page>
