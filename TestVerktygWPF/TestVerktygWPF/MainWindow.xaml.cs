@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF
 {
@@ -23,7 +24,9 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-            _Frame.Navigate(new View.AdminCreateUserPage());
+            _Frame.Navigate(new View.AdminTestDetailManagementPage());
+          
+
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -35,6 +38,19 @@ namespace TestVerktygWPF
         {
             if (e.Key.Equals(Key.Enter))
                 btnLogin_Click(sender, e);
+        }
+        private void AddData()
+        {
+            using (var db = new DbModel())
+            {
+                Student xStudent = new Student();
+                xStudent.FirstName = "Hej";
+                xStudent.LasttName = "Glensson";
+                xStudent.Email = "Glenn";
+                xStudent.UserName = "ASDGF";
+                db.Students.Add(xStudent);
+                db.SaveChanges();
+            }
         }
     }
 }

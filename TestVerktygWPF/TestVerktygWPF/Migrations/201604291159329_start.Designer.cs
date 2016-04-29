@@ -6,14 +6,14 @@ namespace TestVerktygWPF.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ASdf : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
+    public sealed partial class start : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ASdf));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(start));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604281147468_ASdf"; }
+            get { return "201604291159329_start"; }
         }
         
         string IMigrationMetadata.Source
