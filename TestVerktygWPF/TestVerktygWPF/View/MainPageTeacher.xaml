@@ -8,7 +8,41 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPageTeacher">
 
-    <Grid>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Background="#EE7202">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
+                <Image Source="/TestVerktygWPF;component/Assets/Images/NewtonLogo.png" Margin="10,10,10,10" HorizontalAlignment="Center"/>
+                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Välkommen</TextBlock>
+                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Lärare</TextBlock>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ListView Name="lvMustBeGraded" HorizontalAlignment="Stretch">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="300" DisplayMemberBinding="{Binding TestName}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="TestName" >Test Namn</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding StudentId}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="StudentId" >StudentId</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Datum}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Datum" >Datum</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>

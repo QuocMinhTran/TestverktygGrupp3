@@ -9,6 +9,57 @@
       Title="AdminUserManagementPage">
 
     <Grid>
-        
+        <TabControl Margin="0,25,0,0">
+            <TabItem Header="Elev">
+                <DataGrid x:Name="dgElevDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Namn"/>
+                        <DataGridTextColumn Header="Användare"/>
+
+                        <DataGridTextColumn Header="Lösenord"/>
+                        <DataGridTextColumn Header="Email"/>
+
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Lärare">
+                <DataGrid x:Name="dgTeacherDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Namn"/>
+                        <DataGridTextColumn Header="Användare"/>
+
+                        <DataGridTextColumn Header="Lösenord"/>
+                        <DataGridTextColumn Header="Email"/>
+
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Admin">
+                <DataGrid x:Name="dgAdminDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Namn"/>
+                        <DataGridTextColumn Header="Användare"/>
+
+                        <DataGridTextColumn Header="Email"/>
+
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

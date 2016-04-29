@@ -8,7 +8,35 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="StatisticPage">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize"
+                            Value="16" />
+                    <Setter Property="Margin"
+                            Value="10,0,0,5" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Name="TextBlockTestName"
+                       Text="Provnamn" />
+            <TextBlock Name="TextBlockGrade"
+                       Text="Betyg" />
+            <TextBlock Name="TextBlockTime"
+                       Text="Tid"/>
+        </StackPanel>
+        <ListView Grid.Row="1"
+                  Name="ListViewCompletedTest"
+                  Margin="10,0"/>
+        <Button Name="btnGoBack" 
+                Content="Gå tillbaka" 
+                Grid.Row="2"
+                Width="Auto" HorizontalAlignment="Left" Margin="10"/>
+
     </Grid>
 </Page>
