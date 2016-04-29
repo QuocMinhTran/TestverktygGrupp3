@@ -3,7 +3,7 @@ namespace TestVerktygWPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ASdf : DbMigration
+    public partial class hej : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,8 @@ namespace TestVerktygWPF.Migrations
                     {
                         AdminID = c.Int(nullable: false, identity: true),
                         Password = c.String(),
-                        Name = c.String(),
+                        FirstName = c.String(),
+                        LasttName = c.String(),
                         Email = c.String(),
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
@@ -74,7 +75,8 @@ namespace TestVerktygWPF.Migrations
                     {
                         TeacherID = c.Int(nullable: false, identity: true),
                         Password = c.String(),
-                        Name = c.String(),
+                        FirstName = c.String(),
+                        LasttName = c.String(),
                         Email = c.String(),
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
@@ -99,7 +101,8 @@ namespace TestVerktygWPF.Migrations
                     {
                         StudentID = c.Int(nullable: false, identity: true),
                         Password = c.String(),
-                        Name = c.String(),
+                        FirstName = c.String(),
+                        LasttName = c.String(),
                         Email = c.String(),
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
@@ -123,7 +126,6 @@ namespace TestVerktygWPF.Migrations
                         EndDate = c.DateTime(),
                         StartDate = c.DateTime(),
                         TeacherRefFK = c.Int(nullable: false),
-                        AppData = c.String(),
                     })
                 .PrimaryKey(t => t.TestID)
                 .ForeignKey("dbo.Teachers", t => t.TeacherRefFK, cascadeDelete: true)
@@ -136,18 +138,16 @@ namespace TestVerktygWPF.Migrations
                         OptionID = c.Int(nullable: false, identity: true),
                         SelectivOption = c.String(),
                         RightAnswer = c.Boolean(nullable: false),
-                        Question_QuestionID = c.Int(),
                     })
-                .PrimaryKey(t => t.OptionID)
-                .ForeignKey("dbo.Questions", t => t.Question_QuestionID)
-                .Index(t => t.Question_QuestionID);
+                .PrimaryKey(t => t.OptionID);
             
             CreateTable(
                 "dbo.Questions",
                 c => new
                     {
                         QuestionID = c.Int(nullable: false, identity: true),
-                        Questions = c.String(),
+                        QuestionsLabel = c.String(),
+                        AppData = c.String(),
                         QuestTypeRefFK = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.QuestionID)
@@ -158,11 +158,10 @@ namespace TestVerktygWPF.Migrations
                 "dbo.QuestionTypes",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        QuestionTypeID = c.Int(nullable: false),
+                        QuestionTypeID = c.Int(nullable: false, identity: true),
                         Option = c.String(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.QuestionTypeID);
             
             CreateTable(
                 "dbo.StudentTests",
@@ -187,7 +186,7 @@ namespace TestVerktygWPF.Migrations
                         QuestionRefFk = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Questions", t => t.QuestionRefFk, cascadeDelete: true)
+                .ForeignKey("dbo.Occupations", t => t.QuestionRefFk, cascadeDelete: true)
                 .ForeignKey("dbo.Tests", t => t.TestRefFk, cascadeDelete: true)
                 .Index(t => t.TestRefFk)
                 .Index(t => t.QuestionRefFk);
@@ -197,11 +196,10 @@ namespace TestVerktygWPF.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.TestQuestions", "TestRefFk", "dbo.Tests");
-            DropForeignKey("dbo.TestQuestions", "QuestionRefFk", "dbo.Questions");
+            DropForeignKey("dbo.TestQuestions", "QuestionRefFk", "dbo.Occupations");
             DropForeignKey("dbo.StudentTests", "TestRefFk", "dbo.Tests");
             DropForeignKey("dbo.StudentTests", "StudentRefFk", "dbo.Students");
             DropForeignKey("dbo.Questions", "QuestTypeRefFK", "dbo.QuestionTypes");
-            DropForeignKey("dbo.Options", "Question_QuestionID", "dbo.Questions");
             DropForeignKey("dbo.CourseGradeClasses", "GradeClassRefID", "dbo.GradeClasses");
             DropForeignKey("dbo.Students", "GradeClass_ID", "dbo.GradeClasses");
             DropForeignKey("dbo.Students", "Tests_TestID", "dbo.Tests");
@@ -217,7 +215,6 @@ namespace TestVerktygWPF.Migrations
             DropIndex("dbo.StudentTests", new[] { "TestRefFk" });
             DropIndex("dbo.StudentTests", new[] { "StudentRefFk" });
             DropIndex("dbo.Questions", new[] { "QuestTypeRefFK" });
-            DropIndex("dbo.Options", new[] { "Question_QuestionID" });
             DropIndex("dbo.Tests", new[] { "TeacherRefFK" });
             DropIndex("dbo.Students", new[] { "GradeClass_ID" });
             DropIndex("dbo.Students", new[] { "Tests_TestID" });

@@ -67,12 +67,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201604281147468_ASdf.cs" />
-    <Compile Include="Migrations\201604281147468_ASdf.Designer.cs">
-      <DependentUpon>201604281147468_ASdf.cs</DependentUpon>
+    <Compile Include="Migrations\201604291152254_hej.cs" />
+    <Compile Include="Migrations\201604291152254_hej.Designer.cs">
+      <DependentUpon>201604291152254_hej.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\CourseGradeClass.cs" />
     <Compile Include="Model\DbModel.cs" />
+    <Compile Include="Model\GradeClass.cs" />
+    <Compile Include="Model\Occupation.cs" />
+    <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Questions.cs" />
+    <Compile Include="Model\QuestionType.cs" />
+    <Compile Include="Model\Student.cs" />
+    <Compile Include="Model\StudentTest.cs" />
+    <Compile Include="Model\Subjects.cs" />
+    <Compile Include="Model\Teacher.cs" />
+    <Compile Include="Model\Test.cs" />
+    <Compile Include="Model\TestQuestion.cs" />
+    <Compile Include="ViewModel\Repository.cs" />
+    <Compile Include="ViewModel\TestHandler.cs" />
     <Compile Include="View\AdminCreateUserPage.xaml.cs">
       <DependentUpon>AdminCreateUserPage.xaml</DependentUpon>
     </Compile>
@@ -177,8 +193,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201604281147468_ASdf.resx">
-      <DependentUpon>201604281147468_ASdf.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604291152254_hej.resx">
+      <DependentUpon>201604291152254_hej.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -194,9 +210,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Images\NewtonLogo.png" />
   </ItemGroup>
