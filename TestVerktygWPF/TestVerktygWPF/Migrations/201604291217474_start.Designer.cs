@@ -13,7 +13,7 @@ namespace TestVerktygWPF.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604291159329_start"; }
+            get { return "201604291217474_start"; }
         }
         
         string IMigrationMetadata.Source

@@ -89,11 +89,10 @@ namespace TestVerktygWPF.Migrations
                 "dbo.GradeClasses",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        GradeClassID = c.Int(nullable: false),
+                        GradeClassID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.GradeClassID);
             
             CreateTable(
                 "dbo.Students",
@@ -107,15 +106,15 @@ namespace TestVerktygWPF.Migrations
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
                         Tests_TestID = c.Int(),
-                        GradeClass_ID = c.Int(),
+                        GradeClass_GradeClassID = c.Int(),
                     })
                 .PrimaryKey(t => t.StudentID)
                 .ForeignKey("dbo.Occupations", t => t.Occupations_OccupationID)
                 .ForeignKey("dbo.Tests", t => t.Tests_TestID)
-                .ForeignKey("dbo.GradeClasses", t => t.GradeClass_ID)
+                .ForeignKey("dbo.GradeClasses", t => t.GradeClass_GradeClassID)
                 .Index(t => t.Occupations_OccupationID)
                 .Index(t => t.Tests_TestID)
-                .Index(t => t.GradeClass_ID);
+                .Index(t => t.GradeClass_GradeClassID);
             
             CreateTable(
                 "dbo.Tests",
@@ -201,7 +200,7 @@ namespace TestVerktygWPF.Migrations
             DropForeignKey("dbo.StudentTests", "StudentRefFk", "dbo.Students");
             DropForeignKey("dbo.Questions", "QuestTypeRefFK", "dbo.QuestionTypes");
             DropForeignKey("dbo.CourseGradeClasses", "GradeClassRefID", "dbo.GradeClasses");
-            DropForeignKey("dbo.Students", "GradeClass_ID", "dbo.GradeClasses");
+            DropForeignKey("dbo.Students", "GradeClass_GradeClassID", "dbo.GradeClasses");
             DropForeignKey("dbo.Students", "Tests_TestID", "dbo.Tests");
             DropForeignKey("dbo.Tests", "TeacherRefFK", "dbo.Teachers");
             DropForeignKey("dbo.Students", "Occupations_OccupationID", "dbo.Occupations");
@@ -216,7 +215,7 @@ namespace TestVerktygWPF.Migrations
             DropIndex("dbo.StudentTests", new[] { "StudentRefFk" });
             DropIndex("dbo.Questions", new[] { "QuestTypeRefFK" });
             DropIndex("dbo.Tests", new[] { "TeacherRefFK" });
-            DropIndex("dbo.Students", new[] { "GradeClass_ID" });
+            DropIndex("dbo.Students", new[] { "GradeClass_GradeClassID" });
             DropIndex("dbo.Students", new[] { "Tests_TestID" });
             DropIndex("dbo.Students", new[] { "Occupations_OccupationID" });
             DropIndex("dbo.Teachers", new[] { "Occupations_OccupationID" });
