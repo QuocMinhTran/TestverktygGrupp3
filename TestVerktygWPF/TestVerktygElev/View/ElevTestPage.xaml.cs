@@ -23,6 +23,7 @@ namespace TestVerktygElev
         public ElevTestPage()
         {
             InitializeComponent();
+            using(var db )
         }
     }
 }
