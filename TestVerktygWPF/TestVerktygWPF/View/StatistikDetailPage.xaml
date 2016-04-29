@@ -9,6 +9,13 @@
       Title="StatistikDetailPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <TextBlock Name="TextBlockTestName" Text="Namn på provet" FontWeight="Bold"/>
+            <TextBlock Name="TextBlockStudentName" Text="Elevens namn" Margin="0,5,0,0"/>
+            <TextBlock Name="TextBlockScore" Text="Antal rätt: 1/5"/>
+            <TextBlock Name="TextBlockQuestion" Text="Frågan" Margin="0,15,0,0"/>
+            <TextBlock Name="TextBlockStudentsAnswer" Text="Elevens svar" Margin="10,5,0,0"/>
+            <TextBlock Name="TextBlockCorrectAnswer" Text="Korrekta svaret" Margin="10,5,0,0"/>
+        </StackPanel>        
     </Grid>
 </Page>
