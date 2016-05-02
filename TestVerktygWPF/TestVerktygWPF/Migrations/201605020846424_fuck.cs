@@ -3,7 +3,7 @@ namespace TestVerktygWPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class nyDB : DbMigration
+    public partial class fuck : DbMigration
     {
         public override void Up()
         {
@@ -191,6 +191,7 @@ namespace TestVerktygWPF.Migrations
                 .ForeignKey("dbo.Tests", t => t.TestRefFk, cascadeDelete: true)
                 .Index(t => t.TestRefFk)
                 .Index(t => t.QuestionRefFk);
+<<<<<<< HEAD:TestVerktygWPF/TestVerktygWPF/Migrations/201605020724224_nyDB.cs
 
             CreateTable(
                 "dbo.WritenTests",
@@ -203,16 +204,36 @@ namespace TestVerktygWPF.Migrations
                     StudentRefFK = c.Int(nullable: false),
                     TestRefFK = c.Int(nullable: false),
                 })
+=======
+            
+            CreateTable(
+                "dbo.WritenTests",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Score = c.Int(nullable: false),
+                        IsTestDone = c.Boolean(nullable: false),
+                        WritenTime = c.Int(nullable: false),
+                        StudentRefFK = c.Int(nullable: false),
+                        TestRefFK = c.Int(nullable: false),
+                    })
+>>>>>>> origin/master:TestVerktygWPF/TestVerktygWPF/Migrations/201605020846424_fuck.cs
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Students", t => t.StudentRefFK, cascadeDelete: true)
                 .ForeignKey("dbo.Tests", t => t.TestRefFK, cascadeDelete: true)
                 .Index(t => t.StudentRefFK)
                 .Index(t => t.TestRefFK);
+<<<<<<< HEAD:TestVerktygWPF/TestVerktygWPF/Migrations/201605020724224_nyDB.cs
 
+=======
+            
+>>>>>>> origin/master:TestVerktygWPF/TestVerktygWPF/Migrations/201605020846424_fuck.cs
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.WritenTests", "TestRefFK", "dbo.Tests");
+            DropForeignKey("dbo.WritenTests", "StudentRefFK", "dbo.Students");
             DropForeignKey("dbo.TestQuestions", "TestRefFk", "dbo.Tests");
             DropForeignKey("dbo.TestQuestions", "QuestionRefFk", "dbo.Occupations");
             //DropForeignKey("dbo.StudentTests", "TestRefFk", "dbo.Tests");
@@ -228,6 +249,8 @@ namespace TestVerktygWPF.Migrations
             DropForeignKey("dbo.Teachers", "Occupations_OccupationID", "dbo.Occupations");
             DropForeignKey("dbo.Courses", "Subject_SubjectsID", "dbo.Subjects");
             DropForeignKey("dbo.Admins", "Occupations_OccupationID", "dbo.Occupations");
+            DropIndex("dbo.WritenTests", new[] { "TestRefFK" });
+            DropIndex("dbo.WritenTests", new[] { "StudentRefFK" });
             DropIndex("dbo.TestQuestions", new[] { "QuestionRefFk" });
             DropIndex("dbo.TestQuestions", new[] { "TestRefFk" });
             //DropIndex("dbo.StudentTests", new[] { "TestRefFk" });
@@ -243,6 +266,7 @@ namespace TestVerktygWPF.Migrations
             DropIndex("dbo.CourseGradeClasses", new[] { "CouseRefID" });
             DropIndex("dbo.CourseGradeClasses", new[] { "GradeClassRefID" });
             DropIndex("dbo.Admins", new[] { "Occupations_OccupationID" });
+            DropTable("dbo.WritenTests");
             DropTable("dbo.TestQuestions");
             //DropTable("dbo.StudentTests");
             DropTable("dbo.QuestionTypes");

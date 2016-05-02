@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Sql;
 
 namespace TestVerktygElev
 {
@@ -25,9 +26,15 @@ namespace TestVerktygElev
         {
             InitializeComponent();
 
+            AddDummyData();
             _frame.Navigate(new MainPage());
-            
                 
+        }
+
+        private void AddDummyData()
+        {
+
+            
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

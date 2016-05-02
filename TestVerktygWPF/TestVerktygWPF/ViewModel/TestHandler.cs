@@ -9,7 +9,7 @@ namespace TestVerktygWPF.ViewModel
 {
     class TestHandler
     {
-        private List<Model.Test> lxTest;
+        private List<Test> lxTest;
         public void RemoveTest()
         {
 
