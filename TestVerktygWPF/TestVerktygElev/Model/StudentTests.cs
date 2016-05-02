@@ -6,16 +6,16 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TestQuestion
+    public partial class StudentTests
     {
         public int ID { get; set; }
 
+        public int StudentRefFk { get; set; }
+
         public int TestRefFk { get; set; }
 
-        public int QuestionRefFk { get; set; }
+        public virtual Students Students { get; set; }
 
-        public virtual Question Question { get; set; }
-
-        public virtual Test Test { get; set; }
+        public virtual Tests Tests { get; set; }
     }
 }

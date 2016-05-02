@@ -6,16 +6,13 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Option
+    public partial class Options
     {
+        [Key]
         public int OptionID { get; set; }
 
         public string SelectivOption { get; set; }
 
         public bool RightAnswer { get; set; }
-
-        public int? Question_QuestionID { get; set; }
-
-        public virtual Question Question { get; set; }
     }
 }

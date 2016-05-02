@@ -6,19 +6,23 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Student
+    public partial class Students
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Students()
         {
-            StudentTests = new HashSet<StudentTest>();
+            StudentTests = new HashSet<StudentTests>();
+            WritenTests = new HashSet<WritenTests>();
         }
 
+        [Key]
         public int StudentID { get; set; }
 
         public string Password { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LasttName { get; set; }
 
         public string Email { get; set; }
 
@@ -28,15 +32,18 @@ namespace TestVerktygElev
 
         public int? Tests_TestID { get; set; }
 
-        public int? GradeClass_ID { get; set; }
+        public int? GradeClass_GradeClassID { get; set; }
 
-        public virtual GradeClass GradeClass { get; set; }
+        public virtual GradeClasses GradeClasses { get; set; }
 
-        public virtual Occupation Occupation { get; set; }
+        public virtual Occupations Occupations { get; set; }
 
-        public virtual Test Test { get; set; }
+        public virtual Tests Tests { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentTest> StudentTests { get; set; }
+        public virtual ICollection<StudentTests> StudentTests { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WritenTests> WritenTests { get; set; }
     }
 }

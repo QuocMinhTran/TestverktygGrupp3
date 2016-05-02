@@ -27,13 +27,5 @@
             <Label Content="Prov som ska göras" FontSize="14" />
             <DataGrid Name="IncompleteTests" Grid.Column="0" />
         </StackPanel>
-
-        <Button Name="btnLogOut" 
-                Click="btnLogOut_Click" 
-                Content="Logga ut" 
-                Grid.Column="0" 
-                Grid.Row="2" 
-                HorizontalAlignment="Left" 
-                Margin="10,10" />
     </Grid>
 </Page>
