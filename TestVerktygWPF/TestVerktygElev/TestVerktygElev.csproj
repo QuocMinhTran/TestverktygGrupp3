@@ -90,6 +90,7 @@
     <Compile Include="Model\Teachers.cs" />
     <Compile Include="Model\TestQuestions.cs" />
     <Compile Include="Model\Tests.cs" />
+    <Compile Include="ViewModel\MockRepo.cs" />
     <Compile Include="View\ElevTestPage.xaml.cs">
       <DependentUpon>ElevTestPage.xaml</DependentUpon>
     </Compile>
@@ -175,8 +176,12 @@
   <ItemGroup>
     <Resource Include="Assets\Images\NewtonLogo.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\TestVerktygWPF\TestVerktygWPF.csproj">
+      <Project>{0C4AAA86-1300-4D42-B04B-5B237E446BE7}</Project>
+      <Name>TestVerktygWPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
