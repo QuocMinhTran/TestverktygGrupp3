@@ -18,18 +18,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10,10">
-            <TextBlock>Namn</TextBlock>
-            <TextBox Name="tbxName"/>
+            <TextBlock>Förnamn</TextBlock>
+            <TextBox Name="tbxFirstName"/>
+            <TextBlock>Efternamn</TextBlock>
+            <TextBox Name="tbxLastName"/>
             <TextBlock>Användarnamn</TextBlock>
             <TextBox Name="tbxUsername"/>
             <TextBlock>Lösenord</TextBlock>
             <TextBox Name="tbxPassword"/>
             <TextBlock>Email</TextBlock>
             <TextBox Name="tbxEmail"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <RadioButton Name="RdBtnStudent" Content="Elev" Margin="0,0,5,0"/>
+                <RadioButton Name="RdBtnTeacher" Content="Lärare" Margin="0,0,5,0"/>
+                <RadioButton Name="RdBtnAdmin" Content="Admin"/>
+            </StackPanel>
+            </StackPanel>
+        
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10">
-            <Button Name="btnSaveUser" Margin="10,10" Width="100">Spara</Button> 
-            <Button Name="btnCancelUser" Margin="10,10" Width="100">Avbryt</Button>
+            <Button Name="btnSaveUser" Margin="10,10" Width="100" Click="btnSaveUser_Click">Spara</Button> 
+            <Button Name="btnCancelUser" Margin="10,10" Width="100" Click="btnCancelUser_Click">Avbryt</Button>
         </StackPanel>
         <DockPanel Grid.Row="0" Background="#EE7202" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
