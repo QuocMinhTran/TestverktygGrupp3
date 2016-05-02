@@ -22,21 +22,21 @@ namespace TestVerktygWPF.Model
         public int TeacherRefFK { get; set; }
         
 
-        private List<Occupation> lxQuestions;
+        private List<Questions> lxQuestions;
 
         public Test()
         {
-            lxQuestions = new List<Occupation>();
+            lxQuestions = new List<Questions>();
         }
-        public void AddQuestion(Occupation xQuestion)
+        public void AddQuestion(Questions xQuestion)
         {
             lxQuestions.Add(xQuestion);
         }
-        public Occupation GetQuestion(int i)
+        public Questions GetQuestion(int i)
         {
             return lxQuestions[i];   
         }
-        public bool RemoveQuestion(Occupation xQuestion)
+        public bool RemoveQuestion(Questions xQuestion)
         {
             return lxQuestions.Remove(xQuestion);
         }

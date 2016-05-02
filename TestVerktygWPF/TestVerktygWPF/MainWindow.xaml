@@ -16,6 +16,7 @@
             <MenuItem Header="Hantera Användare"></MenuItem>
             <MenuItem Header="Hantera Prov"></MenuItem>
             <MenuItem Header="Statistik" ></MenuItem>
+            <MenuItem Header="GöraProv" Click="MenuItem_Click"></MenuItem>
         </Menu>
         
         <!--<Grid.ColumnDefinitions>

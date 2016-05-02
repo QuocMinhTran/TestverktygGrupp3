@@ -11,5 +11,7 @@ namespace TestVerktygWPF.Model
         public int OptionID { get; set; }
         public string SelectivOption { get; set; }
         public bool RightAnswer { get; set; }
+
+
     }
 }

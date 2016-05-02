@@ -13,7 +13,7 @@ namespace TestVerktygWPF.Model
         [Key]
         public int QuestionID { get; set; }
         public string QuestionsLabel { get; set; } //Frågan
-        //public List<Option> Options { get; set; }
+        public List<Option> Options { get; set; }
         public string AppData { get; set; }
 
         [ForeignKey("QuestTypeRefFK")]
@@ -24,5 +24,12 @@ namespace TestVerktygWPF.Model
         private QuestionType xQuestionType;
         //Svarets id för listan i Test
         private int iAnswerId;
+
+        public Questions()
+        {
+            Options = new List<Option>();
+
+        }
+           
     }
 }
