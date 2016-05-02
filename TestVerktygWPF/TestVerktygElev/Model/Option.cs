@@ -14,7 +14,7 @@ namespace TestVerktygElev
 
         public bool RightAnswer { get; set; }
 
-        public int? Question_QuestionID { get; set; }
+        public int QuestionRefFK { get; set; }
 
         public virtual Question Question { get; set; }
     }

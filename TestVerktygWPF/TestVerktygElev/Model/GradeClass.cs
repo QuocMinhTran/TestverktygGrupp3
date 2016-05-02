@@ -15,8 +15,6 @@ namespace TestVerktygElev
             Students = new HashSet<Student>();
         }
 
-        public int ID { get; set; }
-
         public int GradeClassID { get; set; }
 
         public string Name { get; set; }

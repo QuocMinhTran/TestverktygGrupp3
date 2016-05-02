@@ -14,8 +14,6 @@ namespace TestVerktygElev
             Questions = new HashSet<Question>();
         }
 
-        public int ID { get; set; }
-
         public int QuestionTypeID { get; set; }
 
         public string Option { get; set; }

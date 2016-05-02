@@ -17,7 +17,9 @@ namespace TestVerktygElev
 
         public int QuestionID { get; set; }
 
-        public string Questions { get; set; }
+        public string QuestionsLabel { get; set; }
+
+        public string AppData { get; set; }
 
         public int QuestTypeRefFK { get; set; }
 
