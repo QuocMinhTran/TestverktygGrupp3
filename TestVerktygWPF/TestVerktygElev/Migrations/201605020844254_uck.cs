@@ -1,9 +1,9 @@
-namespace TestVerktygWPF.Migrations
+namespace TestVerktygElev.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class start : DbMigration
+    public partial class uck : DbMigration
     {
         public override void Up()
         {
@@ -13,8 +13,7 @@ namespace TestVerktygWPF.Migrations
                     {
                         AdminID = c.Int(nullable: false, identity: true),
                         Password = c.String(),
-                        FirstName = c.String(),
-                        LasttName = c.String(),
+                        Name = c.String(),
                         Email = c.String(),
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
@@ -31,6 +30,37 @@ namespace TestVerktygWPF.Migrations
                         Occupations = c.String(),
                     })
                 .PrimaryKey(t => t.OccupationID);
+            
+            CreateTable(
+                "dbo.Students",
+                c => new
+                    {
+                        StudentID = c.Int(nullable: false, identity: true),
+                        Password = c.String(),
+                        Name = c.String(),
+                        Email = c.String(),
+                        UserName = c.String(),
+                        Occupations_OccupationID = c.Int(),
+                        Tests_TestID = c.Int(),
+                        GradeClass_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.StudentID)
+                .ForeignKey("dbo.Tests", t => t.Tests_TestID)
+                .ForeignKey("dbo.GradeClasses", t => t.GradeClass_ID)
+                .ForeignKey("dbo.Occupations", t => t.Occupations_OccupationID)
+                .Index(t => t.Occupations_OccupationID)
+                .Index(t => t.Tests_TestID)
+                .Index(t => t.GradeClass_ID);
+            
+            CreateTable(
+                "dbo.GradeClasses",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        GradeClassID = c.Int(nullable: false),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.CourseGradeClasses",
@@ -75,8 +105,7 @@ namespace TestVerktygWPF.Migrations
                     {
                         TeacherID = c.Int(nullable: false, identity: true),
                         Password = c.String(),
-                        FirstName = c.String(),
-                        LasttName = c.String(),
+                        Name = c.String(),
                         Email = c.String(),
                         UserName = c.String(),
                         Occupations_OccupationID = c.Int(),
@@ -84,37 +113,6 @@ namespace TestVerktygWPF.Migrations
                 .PrimaryKey(t => t.TeacherID)
                 .ForeignKey("dbo.Occupations", t => t.Occupations_OccupationID)
                 .Index(t => t.Occupations_OccupationID);
-            
-            CreateTable(
-                "dbo.GradeClasses",
-                c => new
-                    {
-                        GradeClassID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.GradeClassID);
-            
-            CreateTable(
-                "dbo.Students",
-                c => new
-                    {
-                        StudentID = c.Int(nullable: false, identity: true),
-                        Password = c.String(),
-                        FirstName = c.String(),
-                        LasttName = c.String(),
-                        Email = c.String(),
-                        UserName = c.String(),
-                        Occupations_OccupationID = c.Int(),
-                        Tests_TestID = c.Int(),
-                        GradeClass_GradeClassID = c.Int(),
-                    })
-                .PrimaryKey(t => t.StudentID)
-                .ForeignKey("dbo.Occupations", t => t.Occupations_OccupationID)
-                .ForeignKey("dbo.Tests", t => t.Tests_TestID)
-                .ForeignKey("dbo.GradeClasses", t => t.GradeClass_GradeClassID)
-                .Index(t => t.Occupations_OccupationID)
-                .Index(t => t.Tests_TestID)
-                .Index(t => t.GradeClass_GradeClassID);
             
             CreateTable(
                 "dbo.Tests",
@@ -125,42 +123,11 @@ namespace TestVerktygWPF.Migrations
                         EndDate = c.DateTime(),
                         StartDate = c.DateTime(),
                         TeacherRefFK = c.Int(nullable: false),
+                        AppData = c.String(),
                     })
                 .PrimaryKey(t => t.TestID)
                 .ForeignKey("dbo.Teachers", t => t.TeacherRefFK, cascadeDelete: true)
                 .Index(t => t.TeacherRefFK);
-            
-            CreateTable(
-                "dbo.Options",
-                c => new
-                    {
-                        OptionID = c.Int(nullable: false, identity: true),
-                        SelectivOption = c.String(),
-                        RightAnswer = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.OptionID);
-            
-            CreateTable(
-                "dbo.Questions",
-                c => new
-                    {
-                        QuestionID = c.Int(nullable: false, identity: true),
-                        QuestionsLabel = c.String(),
-                        AppData = c.String(),
-                        QuestTypeRefFK = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.QuestionID)
-                .ForeignKey("dbo.QuestionTypes", t => t.QuestTypeRefFK, cascadeDelete: true)
-                .Index(t => t.QuestTypeRefFK);
-            
-            CreateTable(
-                "dbo.QuestionTypes",
-                c => new
-                    {
-                        QuestionTypeID = c.Int(nullable: false, identity: true),
-                        Option = c.String(),
-                    })
-                .PrimaryKey(t => t.QuestionTypeID);
             
             CreateTable(
                 "dbo.StudentTests",
@@ -171,8 +138,8 @@ namespace TestVerktygWPF.Migrations
                         TestRefFk = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Students", t => t.StudentRefFk, cascadeDelete: true)
                 .ForeignKey("dbo.Tests", t => t.TestRefFk, cascadeDelete: true)
+                .ForeignKey("dbo.Students", t => t.StudentRefFk, cascadeDelete: true)
                 .Index(t => t.StudentRefFk)
                 .Index(t => t.TestRefFk);
             
@@ -185,57 +152,106 @@ namespace TestVerktygWPF.Migrations
                         QuestionRefFk = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Occupations", t => t.QuestionRefFk, cascadeDelete: true)
+                .ForeignKey("dbo.Questions", t => t.QuestionRefFk, cascadeDelete: true)
                 .ForeignKey("dbo.Tests", t => t.TestRefFk, cascadeDelete: true)
                 .Index(t => t.TestRefFk)
                 .Index(t => t.QuestionRefFk);
+            
+            CreateTable(
+                "dbo.Questions",
+                c => new
+                    {
+                        QuestionID = c.Int(nullable: false, identity: true),
+                        Questions = c.String(),
+                        QuestTypeRefFK = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.QuestionID)
+                .ForeignKey("dbo.QuestionTypes", t => t.QuestTypeRefFK, cascadeDelete: true)
+                .Index(t => t.QuestTypeRefFK);
+            
+            CreateTable(
+                "dbo.Options",
+                c => new
+                    {
+                        OptionID = c.Int(nullable: false, identity: true),
+                        SelectivOption = c.String(),
+                        RightAnswer = c.Boolean(nullable: false),
+                        Question_QuestionID = c.Int(),
+                    })
+                .PrimaryKey(t => t.OptionID)
+                .ForeignKey("dbo.Questions", t => t.Question_QuestionID)
+                .Index(t => t.Question_QuestionID);
+            
+            CreateTable(
+                "dbo.QuestionTypes",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        QuestionTypeID = c.Int(nullable: false),
+                        Option = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.__MigrationHistory",
+                c => new
+                    {
+                        MigrationId = c.String(nullable: false, maxLength: 150),
+                        ContextKey = c.String(nullable: false, maxLength: 300),
+                        Model = c.Binary(nullable: false),
+                        ProductVersion = c.String(nullable: false, maxLength: 32),
+                    })
+                .PrimaryKey(t => new { t.MigrationId, t.ContextKey });
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.TestQuestions", "TestRefFk", "dbo.Tests");
-            DropForeignKey("dbo.TestQuestions", "QuestionRefFk", "dbo.Occupations");
-            DropForeignKey("dbo.StudentTests", "TestRefFk", "dbo.Tests");
-            DropForeignKey("dbo.StudentTests", "StudentRefFk", "dbo.Students");
-            DropForeignKey("dbo.Questions", "QuestTypeRefFK", "dbo.QuestionTypes");
-            DropForeignKey("dbo.CourseGradeClasses", "GradeClassRefID", "dbo.GradeClasses");
-            DropForeignKey("dbo.Students", "GradeClass_GradeClassID", "dbo.GradeClasses");
-            DropForeignKey("dbo.Students", "Tests_TestID", "dbo.Tests");
-            DropForeignKey("dbo.Tests", "TeacherRefFK", "dbo.Teachers");
-            DropForeignKey("dbo.Students", "Occupations_OccupationID", "dbo.Occupations");
-            DropForeignKey("dbo.CourseGradeClasses", "CouseRefID", "dbo.Courses");
-            DropForeignKey("dbo.Courses", "TeacherRefFK", "dbo.Teachers");
             DropForeignKey("dbo.Teachers", "Occupations_OccupationID", "dbo.Occupations");
+            DropForeignKey("dbo.Students", "Occupations_OccupationID", "dbo.Occupations");
+            DropForeignKey("dbo.StudentTests", "StudentRefFk", "dbo.Students");
+            DropForeignKey("dbo.Students", "GradeClass_ID", "dbo.GradeClasses");
+            DropForeignKey("dbo.CourseGradeClasses", "GradeClassRefID", "dbo.GradeClasses");
+            DropForeignKey("dbo.Tests", "TeacherRefFK", "dbo.Teachers");
+            DropForeignKey("dbo.TestQuestions", "TestRefFk", "dbo.Tests");
+            DropForeignKey("dbo.TestQuestions", "QuestionRefFk", "dbo.Questions");
+            DropForeignKey("dbo.Questions", "QuestTypeRefFK", "dbo.QuestionTypes");
+            DropForeignKey("dbo.Options", "Question_QuestionID", "dbo.Questions");
+            DropForeignKey("dbo.StudentTests", "TestRefFk", "dbo.Tests");
+            DropForeignKey("dbo.Students", "Tests_TestID", "dbo.Tests");
+            DropForeignKey("dbo.Courses", "TeacherRefFK", "dbo.Teachers");
             DropForeignKey("dbo.Courses", "Subject_SubjectsID", "dbo.Subjects");
+            DropForeignKey("dbo.CourseGradeClasses", "CouseRefID", "dbo.Courses");
             DropForeignKey("dbo.Admins", "Occupations_OccupationID", "dbo.Occupations");
+            DropIndex("dbo.Options", new[] { "Question_QuestionID" });
+            DropIndex("dbo.Questions", new[] { "QuestTypeRefFK" });
             DropIndex("dbo.TestQuestions", new[] { "QuestionRefFk" });
             DropIndex("dbo.TestQuestions", new[] { "TestRefFk" });
             DropIndex("dbo.StudentTests", new[] { "TestRefFk" });
             DropIndex("dbo.StudentTests", new[] { "StudentRefFk" });
-            DropIndex("dbo.Questions", new[] { "QuestTypeRefFK" });
             DropIndex("dbo.Tests", new[] { "TeacherRefFK" });
-            DropIndex("dbo.Students", new[] { "GradeClass_GradeClassID" });
-            DropIndex("dbo.Students", new[] { "Tests_TestID" });
-            DropIndex("dbo.Students", new[] { "Occupations_OccupationID" });
             DropIndex("dbo.Teachers", new[] { "Occupations_OccupationID" });
             DropIndex("dbo.Courses", new[] { "Subject_SubjectsID" });
             DropIndex("dbo.Courses", new[] { "TeacherRefFK" });
             DropIndex("dbo.CourseGradeClasses", new[] { "CouseRefID" });
             DropIndex("dbo.CourseGradeClasses", new[] { "GradeClassRefID" });
+            DropIndex("dbo.Students", new[] { "GradeClass_ID" });
+            DropIndex("dbo.Students", new[] { "Tests_TestID" });
+            DropIndex("dbo.Students", new[] { "Occupations_OccupationID" });
             DropIndex("dbo.Admins", new[] { "Occupations_OccupationID" });
+            DropTable("dbo.__MigrationHistory");
+            DropTable("dbo.QuestionTypes");
+            DropTable("dbo.Options");
+            DropTable("dbo.Questions");
             DropTable("dbo.TestQuestions");
             DropTable("dbo.StudentTests");
-            DropTable("dbo.QuestionTypes");
-            DropTable("dbo.Questions");
-            DropTable("dbo.Options");
             DropTable("dbo.Tests");
-            DropTable("dbo.Students");
-            DropTable("dbo.GradeClasses");
             DropTable("dbo.Teachers");
             DropTable("dbo.Subjects");
             DropTable("dbo.Courses");
             DropTable("dbo.CourseGradeClasses");
+            DropTable("dbo.GradeClasses");
+            DropTable("dbo.Students");
             DropTable("dbo.Occupations");
             DropTable("dbo.Admins");
         }

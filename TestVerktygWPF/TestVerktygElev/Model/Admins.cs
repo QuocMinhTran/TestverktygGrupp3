@@ -6,13 +6,16 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Admin
+    public partial class Admins
     {
+        [Key]
         public int AdminID { get; set; }
 
         public string Password { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LasttName { get; set; }
 
         public string Email { get; set; }
 
@@ -20,6 +23,6 @@ namespace TestVerktygElev
 
         public int? Occupations_OccupationID { get; set; }
 
-        public virtual Occupation Occupation { get; set; }
+        public virtual Occupations Occupations { get; set; }
     }
 }

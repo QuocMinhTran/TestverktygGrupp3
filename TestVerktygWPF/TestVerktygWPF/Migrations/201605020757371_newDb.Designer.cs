@@ -7,13 +7,13 @@ namespace TestVerktygWPF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class start : IMigrationMetadata
+    public sealed partial class newDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(start));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604291217474_start"; }
+            get { return "201605020757371_newDb"; }
         }
         
         string IMigrationMetadata.Source

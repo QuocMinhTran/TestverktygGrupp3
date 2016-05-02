@@ -25,7 +25,6 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-            _Frame.Navigate(new AdminTestDetailManagementPage());
           
 
         }

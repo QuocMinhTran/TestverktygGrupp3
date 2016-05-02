@@ -6,7 +6,7 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class CourseGradeClass
+    public partial class CourseGradeClasses
     {
         public int ID { get; set; }
 
@@ -14,8 +14,8 @@ namespace TestVerktygElev
 
         public int CouseRefID { get; set; }
 
-        public virtual Cours Cours { get; set; }
+        public virtual Courses Courses { get; set; }
 
-        public virtual GradeClass GradeClass { get; set; }
+        public virtual GradeClasses GradeClasses { get; set; }
     }
 }

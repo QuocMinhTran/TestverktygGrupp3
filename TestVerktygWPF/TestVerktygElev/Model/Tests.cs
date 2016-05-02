@@ -6,16 +6,18 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Test
+    public partial class Tests
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Test()
+        public Tests()
         {
-            Students = new HashSet<Student>();
-            StudentTests = new HashSet<StudentTest>();
-            TestQuestions = new HashSet<TestQuestion>();
+            Students = new HashSet<Students>();
+            StudentTests = new HashSet<StudentTests>();
+            TestQuestions = new HashSet<TestQuestions>();
+            WritenTests = new HashSet<WritenTests>();
         }
 
+        [Key]
         public int TestID { get; set; }
 
         public string Name { get; set; }
@@ -26,17 +28,18 @@ namespace TestVerktygElev
 
         public int TeacherRefFK { get; set; }
 
-        public string AppData { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Students> Students { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<StudentTests> StudentTests { get; set; }
+
+        public virtual Teachers Teachers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentTest> StudentTests { get; set; }
-
-        public virtual Teacher Teacher { get; set; }
+        public virtual ICollection<TestQuestions> TestQuestions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TestQuestion> TestQuestions { get; set; }
+        public virtual ICollection<WritenTests> WritenTests { get; set; }
     }
 }

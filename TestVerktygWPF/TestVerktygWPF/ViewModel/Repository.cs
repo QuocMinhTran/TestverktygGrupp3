@@ -30,9 +30,32 @@ namespace TestVerktygWPF.ViewModel
             return null;
         }
         //Save
-        public void SaveStudent() { }
-        public void SaveTeacher() { }
-        public void SaveAdmin() { }
+        public void SaveStudent(Student xStudent)
+        {
+            using (var db = new DbModel())
+            {
+                db.Students.Add(xStudent);
+                db.SaveChanges();
+            }
+        }
+
+        public void SaveTeacher(Teacher xTeacher)
+        {
+            using (var db = new DbModel())
+            {
+                db.Teachers.Add(xTeacher);
+                db.SaveChanges();
+            }
+        }
+
+        public void SaveAdmin(Admin xAdmin)
+        {
+            using (var db = new DbModel())
+            {
+                db.Admins.Add(xAdmin);
+                db.SaveChanges();
+            }
+        }
         public void SaveTest(Test xTest)
         {
             using (var db = new DbModel())
@@ -42,6 +65,7 @@ namespace TestVerktygWPF.ViewModel
 
             }
         }
+
         public void SaveQuestion() { }
 
 
