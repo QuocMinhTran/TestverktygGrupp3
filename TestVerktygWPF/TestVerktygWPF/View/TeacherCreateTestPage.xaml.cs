@@ -95,12 +95,9 @@ namespace TestVerktygWPF.View
             Test xTest = new Test();
             Repository xRepository = new Repository();
             xTest.Name = txtBoxTestName.Text;
-            foreach (var item in m_lxQuestions)
-            {
-                Console.WriteLine(item.QuestionsLabel + "");
-                xTest.AddQuestion(item);
-            }
-
+            xTest.StartDate = DateTime.Today;
+            xTest.EndDate = DateTime.Today.AddDays(1);
+            xTest.TeacherRefFK = 2;
             xRepository.SaveTest(xTest);
         }
         private StackPanel CreateQuestion()

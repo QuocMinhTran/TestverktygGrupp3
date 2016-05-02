@@ -3,36 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace TestVerktygElev
+namespace TestVerktygElev.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for ElevTestPage.xaml
-    /// </summary>
-    public partial class ElevTestPage : Page
+    public class MockRepo
     {
-        List<Questions> questionList = new List<Questions>();
-        Questions currentQuestion = new Questions();
-        int qIndex = 0;
-        public ElevTestPage()
-        {
-            InitializeComponent();
-            btnPrevious.IsEnabled = false;
-            CreateDummyTest();
-            currentQuestion = questionList.FirstOrDefault();
-            txtBlockQuestions.Text = qIndex + "/" + questionList.Count.ToString();
-        }
-
-        private void CreateDummyTest()
+       public MockRepo()
         {
             Teachers teacher = new Teachers();
             teacher.FirstName = "fuck";
@@ -45,7 +21,7 @@ namespace TestVerktygElev
             test.StartDate = DateTime.Today;
             test.EndDate = DateTime.Today.AddDays(1);
             test.TeacherRefFK = teacher.TeacherID;
-            
+
 
             QuestionTypes type1 = new QuestionTypes();
             type1.Option = "Envalsfråga";
@@ -88,24 +64,12 @@ namespace TestVerktygElev
             tstqst2.TestRefFk = test.TestID;
             tstqst2.QuestionRefFk = question2.QuestionID;
 
+            List<Questions> questionList = new List<Questions>();
             List<Options> optionsList = new List<Options>();
             questionList.Add(question);
             questionList.Add(question2);
             questionList.Add(question2);
             questionList.Add(question2);
-        }
-
-        private void btnPrevious_Click(object sender, RoutedEventArgs e)
-        {
-            qIndex--;
-            txtBlockQuestions.Text = qIndex + "/" + questionList.Count.ToString();
-            if (qIndex <= 0)
-                btnPrevious.IsEnabled = false;
-        }
-
-        private void btnNext_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

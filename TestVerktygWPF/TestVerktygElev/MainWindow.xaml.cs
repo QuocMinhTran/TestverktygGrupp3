@@ -27,7 +27,7 @@ namespace TestVerktygElev
             InitializeComponent();
 
             AddDummyData();
-            _frame.Navigate(new MainPage());
+            _frame.Navigate(new ElevTestPage());
                 
         }
 
