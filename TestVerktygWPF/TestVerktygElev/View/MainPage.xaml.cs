@@ -23,6 +23,7 @@ namespace TestVerktygElev
         public MainPage()
         {
             InitializeComponent();
+            
         }
 
         private void btnLogOut_Click(object sender, RoutedEventArgs e)

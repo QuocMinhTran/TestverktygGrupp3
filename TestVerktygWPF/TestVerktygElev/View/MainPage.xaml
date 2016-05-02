@@ -11,7 +11,6 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -26,12 +25,7 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
             <Label Content="Prov som ska göras" FontSize="14" />
-            <DataGrid Name="IncompleteTests" Grid.Column="0" Grid.Row="0" />
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
-            <Label Content="Genomförda prov" FontSize="14" />
-            <DataGrid Name="CompletedTests"></DataGrid>
+            <DataGrid Name="IncompleteTests" Grid.Column="0" />
         </StackPanel>
 
         <Button Name="btnLogOut" 
