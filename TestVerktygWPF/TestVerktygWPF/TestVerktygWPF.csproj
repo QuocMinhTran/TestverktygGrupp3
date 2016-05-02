@@ -67,9 +67,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201605021128490_Hej.cs" />
-    <Compile Include="Migrations\201605021128490_Hej.Designer.cs">
-      <DependentUpon>201605021128490_Hej.cs</DependentUpon>
+
+
+    <Compile Include="Migrations\201605020724224_nyDB.cs" />
+    <Compile Include="Migrations\201605020724224_nyDB.Designer.cs">
+      <DependentUpon>201605020724224_nyDB.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />

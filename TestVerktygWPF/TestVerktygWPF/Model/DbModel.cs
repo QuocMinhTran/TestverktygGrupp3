@@ -22,7 +22,7 @@ namespace TestVerktygWPF.Model
         public DbSet<Option> Options { get; set; }
         public DbSet<Questions> Questions { get; set; }
 
-        public DbSet<StudentTest> StudentTests { get; set; }
+        //public DbSet<StudentTest> StudentTests { get; set; }
         public DbSet<GradeClass> GradeClasss { get; set; }
         public DbSet<CourseGradeClass> CourseGradeClasss { get; set; }
         public DbSet<TestQuestion> TestQuestions { get; set; }

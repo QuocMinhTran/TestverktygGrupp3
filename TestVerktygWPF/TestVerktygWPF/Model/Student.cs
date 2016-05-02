@@ -13,8 +13,7 @@ namespace TestVerktygWPF.Model
         public Occupation Occupations { get; set; }
         public string FirstName { get; set; }
         public string LasttName { get; set; }
-        public string Email { get; set; }
-        public Test Tests { get; set; }
+        public string Email { get; set; }        
         public string UserName { get; set; }
     }
 }
