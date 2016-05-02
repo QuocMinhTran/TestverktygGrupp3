@@ -3,7 +3,7 @@ namespace TestVerktygWPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class fuck : DbMigration
+    public partial class Hej : DbMigration
     {
         public override void Up()
         {
@@ -137,8 +137,11 @@ namespace TestVerktygWPF.Migrations
                         OptionID = c.Int(nullable: false, identity: true),
                         SelectivOption = c.String(),
                         RightAnswer = c.Boolean(nullable: false),
+                        Questions_QuestionID = c.Int(),
                     })
-                .PrimaryKey(t => t.OptionID);
+                .PrimaryKey(t => t.OptionID)
+                .ForeignKey("dbo.Questions", t => t.Questions_QuestionID)
+                .Index(t => t.Questions_QuestionID);
             
             CreateTable(
                 "dbo.Questions",
@@ -218,6 +221,7 @@ namespace TestVerktygWPF.Migrations
             DropForeignKey("dbo.StudentTests", "TestRefFk", "dbo.Tests");
             DropForeignKey("dbo.StudentTests", "StudentRefFk", "dbo.Students");
             DropForeignKey("dbo.Questions", "QuestTypeRefFK", "dbo.QuestionTypes");
+            DropForeignKey("dbo.Options", "Questions_QuestionID", "dbo.Questions");
             DropForeignKey("dbo.CourseGradeClasses", "GradeClassRefID", "dbo.GradeClasses");
             DropForeignKey("dbo.Students", "GradeClass_GradeClassID", "dbo.GradeClasses");
             DropForeignKey("dbo.Students", "Tests_TestID", "dbo.Tests");
@@ -235,6 +239,7 @@ namespace TestVerktygWPF.Migrations
             DropIndex("dbo.StudentTests", new[] { "TestRefFk" });
             DropIndex("dbo.StudentTests", new[] { "StudentRefFk" });
             DropIndex("dbo.Questions", new[] { "QuestTypeRefFK" });
+            DropIndex("dbo.Options", new[] { "Questions_QuestionID" });
             DropIndex("dbo.Tests", new[] { "TeacherRefFK" });
             DropIndex("dbo.Students", new[] { "GradeClass_GradeClassID" });
             DropIndex("dbo.Students", new[] { "Tests_TestID" });

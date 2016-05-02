@@ -60,6 +60,7 @@ namespace TestVerktygWPF.ViewModel
         {
             using (var db = new DbModel())
             {
+                
                 db.Tests.Add(xTest);
                 db.SaveChanges();
 
