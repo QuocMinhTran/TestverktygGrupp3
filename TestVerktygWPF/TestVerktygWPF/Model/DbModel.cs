@@ -27,6 +27,7 @@ namespace TestVerktygWPF.Model
         public DbSet<CourseGradeClass> CourseGradeClasss { get; set; }
         public DbSet<TestQuestion> TestQuestions { get; set; }
         public DbSet<QuestionType> QuestionTypes { get; set; }
+        public DbSet<WritenTest> WritenTests { get; set; }
 
     }
 
