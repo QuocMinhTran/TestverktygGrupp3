@@ -6,24 +6,29 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class GradeClasses
+    public partial class Question
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GradeClasses()
+        public Question()
         {
-            CourseGradeClasses = new HashSet<CourseGradeClasses>();
-            Students = new HashSet<Students>();
+            Options = new HashSet<Option>();
+            TestQuestions = new HashSet<TestQuestion>();
         }
 
-        [Key]
-        public int GradeClassID { get; set; }
+        public int QuestionID { get; set; }
 
-        public string Name { get; set; }
+        public string QuestionsLabel { get; set; }
+
+        public string AppData { get; set; }
+
+        public int QuestTypeRefFK { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseGradeClasses> CourseGradeClasses { get; set; }
+        public virtual ICollection<Option> Options { get; set; }
+
+        public virtual QuestionType QuestionType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Students> Students { get; set; }
+        public virtual ICollection<TestQuestion> TestQuestions { get; set; }
     }
 }

@@ -13,107 +13,96 @@ namespace TestVerktygElev
         }
 
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<Admins> Admins { get; set; }
-        public virtual DbSet<CourseGradeClasses> CourseGradeClasses { get; set; }
-        public virtual DbSet<Courses> Courses { get; set; }
-        public virtual DbSet<GradeClasses> GradeClasses { get; set; }
-        public virtual DbSet<Occupations> Occupations { get; set; }
-        public virtual DbSet<Options> Options { get; set; }
-        public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<QuestionTypes> QuestionTypes { get; set; }
-        public virtual DbSet<Students> Students { get; set; }
-        public virtual DbSet<StudentTests> StudentTests { get; set; }
-        public virtual DbSet<Subjects> Subjects { get; set; }
-        public virtual DbSet<Teachers> Teachers { get; set; }
-        public virtual DbSet<TestQuestions> TestQuestions { get; set; }
-        public virtual DbSet<Tests> Tests { get; set; }
-        public virtual DbSet<WritenTests> WritenTests { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<CourseGradeClass> CourseGradeClasses { get; set; }
+        public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<GradeClass> GradeClasses { get; set; }
+        public virtual DbSet<Occupation> Occupations { get; set; }
+        public virtual DbSet<Option> Options { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<QuestionType> QuestionTypes { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<TestQuestion> TestQuestions { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<WritenTest> WritenTests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Courses>()
+            modelBuilder.Entity<Cours>()
                 .HasMany(e => e.CourseGradeClasses)
-                .WithRequired(e => e.Courses)
+                .WithRequired(e => e.Cours)
                 .HasForeignKey(e => e.CouseRefID);
 
-            modelBuilder.Entity<GradeClasses>()
+            modelBuilder.Entity<GradeClass>()
                 .HasMany(e => e.CourseGradeClasses)
-                .WithRequired(e => e.GradeClasses)
+                .WithRequired(e => e.GradeClass)
                 .HasForeignKey(e => e.GradeClassRefID);
 
-            modelBuilder.Entity<GradeClasses>()
+            modelBuilder.Entity<GradeClass>()
                 .HasMany(e => e.Students)
-                .WithOptional(e => e.GradeClasses)
+                .WithOptional(e => e.GradeClass)
                 .HasForeignKey(e => e.GradeClass_GradeClassID);
 
-            modelBuilder.Entity<Occupations>()
+            modelBuilder.Entity<Occupation>()
                 .HasMany(e => e.Admins)
-                .WithOptional(e => e.Occupations)
+                .WithOptional(e => e.Occupation)
                 .HasForeignKey(e => e.Occupations_OccupationID);
 
-            modelBuilder.Entity<Occupations>()
+            modelBuilder.Entity<Occupation>()
                 .HasMany(e => e.Students)
-                .WithOptional(e => e.Occupations)
+                .WithOptional(e => e.Occupation)
                 .HasForeignKey(e => e.Occupations_OccupationID);
 
-            modelBuilder.Entity<Occupations>()
+            modelBuilder.Entity<Occupation>()
                 .HasMany(e => e.Teachers)
-                .WithOptional(e => e.Occupations)
+                .WithOptional(e => e.Occupation)
                 .HasForeignKey(e => e.Occupations_OccupationID);
 
-            modelBuilder.Entity<Occupations>()
+            modelBuilder.Entity<Question>()
+                .HasMany(e => e.Options)
+                .WithRequired(e => e.Question)
+                .HasForeignKey(e => e.QuestionRefFK);
+
+            modelBuilder.Entity<Question>()
                 .HasMany(e => e.TestQuestions)
-                .WithRequired(e => e.Occupations)
+                .WithRequired(e => e.Question)
                 .HasForeignKey(e => e.QuestionRefFk);
 
-            modelBuilder.Entity<QuestionTypes>()
+            modelBuilder.Entity<QuestionType>()
                 .HasMany(e => e.Questions)
-                .WithRequired(e => e.QuestionTypes)
+                .WithRequired(e => e.QuestionType)
                 .HasForeignKey(e => e.QuestTypeRefFK);
 
-            modelBuilder.Entity<Students>()
-                .HasMany(e => e.StudentTests)
-                .WithRequired(e => e.Students)
-                .HasForeignKey(e => e.StudentRefFk);
-
-            modelBuilder.Entity<Students>()
+            modelBuilder.Entity<Student>()
                 .HasMany(e => e.WritenTests)
-                .WithRequired(e => e.Students)
+                .WithRequired(e => e.Student)
                 .HasForeignKey(e => e.StudentRefFK);
 
-            modelBuilder.Entity<Subjects>()
+            modelBuilder.Entity<Subject>()
                 .HasMany(e => e.Courses)
-                .WithOptional(e => e.Subjects)
+                .WithOptional(e => e.Subject)
                 .HasForeignKey(e => e.Subject_SubjectsID);
 
-            modelBuilder.Entity<Teachers>()
+            modelBuilder.Entity<Teacher>()
                 .HasMany(e => e.Courses)
-                .WithRequired(e => e.Teachers)
+                .WithRequired(e => e.Teacher)
                 .HasForeignKey(e => e.TeacherRefFK);
 
-            modelBuilder.Entity<Teachers>()
+            modelBuilder.Entity<Teacher>()
                 .HasMany(e => e.Tests)
-                .WithRequired(e => e.Teachers)
+                .WithRequired(e => e.Teacher)
                 .HasForeignKey(e => e.TeacherRefFK);
 
-            modelBuilder.Entity<Tests>()
-                .HasMany(e => e.Students)
-                .WithOptional(e => e.Tests)
-                .HasForeignKey(e => e.Tests_TestID);
-
-            modelBuilder.Entity<Tests>()
-                .HasMany(e => e.StudentTests)
-                .WithRequired(e => e.Tests)
-                .HasForeignKey(e => e.TestRefFk);
-
-            modelBuilder.Entity<Tests>()
+            modelBuilder.Entity<Test>()
                 .HasMany(e => e.TestQuestions)
-                .WithRequired(e => e.Tests)
+                .WithRequired(e => e.Test)
                 .HasForeignKey(e => e.TestRefFk);
 
-            modelBuilder.Entity<Tests>()
+            modelBuilder.Entity<Test>()
                 .HasMany(e => e.WritenTests)
-                .WithRequired(e => e.Tests)
+                .WithRequired(e => e.Test)
                 .HasForeignKey(e => e.TestRefFK);
         }
     }

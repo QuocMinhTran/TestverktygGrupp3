@@ -17,7 +17,7 @@ namespace TestVerktygWPF.Model
 
 
         [ForeignKey("QuestionRefFk")]
-        public Occupation QuestionFk { get; set; }
+        public Questions QuestionFk { get; set; }
         public int QuestionRefFk { get; set; }
 
     }

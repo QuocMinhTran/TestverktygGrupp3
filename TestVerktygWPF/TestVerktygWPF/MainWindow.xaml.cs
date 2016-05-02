@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygWPF.Model;
+using TestVerktygWPF.View;
 
 namespace TestVerktygWPF
 {
@@ -24,7 +25,6 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-            _Frame.Navigate(new View.AdminCreateUserPage());
           
 
         }
@@ -51,6 +51,11 @@ namespace TestVerktygWPF
                 db.Students.Add(xStudent);
                 db.SaveChanges();
             }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            _Frame.Navigate(new TeacherCreateTestPage());
         }
     }
 }

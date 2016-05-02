@@ -6,23 +6,21 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class QuestionTypes
+    public partial class Subject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QuestionTypes()
+        public Subject()
         {
-            Questions = new HashSet<Questions>();
+            Courses = new HashSet<Cours>();
         }
 
-<<<<<<< HEAD:TestVerktygWPF/TestVerktygElev/Model/QuestionType.cs
-=======
         [Key]
->>>>>>> origin/master:TestVerktygWPF/TestVerktygElev/Model/QuestionTypes.cs
-        public int QuestionTypeID { get; set; }
+        public int SubjectsID { get; set; }
 
-        public string Option { get; set; }
+        [Column("Subject")]
+        public string Subject1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Questions> Questions { get; set; }
+        public virtual ICollection<Cours> Courses { get; set; }
     }
 }

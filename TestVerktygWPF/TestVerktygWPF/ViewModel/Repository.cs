@@ -56,8 +56,19 @@ namespace TestVerktygWPF.ViewModel
                 db.SaveChanges();
             }
         }
-        public void SaveTest() { }
+        public void SaveTest(Test xTest)
+        {
+            using (var db = new DbModel())
+            {
+                
+                db.Tests.Add(xTest);
+                db.SaveChanges();
+
+            }
+        }
+
         public void SaveQuestion() { }
+
 
         //Delete
         public void RemoveQuestion() { }
@@ -74,6 +85,7 @@ namespace TestVerktygWPF.ViewModel
         public void EditAdmin() { }
         public void EditTest() { }
 
+ 
 
     }
 }
