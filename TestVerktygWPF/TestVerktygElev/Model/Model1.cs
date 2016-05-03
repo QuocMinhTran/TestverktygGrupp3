@@ -22,6 +22,7 @@ namespace TestVerktygElev
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentTest> StudentTests { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TestQuestion> TestQuestions { get; set; }
@@ -60,20 +61,20 @@ namespace TestVerktygElev
                 .WithOptional(e => e.Occupation)
                 .HasForeignKey(e => e.Occupations_OccupationID);
 
-            modelBuilder.Entity<Question>()
-                .HasMany(e => e.Options)
-                .WithRequired(e => e.Question)
-                .HasForeignKey(e => e.QuestionRefFK);
-
-            modelBuilder.Entity<Question>()
+            modelBuilder.Entity<Occupation>()
                 .HasMany(e => e.TestQuestions)
-                .WithRequired(e => e.Question)
+                .WithRequired(e => e.Occupation)
                 .HasForeignKey(e => e.QuestionRefFk);
 
             modelBuilder.Entity<QuestionType>()
                 .HasMany(e => e.Questions)
                 .WithRequired(e => e.QuestionType)
                 .HasForeignKey(e => e.QuestTypeRefFK);
+
+            modelBuilder.Entity<Student>()
+                .HasMany(e => e.StudentTests)
+                .WithRequired(e => e.Student)
+                .HasForeignKey(e => e.StudentRefFk);
 
             modelBuilder.Entity<Student>()
                 .HasMany(e => e.WritenTests)
@@ -94,6 +95,16 @@ namespace TestVerktygElev
                 .HasMany(e => e.Tests)
                 .WithRequired(e => e.Teacher)
                 .HasForeignKey(e => e.TeacherRefFK);
+
+            modelBuilder.Entity<Test>()
+                .HasMany(e => e.Students)
+                .WithOptional(e => e.Test)
+                .HasForeignKey(e => e.Tests_TestID);
+
+            modelBuilder.Entity<Test>()
+                .HasMany(e => e.StudentTests)
+                .WithRequired(e => e.Test)
+                .HasForeignKey(e => e.TestRefFk);
 
             modelBuilder.Entity<Test>()
                 .HasMany(e => e.TestQuestions)

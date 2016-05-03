@@ -13,9 +13,5 @@ namespace TestVerktygElev
         public string SelectivOption { get; set; }
 
         public bool RightAnswer { get; set; }
-
-        public int QuestionRefFK { get; set; }
-
-        public virtual Question Question { get; set; }
     }
 }

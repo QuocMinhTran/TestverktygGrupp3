@@ -14,7 +14,7 @@ namespace TestVerktygElev
 
         public int QuestionRefFk { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual Occupation Occupation { get; set; }
 
         public virtual Test Test { get; set; }
     }

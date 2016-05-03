@@ -14,6 +14,7 @@ namespace TestVerktygElev
             Admins = new HashSet<Admin>();
             Students = new HashSet<Student>();
             Teachers = new HashSet<Teacher>();
+            TestQuestions = new HashSet<TestQuestion>();
         }
 
         public int OccupationID { get; set; }
@@ -28,5 +29,8 @@ namespace TestVerktygElev
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teacher> Teachers { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TestQuestion> TestQuestions { get; set; }
     }
 }

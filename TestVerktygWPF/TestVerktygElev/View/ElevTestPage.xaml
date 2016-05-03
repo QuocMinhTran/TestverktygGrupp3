@@ -14,21 +14,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel  Grid.Row="0">
-            <TextBlock Name="txtBlockTestName" />
+            <TextBlock Name="txtBlockTestName" HorizontalAlignment="Center" FontSize="30" />
             <TextBlock Name="txtBlockTimeLeft" />
             <TextBlock Name="txtBlockQuestions" />
         </StackPanel>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right">
-            <TextBlock>Tid kvar</TextBlock>
-            <TextBlock>Fråga 6</TextBlock>
-        </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBlock Name="txtBlockQuestionName" FontSize="30" HorizontalAlignment="Left" />
+            <TextBlock Name="txtBlockQuestionName" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap" />
             <StackPanel Name="splAnswers">
             </StackPanel>
             <StackPanel x:Name="splNavigation" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100"  Margin="10,0,10,0" Content="Förgående" Name="btnPrevious" Click="btnPrevious_Click" />
-                <Button Width="100"  Margin="10,0,10,0" Content="Nästa" Name="btnNext" Click="btnNext_Click" />
+                <Button Width="100" Margin="10,0,10,0" Content="Föregående fråga" Name="btnPrevious" Click="btnPrevious_Click" />
+                <Button Width="100" Margin="10,0,10,0" Content="Nästa fråga" Name="btnNext" Click="btnNext_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>
