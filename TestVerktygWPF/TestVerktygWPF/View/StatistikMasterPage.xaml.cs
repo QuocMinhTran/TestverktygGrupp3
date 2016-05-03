@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
+using TestVerktygWPF.ViewModel;
 
 namespace TestVerktygWPF.View
 {
@@ -20,9 +22,18 @@ namespace TestVerktygWPF.View
     /// </summary>
     public partial class StatistikMasterPage : Page
     {
+        List<WritenTest> liWrittenTests = new List<WritenTest>(); 
         public StatistikMasterPage()
         {
             InitializeComponent();
+            GetTestList();
+            ListViewTests.ItemsSource = liWrittenTests;
+        }
+
+        private void GetTestList()
+        {
+            Repository repo = new Repository();
+            liWrittenTests = repo.GetAllWrittenTests();
         }
     }
 }

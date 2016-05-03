@@ -35,15 +35,9 @@
             <ListView Name="ListViewTests">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Elev" Width="120" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Betyg" Width="50" DisplayMemberBinding="{Binding Age}" />
-                        <GridViewColumn Header="Tid" Width="150">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        <GridViewColumn Header="Elev" Width="120" DisplayMemberBinding="{Binding StudentRefFK}" />
+                        <GridViewColumn Header="Betyg" Width="50" DisplayMemberBinding="{Binding }" />
+                        <GridViewColumn Header="Tid" Width="150"/>
                     </GridView>
                 </ListView.View>
 

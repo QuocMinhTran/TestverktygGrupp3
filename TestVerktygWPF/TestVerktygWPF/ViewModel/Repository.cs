@@ -26,6 +26,22 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
+
+        public List<WritenTest> GetAllWrittenTests()
+        {
+            List<WritenTest> liAllWritenTests = new List<WritenTest>();
+            using (var db = new DbModel())
+            {
+                var getAllTests = from test in db.WritenTests
+                    select test;
+                foreach (var allTest in getAllTests)
+                {
+                    liAllWritenTests.Add(allTest);
+                }
+
+            }
+            return liAllWritenTests;
+        } 
         public Occupation GetQuestion()
         {
             return null;

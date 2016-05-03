@@ -30,9 +30,17 @@ namespace TestVerktygWPF.ViewModel
         {
 
         }
-        public Test GetTest()
+        public Test GetTest(int testId)
         {
-            return null;
+            Test selectedTest = new Test();
+            using (var db = new DbModel())
+            {
+                var getSelectTest = from theTest in db.Tests
+                    where theTest.TestID == testId
+                    select theTest;
+                return selectedTest = getSelectTest as Test;
+            }
+            
         }
 
     }
