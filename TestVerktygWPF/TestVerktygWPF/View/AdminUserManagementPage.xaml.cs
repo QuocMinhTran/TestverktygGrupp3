@@ -29,7 +29,7 @@ namespace TestVerktygWPF.View
         public List<Teacher> LsTeachers;
         public List<Admin> LsAdmins;
         public Student SelectedStudent = new Student();
-        public Teacher SelectedTeacher =new Teacher();
+        public Teacher SelectedTeacher = new Teacher();
         public Admin SelectedAdmin = new Admin();
         public bool IsSelectedUserAdmin = false;
         public bool IsSelectedUserTeacher = false;
@@ -86,7 +86,7 @@ namespace TestVerktygWPF.View
                 UpdateUserList(2);
                 IsSelectedUserTeacher = false;
             }
-            else 
+            else
             {
                 SelectedAdmin.FirstName = TxtPopFirstName.Text;
                 SelectedAdmin.LasttName = TxtPopLastName.Text;
@@ -122,8 +122,8 @@ namespace TestVerktygWPF.View
                 default:
                     break;
             }
-                            
-            
+
+
         }
 
 
@@ -141,7 +141,7 @@ namespace TestVerktygWPF.View
 
         private void DgTeacherDataGrid_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            SelectedTeacher = (Teacher) dgTeacherDataGrid.SelectedItem;
+            SelectedTeacher = (Teacher)dgTeacherDataGrid.SelectedItem;
             PopUpSelectedUser.IsOpen = true;
             TxtPopFirstName.Text = SelectedTeacher.FirstName;
             TxtPopLastName.Text = SelectedTeacher.LasttName;
@@ -165,9 +165,29 @@ namespace TestVerktygWPF.View
 
         private void BtnDeleteUser(object sender, RoutedEventArgs e)
         {
+            PopUpSelectedUser.IsOpen = false;
             Repository repo = new Repository();
+            if (IsSelectedUserStudent)
+            {
+                repo.Removetudent(SelectedStudent);
+                UpdateUserList(1);
+                IsSelectedUserStudent = false;
+            }
+            else if (IsSelectedUserTeacher)
+            {
+               
 
-            repo.Removetudent(SelectedStudent);
+                repo.RemoveTeacher(SelectedTeacher);
+                UpdateUserList(2);
+                IsSelectedUserTeacher = false;
+            }
+            else
+            {
+
+                repo.RemoveAdmin(SelectedAdmin);
+                UpdateUserList(3);
+                IsSelectedUserAdmin = false;
+            }
         }
     }
 }

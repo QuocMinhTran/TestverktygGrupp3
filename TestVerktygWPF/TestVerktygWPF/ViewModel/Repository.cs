@@ -131,12 +131,43 @@ namespace TestVerktygWPF.ViewModel
                 var deleteStudent = from student in db.Students
                     where student.StudentID == xStudent.StudentID
                     select student;
-                db.Students.Remove(xStudent);
+                foreach (var student in deleteStudent)
+                {
+                    db.Students.Remove(student);
+                }
                 db.SaveChanges();
             }
         }
-        public void RemoveTeacher() { }
-        public void RemoveAdmin() { }
+
+        public void RemoveTeacher(Teacher xTeacher)
+        {
+            using (var db = new DbModel())
+            {
+                var deleteTeacher = from teacher in db.Teachers
+                                    where teacher.TeacherID == xTeacher.TeacherID
+                                    select teacher;
+                foreach (var teacher in deleteTeacher)
+                {
+                    db.Teachers.Remove(teacher);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveAdmin(Admin xAdmin)
+        {
+            using (var db = new DbModel())
+            {
+                var deleteAdmin = from admin in db.Admins
+                                    where admin.AdminID == xAdmin.AdminID
+                                    select admin;
+                foreach (var admin in deleteAdmin)
+                {
+                    db.Admins.Remove(admin);
+                }
+                db.SaveChanges();
+            }
+        }
         public void RemoveTest() { }
 
 
