@@ -14,10 +14,9 @@ namespace TestVerktygElev
             Questions = new HashSet<Questions>();
         }
 
-<<<<<<< HEAD:TestVerktygWPF/TestVerktygElev/Model/QuestionType.cs
-=======
+
         [Key]
->>>>>>> origin/master:TestVerktygWPF/TestVerktygElev/Model/QuestionTypes.cs
+
         public int QuestionTypeID { get; set; }
 
         public string Option { get; set; }

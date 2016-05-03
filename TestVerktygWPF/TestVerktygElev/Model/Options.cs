@@ -14,12 +14,11 @@ namespace TestVerktygElev
         public string SelectivOption { get; set; }
 
         public bool RightAnswer { get; set; }
-<<<<<<< HEAD:TestVerktygWPF/TestVerktygElev/Model/Option.cs
+
 
         public int QuestionRefFK { get; set; }
 
-        public virtual Question Question { get; set; }
-=======
->>>>>>> origin/master:TestVerktygWPF/TestVerktygElev/Model/Options.cs
+        public virtual Questions Question { get; set; }
+
     }
 }
