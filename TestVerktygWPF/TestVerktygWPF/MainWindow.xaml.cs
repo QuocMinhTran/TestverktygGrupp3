@@ -24,7 +24,7 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-            _Frame.Navigate(new View.AdminCreateUserPage());
+            _Frame.Navigate(new View.AdminUserManagementPage());
           
 
         }
@@ -39,18 +39,18 @@ namespace TestVerktygWPF
             if (e.Key.Equals(Key.Enter))
                 btnLogin_Click(sender, e);
         }
-        private void AddData()
-        {
-            using (var db = new DbModel())
-            {
-                Student xStudent = new Student();
-                xStudent.FirstName = "Hej";
-                xStudent.LasttName = "Glensson";
-                xStudent.Email = "Glenn";
-                xStudent.UserName = "ASDGF";
-                db.Students.Add(xStudent);
-                db.SaveChanges();
-            }
-        }
+        //private void AddData()
+        //{
+        //    using (var db = new DbModel())
+        //    {
+        //        Student xStudent = new Student();
+        //        xStudent.FirstName = "Hej";
+        //        xStudent.LasttName = "Glensson";
+        //        xStudent.Email = "Glenn";
+        //        xStudent.UserName = "ASDGF";
+        //        db.Students.Add(xStudent);
+        //        db.SaveChanges();
+        //    }
+        //}
     }
 }
