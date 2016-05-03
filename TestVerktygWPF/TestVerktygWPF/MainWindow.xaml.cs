@@ -28,7 +28,7 @@ namespace TestVerktygWPF
 
             _Frame.Navigate(new View.AdminUserManagementPage());
 
-            AddDataToBase();
+           // AddDataToBase();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -103,11 +103,67 @@ namespace TestVerktygWPF
                 {
                     db.Students.Add(item);
                 }
-
+                foreach (var item in lxCourse)
+                {
+                    db.Courses.Add(item);
+                }
+                foreach (var item in lxCGC)
+                {
+                    db.CourseGradeClasss.Add(item);
+                }
+                foreach (var item in lxGC)
+                {
+                    db.GradeClasss.Add(item);
+                }
+                foreach (var item in lxOcc)
+                {
+                    db.Occupations.Add(item);
+                }
+                foreach (var item in lxOp)
+                {
+                    db.Options.Add(item);
+                }
+                foreach (var item in lxTestQues)
+                {
+                    db.TestQuestions.Add(item);
+                }
+                foreach (var item in lxWT)
+                {
+                    db.WritenTests.Add(item);
+                }
+                foreach (var item in lxQuest)
+                {
+                    db.Questions.Add(item);
+                }
             }
 
         }
-        private List<Questions> AddQuestion() { return null; }
+
+        private List<Questions> AddQuestion()
+        {
+            Option xOptions = new Option()
+            {
+                SelectivOption = "Röd",
+                QuestionRefFK = 1,
+                RightAnswer = false
+            };
+            Option xOptions1= new Option()
+            {
+                SelectivOption = "Blå",
+                QuestionRefFK = 1,
+                RightAnswer = true
+            };
+
+            Questions xQuestions = new Questions()
+            {
+                QuestionID = 1,
+                QuestionsLabel = "Vilken färg har himmlen ",
+               
+
+
+            };
+            return null;
+        }
 
         private List<Course> AddCourse() { return null; }
         private List<CourseGradeClass> AddCoruseGradeClass() { return null; }
