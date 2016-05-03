@@ -61,7 +61,17 @@ namespace TestVerktygWPF
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            _Frame.Navigate(new TeacherCreateTestPage());
+            MenuItem btn = sender as MenuItem;
+            switch (btn.Header.ToString())
+            {
+                case "Hantera Prov":
+                    _Frame.Navigate(new TeacherTestManagementPage());
+                    break;
+                case "GöraProv":
+                    _Frame.Navigate(new TeacherCreateTestPage());
+                    break;
+
+            }
         }
 
     }

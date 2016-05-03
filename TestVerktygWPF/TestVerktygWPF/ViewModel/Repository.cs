@@ -123,7 +123,18 @@ namespace TestVerktygWPF.ViewModel
 
         //Delete
         public void RemoveQuestion() { }
-        public void Removetudent() { }
+
+        public void Removetudent(Student xStudent)
+        {
+            using (var db = new DbModel())
+            {
+                var deleteStudent = from student in db.Students
+                    where student.StudentID == xStudent.StudentID
+                    select student;
+                db.Students.Remove(xStudent);
+                db.SaveChanges();
+            }
+        }
         public void RemoveTeacher() { }
         public void RemoveAdmin() { }
         public void RemoveTest() { }

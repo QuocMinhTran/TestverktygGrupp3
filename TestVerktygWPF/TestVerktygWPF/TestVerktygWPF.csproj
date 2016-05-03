@@ -67,12 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-
-    <Compile Include="Migrations\201605020724224_nyDB.cs" />
-    <Compile Include="Migrations\201605020724224_nyDB.Designer.cs">
-      <DependentUpon>201605020724224_nyDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\CourseGradeClass.cs" />
@@ -195,11 +189,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-
-    <EmbeddedResource Include="Migrations\201605021128490_Hej.resx">
-      <DependentUpon>201605021128490_Hej.cs</DependentUpon>
-
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

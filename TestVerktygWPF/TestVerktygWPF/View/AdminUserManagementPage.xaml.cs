@@ -162,5 +162,12 @@ namespace TestVerktygWPF.View
             TxtPopEmail.Text = SelectedAdmin.Email;
             IsSelectedUserAdmin = true;
         }
+
+        private void BtnDeleteUser(object sender, RoutedEventArgs e)
+        {
+            Repository repo = new Repository();
+
+            repo.Removetudent(SelectedStudent);
+        }
     }
 }

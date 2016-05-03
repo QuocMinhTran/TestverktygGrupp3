@@ -40,7 +40,7 @@ namespace TestVerktygWPF.Model
         {
             return lxQuestions.Remove(xQuestion);
         }
-        public void EditQuestion(Occupation xQuestion)
+        public void EditQuestion(Questions xQuestion)
         {
 
         }
