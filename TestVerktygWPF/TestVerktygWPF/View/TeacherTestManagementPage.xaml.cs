@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.View
 {
@@ -20,9 +21,52 @@ namespace TestVerktygWPF.View
     /// </summary>
     public partial class TeacherTestManagementPage : Page
     {
+        IList<Test> tests = new List<Test>();
         public TeacherTestManagementPage()
         {
             InitializeComponent();
+            using (var db = new DbModel())
+            {
+                var query = (from t in db.Tests
+                             select t).ToList();
+                foreach (var item in query)
+                {
+                    tests.Add(item);
+                }
+                cbSelectClass.ItemsSource = db.GradeClasss.ToList();
+                cbSelectClass.DisplayMemberPath = "Name";
+            }
+            listViewTestToSend.ItemsSource = tests;
+        }
+
+        private void btnTimeUp_Click(object sender, RoutedEventArgs e)
+        {
+            txtBoxTestTime.Text = (int.Parse(txtBoxTestTime.Text) + 1).ToString();
+        }
+
+        private void btnTimeDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.Parse(txtBoxTestTime.Text) > 1)
+            {
+                txtBoxTestTime.Text = (int.Parse(txtBoxTestTime.Text) - 1).ToString();
+            }
+            else
+            {
+                MessageBox.Show("Det räcker inter");
+            }
+        }
+
+        private void cbSelectClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using (var db = new DbModel())
+            {
+                ComboBox cbb = sender as ComboBox;
+                var query = from s in db.GradeClasss
+                            where s.Name == cbb.SelectedItem.ToString()
+                            select s.Studends;
+                cbSelectStudent.ItemsSource = query;
+                cbSelectStudent.DisplayMemberPath = "FirstName";
+            }
         }
     }
 }

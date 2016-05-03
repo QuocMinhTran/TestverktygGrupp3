@@ -14,7 +14,7 @@
         <Menu Grid.Row="0">
             <MenuItem Header="Startsida"></MenuItem>
             <MenuItem Header="Hantera Användare"></MenuItem>
-            <MenuItem Header="Hantera Prov"></MenuItem>
+            <MenuItem Header="Hantera Prov" Click="MenuItem_Click"></MenuItem>
             <MenuItem Header="Statistik" ></MenuItem>
             <MenuItem Header="GöraProv" Click="MenuItem_Click"></MenuItem>
         </Menu>

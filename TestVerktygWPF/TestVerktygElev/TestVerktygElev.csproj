@@ -74,11 +74,6 @@
     <Compile Include="Model\Courses.cs" />
     <Compile Include="Model\C__MigrationHistory.cs" />
     <Compile Include="Model\GradeClasses.cs" />
-    <Compile Include="Migrations\201605020844254_uck.cs" />
-    <Compile Include="Migrations\201605020844254_uck.Designer.cs">
-      <DependentUpon>201605020844254_uck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupations.cs" />
     <Compile Include="Model\Options.cs" />
@@ -154,9 +149,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201605020844254_uck.resx">
-      <DependentUpon>201605020844254_uck.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
