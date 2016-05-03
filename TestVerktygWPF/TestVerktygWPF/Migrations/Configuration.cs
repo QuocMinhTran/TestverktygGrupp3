@@ -9,7 +9,7 @@ namespace TestVerktygWPF.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(TestVerktygWPF.Model.DbModel context)
