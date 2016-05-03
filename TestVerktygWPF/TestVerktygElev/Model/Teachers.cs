@@ -6,15 +6,16 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Teacher
+    public partial class Teachers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Teacher()
+        public Teachers()
         {
-            Courses = new HashSet<Cours>();
-            Tests = new HashSet<Test>();
+            Courses = new HashSet<Courses>();
+            Tests = new HashSet<Tests>();
         }
 
+        [Key]
         public int TeacherID { get; set; }
 
         public string Password { get; set; }
@@ -30,11 +31,11 @@ namespace TestVerktygElev
         public int? Occupations_OccupationID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cours> Courses { get; set; }
+        public virtual ICollection<Courses> Courses { get; set; }
 
-        public virtual Occupation Occupation { get; set; }
+        public virtual Occupations Occupations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Test> Tests { get; set; }
+        public virtual ICollection<Tests> Tests { get; set; }
     }
 }

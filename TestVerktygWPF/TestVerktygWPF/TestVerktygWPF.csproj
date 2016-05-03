@@ -67,13 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+
     <Compile Include="Migrations\201605020724224_nyDB.cs" />
     <Compile Include="Migrations\201605020724224_nyDB.Designer.cs">
       <DependentUpon>201605020724224_nyDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605020727277_dbModelUpdate.cs" />
-    <Compile Include="Migrations\201605020727277_dbModelUpdate.Designer.cs">
-      <DependentUpon>201605020727277_dbModelUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
@@ -198,11 +195,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201605020724224_nyDB.resx">
-      <DependentUpon>201605020724224_nyDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605020727277_dbModelUpdate.resx">
-      <DependentUpon>201605020727277_dbModelUpdate.cs</DependentUpon>
+
+    <EmbeddedResource Include="Migrations\201605021128490_Hej.resx">
+      <DependentUpon>201605021128490_Hej.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

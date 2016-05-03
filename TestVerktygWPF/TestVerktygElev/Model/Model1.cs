@@ -8,7 +8,7 @@ namespace TestVerktygElev
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=DbModel")
+            : base("name=Model1")
         {
         }
 
@@ -22,11 +22,11 @@ namespace TestVerktygElev
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<StudentTest> StudentTests { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TestQuestion> TestQuestions { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<WritenTest> WritenTests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,7 +43,7 @@ namespace TestVerktygElev
             modelBuilder.Entity<GradeClass>()
                 .HasMany(e => e.Students)
                 .WithOptional(e => e.GradeClass)
-                .HasForeignKey(e => e.GradeClass_ID);
+                .HasForeignKey(e => e.GradeClass_GradeClassID);
 
             modelBuilder.Entity<Occupation>()
                 .HasMany(e => e.Admins)
@@ -62,8 +62,8 @@ namespace TestVerktygElev
 
             modelBuilder.Entity<Question>()
                 .HasMany(e => e.Options)
-                .WithOptional(e => e.Question)
-                .HasForeignKey(e => e.Question_QuestionID);
+                .WithRequired(e => e.Question)
+                .HasForeignKey(e => e.QuestionRefFK);
 
             modelBuilder.Entity<Question>()
                 .HasMany(e => e.TestQuestions)
@@ -76,9 +76,9 @@ namespace TestVerktygElev
                 .HasForeignKey(e => e.QuestTypeRefFK);
 
             modelBuilder.Entity<Student>()
-                .HasMany(e => e.StudentTests)
+                .HasMany(e => e.WritenTests)
                 .WithRequired(e => e.Student)
-                .HasForeignKey(e => e.StudentRefFk);
+                .HasForeignKey(e => e.StudentRefFK);
 
             modelBuilder.Entity<Subject>()
                 .HasMany(e => e.Courses)
@@ -96,19 +96,14 @@ namespace TestVerktygElev
                 .HasForeignKey(e => e.TeacherRefFK);
 
             modelBuilder.Entity<Test>()
-                .HasMany(e => e.Students)
-                .WithOptional(e => e.Test)
-                .HasForeignKey(e => e.Tests_TestID);
-
-            modelBuilder.Entity<Test>()
-                .HasMany(e => e.StudentTests)
-                .WithRequired(e => e.Test)
-                .HasForeignKey(e => e.TestRefFk);
-
-            modelBuilder.Entity<Test>()
                 .HasMany(e => e.TestQuestions)
                 .WithRequired(e => e.Test)
                 .HasForeignKey(e => e.TestRefFk);
+
+            modelBuilder.Entity<Test>()
+                .HasMany(e => e.WritenTests)
+                .WithRequired(e => e.Test)
+                .HasForeignKey(e => e.TestRefFK);
         }
     }
 }

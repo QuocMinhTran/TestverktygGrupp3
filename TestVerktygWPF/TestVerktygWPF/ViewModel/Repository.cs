@@ -107,8 +107,19 @@ namespace TestVerktygWPF.ViewModel
                 db.SaveChanges();
             }
         }
-        public void SaveTest() { }
+        public void SaveTest(Test xTest)
+        {
+            using (var db = new DbModel())
+            {
+                
+                db.Tests.Add(xTest);
+                db.SaveChanges();
+
+            }
+        }
+
         public void SaveQuestion() { }
+
 
         //Delete
         public void RemoveQuestion() { }
@@ -136,7 +147,6 @@ namespace TestVerktygWPF.ViewModel
                     item.Password = xStudent.Password;
                     item.UserName = xStudent.UserName;
                     item.Occupations = xStudent.Occupations;
-                    item.Tests = xStudent.Tests;
                     item.StudentID = xStudent.StudentID;
 
 
@@ -185,6 +195,7 @@ namespace TestVerktygWPF.ViewModel
         }
         public void EditTest() { }
 
+ 
 
     }
 }
