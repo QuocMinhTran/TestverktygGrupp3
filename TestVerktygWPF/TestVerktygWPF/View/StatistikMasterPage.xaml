@@ -17,27 +17,43 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ComboBox Grid.Row="0" HorizontalAlignment="Left" >
-            <ComboBoxItem Content="--Välj klass--" IsSelected="True"  />
+            <ComboBoxItem Content="--Välj prov--" IsSelected="True"  />
         </ComboBox>
         <ComboBox Grid.Row="0" HorizontalAlignment="Right">
             <ComboBoxItem Content="--Välj elev--" IsSelected="True"/>
         </ComboBox>
-        <StackPanel x:Name="spClass" Grid.Row="1" Visibility="Hidden">
+        <StackPanel x:Name="spClass" Grid.Row="1" >
             <TextBlock Text="Namn på provet:">
                 <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
             </TextBlock>
             <TextBlock Text="Genomsnitts tid på provet">
                 <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
             </TextBlock>
-            <TextBlock Text="Elev och Betyg">
+            <TextBlock Text="Genomsnitts betyg">
                 <TextBlock Text="Bind Elev och betyg"></TextBlock>
             </TextBlock>
+            <ListView Name="ListViewTests">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Elev" Width="120" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Betyg" Width="50" DisplayMemberBinding="{Binding Age}" />
+                        <GridViewColumn Header="Tid" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
         </StackPanel>
-        <StackPanel x:Name="spStudent" Grid.Row="1" Orientation="Horizontal">
+        <!--<StackPanel x:Name="spStudent" Grid.Row="1" Orientation="Horizontal">
             <TextBlock x:Name="tbTestName" Margin="10,0" Text="Provnamn"/>
             <TextBlock x:Name="tbGrade" Margin="10,0" Text="Betyg"/>
             <TextBlock x:Name="tbDate" Margin="10,0" Text="Datum"/>
             <TextBlock x:Name="tbTime" Margin="10,0" Text="Tid"/>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </Page>
