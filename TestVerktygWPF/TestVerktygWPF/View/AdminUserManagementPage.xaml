@@ -11,55 +11,80 @@
     <Grid>
         <TabControl Margin="0,25,0,0">
             <TabItem Header="Elev">
-                <DataGrid x:Name="dgElevDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                <DataGrid x:Name="dgElevDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,40,0,0" HorizontalAlignment="Center"  MouseLeftButtonUp="DgElevDataGrid_OnMouseLeftButtonUp">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn"/>
-                        <DataGridTextColumn Header="Användare"/>
+                        <DataGridTextColumn Header="Förnamn" Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Efternamn" Binding="{Binding LasttName}"/>
+                        <DataGridTextColumn Header="Användare" Binding="{Binding UserName}"/>
 
-                        <DataGridTextColumn Header="Lösenord"/>
-                        <DataGridTextColumn Header="Email"/>
+                        <DataGridTextColumn Header="Lösenord" Binding="{Binding Password}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
 
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
+                    <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
-                            <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
+                            <TextBlock Text="" Margin="10"></TextBlock>
                         </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
+                    </DataGrid.RowDetailsTemplate>-->
                 </DataGrid>
             </TabItem>
             <TabItem Header="Lärare">
-                <DataGrid x:Name="dgTeacherDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                <DataGrid x:Name="dgTeacherDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,40,0,0" HorizontalAlignment="Center" MouseLeftButtonUp="DgTeacherDataGrid_OnMouseLeftButtonUp">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn"/>
-                        <DataGridTextColumn Header="Användare"/>
+                        <DataGridTextColumn Header="Förnamn" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Efternamn" Binding="{Binding LasttName}"/>
+                        <DataGridTextColumn Header="Användarnamn" Binding="{Binding UserName}"/>
 
-                        <DataGridTextColumn Header="Lösenord"/>
-                        <DataGridTextColumn Header="Email"/>
+                        <DataGridTextColumn Header="Lösenord" Binding="{Binding Password}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
 
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
+                    <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
                         </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
+                    </DataGrid.RowDetailsTemplate>-->
                 </DataGrid>
             </TabItem>
             <TabItem Header="Admin">
-                <DataGrid x:Name="dgAdminDataGrid" Margin="0,40,0,0" HorizontalAlignment="Center">
+                <DataGrid x:Name="dgAdminDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,40,0,0" HorizontalAlignment="Center" MouseLeftButtonUp="DgAdminDataGrid_OnMouseLeftButtonUp">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Namn"/>
-                        <DataGridTextColumn Header="Användare"/>
-
-                        <DataGridTextColumn Header="Email"/>
+                        <DataGridTextColumn Header="Förnamn" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Efternamn" Binding="{Binding LasttName}"/>
+                        <DataGridTextColumn Header="Användarnamn" Binding="{Binding UserName}"/>
+                        <DataGridTextColumn Header="Lösenord" Binding="{Binding Password}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
 
                     </DataGrid.Columns>
-                    <DataGrid.RowDetailsTemplate>
+                    <!--<DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
                         </DataTemplate>
-                    </DataGrid.RowDetailsTemplate>
+                    </DataG--><!--rid.RowDetailsTemplate>-->
                 </DataGrid>
             </TabItem>
         </TabControl>
+        <Popup Name="PopUpSelectedUser" IsOpen="False" Placement="Center" AllowsTransparency="True" >
+            <Grid Width="500">
+                <StackPanel Orientation="Vertical" Background="Aqua" Margin="40,20,40,20">
+                    <Label Content="Förnamn"/>
+                    <TextBox Name="TxtPopFirstName"></TextBox>
+                    <Label Content="Efternamn"/>
+                    <TextBox Name="TxtPopLastName"></TextBox>
+                    <Label Content="Användarnamn"/>
+                    <TextBox Name="TxtPopUserName"></TextBox>
+                    <Label Content="Lösenord"/>
+                    <TextBox Name="TxtPopPassword"></TextBox>
+                    <Label Content="Email"/>
+                    <TextBox Name="TxtPopEmail"></TextBox>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Avbryt" Click="BtnPopUpClose" Margin="0,10,20,10"/>
+                        <Button Content="Tabort Användare" Margin="0,10,20,10" Click="BtnDeleteUser"/>
+                        <Button Content="Spara" Margin="0,10,20,10" Click="BtnSaveEditStudent"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Popup>
     </Grid>
 </Page>
