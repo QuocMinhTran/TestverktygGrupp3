@@ -10,25 +10,26 @@
 
     <Grid Background="White">        
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel  Grid.Row="0">
-            <TextBlock Name="txtBlockTestName" />
-            <TextBlock Name="txtBlockTimeLeft" />
+        
+        <StackPanel Grid.Row="0">
+            <TextBlock Name="txtBlockTestName" HorizontalAlignment="Center" FontSize="20" />
             <TextBlock Name="txtBlockQuestions" />
         </StackPanel>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right">
-            <TextBlock>Tid kvar</TextBlock>
-            <TextBlock>Fråga 6</TextBlock>
-        </StackPanel>
+        
         <StackPanel Grid.Row="1">
-            <TextBlock Name="txtBlockQuestionName" FontSize="30" HorizontalAlignment="Left" />
-            <StackPanel Name="splAnswers">
-            </StackPanel>
+            <TextBlock Name="txtBlockQuestionName" FontSize="18" HorizontalAlignment="Left" />
+            <TextBlock Name="txtBlockTimeLeft" />
+            <Separator BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Stretch" />
+
+            <StackPanel Name="splAnswers" />
+            <Separator BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Stretch" />
+
             <StackPanel x:Name="splNavigation" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100"  Margin="10,0,10,0" Content="Förgående" Name="btnPrevious" Click="btnPrevious_Click" />
-                <Button Width="100"  Margin="10,0,10,0" Content="Nästa" Name="btnNext" Click="btnNext_Click" />
+                <Button Width="100"  Margin="10,0,10,0" Content="Föregående fråga" Name="btnPrevious" Click="btnPrevious_Click" IsEnabled="False" />
+                <Button Width="100"  Margin="10,0,10,0" Content="Nästa fråga" Name="btnNext" Click="btnNext_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

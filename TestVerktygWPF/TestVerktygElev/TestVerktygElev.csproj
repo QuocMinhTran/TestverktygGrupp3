@@ -85,6 +85,7 @@
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\TestQuestion.cs" />
     <Compile Include="ViewModel\MockRepo.cs" />
+    <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="View\ElevTestPage.xaml.cs">
       <DependentUpon>ElevTestPage.xaml</DependentUpon>
     </Compile>
