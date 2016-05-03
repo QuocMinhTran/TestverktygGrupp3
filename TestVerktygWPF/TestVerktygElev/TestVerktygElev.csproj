@@ -74,6 +74,7 @@
     <Compile Include="Model\CourseGradeClass.cs" />
     <Compile Include="Model\C__MigrationHistory.cs" />
     <Compile Include="Model\GradeClass.cs" />
+    <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupation.cs" />
     <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Question.cs" />
