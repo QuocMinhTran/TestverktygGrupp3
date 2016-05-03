@@ -69,27 +69,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Admins.cs" />
-    <Compile Include="Model\CourseGradeClasses.cs" />
-    <Compile Include="Model\Courses.cs" />
-    <Compile Include="Model\C__MigrationHistory.cs" />
-    <Compile Include="Model\GradeClasses.cs" />
     <Compile Include="Migrations\201605020844254_uck.cs" />
     <Compile Include="Migrations\201605020844254_uck.Designer.cs">
       <DependentUpon>201605020844254_uck.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Model1.cs" />
-    <Compile Include="Model\Occupations.cs" />
-    <Compile Include="Model\Options.cs" />
-    <Compile Include="Model\Questions.cs" />
-    <Compile Include="Model\QuestionTypes.cs" />
-    <Compile Include="Model\Students.cs" />
-    <Compile Include="Model\StudentTests.cs" />
-    <Compile Include="Model\Subjects.cs" />
-    <Compile Include="Model\Teachers.cs" />
-    <Compile Include="Model\TestQuestions.cs" />
-    <Compile Include="Model\Tests.cs" />
     <Compile Include="ViewModel\MockRepo.cs" />
     <Compile Include="View\ElevTestPage.xaml.cs">
       <DependentUpon>ElevTestPage.xaml</DependentUpon>
@@ -103,7 +87,6 @@
     <Compile Include="View\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\WritenTests.cs" />
     <Page Include="View\ElevTestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,7 +159,9 @@
   <ItemGroup>
     <Resource Include="Assets\Images\NewtonLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestVerktygWPF\TestVerktygWPF.csproj">
       <Project>{0C4AAA86-1300-4D42-B04B-5B237E446BE7}</Project>
