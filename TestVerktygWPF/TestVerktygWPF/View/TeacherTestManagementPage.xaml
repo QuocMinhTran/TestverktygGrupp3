@@ -40,7 +40,7 @@
             <ComboBox Name="cbSelectClass" SelectionChanged="cbSelectClass_SelectionChanged"></ComboBox>
             <Label Content="Välj elev"/>
             <ComboBox Name="cbSelectStudent"></ComboBox>
-            <Button Name="btnSendTestToAdmin" Margin="0,10,0,0" Content="Skicka till Admin"/>
+            <Button Name="btnSendTestToAdmin" Margin="0,10,0,0" Content="Skicka till Admin" Click="btnSendTestToAdmin_Click"/>
         </StackPanel>
     </Grid>
 </Page>

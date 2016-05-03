@@ -60,13 +60,23 @@ namespace TestVerktygWPF.View
         {
             using (var db = new DbModel())
             {
-                ComboBox cbb = sender as ComboBox;
-                var query = from s in db.GradeClasss
-                            where s.Name == cbb.SelectedItem.ToString()
-                            select s.Studends;
-                cbSelectStudent.ItemsSource = query;
+                //ComboBox cbb = sender as ComboBox;
+                //var query = from grade in db.GradeClasss
+                //            where grade.Name == cbSelectClass.SelectedItem.ToString()
+                //            select grade.Studends.ToList();
+                //List<string> Names = new List<string>();
+                //foreach (var item in query)
+                //{
+                //    Console.WriteLine(item);
+                //}
+                cbSelectStudent.ItemsSource = db.Students.ToList();
                 cbSelectStudent.DisplayMemberPath = "FirstName";
             }
+        }
+
+        private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
