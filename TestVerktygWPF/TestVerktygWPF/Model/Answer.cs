@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace TestVerktygWPF.Model
 {
-    public class Option //Done
+    public class Answer //Done
     {
-        public int OptionID { get; set; }
-        public string SelectivOption { get; set; }
+        public int ID { get; set; }
+        public string Text{ get; set; }
         public bool RightAnswer { get; set; }
 
-        //[ForeignKey("QuestionRefFK")]
-        //public Questions QuestionID { get; set; }
-        public int QuestionRefFK { get; set; }
+        [ForeignKey("QuestionFk")]
+        public Questions Questions { get; set; }
+        public int QuestionFk { get; set; }
 
     }
 }

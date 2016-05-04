@@ -22,6 +22,7 @@ namespace TestVerktygWPF.View
     public partial class TeacherTestManagementPage : Page
     {
         IList<Test> tests = new List<Test>();
+        Test test;
         public TeacherTestManagementPage()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace TestVerktygWPF.View
                 {
                     tests.Add(item);
                 }
-                cbSelectClass.ItemsSource = db.GradeClasss.ToList();
+                //cbSelectClass.ItemsSource = db.GradeClasss.ToList();
                 cbSelectClass.DisplayMemberPath = "Name";
             }
             listViewTestToSend.ItemsSource = tests;
@@ -76,7 +77,13 @@ namespace TestVerktygWPF.View
 
         private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
         {
+            test = listViewTestToSend.SelectedItem as Test;
+            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, cbSelectClass.SelectedItem, cbSelectStudent.SelectedItem);
+        }
 
+        private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, object selectedItem1, object selectedItem2)
+        {
+            throw new NotImplementedException();
         }
     }
 }
