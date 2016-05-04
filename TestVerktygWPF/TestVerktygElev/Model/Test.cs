@@ -11,11 +11,12 @@ namespace TestVerktygElev
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Test()
         {
-            TestQuestions = new HashSet<TestQuestion>();
-            WritenTests = new HashSet<WritenTest>();
+            Questions = new HashSet<Question>();
+            StudentTests = new HashSet<StudentTest>();
+            UserTests = new HashSet<UserTest>();
         }
 
-        public int TestID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 
@@ -23,14 +24,15 @@ namespace TestVerktygElev
 
         public DateTime? StartDate { get; set; }
 
-        public int TeacherRefFK { get; set; }
-
-        public virtual Teacher Teacher { get; set; }
+        public double TimeStampe { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TestQuestion> TestQuestions { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WritenTest> WritenTests { get; set; }
+        public virtual ICollection<StudentTest> StudentTests { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserTest> UserTests { get; set; }
     }
 }

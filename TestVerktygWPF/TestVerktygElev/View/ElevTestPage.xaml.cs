@@ -68,8 +68,9 @@ namespace TestVerktygElev
                 item.Visibility = Visibility.Collapsed;
             }
             txtBlockQuestions.Text = (qIndex + 1).ToString() + "/" + questionList.Count.ToString();
-            txtBlockQuestionName.Text = questionList[qIndex].QuestionsLabel;
+            txtBlockQuestionName.Text = questionList[qIndex].Name;
             listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
+
             //ProcessAnswers();
         }
 
@@ -77,112 +78,99 @@ namespace TestVerktygElev
         {
             for (int i = 0; i < questionList.Count; i++)
             {
-                foreach (var item in questionList[i].Options)
+                StackPanel answerControl = new StackPanel();
+                foreach (var item in questionList[i].Answers)
                 {
                     TextBlock txtBlock = new TextBlock();
-                    txtBlock.Text = item.SelectivOption;
+                    txtBlock.Text = item.Text;
                     CheckBox box = new CheckBox();
-                    StackPanel answerControl = new StackPanel();
                     answerControl.Children.Add(txtBlock);
                     answerControl.Children.Add(box);
-                    answerControl.Orientation = Orientation.Horizontal;
                     answerControl.Visibility = Visibility.Collapsed;
-                    splAnswers.Children.Add(answerControl);
-                    listCheckedAnswers.Add(answerControl);
                 }
-            }
-            //foreach (var item in questionList[qIndex].Options)
-            //{
-            //    TextBlock txtBlock = new TextBlock();
-            //    txtBlock.Text = item.SelectivOption;
-            //    CheckBox box = new CheckBox();
-            //    StackPanel answerControl = new StackPanel();
-            //    answerControl.Children.Add(txtBlock);
-            //    answerControl.Children.Add(box);
-            //    answerControl.Orientation = Orientation.Horizontal;
-            //    splAnswers.Children.Add(answerControl);
-            //    listCheckedAnswers.Add(answerControl);
-            //}
-        }
 
-        private void ProcessAnswers()
-        {
-            foreach (var item in questionList[qIndex].Options)
-            {
-                TextBlock txtBlock = new TextBlock();
-                txtBlock.Text = item.SelectivOption;
-                CheckBox box = new CheckBox();
-                StackPanel answerControl = new StackPanel();
-                answerControl.Children.Add(txtBlock);
-                answerControl.Children.Add(box);
-                answerControl.Orientation = Orientation.Horizontal;
-                splAnswers.Children.Add(answerControl);
                 listCheckedAnswers.Add(answerControl);
+                splAnswers.Children.Add(answerControl);
             }
         }
 
-        private void CreateDummyTest()
-        {
-            Teacher teacher = new Teacher();
-            teacher.FirstName = "fuck";
-            teacher.LasttName = "fuckerson";
+        //private void ProcessAnswers()
+        //{
+        //    foreach (var item in questionList[qIndex].Options)
+        //    {
+        //        TextBlock txtBlock = new TextBlock();
+        //        txtBlock.Text = item.SelectivOption;
+        //        CheckBox box = new CheckBox();
+        //        StackPanel answerControl = new StackPanel();
+        //        answerControl.Children.Add(txtBlock);
+        //        answerControl.Children.Add(box);
+        //        answerControl.Orientation = Orientation.Horizontal;
+        //        listCheckedAnswers.Add(answerControl);
+        //    }
+        //}
 
-            Student student = new Student();
+        //private void CreateDummyTest()
+        //{
+        //    Teacher teacher = new Teacher();
+        //    teacher.FirstName = "fuck";
+        //    teacher.LasttName = "fuckerson";
 
-            test.Name = "honk honk motherfucker";
-            test.StartDate = DateTime.Today;
-            test.EndDate = DateTime.Today.AddDays(1);
-            test.TeacherRefFK = teacher.TeacherID;
+        //    Student student = new Student();
+
+        //    test.Name = "honk honk motherfucker";
+        //    test.StartDate = DateTime.Today;
+        //    test.EndDate = DateTime.Today.AddDays(1);
+        //    test.TeacherRefFK = teacher.TeacherID;
             
-            QuestionType type1 = new QuestionType();
-            type1.Option = "Envalsfråga";
+        //    QuestionType type1 = new QuestionType();
+        //    type1.Option = "Envalsfråga";
 
-            QuestionType type2 = new QuestionType();
-            type2.Option = "Flervalsfråga";
+        //    QuestionType type2 = new QuestionType();
+        //    type2.Option = "Flervalsfråga";
 
-            Question question = new Question();
-            question.QuestionsLabel = "What the fuck did you just fucking say about me, you little bitch?";
-            question.QuestTypeRefFK = type1.QuestionTypeID;
+        //    Question question = new Question();
+        //    question.QuestionsLabel = "What the fuck did you just fucking say about me, you little bitch?";
+        //    question.QuestTypeRefFK = type1.QuestionTypeID;
 
-            Option option = new Option();
-            option.SelectivOption = "Gorilla Warfare";
-            option.RightAnswer = true;
+        //    Option option = new Option();
+        //    option.SelectivOption = "Gorilla Warfare";
+        //    option.RightAnswer = true;
 
-            Option option2 = new Option();
-            option2.SelectivOption = "united nations space command";
-            option2.RightAnswer = false;
+        //    Option option2 = new Option();
+        //    option2.SelectivOption = "united nations space command";
+        //    option2.RightAnswer = false;
 
-            Question question2 = new Question();
-            question2.QuestionsLabel = "what is shitposting";
-            question2.QuestTypeRefFK = type2.QuestionTypeID;
+        //    Question question2 = new Question();
+        //    question2.QuestionsLabel = "what is shitposting";
+        //    question2.QuestTypeRefFK = type2.QuestionTypeID;
 
-            Option option3 = new Option();
-            option3.SelectivOption = "The failure to make a constructive post ";
-            option3.RightAnswer = true;
+        //    Option option3 = new Option();
+        //    option3.SelectivOption = "The failure to make a constructive post ";
+        //    option3.RightAnswer = true;
 
-            Option option4 = new Option();
-            option4.SelectivOption = "The inability to add useful information to a forum";
-            option4.RightAnswer = true;
+        //    Option option4 = new Option();
+        //    option4.SelectivOption = "The inability to add useful information to a forum";
+        //    option4.RightAnswer = true;
 
-            Option option5 = new Option();
-            option5.SelectivOption = "Worthless overly offensive posts written in a manner which aggravates others";
-            option5.RightAnswer = true;
+        //    Option option5 = new Option();
+        //    option5.SelectivOption = "Worthless overly offensive posts written in a manner which aggravates others";
+        //    option5.RightAnswer = true;
 
-            Question q3 = new Question();
-            q3.QuestionsLabel = "whats the difference between a shit and a turd";
-            questionList.Add(q3);
+        //    Question q3 = new Question();
+        //    q3.QuestionsLabel = "whats the difference between a shit and a turd";
+        //    questionList.Add(q3);
 
-            TestQuestion tstqst = new TestQuestion();
-            tstqst.TestRefFk = test.TestID;
-            tstqst.QuestionRefFk = question.QuestionID;
-            TestQuestion tstqst2 = new TestQuestion();
-            tstqst2.TestRefFk = test.TestID;
-            tstqst2.QuestionRefFk = question2.QuestionID;
+        //    TestQuestion tstqst = new TestQuestion();
+        //    tstqst.TestRefFk = test.TestID;
+        //    tstqst.QuestionRefFk = question.QuestionID;
+        //    TestQuestion tstqst2 = new TestQuestion();
+        //    tstqst2.TestRefFk = test.TestID;
+        //    tstqst2.QuestionRefFk = question2.QuestionID;
 
-            List<Option> optionsList = new List<Option>();
-            questionList.Add(question);
-            questionList.Add(question2);
-        }
+        //    List<Option> optionsList = new List<Option>();
+        //    questionList.Add(question);
+        //    questionList.Add(question2);
+        //}
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
@@ -196,7 +184,7 @@ namespace TestVerktygElev
         {
             if (qIndex + 1 >= questionList.Count)
             {
-                MessageBox.Show("wow you completed the test so good");
+                CorrectTest();
             }
 
             else
@@ -205,6 +193,11 @@ namespace TestVerktygElev
                 btnPrevious.IsEnabled = true;
                 ProcessQuestion();
             }
+        }
+
+        private void CorrectTest()
+        {
+            
         }
     }
 }

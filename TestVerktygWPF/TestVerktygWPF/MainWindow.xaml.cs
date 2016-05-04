@@ -26,7 +26,7 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
-            _Frame.Navigate(new View.AdminUserManagementPage());
+            _Frame.Navigate(new View.AdminCreateUserPage());
 
             // AddDataToBase();
         }
@@ -69,7 +69,9 @@ namespace TestVerktygWPF
                 case "GöraProv":
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
-
+                case "Godkänna Prov":
+                    _Frame.Navigate(new AdminTestManagementPage());
+                    break;
             }
         }
         private void AddDataToBase()

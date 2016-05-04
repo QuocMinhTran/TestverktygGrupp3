@@ -70,6 +70,7 @@
     <Compile Include="Migrations\201605041156440_hej.cs" />
     <Compile Include="Migrations\201605041156440_hej.Designer.cs">
       <DependentUpon>201605041156440_hej.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
@@ -194,6 +195,7 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201605041156440_hej.resx">
       <DependentUpon>201605041156440_hej.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

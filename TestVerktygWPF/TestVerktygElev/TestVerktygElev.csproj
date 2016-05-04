@@ -69,22 +69,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Cours.cs" />
     <Compile Include="Model\CourseGradeClass.cs" />
+=======
+    <Compile Include="Model\Answer.cs" />
+    <Compile Include="Model\Course.cs" />
+>>>>>>> f7c5f99deafed981e9fef90cb17b270825abe633
     <Compile Include="Model\C__MigrationHistory.cs" />
-    <Compile Include="Model\GradeClass.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupation.cs" />
-    <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Question.cs" />
-    <Compile Include="Model\QuestionType.cs" />
     <Compile Include="Model\Student.cs" />
-    <Compile Include="Model\Subject.cs" />
-    <Compile Include="Model\Teacher.cs" />
+    <Compile Include="Model\StudentAnswer.cs" />
+    <Compile Include="Model\StudentClass.cs" />
+    <Compile Include="Model\StudentClassCourse.cs" />
+    <Compile Include="Model\StudentTest.cs" />
     <Compile Include="Model\Test.cs" />
-    <Compile Include="Model\TestQuestion.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserTest.cs" />
     <Compile Include="ViewModel\MockRepo.cs" />
     <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="View\ElevTestPage.xaml.cs">
@@ -99,7 +104,6 @@
     <Compile Include="View\TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\WritenTest.cs" />
     <Page Include="View\ElevTestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +154,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201605041227083_fuark.resx">
+      <DependentUpon>201605041227083_fuark.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

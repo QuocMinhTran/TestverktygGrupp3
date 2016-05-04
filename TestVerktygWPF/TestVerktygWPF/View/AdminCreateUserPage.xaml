@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TestVerktygWPF.View"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="AdminCreateUserPage">
+      mc:Ignorable="d" d:DesignWidth="300"
+      Title="AdminCreateUserPage" Height="411.222">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -33,16 +32,17 @@
                 <RadioButton Name="RdBtnTeacher" Content="Lärare" Margin="0,0,5,0"/>
                 <RadioButton Name="RdBtnAdmin" Content="Admin"/>
             </StackPanel>
-            </StackPanel>
-        
+            <ComboBox Name="CbxSelectClass" SelectionChanged="CbxSelectClass_OnSelectionChanged"/>
+        </StackPanel>
+
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,10">
-            <Button Name="btnSaveUser" Margin="10,10" Width="100" Click="btnSaveUser_Click">Spara</Button> 
+            <Button Name="btnSaveUser" Margin="10,10" Width="100" Click="btnSaveUser_Click">Spara</Button>
             <Button Name="btnCancelUser" Margin="10,10" Width="100" Click="btnCancelUser_Click">Avbryt</Button>
         </StackPanel>
         <DockPanel Grid.Row="0" Background="#EE7202" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Source="/TestVerktygWPF;component/Assets/Images/NewtonLogo.png" Margin="10,10,10,10" HorizontalAlignment="Center"/>
-                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Skapa/Redigera användare</TextBlock>                
+                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Skapa/Redigera användare</TextBlock>
             </StackPanel>
         </DockPanel>
     </Grid>
