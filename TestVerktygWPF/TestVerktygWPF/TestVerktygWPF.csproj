@@ -80,6 +80,7 @@
     <Compile Include="Model\StudentTest.cs" />
     <Compile Include="Model\UserTest.cs" />
     <Compile Include="Model\Test.cs" />
+    <Compile Include="ViewModel\CurrentSelectedTest.cs" />
     <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="ViewModel\TestHandler.cs" />
     <Compile Include="View\AdminCreateUserPage.xaml.cs">

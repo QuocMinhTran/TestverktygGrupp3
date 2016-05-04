@@ -23,10 +23,38 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
+
+        //public Test GetTest(int iD)
+        //{
+        //    Test xTest = new Test();
+        //    using (var db = new DbModel())
+        //    {
+        //        var querry = from test in db.Tests
+        //                     where test.TestID == iD
+        //                     select test;
+        //        xTest = querry as Test;
+        //    }
+
+        //    return xTest;
+        //}
+
+        //internal List<Option> GetOptions(int questionID)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        internal List<Questions> GetQuestion(int testID)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public Questions GetQuestion()
         {
             return null;
         }
+
+       
 
         public List<Student> GetAllStudents()
         {
