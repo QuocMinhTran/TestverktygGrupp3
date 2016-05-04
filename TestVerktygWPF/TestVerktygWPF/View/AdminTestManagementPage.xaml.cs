@@ -21,15 +21,19 @@ namespace TestVerktygWPF.View
     /// </summary>
     public partial class AdminTestManagementPage : Page
     {
-        
+        //IList<Test> Tests = new List<Test>();
         public AdminTestManagementPage()
         {
             InitializeComponent();
             using (var db = new DbModel())
             {
-               _DataGrid.ItemsSource = db.Tests.ToList();
-                
+                var query = from t in db.Tests
+                            where t.EndDate > new DateTime()
+                _DataGrid.ItemsSource = db.Tests.ToList();
+
             }
+
+
         }
     }
 }
