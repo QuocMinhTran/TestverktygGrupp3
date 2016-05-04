@@ -79,7 +79,7 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectTeachers = from teacher in db.Users
-                    where teacher.Occupations.ID == 1 
+                    where teacher.OccupationFk == 1 
                     select teacher;
                 foreach (var item in selectTeachers)
                 {
@@ -96,7 +96,7 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectAdmins = from admin in db.Users
-                                   where admin.Occupations.ID ==2
+                                   where admin.OccupationFk ==2
                                    select admin;
                 foreach (var item in selectAdmins)
                 {
