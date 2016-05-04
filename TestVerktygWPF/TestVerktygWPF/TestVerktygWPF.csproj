@@ -88,6 +88,7 @@
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\TestQuestion.cs" />
     <Compile Include="Model\WritenTest.cs" />
+    <Compile Include="ViewModel\CurrentSelectedTest.cs" />
     <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="ViewModel\TestHandler.cs" />
     <Compile Include="View\AdminCreateUserPage.xaml.cs">

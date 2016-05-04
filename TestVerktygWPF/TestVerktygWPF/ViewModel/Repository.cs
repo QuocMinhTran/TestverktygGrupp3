@@ -26,10 +26,36 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
+        public Test GetTest(int iD)
+        {
+            Test xTest = new Test();
+            using (var db = new DbModel())
+            {
+                var querry = from test in db.Tests
+                             where test.TestID == iD
+                             select test;
+                xTest = querry as Test;
+            }
+
+            return xTest;
+        }
+
+        internal List<Option> GetOptions(int questionID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<Questions> GetQuestion(int testID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Occupation GetQuestion()
         {
             return null;
         }
+
+       
 
         public List<Student> GetAllStudents()
         {
@@ -46,6 +72,31 @@ namespace TestVerktygWPF.ViewModel
             }
 
             return liAllStudents;
+        }
+
+        internal List<Student> GetAllStudents(Test xTest)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Student GetStudent(int iD)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int GetTestInfoTime(Student xStudent)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int GetTestInfoScore(Student xStudent)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int GetTestInfo(Student xStudent)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Teacher> GetAllTeachers()
