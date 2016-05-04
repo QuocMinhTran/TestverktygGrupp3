@@ -82,7 +82,7 @@ namespace TestVerktygWPF.View
                 xAdmin.UserName = tbxUsername.Text;
                 xAdmin.Password = tbxPassword.Text;
                 xAdmin.Email = tbxEmail.Text;
-                xAdmin.OccupationFk = 3;
+                xAdmin.OccupationFk = 2;
                 xAdmin.StudentClassFk = SelectedIntClass;
                 repo.SaveUser(xAdmin);
             }
