@@ -11,30 +11,30 @@ namespace TestVerktygElev
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            WritenTests = new HashSet<WritenTest>();
+            StudentTests = new HashSet<StudentTest>();
         }
 
-        public int StudentID { get; set; }
+        public int ID { get; set; }
 
         public string Password { get; set; }
 
         public string FirstName { get; set; }
 
-        public string LasttName { get; set; }
+        public string LastName { get; set; }
 
         public string Email { get; set; }
 
         public string UserName { get; set; }
 
-        public int? Occupations_OccupationID { get; set; }
+        public int StudentClassFk { get; set; }
 
-        public int? GradeClass_GradeClassID { get; set; }
-
-        public virtual GradeClass GradeClass { get; set; }
+        public int OccupationFk { get; set; }
 
         public virtual Occupation Occupation { get; set; }
 
+        public virtual StudentClass StudentClass { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WritenTest> WritenTests { get; set; }
+        public virtual ICollection<StudentTest> StudentTests { get; set; }
     }
 }
