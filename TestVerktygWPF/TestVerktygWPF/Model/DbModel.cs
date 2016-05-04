@@ -23,6 +23,7 @@ namespace TestVerktygWPF.Model
         public DbSet<Test> Tests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserTest> UserTests { get; set; }
+        public DbSet<StudentAnswer> StudentAnswers { get; set; }
 
     }
 

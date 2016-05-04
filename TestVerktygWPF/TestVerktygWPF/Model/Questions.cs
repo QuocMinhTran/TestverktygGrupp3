@@ -15,6 +15,7 @@ namespace TestVerktygWPF.Model
         public string Name { get; set; } //Frågan
         public string QuestionType { get; set; }
         public string AppData { get; set; }
+      
 
         [ForeignKey("TestFk")]
         public Test Test { get; set; }
