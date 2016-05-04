@@ -34,7 +34,7 @@ namespace TestVerktygWPF.View
                 {
                     tests.Add(item);
                 }
-                //cbSelectClass.ItemsSource = db.GradeClasss.ToList();
+                cbSelectClass.ItemsSource = db.StudentClasses.ToList();
                 cbSelectClass.DisplayMemberPath = "Name";
             }
             listViewTestToSend.ItemsSource = tests;
