@@ -12,38 +12,32 @@ namespace TestVerktygWPF.Model
     public class Test 
     {
         [Key]
-        public int TestID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? StartDate { get; set; }
+        public double TimeStampe { get; set; }
 
-        [ForeignKey("TeacherRefFK")]
-        public Teacher TeacherFK { get; set; }
-        public int TeacherRefFK { get; set; }
-        
+        //public Test()
+        //{
+        //    lxQuestions = new List<Questions>();
+        //}
+        //public void AddQuestion(Questions xQuestion)
+        //{
+        //    lxQuestions.Add(xQuestion);
+        //}
+        //public Questions GetQuestion(int i)
+        //{
+        //    return lxQuestions[i];   
+        //}
+        //public bool RemoveQuestion(Questions xQuestion)
+        //{
+        //    return lxQuestions.Remove(xQuestion);
+        //}
+        //public void EditQuestion(Questions xQuestion)
+        //{
 
-        private List<Questions> lxQuestions;
-
-        public Test()
-        {
-            lxQuestions = new List<Questions>();
-        }
-        public void AddQuestion(Questions xQuestion)
-        {
-            lxQuestions.Add(xQuestion);
-        }
-        public Questions GetQuestion(int i)
-        {
-            return lxQuestions[i];   
-        }
-        public bool RemoveQuestion(Questions xQuestion)
-        {
-            return lxQuestions.Remove(xQuestion);
-        }
-        public void EditQuestion(Questions xQuestion)
-        {
-
-        }
+        //}
     }
 
 }
