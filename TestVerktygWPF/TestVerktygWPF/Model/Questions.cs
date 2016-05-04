@@ -11,25 +11,20 @@ namespace TestVerktygWPF.Model
     public class Questions
     {
         [Key]
-        public int QuestionID { get; set; }
-        public string QuestionsLabel { get; set; } //Frågan
-        public List<Option> Options { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; } //Frågan
+        public string QuestionType { get; set; }
         public string AppData { get; set; }
 
-        [ForeignKey("QuestTypeRefFK")]
-        public QuestionType QuestionTypeFK { get; set; }
-        public int QuestTypeRefFK { get; set; }
+        [ForeignKey("TestFk")]
+        public Test Test { get; set; }
+        public int TestFk { get; set; }
 
-        //Frågans typ
-        private QuestionType xQuestionType;
-        //Svarets id för listan i Test
-        private int iAnswerId;
+        //public Questions()
+        //{
+        //    Options = new List<Option>();
 
-        public Questions()
-        {
-            Options = new List<Option>();
-
-        }
+        //}
            
     }
 }

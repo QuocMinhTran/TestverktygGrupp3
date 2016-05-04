@@ -11,12 +11,8 @@ namespace TestVerktygWPF.Model
     public class Course //Done
     {
         [Key]
-        public int CourseID { get; set; }
+        public int ID { get; set; }
 
-        public Subjects Subject { get; set; }
-
-        [ForeignKey("TeacherRefFK")]
-        public Teacher TeacherFK { get; set; }
-        public int TeacherRefFK { get; set; }
+        public string CourseName { get; set; }
     }
 }

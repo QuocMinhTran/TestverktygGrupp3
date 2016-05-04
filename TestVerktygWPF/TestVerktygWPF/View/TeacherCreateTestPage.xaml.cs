@@ -52,53 +52,53 @@ namespace TestVerktygWPF.View
         private void SaveQuestion(object sender, RoutedEventArgs e)
         {
 
-            Questions xQuest = new Questions();
-            xQuest.QuestionsLabel = txtBoxQuestion.Text;
-            foreach (var StackPanelItem in _StackPanel.Children)
-            {
-                Option xOption = new Option();
-                Console.WriteLine(StackPanelItem.ToString());
-                var temp = StackPanelItem as StackPanel;
-                foreach (var Item in temp.Children)
-                {
+            //Questions xQuest = new Questions();
+            //xQuest.QuestionsLabel = txtBoxQuestion.Text;
+            //foreach (var StackPanelItem in _StackPanel.Children)
+            //{
+            //    Answer xOption = new Answer();
+            //    Console.WriteLine(StackPanelItem.ToString());
+            //    var temp = StackPanelItem as StackPanel;
+            //    foreach (var Item in temp.Children)
+            //    {
 
-                    TextBox xTextBox = Item as TextBox;
-                    if (xTextBox != null)
-                    {
-                        xOption.SelectivOption = xTextBox.Text;
-                    }
-                    CheckBox xCheckBox = Item as CheckBox;
-                    if (xCheckBox != null)
-                    {
-                        if (xCheckBox.IsChecked == true) xOption.RightAnswer = true;
-                        else xOption.RightAnswer = false;
+            //        TextBox xTextBox = Item as TextBox;
+            //        if (xTextBox != null)
+            //        {
+            //            xOption.SelectivOption = xTextBox.Text;
+            //        }
+            //        CheckBox xCheckBox = Item as CheckBox;
+            //        if (xCheckBox != null)
+            //        {
+            //            if (xCheckBox.IsChecked == true) xOption.RightAnswer = true;
+            //            else xOption.RightAnswer = false;
 
-                    }
-                    RadioButton xRadioButton = Item as RadioButton;
-                    if (xRadioButton != null)
-                    {
-                        if (xRadioButton.IsChecked == true) xOption.RightAnswer = true;
-                        else xOption.RightAnswer = false;
+            //        }
+            //        RadioButton xRadioButton = Item as RadioButton;
+            //        if (xRadioButton != null)
+            //        {
+            //            if (xRadioButton.IsChecked == true) xOption.RightAnswer = true;
+            //            else xOption.RightAnswer = false;
 
-                    }
-                }
-                xQuest.Options.Add(xOption);
-            }
-            m_lxQuestions.Add(xQuest);
-            listViewAddedQuestions.Items.Add(xQuest.QuestionsLabel);
+            //        }
+            //    }
+            //    xQuest.Options.Add(xOption);
+            //}
+            //m_lxQuestions.Add(xQuest);
+            //listViewAddedQuestions.Items.Add(xQuest.QuestionsLabel);
 
         }
 
         private void SaveTest(object sender, RoutedEventArgs e)
         {
        
-            Test xTest = new Test();
-            Repository xRepository = new Repository();
-            xTest.Name = txtBoxTestName.Text;
-            xTest.StartDate = DateTime.Today;
-            xTest.EndDate = DateTime.Today.AddDays(1);
-            xTest.TeacherRefFK = 2;
-            xRepository.SaveTest(xTest);
+            //Test xTest = new Test();
+            //Repository xRepository = new Repository();
+            //xTest.Name = txtBoxTestName.Text;
+            //xTest.StartDate = DateTime.Today;
+            //xTest.EndDate = DateTime.Today.AddDays(1);
+            //xTest.TeacherRefFK = 2;
+            //xRepository.SaveTest(xTest);
         }
         private StackPanel CreateQuestion()
         {

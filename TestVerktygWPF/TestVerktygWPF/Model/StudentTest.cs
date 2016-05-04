@@ -10,6 +10,9 @@ namespace TestVerktygWPF.Model
     public class StudentTest //Tabort
     {
         public int ID { get; set; }
+        public int Score { get; set; }
+        public bool IsTestDone { get; set; }
+        public int WritenTime { get; set; }
 
         [ForeignKey("StudentRefFk")]
         public Student StudentFk { get; set; }

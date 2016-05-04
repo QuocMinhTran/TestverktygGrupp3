@@ -72,193 +72,193 @@ namespace TestVerktygWPF
 
             }
         }
-        private void AddDataToBase()
-        {
-            List<Admin> lxAdmin = AddAdmin();
-            List<Student> lxStudent = AddStudent();
-            List<Teacher> lxTeacher = AddTeacher();
+        //private void AddDataToBase()
+        //{
+        //    List<User> lxAdmin = AddAdmin();
+        //    List<Student> lxStudent = AddStudent();
+        //    List<Teacher> lxTeacher = AddTeacher();
 
-            List<Course> lxCourse = AddCourse();
-            List<CourseGradeClass> lxCGC = AddCoruseGradeClass();
-            List<GradeClass> lxGC = AddGradeClass();
-            List<Occupation> lxOcc = AddOccupation();
-            List<Option> lxOp = AddOptions();
-            List<Test> lxTest = AddTest();
-            List<TestQuestion> lxTestQues = AddTestQuest();
-            List<WritenTest> lxWT = AddWritenTest();
+        //    List<Course> lxCourse = AddCourse();
+        //    List<StudentClassCourse> lxCGC = AddCoruseGradeClass();
+        //    List<StudentClass> lxGC = AddGradeClass();
+        //    List<Occupation> lxOcc = AddOccupation();
+        //    List<Answer> lxOp = AddOptions();
+        //    List<Test> lxTest = AddTest();
+        //    List<TestQuestion> lxTestQues = AddTestQuest();
+        //    List<WritenTest> lxWT = AddWritenTest();
 
-            List<Questions> lxQuest = AddQuestion();
+        //    List<Questions> lxQuest = AddQuestion();
 
-            using (var db = new DbModel())
-            {
-                foreach (var item in lxAdmin)
-                {
-                    db.Admins.Add(item);
-                }
-                foreach (var item in lxTeacher)
-                {
-                    db.Teachers.Add(item);
-                }
-                foreach (var item in lxStudent)
-                {
-                    db.Students.Add(item);
-                }
-                foreach (var item in lxCourse)
-                {
-                    db.Courses.Add(item);
-                }
-                foreach (var item in lxCGC)
-                {
-                    db.CourseGradeClasss.Add(item);
-                }
-                foreach (var item in lxGC)
-                {
-                    db.GradeClasss.Add(item);
-                }
-                foreach (var item in lxOcc)
-                {
-                    db.Occupations.Add(item);
-                }
-                foreach (var item in lxOp)
-                {
-                    db.Options.Add(item);
-                }
-                foreach (var item in lxTestQues)
-                {
-                    db.TestQuestions.Add(item);
-                }
-                foreach (var item in lxWT)
-                {
-                    db.WritenTests.Add(item);
-                }
-                foreach (var item in lxQuest)
-                {
-                    db.Questions.Add(item);
-                }
-            }
+        //    using (var db = new DbModel())
+        //    {
+        //        foreach (var item in lxAdmin)
+        //        {
+        //            db.Admins.Add(item);
+        //        }
+        //        foreach (var item in lxTeacher)
+        //        {
+        //            db.Teachers.Add(item);
+        //        }
+        //        foreach (var item in lxStudent)
+        //        {
+        //            db.Students.Add(item);
+        //        }
+        //        foreach (var item in lxCourse)
+        //        {
+        //            db.Courses.Add(item);
+        //        }
+        //        foreach (var item in lxCGC)
+        //        {
+        //            db.CourseGradeClasss.Add(item);
+        //        }
+        //        foreach (var item in lxGC)
+        //        {
+        //            db.GradeClasss.Add(item);
+        //        }
+        //        foreach (var item in lxOcc)
+        //        {
+        //            db.Occupations.Add(item);
+        //        }
+        //        foreach (var item in lxOp)
+        //        {
+        //            db.Options.Add(item);
+        //        }
+        //        foreach (var item in lxTestQues)
+        //        {
+        //            db.TestQuestions.Add(item);
+        //        }
+        //        foreach (var item in lxWT)
+        //        {
+        //            db.WritenTests.Add(item);
+        //        }
+        //        foreach (var item in lxQuest)
+        //        {
+        //            db.Questions.Add(item);
+        //        }
+        //    }
 
-        }
+        //}
 
-        private List<Questions> AddQuestion()
-        {
-            Option xOptions = new Option()
-            {
-                SelectivOption = "Röd",
-                QuestionRefFK = 1,
-                RightAnswer = false
-            };
-            Option xOptions1= new Option()
-            {
-                SelectivOption = "Blå",
-                QuestionRefFK = 1,
-                RightAnswer = true
-            };
+        //private List<Questions> AddQuestion()
+        //{
+        //    Answer xOptions = new Answer()
+        //    {
+        //        SelectivOption = "Röd",
+        //        QuestionRefFK = 1,
+        //        RightAnswer = false
+        //    };
+        //    Answer xOptions1= new Answer()
+        //    {
+        //        SelectivOption = "Blå",
+        //        QuestionRefFK = 1,
+        //        RightAnswer = true
+        //    };
 
-            Questions xQuestions = new Questions()
-            {
-                QuestionID = 1,
-                QuestionsLabel = "Vilken färg har himmlen ",
+        //    Questions xQuestions = new Questions()
+        //    {
+        //        QuestionID = 1,
+        //        QuestionsLabel = "Vilken färg har himmlen ",
                
 
 
-            };
-            return null;
-        }
+        //    };
+        //    return null;
+        //}
 
-        private List<Course> AddCourse() { return null; }
-        private List<CourseGradeClass> AddCoruseGradeClass() { return null; }
-        private List<GradeClass> AddGradeClass() { return null; }
-        private List<Occupation> AddOccupation() { return null; }
-        private List<Option> AddOptions() { return null; }
+        //private List<Course> AddCourse() { return null; }
+        //private List<StudentClassCourse> AddCoruseGradeClass() { return null; }
+        //private List<StudentClass> AddGradeClass() { return null; }
+        //private List<Occupation> AddOccupation() { return null; }
+        //private List<Answer> AddOptions() { return null; }
 
-        private List<Test> AddTest() { return null; }
-        private List<TestQuestion> AddTestQuest() { return null; }
-        private List<WritenTest>AddWritenTest () { return null; }
-        private List<Admin> AddAdmin()
-        {
-            List<Admin> lxAdmin = new List<Admin>();
-            Occupation xOcc = new Occupation();
-            xOcc.OccupationID = 1;
-            Admin xAdmin = new Admin()
-            {
-                FirstName = "Jan",
-                UserName = "JanBen01",
-                Password = "ASd",
-                Email = "Asd",
-                LasttName = "Benson",
-                Occupations = xOcc,
+        //private List<Test> AddTest() { return null; }
+        //private List<TestQuestion> AddTestQuest() { return null; }
+        //private List<WritenTest>AddWritenTest () { return null; }
+        //private List<User> AddAdmin()
+        //{
+        //    List<User> lxAdmin = new List<User>();
+        //    Occupation xOcc = new Occupation();
+        //    xOcc.OccupationID = 1;
+        //    User xAdmin = new User()
+        //    {
+        //        FirstName = "Jan",
+        //        UserName = "JanBen01",
+        //        Password = "ASd",
+        //        Email = "Asd",
+        //        LasttName = "Benson",
+        //        Occupations = xOcc,
                
 
-            };
+        //    };
 
-            Admin xAdmin2 = new Admin()
-            {
-                FirstName = "Glenn",
-                UserName = "GlenBen01",
-                Password = "ASd",
-                Email = "Asd",
-                LasttName = "Benson",
-            };
-            lxAdmin.Add(xAdmin2);
-            lxAdmin.Add(xAdmin);
-            return lxAdmin;
-        }
-        private List<Teacher> AddTeacher()
-        {
-            List<Teacher> lxTeacher = new List<Teacher>();
-            Occupation xOcc = new Occupation();
-            xOcc.OccupationID = 2;
-            Teacher xTeacher = new Teacher()
-            {
-                FirstName = "TJÖTA",
-                UserName = "TJöBen01",
-                Password = "wadww",
-                Email = "Asd",
-                LasttName = "Åkersson",
-                Occupations = xOcc,
-            };
+        //    User xAdmin2 = new User()
+        //    {
+        //        FirstName = "Glenn",
+        //        UserName = "GlenBen01",
+        //        Password = "ASd",
+        //        Email = "Asd",
+        //        LasttName = "Benson",
+        //    };
+        //    lxAdmin.Add(xAdmin2);
+        //    lxAdmin.Add(xAdmin);
+        //    return lxAdmin;
+        //}
+        //private List<Teacher> AddTeacher()
+        //{
+        //    List<Teacher> lxTeacher = new List<Teacher>();
+        //    Occupation xOcc = new Occupation();
+        //    xOcc.OccupationID = 2;
+        //    Teacher xTeacher = new Teacher()
+        //    {
+        //        FirstName = "TJÖTA",
+        //        UserName = "TJöBen01",
+        //        Password = "wadww",
+        //        Email = "Asd",
+        //        LasttName = "Åkersson",
+        //        Occupations = xOcc,
+        //    };
 
-            Teacher xTeacher2 = new Teacher()
-            {
-                FirstName = "HullaBallo",
-                UserName = "GlenBen01",
-                Password = "ASd",
-                Email = "Asd",
-                LasttName = "Huvudvärk",
-            };
-            lxTeacher.Add(xTeacher2);
-            lxTeacher.Add(xTeacher);
+        //    Teacher xTeacher2 = new Teacher()
+        //    {
+        //        FirstName = "HullaBallo",
+        //        UserName = "GlenBen01",
+        //        Password = "ASd",
+        //        Email = "Asd",
+        //        LasttName = "Huvudvärk",
+        //    };
+        //    lxTeacher.Add(xTeacher2);
+        //    lxTeacher.Add(xTeacher);
            
-            return lxTeacher;
-        }
-        private List<Student> AddStudent()
-        {
-            List<Student> lxStudent = new List<Student>();
-            Occupation xOcc = new Occupation();
-            xOcc.OccupationID = 3;
-            Student xStudent = new Student()
-            {
-                FirstName = "TJÖTA",
-                UserName = "TJöBen01",
-                Password = "wadww",
-                Email = "Asd",
-                LasttName = "Åkersson",
-                Occupations = xOcc,
-            };
+        //    return lxTeacher;
+        //}
+        //private List<Student> AddStudent()
+        //{
+        //    List<Student> lxStudent = new List<Student>();
+        //    Occupation xOcc = new Occupation();
+        //    xOcc.OccupationID = 3;
+        //    Student xStudent = new Student()
+        //    {
+        //        FirstName = "TJÖTA",
+        //        UserName = "TJöBen01",
+        //        Password = "wadww",
+        //        Email = "Asd",
+        //        LasttName = "Åkersson",
+        //        Occupations = xOcc,
+        //    };
 
-            Student xStudent2 = new Student()
-            {
-                FirstName = "HullaBallo",
-                UserName = "GlenBen01",
-                Password = "ASd",
-                Email = "Asd",
-                LasttName = "Huvudvärk",
-            };
-            lxStudent.Add(xStudent);
-            lxStudent.Add(xStudent2);
+        //    Student xStudent2 = new Student()
+        //    {
+        //        FirstName = "HullaBallo",
+        //        UserName = "GlenBen01",
+        //        Password = "ASd",
+        //        Email = "Asd",
+        //        LasttName = "Huvudvärk",
+        //    };
+        //    lxStudent.Add(xStudent);
+        //    lxStudent.Add(xStudent2);
 
-            return lxStudent;
-        }
+        //    return lxStudent;
+        //}
         
     }
 }
