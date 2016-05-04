@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestVerktygWPF.Model
 {
-    class StudentAnswer
+    public class StudentAnswer
     {
         public int Id { get; set; }
         public  int Answer { get; set; }

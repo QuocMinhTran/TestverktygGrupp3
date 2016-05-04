@@ -23,24 +23,24 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
-        public Test GetTest(int iD)
-        {
-            Test xTest = new Test();
-            using (var db = new DbModel())
-            {
-                var querry = from test in db.Tests
-                             where test.TestID == iD
-                             select test;
-                xTest = querry as Test;
-            }
+        //public Test GetTest(int iD)
+        //{
+        //    Test xTest = new Test();
+        //    using (var db = new DbModel())
+        //    {
+        //        var querry = from test in db.Tests
+        //                     where test.TestID == iD
+        //                     select test;
+        //        xTest = querry as Test;
+        //    }
 
-            return xTest;
-        }
+        //    return xTest;
+        //}
 
-        internal List<Option> GetOptions(int questionID)
-        {
-            throw new NotImplementedException();
-        }
+        //internal List<Option> GetOptions(int questionID)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         internal List<Questions> GetQuestion(int testID)
         {
@@ -71,65 +71,6 @@ namespace TestVerktygWPF.ViewModel
             return liAllStudents;
         }
 
-<<<<<<< HEAD
-        internal List<Student> GetAllStudents(Test xTest)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal Student GetStudent(int iD)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal int GetTestInfoTime(Student xStudent)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal int GetTestInfoScore(Student xStudent)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal int GetTestInfo(Student xStudent)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Teacher> GetAllTeachers()
-        {
-            List<Teacher> liAllTeachers = new List<Teacher>();
-            using (var db = new DbModel())
-            {
-                var selectTeachers = from teacher in db.Teachers
-                                     select teacher;
-                foreach (var item in selectTeachers)
-                {
-                    liAllTeachers.Add(item);
-
-                }
-            }
-            return liAllTeachers;
-        }
-
-        public List<Admin> GetAllAdmins()
-        {
-            List<Admin> liAllAdmins = new List<Admin>();
-            using (var db = new DbModel())
-            {
-                var selectAdmins = from admin in db.Admins
-                                   select admin;
-                foreach (var item in selectAdmins)
-                {
-                    liAllAdmins.Add(item);
-
-                }
-            }
-
-            return liAllAdmins;
-        }
-=======
         //public List<Teacher> GetAllTeachers()
         //{
         //    List<Teacher> liAllTeachers = new List<Teacher>();
@@ -162,7 +103,6 @@ namespace TestVerktygWPF.ViewModel
 
         //    return liAllAdmins;
         //}
->>>>>>> 75211778316fde8c8656dd4f56607a71d9c21e62
         //Save
         public void SaveStudent(Student xStudent)
         {

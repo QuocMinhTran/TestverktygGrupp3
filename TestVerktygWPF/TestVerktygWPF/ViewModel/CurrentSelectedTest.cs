@@ -12,7 +12,7 @@ namespace TestVerktygWPF.ViewModel
         private static Repository xRepo;
         public Test CurrentTest { get; private set; }
         public List<Questions> CurrentQuestions { get; private set; }
-        public List<Option> CurrentOptions { get; private set; }
+      //  public List<Option> CurrentOptions { get; private set; }
         public List<Student> CurrentStudents { get; private set; }
         public Student CurrentStudent { get; private set; }
         public int StudentTime { get; private set; }
@@ -23,44 +23,44 @@ namespace TestVerktygWPF.ViewModel
         }
         public void SetCurrentTest(int ID)
         {
-            CurrentTest = xRepo.GetTest(ID);
+           // CurrentTest = xRepo.GetTest(ID);
             SetCurrentQuestions(CurrentTest);
             SetCurrentStudents(CurrentTest);
         }
         private void SetCurrentQuestions(Test xCurrentTest)
         {
-            CurrentQuestions = xRepo.GetQuestion(xCurrentTest.TestID);
-            SetCurrentOptions(CurrentQuestions);
+           // CurrentQuestions = xRepo.GetQuestion(xCurrentTest.TestID);
+            //SetCurrentOptions(CurrentQuestions);
            
         }
         private void SetCurrentOptions(List<Questions> xCurrentQuestions)
         {
             foreach (var item in CurrentQuestions)
             {
-                CurrentOptions = xRepo.GetOptions(item.QuestionID);
+               /// CurrentOptions = xRepo.GetOptions(item.QuestionID);
             }
         }
         public void SetCurrentStudent(int ID)
         {
-            CurrentStudent = xRepo.GetStudent(ID);
-            SetScoreForStudent(CurrentStudent);
-            SetTimeForStudent(CurrentStudent);
+           // CurrentStudent = xRepo.GetStudent(ID);
+            //SetScoreForStudent(CurrentStudent);
+            //SetTimeForStudent(CurrentStudent);
         }
         public void SetCurrentStudent(Student xStudent)
         {
-            CurrentStudent = xRepo.GetStudent(xStudent.StudentID);
+            //CurrentStudent = xRepo.GetStudent(xStudent.StudentID);
         }
         private void SetCurrentStudents(Test xTest)
         {
-            CurrentStudents = xRepo.GetAllStudents(xTest);
+           // CurrentStudents = xRepo.GetAllStudents(xTest);
         }
         private void SetTimeForStudent(Student xStudent)
         {
-            StudentTime = xRepo.GetTestInfoTime(xStudent);
+           // StudentTime = xRepo.GetTestInfoTime(xStudent);
         }
         private void SetScoreForStudent(Student xStudent)
         {
-            StudentScore = xRepo.GetTestInfoScore(xStudent);
+           // StudentScore = xRepo.GetTestInfoScore(xStudent);
         }
 
 

@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\StudentAnswer.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\StudentClassCourse.cs" />
@@ -79,12 +80,7 @@
     <Compile Include="Model\StudentTest.cs" />
     <Compile Include="Model\UserTest.cs" />
     <Compile Include="Model\Test.cs" />
-<<<<<<< HEAD
-    <Compile Include="Model\TestQuestion.cs" />
-    <Compile Include="Model\WritenTest.cs" />
     <Compile Include="ViewModel\CurrentSelectedTest.cs" />
-=======
->>>>>>> 75211778316fde8c8656dd4f56607a71d9c21e62
     <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="ViewModel\TestHandler.cs" />
     <Compile Include="View\AdminCreateUserPage.xaml.cs">
