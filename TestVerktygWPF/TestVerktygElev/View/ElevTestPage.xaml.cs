@@ -70,6 +70,7 @@ namespace TestVerktygElev
             txtBlockQuestions.Text = (qIndex + 1).ToString() + "/" + questionList.Count.ToString();
             txtBlockQuestionName.Text = questionList[qIndex].QuestionsLabel;
             listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
+
             //ProcessAnswers();
         }
 
@@ -85,25 +86,12 @@ namespace TestVerktygElev
                     CheckBox box = new CheckBox();
                     answerControl.Children.Add(txtBlock);
                     answerControl.Children.Add(box);
-                    answerControl.Orientation = Orientation.Horizontal;
                     answerControl.Visibility = Visibility.Collapsed;
                 }
 
                 listCheckedAnswers.Add(answerControl);
                 splAnswers.Children.Add(answerControl);
             }
-            //foreach (var item in questionList[qIndex].Options)
-            //{
-            //    TextBlock txtBlock = new TextBlock();
-            //    txtBlock.Text = item.SelectivOption;
-            //    CheckBox box = new CheckBox();
-            //    StackPanel answerControl = new StackPanel();
-            //    answerControl.Children.Add(txtBlock);
-            //    answerControl.Children.Add(box);
-            //    answerControl.Orientation = Orientation.Horizontal;
-            //    splAnswers.Children.Add(answerControl);
-            //    listCheckedAnswers.Add(answerControl);
-            //}
         }
 
         private void ProcessAnswers()
@@ -117,7 +105,6 @@ namespace TestVerktygElev
                 answerControl.Children.Add(txtBlock);
                 answerControl.Children.Add(box);
                 answerControl.Orientation = Orientation.Horizontal;
-                splAnswers.Children.Add(answerControl);
                 listCheckedAnswers.Add(answerControl);
             }
         }
@@ -197,7 +184,7 @@ namespace TestVerktygElev
         {
             if (qIndex + 1 >= questionList.Count)
             {
-                MessageBox.Show("wow you completed the test so good");
+                CorrectTest();
             }
 
             else
@@ -206,6 +193,11 @@ namespace TestVerktygElev
                 btnPrevious.IsEnabled = true;
                 ProcessQuestion();
             }
+        }
+
+        private void CorrectTest()
+        {
+            
         }
     }
 }
