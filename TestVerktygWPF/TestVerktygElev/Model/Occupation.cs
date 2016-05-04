@@ -11,22 +11,18 @@ namespace TestVerktygElev
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Occupation()
         {
-            Admins = new HashSet<Admin>();
             Students = new HashSet<Student>();
-            Teachers = new HashSet<Teacher>();
+            Users = new HashSet<User>();
         }
 
-        public int OccupationID { get; set; }
+        public int ID { get; set; }
 
         public string Occupations { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admins { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

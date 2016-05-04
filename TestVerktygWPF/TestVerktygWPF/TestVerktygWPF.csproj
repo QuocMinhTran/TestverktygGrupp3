@@ -67,13 +67,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201605040901356_InitialCreate.cs" />
-    <Compile Include="Migrations\201605040901356_InitialCreate.Designer.cs">
-      <DependentUpon>201605040901356_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605041159226_first.cs" />
-    <Compile Include="Migrations\201605041159226_first.Designer.cs">
-      <DependentUpon>201605041159226_first.cs</DependentUpon>
+
+    <Compile Include="Migrations\201605041147137_newDB.cs" />
+    <Compile Include="Migrations\201605041147137_newDB.Designer.cs">
+      <DependentUpon>201605041147137_newDB.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
@@ -196,11 +194,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201605040901356_InitialCreate.resx">
-      <DependentUpon>201605040901356_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605041159226_first.resx">
-      <DependentUpon>201605041159226_first.cs</DependentUpon>
+
+    <EmbeddedResource Include="Migrations\201605041147137_newDB.resx">
+      <DependentUpon>201605041147137_newDB.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
