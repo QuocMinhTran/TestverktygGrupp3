@@ -54,6 +54,22 @@ namespace TestVerktygWPF.ViewModel
             return null;
         }
 
+        public List<StudentClass> GetClasses()
+        {
+            List<StudentClass> liAllClasses = new List<StudentClass>();
+            using (var db = new DbModel())
+            {
+                var selectClass = from xclass in db.StudentClasses
+                                     select xclass;
+
+                foreach (var item in selectClass)
+                {
+                    liAllClasses.Add(item);
+                }
+            }
+
+            return liAllClasses;
+        } 
        
 
         public List<Student> GetAllStudents()
