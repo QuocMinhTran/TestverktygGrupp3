@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygElev.ViewModel;
 
 namespace TestVerktygElev
 {
@@ -22,14 +24,101 @@ namespace TestVerktygElev
     {
         List<Question> questionList = new List<Question>();
         Question currentQuestion = new Question();
+        List<StackPanel> listCheckedAnswers = new List<StackPanel>();
+        Test test = new Test();
         int qIndex = 0;
+        
         public ElevTestPage()
         {
             InitializeComponent();
-            btnPrevious.IsEnabled = false;
-            CreateDummyTest();
-            currentQuestion = questionList.FirstOrDefault();
-            txtBlockQuestions.Text = qIndex + "/" + questionList.Count.ToString();
+            InitTest();
+            //CreateDummyTest();
+            //currentQuestion = questionList.FirstOrDefault();
+            //UpdateQuestionsCounter();
+            //txtBlockTestName.Text = test.Name;
+            //StartTimer();
+        }
+
+        private void InitTest()
+        {
+            Repository repo = new Repository();
+            test = repo.GetTest();
+            txtBlockTestName.Text = test.Name;
+            questionList = repo.GetQuestion();
+            RenderQuestions();
+            ProcessQuestion();
+        }
+
+        private void StartTimer()
+        {
+            Timer timer = new Timer(1000);
+            timer.Elapsed += OnTimedEvent;
+            timer.Start();
+        }
+
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            //TODO: update timer
+        }
+
+        private void ProcessQuestion()
+        {
+            foreach (var item in listCheckedAnswers)
+            {
+                item.Visibility = Visibility.Collapsed;
+            }
+            txtBlockQuestions.Text = (qIndex + 1).ToString() + "/" + questionList.Count.ToString();
+            txtBlockQuestionName.Text = questionList[qIndex].QuestionsLabel;
+            listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
+            //ProcessAnswers();
+        }
+
+        private void RenderQuestions()
+        {
+            for (int i = 0; i < questionList.Count; i++)
+            {
+                foreach (var item in questionList[i].Options)
+                {
+                    TextBlock txtBlock = new TextBlock();
+                    txtBlock.Text = item.SelectivOption;
+                    CheckBox box = new CheckBox();
+                    StackPanel answerControl = new StackPanel();
+                    answerControl.Children.Add(txtBlock);
+                    answerControl.Children.Add(box);
+                    answerControl.Orientation = Orientation.Horizontal;
+                    answerControl.Visibility = Visibility.Collapsed;
+                    splAnswers.Children.Add(answerControl);
+                    listCheckedAnswers.Add(answerControl);
+                }
+            }
+            //foreach (var item in questionList[qIndex].Options)
+            //{
+            //    TextBlock txtBlock = new TextBlock();
+            //    txtBlock.Text = item.SelectivOption;
+            //    CheckBox box = new CheckBox();
+            //    StackPanel answerControl = new StackPanel();
+            //    answerControl.Children.Add(txtBlock);
+            //    answerControl.Children.Add(box);
+            //    answerControl.Orientation = Orientation.Horizontal;
+            //    splAnswers.Children.Add(answerControl);
+            //    listCheckedAnswers.Add(answerControl);
+            //}
+        }
+
+        private void ProcessAnswers()
+        {
+            foreach (var item in questionList[qIndex].Options)
+            {
+                TextBlock txtBlock = new TextBlock();
+                txtBlock.Text = item.SelectivOption;
+                CheckBox box = new CheckBox();
+                StackPanel answerControl = new StackPanel();
+                answerControl.Children.Add(txtBlock);
+                answerControl.Children.Add(box);
+                answerControl.Orientation = Orientation.Horizontal;
+                splAnswers.Children.Add(answerControl);
+                listCheckedAnswers.Add(answerControl);
+            }
         }
 
         private void CreateDummyTest()
@@ -40,13 +129,11 @@ namespace TestVerktygElev
 
             Student student = new Student();
 
-            Test test = new Test();
             test.Name = "honk honk motherfucker";
             test.StartDate = DateTime.Today;
             test.EndDate = DateTime.Today.AddDays(1);
             test.TeacherRefFK = teacher.TeacherID;
             
-
             QuestionType type1 = new QuestionType();
             type1.Option = "Envalsfråga";
 
@@ -54,7 +141,7 @@ namespace TestVerktygElev
             type2.Option = "Flervalsfråga";
 
             Question question = new Question();
-            question.QuestionsLabel = "What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You’re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that’s just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fucking dead, kiddo.";
+            question.QuestionsLabel = "What the fuck did you just fucking say about me, you little bitch?";
             question.QuestTypeRefFK = type1.QuestionTypeID;
 
             Option option = new Option();
@@ -78,8 +165,12 @@ namespace TestVerktygElev
             option4.RightAnswer = true;
 
             Option option5 = new Option();
-            option5.SelectivOption = "Worthless overly offensive generally racists posts written in a manner which aggravates others";
+            option5.SelectivOption = "Worthless overly offensive posts written in a manner which aggravates others";
             option5.RightAnswer = true;
+
+            Question q3 = new Question();
+            q3.QuestionsLabel = "whats the difference between a shit and a turd";
+            questionList.Add(q3);
 
             TestQuestion tstqst = new TestQuestion();
             tstqst.TestRefFk = test.TestID;
@@ -91,21 +182,29 @@ namespace TestVerktygElev
             List<Option> optionsList = new List<Option>();
             questionList.Add(question);
             questionList.Add(question2);
-            questionList.Add(question2);
-            questionList.Add(question2);
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
             qIndex--;
-            txtBlockQuestions.Text = qIndex + "/" + questionList.Count.ToString();
-            if (qIndex <= 0)
+            ProcessQuestion();
+            if (qIndex == 0)
                 btnPrevious.IsEnabled = false;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            if (qIndex + 1 >= questionList.Count)
+            {
+                MessageBox.Show("wow you completed the test so good");
+            }
 
+            else
+            {
+                qIndex++;
+                btnPrevious.IsEnabled = true;
+                ProcessQuestion();
+            }
         }
     }
 }

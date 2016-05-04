@@ -10,7 +10,7 @@ namespace TestVerktygWPF.Model
     public class Occupation 
     {
         [Key]
-        public int OccupationID { get; set; }
+        public int ID { get; set; }
         public string Occupations { get; set; }
     }
 }

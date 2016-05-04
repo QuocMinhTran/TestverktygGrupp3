@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace TestVerktygWPF.Model
 {
-    public class GradeClass //Done
+    public class StudentClass //Done
     {
         
         [Key]
-        public int GradeClassID { get; set; }
-        public List<Student> Studends { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
 
     }
