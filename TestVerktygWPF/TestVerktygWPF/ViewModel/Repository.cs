@@ -11,7 +11,7 @@ namespace TestVerktygWPF.ViewModel
     {
 
        
-        public User GetAdmin()
+        public User GetUser()
         {
             return null;
         }
@@ -23,6 +23,7 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
+
         //public Test GetTest(int iD)
         //{
         //    Test xTest = new Test();
@@ -47,7 +48,8 @@ namespace TestVerktygWPF.ViewModel
             throw new NotImplementedException();
         }
 
-        public Occupation GetQuestion()
+
+        public Questions GetQuestion()
         {
             return null;
         }
