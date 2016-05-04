@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.View
 {
@@ -23,6 +24,10 @@ namespace TestVerktygWPF.View
         public AdminTestManagementPage()
         {
             InitializeComponent();
+            using (var db = new DbModel())
+            {
+                _DataGrid.ItemsSource = db.Tests.ToList();
+            }
         }
     }
 }
