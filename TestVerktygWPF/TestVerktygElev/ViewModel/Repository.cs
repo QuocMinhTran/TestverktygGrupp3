@@ -21,33 +21,33 @@ namespace TestVerktygElev.ViewModel
         {
             List<Question> qList = new List<Question>();
             Question q = new Question();
-            Option opt = new Option();
-            Option opt2 = new Option();
+            Answer opt = new Answer();
+            Answer opt2 = new Answer();
 
             Question q2 = new Question();
-            Option opt3 = new Option();
-            Option opt4 = new Option();
-            Option opt5 = new Option();
+            Answer opt3 = new Answer();
+            Answer opt4 = new Answer();
+            Answer opt5 = new Answer();
 
-            q.QuestionsLabel = "fråga nummer ett";
-            opt.SelectivOption = "rätt svar";
+            q.Name = "fråga nummer ett";
+            opt.Text = "rätt svar";
             opt.RightAnswer = true;
-            opt2.SelectivOption = "fel svar";
+            opt2.Text = "fel svar";
             opt2.RightAnswer = false;
-            q.Options.Add(opt);
-            q.Options.Add(opt2);
+            q.Answers.Add(opt);
+            q.Answers.Add(opt2);
             qList.Add(q);
 
-            q2.QuestionsLabel = "fråga nummer två";
-            opt3.SelectivOption = "rätt";
+            q2.Name = "fråga nummer två";
+            opt3.Text = "rätt";
             opt3.RightAnswer = true;
-            opt4.SelectivOption = "rätt";
+            opt4.Text = "rätt";
             opt4.RightAnswer = true;
-            opt5.SelectivOption = "fel";
+            opt5.Text = "fel";
             opt5.RightAnswer = false;
-            q2.Options.Add(opt3);
-            q2.Options.Add(opt4);
-            q2.Options.Add(opt5);
+            q2.Answers.Add(opt3);
+            q2.Answers.Add(opt4);
+            q2.Answers.Add(opt5);
 
             qList.Add(q2);
             //for (int i = 0; i < 2; i++)

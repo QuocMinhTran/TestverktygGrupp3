@@ -11,7 +11,7 @@ namespace TestVerktygElev
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StudentClass()
         {
-            StudentClassCourses = new HashSet<StudentClassCours>();
+            StudentClassCourses = new HashSet<StudentClassCourse>();
             Students = new HashSet<Student>();
             Users = new HashSet<User>();
         }
@@ -21,7 +21,7 @@ namespace TestVerktygElev
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentClassCours> StudentClassCourses { get; set; }
+        public virtual ICollection<StudentClassCourse> StudentClassCourses { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
