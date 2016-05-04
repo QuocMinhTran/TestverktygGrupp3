@@ -77,19 +77,20 @@ namespace TestVerktygElev
         {
             for (int i = 0; i < questionList.Count; i++)
             {
+                StackPanel answerControl = new StackPanel();
                 foreach (var item in questionList[i].Options)
                 {
                     TextBlock txtBlock = new TextBlock();
                     txtBlock.Text = item.SelectivOption;
                     CheckBox box = new CheckBox();
-                    StackPanel answerControl = new StackPanel();
                     answerControl.Children.Add(txtBlock);
                     answerControl.Children.Add(box);
                     answerControl.Orientation = Orientation.Horizontal;
                     answerControl.Visibility = Visibility.Collapsed;
-                    splAnswers.Children.Add(answerControl);
-                    listCheckedAnswers.Add(answerControl);
                 }
+
+                listCheckedAnswers.Add(answerControl);
+                splAnswers.Children.Add(answerControl);
             }
             //foreach (var item in questionList[qIndex].Options)
             //{
