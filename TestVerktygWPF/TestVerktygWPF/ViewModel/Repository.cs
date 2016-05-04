@@ -24,19 +24,19 @@ namespace TestVerktygWPF.ViewModel
             return null;
         }
 
-        //public Test GetTest(int iD)
-        //{
-        //    Test xTest = new Test();
-        //    using (var db = new DbModel())
-        //    {
-        //        var querry = from test in db.Tests
-        //                     where test.TestID == iD
-        //                     select test;
-        //        xTest = querry as Test;
-        //    }
+        public Test GetTest(int iD)
+        {
+            Test xTest = new Test();
+            using (var db = new DbModel())
+            {
+                var querry = from test in db.Tests
+                             where test.ID == iD
+                             select test;
+                xTest = querry as Test;
+            }
 
-        //    return xTest;
-        //}
+            return xTest;
+        }
 
         //internal List<Option> GetOptions(int questionID)
         //{
@@ -73,38 +73,40 @@ namespace TestVerktygWPF.ViewModel
             return liAllStudents;
         }
 
-        //public List<Teacher> GetAllTeachers()
-        //{
-        //    List<Teacher> liAllTeachers = new List<Teacher>();
-        //    using (var db = new DbModel())
-        //    {
-        //        var selectTeachers = from teacher in db.Teachers
-        //                             select teacher;
-        //        foreach (var item in selectTeachers)
-        //        {
-        //            liAllTeachers.Add(item);
+        public List<User> GetAllTeachers()
+        {
+            List<User> liAllTeachers = new List<User>();
+            using (var db = new DbModel())
+            {
+                var selectTeachers = from teacher in db.Users
+                    where teacher.Occupations.ID == 1 
+                    select teacher;
+                foreach (var item in selectTeachers)
+                {
+                    liAllTeachers.Add(item);
 
-        //        }
-        //    }
-        //    return liAllTeachers;
-        //}
+                }
+            }
+            return liAllTeachers;
+        }
 
-        //public List<User> GetAllAdmins()
-        //{
-        //    List<User> liAllAdmins = new List<User>();
-        //    using (var db = new DbModel())
-        //    {
-        //        var selectAdmins = from admin in db.Admins
-        //                           select admin;
-        //        foreach (var item in selectAdmins)
-        //        {
-        //            liAllAdmins.Add(item);
+        public List<User> GetAllAdmins()
+        {
+            List<User> liAllAdmins = new List<User>();
+            using (var db = new DbModel())
+            {
+                var selectAdmins = from admin in db.Users
+                                   where admin.Occupations.ID ==2
+                                   select admin;
+                foreach (var item in selectAdmins)
+                {
+                    liAllAdmins.Add(item);
 
-        //        }
-        //    }
+                }
+            }
 
-        //    return liAllAdmins;
-        //}
+            return liAllAdmins;
+        }
         //Save
         public void SaveStudent(Student xStudent)
         {
@@ -115,23 +117,15 @@ namespace TestVerktygWPF.ViewModel
             }
         }
 
-        //public void SaveTeacher(Teacher xTeacher)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        db.Teachers.Add(xTeacher);
-        //        db.SaveChanges();
-        //    }
-        //}
+        public void SaveUser(User xUser)
+        {
+            using (var db = new DbModel())
+            {
+                db.Users.Add(xUser);
+                db.SaveChanges();
+            }
+        }
 
-        //public void SaveAdmin(User xAdmin)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        db.Admins.Add(xAdmin);
-        //        db.SaveChanges();
-        //    }
-        //}
         public void SaveTest(Test xTest)
         {
             using (var db = new DbModel())
@@ -149,117 +143,84 @@ namespace TestVerktygWPF.ViewModel
         //Delete
         public void RemoveQuestion() { }
 
-        //public void Removetudent(Student xStudent)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var deleteStudent = from student in db.Students
-        //            where student.StudentID == xStudent.StudentID
-        //            select student;
-        //        foreach (var student in deleteStudent)
-        //        {
-        //            db.Students.Remove(student);
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+        public void Removetudent(Student xStudent)
+        {
+            using (var db = new DbModel())
+            {
+                var deleteStudent = from student in db.Students
+                                    where student.ID == xStudent.ID
+                                    select student;
+                foreach (var student in deleteStudent)
+                {
+                    db.Students.Remove(student);
+                }
+                db.SaveChanges();
+            }
+        }
 
-        //public void RemoveTeacher(Teacher xTeacher)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var deleteTeacher = from teacher in db.Teachers
-        //                            where teacher.TeacherID == xTeacher.TeacherID
-        //                            select teacher;
-        //        foreach (var teacher in deleteTeacher)
-        //        {
-        //            db.Teachers.Remove(teacher);
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+        public void RemoveUser(User xUser)
+        {
+            using (var db = new DbModel())
+            {
+                var deleteUser = from user in db.Users
+                                    where user.ID == xUser.ID
+                                    select user;
+                foreach (var user in deleteUser)
+                {
+                    db.Users.Remove(user);
+                }
+                db.SaveChanges();
+            }
+        }
 
-        //public void RemoveAdmin(User xAdmin)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var deleteAdmin = from admin in db.Admins
-        //                            where admin.AdminID == xAdmin.AdminID
-        //                            select admin;
-        //        foreach (var admin in deleteAdmin)
-        //        {
-        //            db.Admins.Remove(admin);
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+       
         public void RemoveTest() { }
 
 
         //Edit
         public void EditQuestion() { }
 
-        //public void Edittudent(Student xStudent)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var selectedstudent = from student in db.Students
-        //                              where student.StudentID == xStudent.StudentID
-        //                              select student;
-        //        foreach (var item in selectedstudent)
-        //        {
-        //            item.FirstName = xStudent.FirstName;
-        //            item.LasttName = xStudent.LasttName;
-        //            item.Email = xStudent.Email;
-        //            item.Password = xStudent.Password;
-        //            item.UserName = xStudent.UserName;
-        //            item.Occupations = xStudent.Occupations;
-        //            item.StudentID = xStudent.StudentID;
+        public void Edittudent(Student xStudent)
+        {
+            using (var db = new DbModel())
+            {
+                var selectedstudent = from student in db.Students
+                                      where student.ID == xStudent.ID
+                                      select student;
+                foreach (var item in selectedstudent)
+                {
+                    item.FirstName = xStudent.FirstName;
+                    item.LastName = xStudent.LastName;
+                    item.Email = xStudent.Email;
+                    item.Password = xStudent.Password;
+                    item.UserName = xStudent.UserName;
+                    item.Occupations = xStudent.Occupations;
+                    item.ID = xStudent.ID;
 
 
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+                }
+                db.SaveChanges();
+            }
+        }
 
-        //public void EditTeacher(Teacher xTeacher)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var selectedTeacher = from teacher in db.Teachers
-        //                              where teacher.TeacherID == xTeacher.TeacherID
-        //                              select teacher;
-        //        foreach (var item in selectedTeacher)
-        //        {
-        //            item.FirstName = xTeacher.FirstName;
-        //            item.LasttName = xTeacher.LasttName;
-        //            item.Email = xTeacher.Email;
-        //            item.Password = xTeacher.Password;
-        //            item.UserName = xTeacher.UserName;
-
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
-
-        //public void EditAdmin(User xAdmin)
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        var selectedAdmin = from admin in db.Admins
-        //                            where admin.AdminID == xAdmin.AdminID
-        //                            select admin;
-        //        foreach (var item in selectedAdmin)
-        //        {
-        //            item.FirstName = xAdmin.FirstName;
-        //            item.LasttName = xAdmin.LasttName;
-        //            item.Email = xAdmin.Email;
-        //            item.Password = xAdmin.Password;
-        //            item.UserName = xAdmin.UserName;
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //}
+       public void EditUser(User xUser)
+        {
+            using (var db = new DbModel())
+            {
+                var selectedUser = from user in db.Users
+                                    where user.ID == xUser.ID
+                                    select user;
+                foreach (var item in selectedUser)
+                {
+                    item.FirstName = xUser.FirstName;
+                    item.LastName = xUser.LastName;
+                    item.Email = xUser.Email;
+                    item.Password = xUser.Password;
+                    item.UserName = xUser.UserName;
+                }
+                db.SaveChanges();
+            }
+        }
         public void EditTest() { }
 
  
