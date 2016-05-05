@@ -15,7 +15,7 @@
                   Margin="0,40,0,0" 
                   HorizontalAlignment="Center" 
                   AutoGenerateColumns="False" 
-                  IsReadOnly="True">
+                  IsReadOnly="True" SelectionChanged="_DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Provnamn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Lärare" Binding="{Binding FirstName}"/>

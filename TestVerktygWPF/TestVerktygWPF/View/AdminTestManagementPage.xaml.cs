@@ -41,5 +41,10 @@ namespace TestVerktygWPF.View
 
 
         }
+
+        private void _DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Test test = sender as Test;
+        }
     }
 }
