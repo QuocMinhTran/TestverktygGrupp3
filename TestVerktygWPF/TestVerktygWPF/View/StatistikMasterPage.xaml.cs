@@ -38,12 +38,12 @@ namespace TestVerktygWPF.View
             CurrentSelectedTest csTest = new CurrentSelectedTest();
 
             cbxSelectTest.Items.Add("kalle");
-            //liAllTests = csTest.AllTestsDone;
-            //cbxSelectTest.SelectedIndex = 0;
-            //foreach (var item in liAllTests)
-            //{
-            //    cbxSelectTest.Items.Add(item.Name);
-            //}
+            liAllTests = csTest.AllTestsDone();
+            cbxSelectTest.SelectedIndex = 0;
+            foreach (var item in liAllTests)
+            {
+                cbxSelectTest.Items.Add(item.Name);
+            }
 
             Repository repo = new Repository();
             liAllStudents = repo.GetAllStudents();
@@ -75,8 +75,11 @@ namespace TestVerktygWPF.View
         {
             spClass.Visibility = Visibility.Visible;
             spStudent.Visibility = Visibility.Collapsed;
-            SelectedTest = sender as Test;
+            var varSender = sender as ComboBox;
+           
             CurrentSelectedTest csTest = new CurrentSelectedTest();
+            csTest.SetCurrentTest(varSender.SelectedItem.ToString());
+            SelectedTest = csTest.CurrentTest;
             if (SelectedTest != null)
             {
                 csTest.SetCurrentTest(SelectedTest.ID);

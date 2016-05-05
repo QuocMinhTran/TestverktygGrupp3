@@ -78,7 +78,7 @@ namespace TestVerktygWPF.ViewModel
         {
             StudentScore = xRepo.GetTestInfoScore(xStudent, CurrentTest);
         }
-        private List<Test> AllTestsDone()
+        public List<Test> AllTestsDone()
         {
             List<Test> AllTestsDone = new List<Test>();
             List<int> lxIds = xRepo.GetWritenTestsID();
