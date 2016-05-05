@@ -23,7 +23,14 @@ namespace TestVerktygWPF.ViewModel
         {
             xRepo = new Repository();
             AllTests = xRepo.GetAllTests();
-        }
+            m_lxAllTestsDone = new List<Test>();
+            AllTests = new List<Test>();
+            CurrentQuestions = new List<Questions>();
+            CurrentStudents = new List<Student>();
+            CurrentAnswers = new List<Answer>();
+            CurrentStudent = new Student();
+
+    }
         public void SetCurrentTest(int ID)
         {
             CurrentTest = xRepo.GetTest(ID);
@@ -78,7 +85,7 @@ namespace TestVerktygWPF.ViewModel
         {
             StudentScore = xRepo.GetTestInfoScore(xStudent, CurrentTest);
         }
-        private List<Test> AllTestsDone()
+        public List<Test> AllTestsDone()
         {
             List<Test> AllTestsDone = new List<Test>();
             List<int> lxIds = xRepo.GetWritenTestsID();
