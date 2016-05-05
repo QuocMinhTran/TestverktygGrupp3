@@ -30,7 +30,7 @@ namespace TestVerktygWPF
             _Frame.Navigate(new View.AdminCreateUserPage());
 
 
-             AddDataToBase();
+           //  AddDataToBase();
 
         }
 
