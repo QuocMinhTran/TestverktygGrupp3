@@ -7,9 +7,18 @@ using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.ViewModel
 {
-    class TestHandler
+    public class TestHandler
     {
-        private List<Test> lxTest;
+        private Test xTest;
+        private List<Questions> xQuestions;
+        private List<Answer> xAnswer;
+
+        public TestHandler()
+        {
+            xAnswer = new List<Answer>();
+            xQuestions = new List<Questions>();
+            xTest = new Test();
+        }
         public void RemoveTest()
         {
 

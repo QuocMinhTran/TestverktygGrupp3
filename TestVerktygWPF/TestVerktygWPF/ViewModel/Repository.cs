@@ -15,9 +15,17 @@ namespace TestVerktygWPF.ViewModel
         {
             return null;
         }
-        public Student GetStudent()
+        public Student GetStudent(int ID)
         {
-            return null;
+            Student xStudent = new Student();
+            using (var db = new DbModel())
+            {
+                var querry = from studnet in db.Students
+                             where studnet.ID == ID
+                             select studnet;
+                xStudent = querry as Student;
+            }
+            return xStudent;
         }
         public Test GetTest()
         {
@@ -87,6 +95,24 @@ namespace TestVerktygWPF.ViewModel
             }
 
             return liAllStudents;
+        }
+
+        public int GetTestInfoScore(Student xStudent, Test xText)
+        {
+            int i = 0;
+            using (var db = new DbModel())
+            {
+                var querry = from Time in db.StudentTests
+                             where Time.StudentRefFk == xStudent.ID
+                             where Time.TestRefFk
+                             select Time;
+            }
+            return i;
+        }
+
+        internal int GetTestInfoTime(Student xStudent)
+        {
+            throw new NotImplementedException();
         }
 
         public List<User> GetAllTeachers()
