@@ -26,11 +26,11 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
-           // _Frame.Navigate(new View.AdminUserManagementPage());
-            _Frame.Navigate(new View.AdminCreateUserPage());
+            // _Frame.Navigate(new View.AdminUserManagementPage());
+            // _Frame.Navigate(new View.AdminCreateUserPage());
 
 
-             //AddDataToBase();
+            //AddDataToBase();
 
         }
 
@@ -66,16 +66,50 @@ namespace TestVerktygWPF
             MenuItem btn = sender as MenuItem;
             switch (btn.Header.ToString())
             {
+                case "Startsida Admin":
+                    _Frame.Navigate(new MainPageAdmin());
+                    break;
+                case "Hantera Användare":
+                    _Frame.Navigate(new AdminUserManagementPage());
+                    break;
+                case "Statistik":
+                    _Frame.Navigate(new StatistikMasterPage());
+                    break;
+                case "Skicka ut prov":
+
+                    break;
+                case "Rätt prov":
+                    _Frame.Navigate(new TeacherEvaluatePage());
+                    break;
+                case "Start Lärare":
+                    _Frame.Navigate(new MainPageTeacher());
+                    break;
                 case "Hantera Prov":
                     _Frame.Navigate(new TeacherTestManagementPage());
                     break;
-                case "GöraProv":
+                case "Skapa Prov":
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
                     _Frame.Navigate(new AdminTestManagementPage());
                     break;
             }
+
+            //< MenuItem Header = "Startsida Admin" Click = "MenuItem_Click" />
+
+            //< MenuItem Header = "Hantera Användare" Click = "MenuItem_Click" />
+
+            //< MenuItem Header = "Hantera Prov" Click = "MenuItem_Click" />
+
+            //< MenuItem Header = "Godkänna Prov" Click = "MenuItem_Click" />
+
+            //< MenuItem Header = "Statistik" Click = "MenuItem_Click" />
+
+            //< MenuItem Header = "Start Start Lärare" Click = "MenuItem_Click" />
+            //< MenuItem Header = "Skapa Prov" Click = "MenuItem_Click" />
+            //< MenuItem Header = "Rätt prov" Click = "MenuItem_Click" />
+            //< MenuItem Header = "Skicka ut prov" Click = "MenuItem_Click" />
+            //< MenuItem Header = "Statistik" Click = "MenuItem_Click" />
         }
         private void AddDataToBase()
         {
@@ -157,7 +191,7 @@ namespace TestVerktygWPF
         private List<UserTest> AddUserTest()
         {
             List<UserTest> lxUserTest = new List<UserTest>();
-           
+
             UserTest xUserTets = new UserTest()
             {
                 UserFk = 1,

@@ -12,12 +12,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="Startsida"></MenuItem>
-            <MenuItem Header="Hantera Användare"></MenuItem>
-            <MenuItem Header="Hantera Prov" Click="MenuItem_Click"></MenuItem>
-            <MenuItem Header="Godkänna Prov" Click="MenuItem_Click"/>
-            <MenuItem Header="Statistik" ></MenuItem>
-            <MenuItem Header="GöraProv" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="Admin">
+                <MenuItem Header="Startsida Admin" Click="MenuItem_Click"/>
+                <MenuItem Header="Hantera Användare" Click="MenuItem_Click"/>
+                <MenuItem Header="Hantera Prov" Click="MenuItem_Click"/>
+                <MenuItem Header="Godkänna Prov" Click="MenuItem_Click"/>
+                <MenuItem Header="Statistik" Click="MenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="Lärare">
+                <MenuItem Header="Start Lärare" Click="MenuItem_Click"/>
+                <MenuItem Header="Skapa Prov" Click="MenuItem_Click"/>
+                <MenuItem Header="Rätt prov" Click="MenuItem_Click"/>
+                <MenuItem Header="Skicka ut prov" Click="MenuItem_Click"/>
+                <MenuItem Header="Statistik" Click="MenuItem_Click" />
+            </MenuItem>
         </Menu>
         
         <!--<Grid.ColumnDefinitions>
