@@ -39,7 +39,8 @@ namespace TestVerktygWPF.View
 
             cbxSelectTest.Items.Add("kalle");
             liAllTests = csTest.AllTestsDone();
-            cbxSelectTest.SelectedIndex = 0;
+            //cbxSelectTest.SelectedIndex = 0;
+            Console.WriteLine(liAllStudents.Count);
             foreach (var item in liAllTests)
             {
                 cbxSelectTest.Items.Add(item.Name);
