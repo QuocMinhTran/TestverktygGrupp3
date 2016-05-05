@@ -30,7 +30,7 @@ namespace TestVerktygWPF
             _Frame.Navigate(new View.AdminCreateUserPage());
 
 
-             //AddDataToBase();
+             AddDataToBase();
 
         }
 
@@ -96,59 +96,59 @@ namespace TestVerktygWPF
             #region UsingDB
             using (var db = new DbModel())
             {
-                foreach (var item in lxOcc)
-                {
-                    db.Occupations.Add(item);
-                }
-                foreach (var item in lxCourse)
-                {
-                    db.Courses.Add(item);
-                }
-                foreach (var item in lxSC)
-                {
-                    db.StudentClasses.Add(item);
-                }
-                foreach (var item in lxSGC)
-                {
-                    db.StudentClassCourses.Add(item);
-                }
-                foreach (var item in lxStudent)
-                {
-                    db.Students.Add(item);
-                }
+                //foreach (var item in lxOcc)
+                //{
+                //    db.Occupations.Add(item);
+                //}
+                //foreach (var item in lxCourse)
+                //{
+                //    db.Courses.Add(item);
+                //}
+                //foreach (var item in lxSC)
+                //{
+                //    db.StudentClasses.Add(item);
+                //}
+                //foreach (var item in lxSGC)
+                //{
+                //    db.StudentClassCourses.Add(item);
+                //}
+                //foreach (var item in lxStudent)
+                //{
+                //    db.Students.Add(item);
+                //}
 
-                foreach (var item in lxUser)
-                {
-                    db.Users.Add(item);
-                }
-                foreach (var item in lxTest)
-                {
-                    db.Tests.Add(item);
-                }
+                //foreach (var item in lxUser)
+                //{
+                //    db.Users.Add(item);
+                //}
+                //foreach (var item in lxTest)
+                //{
+                //    db.Tests.Add(item);
+                //}
 
                 foreach (var item in lxUserTest)
                 {
                     db.UserTests.Add(item);
                 }
 
-                foreach (var item in lxQuestions)
-                {
-                    db.Questions.Add(item);
-                }
+                //foreach (var item in lxQuestions)
+                //{
+                //    db.Questions.Add(item);
+                //}
 
-                foreach (var item in lxAnswer)
-                {
-                    db.Answers.Add(item);
-                }
-                foreach (var item in lxStudentTest)
-                {
-                    db.StudentTests.Add(item);
-                }
-                foreach (var item in lxStudentAnswer)
-                {
-                    Console.WriteLine(item.Answer);
-                    db.StudentAnswers.Add(item);
-                }
+                //foreach (var item in lxAnswer)
+                //{
+                //    db.Answers.Add(item);
+                //}
+                //foreach (var item in lxStudentTest)
+                //{
+                //    db.StudentTests.Add(item);
+                //}
+                //foreach (var item in lxStudentAnswer)
+                //{
+                //    Console.WriteLine(item.Answer);
+                //    db.StudentAnswers.Add(item);
+                //}
                 db.SaveChanges();
             }
             #endregion
@@ -160,7 +160,7 @@ namespace TestVerktygWPF
            
             UserTest xUserTets = new UserTest()
             {
-                UserFk = 1,
+                UserFk = 2,
                 TestFk = 1,
             };
             UserTest xUserTets1 = new UserTest()
@@ -233,7 +233,7 @@ namespace TestVerktygWPF
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
-                ID = 1,
+                ID = 5,
             };
             lxStudentTest.Add(xStudentTest);
             lxStudentTest.Add(xStudentTest2);
