@@ -16,11 +16,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Grid.Row="0" HorizontalAlignment="Left" >
-            <ComboBoxItem Content="--Välj klass--" IsSelected="True"  />
+        <ComboBox Grid.Row="0" HorizontalAlignment="Left" Name="cbxSelectTest" SelectionChanged="CbxSelectTest_OnSelectionChanged" >
+            <ComboBoxItem Content="--Välj Prov--"/>
         </ComboBox>
-        <ComboBox Grid.Row="0" HorizontalAlignment="Right">
-            <ComboBoxItem Content="--Välj elev--" IsSelected="True"/>
+        <ComboBox Grid.Row="0" HorizontalAlignment="Right" Name="cbxSelectStudent" SelectionChanged="CbxSelectStudent_OnSelectionChanged">
+            <ComboBoxItem  Content="--Välj elev--" />
         </ComboBox>
         <StackPanel x:Name="spClass" Grid.Row="1" Visibility="Hidden">
             <TextBlock Text="Namn på provet:">
@@ -33,11 +33,13 @@
                 <TextBlock Text="Bind Elev och betyg"></TextBlock>
             </TextBlock>
         </StackPanel>
-        <StackPanel x:Name="spStudent" Grid.Row="1" Orientation="Horizontal">
-            <TextBlock x:Name="tbTestName" Margin="10,0" Text="Provnamn"/>
-            <TextBlock x:Name="tbGrade" Margin="10,0" Text="Betyg"/>
-            <TextBlock x:Name="tbDate" Margin="10,0" Text="Datum"/>
-            <TextBlock x:Name="tbTime" Margin="10,0" Text="Tid"/>
+        <StackPanel Name="spTest" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+            <ListView Name="lvClassStatistics">
+            </ListView>
+        </StackPanel>
+        <StackPanel Name="spStudent" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+            <ListView Name="lvStudentStatistics">
+            </ListView>
         </StackPanel>
     </Grid>
 </Page>

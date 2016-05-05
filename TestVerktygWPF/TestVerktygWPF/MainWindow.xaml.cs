@@ -25,7 +25,8 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-            //AddDataToBase();
+
+            //  AddDataToBase();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
