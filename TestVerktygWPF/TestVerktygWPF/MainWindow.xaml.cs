@@ -25,13 +25,7 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-
-            // _Frame.Navigate(new View.AdminUserManagementPage());
-            // _Frame.Navigate(new View.AdminCreateUserPage());
-
-
             //AddDataToBase();
-
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -44,23 +38,6 @@ namespace TestVerktygWPF
             if (e.Key.Equals(Key.Enter))
                 btnLogin_Click(sender, e);
         }
-
-
-
-        //private void AddData()
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        Student xStudent = new Student();
-        //        xStudent.FirstName = "Hej";
-        //        xStudent.LasttName = "Glensson";
-        //        xStudent.Email = "Glenn";
-        //        xStudent.UserName = "ASDGF";
-        //        db.Students.Add(xStudent);
-        //        db.SaveChanges();
-        //    }
-        //}
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem btn = sender as MenuItem;
@@ -94,22 +71,6 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new AdminTestManagementPage());
                     break;
             }
-
-            //< MenuItem Header = "Startsida Admin" Click = "MenuItem_Click" />
-
-            //< MenuItem Header = "Hantera Användare" Click = "MenuItem_Click" />
-
-            //< MenuItem Header = "Hantera Prov" Click = "MenuItem_Click" />
-
-            //< MenuItem Header = "Godkänna Prov" Click = "MenuItem_Click" />
-
-            //< MenuItem Header = "Statistik" Click = "MenuItem_Click" />
-
-            //< MenuItem Header = "Start Start Lärare" Click = "MenuItem_Click" />
-            //< MenuItem Header = "Skapa Prov" Click = "MenuItem_Click" />
-            //< MenuItem Header = "Rätt prov" Click = "MenuItem_Click" />
-            //< MenuItem Header = "Skicka ut prov" Click = "MenuItem_Click" />
-            //< MenuItem Header = "Statistik" Click = "MenuItem_Click" />
         }
         private void AddDataToBase()
         {
@@ -130,59 +91,59 @@ namespace TestVerktygWPF
             #region UsingDB
             using (var db = new DbModel())
             {
-                foreach (var item in lxOcc)
-                {
-                    db.Occupations.Add(item);
-                }
-                foreach (var item in lxCourse)
-                {
-                    db.Courses.Add(item);
-                }
-                foreach (var item in lxSC)
-                {
-                    db.StudentClasses.Add(item);
-                }
-                foreach (var item in lxSGC)
-                {
-                    db.StudentClassCourses.Add(item);
-                }
-                foreach (var item in lxStudent)
-                {
-                    db.Students.Add(item);
-                }
+                //foreach (var item in lxOcc)
+                //{
+                //    db.Occupations.Add(item);
+                //}
+                //foreach (var item in lxCourse)
+                //{
+                //    db.Courses.Add(item);
+                //}
+                //foreach (var item in lxSC)
+                //{
+                //    db.StudentClasses.Add(item);
+                //}
+                //foreach (var item in lxSGC)
+                //{
+                //    db.StudentClassCourses.Add(item);
+                //}
+                //foreach (var item in lxStudent)
+                //{
+                //    db.Students.Add(item);
+                //}
 
-                foreach (var item in lxUser)
-                {
-                    db.Users.Add(item);
-                }
-                foreach (var item in lxTest)
-                {
-                    db.Tests.Add(item);
-                }
+                //foreach (var item in lxUser)
+                //{
+                //    db.Users.Add(item);
+                //}
+                //foreach (var item in lxTest)
+                //{
+                //    db.Tests.Add(item);
+                //}
 
                 foreach (var item in lxUserTest)
                 {
                     db.UserTests.Add(item);
                 }
 
-                foreach (var item in lxQuestions)
-                {
-                    db.Questions.Add(item);
-                }
+                //foreach (var item in lxQuestions)
+                //{
+                //    db.Questions.Add(item);
+                //}
 
-                foreach (var item in lxAnswer)
-                {
-                    db.Answers.Add(item);
-                }
-                foreach (var item in lxStudentTest)
-                {
-                    db.StudentTests.Add(item);
-                }
-                foreach (var item in lxStudentAnswer)
-                {
-                    Console.WriteLine(item.Answer);
-                    db.StudentAnswers.Add(item);
-                }
+                //foreach (var item in lxAnswer)
+                //{
+                //    db.Answers.Add(item);
+                //}
+                //foreach (var item in lxStudentTest)
+                //{
+                //    db.StudentTests.Add(item);
+                //}
+                //foreach (var item in lxStudentAnswer)
+                //{
+                //    Console.WriteLine(item.Answer);
+                //    db.StudentAnswers.Add(item);
+                //}
                 db.SaveChanges();
             }
             #endregion
@@ -194,7 +155,7 @@ namespace TestVerktygWPF
 
             UserTest xUserTets = new UserTest()
             {
-                UserFk = 1,
+                UserFk = 2,
                 TestFk = 1,
             };
             UserTest xUserTets1 = new UserTest()
@@ -267,7 +228,7 @@ namespace TestVerktygWPF
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
-                ID = 1,
+                ID = 5,
             };
             lxStudentTest.Add(xStudentTest);
             lxStudentTest.Add(xStudentTest2);

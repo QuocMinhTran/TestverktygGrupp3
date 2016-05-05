@@ -89,14 +89,16 @@ namespace TestVerktygWPF.View
 
             MessageBox.Show($"{tbxFirstName.Text} är tillagd");
 
-            tbxFirstName.Clear();
-            tbxLastName.Clear();
-            tbxUsername.Clear();
-            tbxPassword.Clear();
-            tbxEmail.Clear();
-            RdBtnStudent.IsChecked = false;
-            RdBtnAdmin.IsChecked = false;
-            RdBtnTeacher.IsChecked = false;
+            btnCancelUser_Click(sender, e);
+
+            //tbxFirstName.Clear();
+            //tbxLastName.Clear();
+            //tbxUsername.Clear();
+            //tbxPassword.Clear();
+            //tbxEmail.Clear();
+            //RdBtnStudent.IsChecked = false;
+            //RdBtnAdmin.IsChecked = false;
+            //RdBtnTeacher.IsChecked = false;
         }
 
         private void btnCancelUser_Click(object sender, RoutedEventArgs e)
