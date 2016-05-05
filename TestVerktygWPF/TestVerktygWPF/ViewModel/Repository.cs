@@ -46,14 +46,76 @@ namespace TestVerktygWPF.ViewModel
             return xTest;
         }
 
+        public List<Test> GetAllTests()
+        {
+            List<Test> lxTests = new List<Test>();
+            using (var db = new DbModel())
+            {
+                var selectTest = from test in db.Tests
+                                     select test;
+
+                foreach (var item in selectTest)
+                {
+                    lxTests.Add(item);
+                }
+            }
+            return lxTests;
+        }
+        public List<int> GetWritenTestsID()
+        {
+            List<StudentTest> lxTests = new List<StudentTest>();
+            List<int> liList = new List<int>();
+            using (var db = new DbModel())
+            {
+                var selectTest = from test in db.StudentTests
+                                 select test;
+
+                foreach (var item in selectTest)
+                {
+                    lxTests.Add(item);
+                }
+                foreach (var item in lxTests)
+                {
+                    liList.Add(item.ID);
+                }
+            }
+            return liList;
+        }
+
+        public Test GetTest(string sName)
+        {
+            Test xTest = new Test();
+            using (var db = new DbModel())
+            {
+                var selectTest = from test in db.Tests
+                                 where test.Name == sName
+                                 select test;
+
+                xTest = selectTest as Test;
+            }
+            return xTest;
+        }
+
         //internal List<Option> GetOptions(int questionID)
         //{
         //    throw new NotImplementedException();
         //}
 
-        internal List<Questions> GetQuestion(int testID)
+        public List<Questions> GetQuestion(int testID)
         {
-            throw new NotImplementedException();
+            List<Questions> lxQuestion = new List<Questions>();
+            using (var db = new DbModel())
+            {
+                var selectTest = from question in db.Questions
+                                 where question.TestFk == testID
+                                 select question;
+
+                foreach (var item in selectTest)
+                {
+                    lxQuestion.Add(item);
+                }
+            }
+            return lxQuestion;
         }
 
 
@@ -77,8 +139,36 @@ namespace TestVerktygWPF.ViewModel
             }
 
             return liAllClasses;
-        } 
-       
+        }
+
+
+        public Student GetStudent(string sName)
+        {
+            Student xTest = new Student();
+            using (var db = new DbModel())
+            {
+                var selectStudent = from student in db.Students
+                                 where student.FirstName == sName
+                                 select student;
+
+                xTest = selectStudent as Student;
+            }
+            return xTest;
+        }
+        public Student GetStudent(string sName, string sLastName)
+        {
+            Student xTest = new Student();
+            using (var db = new DbModel())
+            {
+                var selectStudent = from student in db.Students
+                                    where student.FirstName == sName
+                                    where student.LastName == sLastName
+                                    select student;
+
+                xTest = selectStudent as Student;
+            }
+            return xTest;
+        }
 
         public List<Student> GetAllStudents()
         {
@@ -99,20 +189,30 @@ namespace TestVerktygWPF.ViewModel
 
         public int GetTestInfoScore(Student xStudent, Test xText)
         {
-            int i = 0;
+            StudentTest xTest = new StudentTest();
             using (var db = new DbModel())
             {
                 var querry = from Time in db.StudentTests
                              where Time.StudentRefFk == xStudent.ID
-                             where Time.TestRefFk
+                             where Time.TestRefFk  == xText.ID
                              select Time;
+                xTest = querry as StudentTest;
             }
-            return i;
+            return xTest.Score;
         }
 
-        internal int GetTestInfoTime(Student xStudent)
+        internal int GetTestInfoTime(Student xStudent, Test xText)
         {
-            throw new NotImplementedException();
+            StudentTest xTest = new StudentTest();
+            using (var db = new DbModel())
+            {
+                var querry = from Time in db.StudentTests
+                             where Time.StudentRefFk == xStudent.ID
+                             where Time.TestRefFk == xText.ID
+                             select Time;
+                xTest = querry as StudentTest;
+            }
+            return xTest.WritenTime;
         }
 
         public List<User> GetAllTeachers()
