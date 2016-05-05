@@ -26,8 +26,8 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
-            _Frame.Navigate(new View.AdminUserManagementPage());
-            //_Frame.Navigate(new View.AdminCreateUserPage());
+            //_Frame.Navigate(new View.AdminUserManagementPage());
+            _Frame.Navigate(new View.AdminCreateUserPage());
 
             // AddDataToBase();
         }
