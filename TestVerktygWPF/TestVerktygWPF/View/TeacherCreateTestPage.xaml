@@ -53,8 +53,9 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,20,0" >
             <Label>Frågor som är tillagda</Label>
-            <ListView Name="listViewAddedQuestions"></ListView>
+            <ListView Name="listViewAddedQuestions" ></ListView>
             <Button Content="Spara prov" Width="70" Click="SaveTest" Margin="0,40,0,0"/>
+            <Button Content="Edit Fråga" Width="70" Click="EditQ" Margin="20,40,0,0" />
         </StackPanel>
     </Grid>
 </Page>

@@ -79,11 +79,11 @@ namespace TestVerktygWPF
             List<Occupation> lxOcc = AddOccupation();       //Done
             List<Questions> lxQuestions = AddQuestion();    //Done
 
-            List<Student> lxStudent = AddStudent();                  //Done
-            List<StudentAnswer> lxStudentAnswer = AddStudentAwnser();//Done
+            List<Student> lxStudent = AddStudent();                   //Done
+            List<StudentAnswer> lxStudentAnswer = AddStudentAwnser(); //Done
             List<StudentClassCourse> lxSGC = AddStudentClassCourse(); //Done
-            List<StudentClass> lxSC = AddStudentClass();    //Done
-            List<StudentTest> lxStudentTest = AddStudentTest(); //Done
+            List<StudentClass> lxSC = AddStudentClass();              //Done
+            List<StudentTest> lxStudentTest = AddStudentTest();       //Done
 
             List<Test> lxTest = AddTest();                  //Done
             List<User> lxUser = AddUser();                  //Done
@@ -149,6 +149,7 @@ namespace TestVerktygWPF
             #endregion
 
         }
+        
         private List<UserTest> AddUserTest()
         {
             List<UserTest> lxUserTest = new List<UserTest>();

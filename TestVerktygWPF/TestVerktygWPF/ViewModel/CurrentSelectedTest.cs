@@ -14,7 +14,6 @@ namespace TestVerktygWPF.ViewModel
         public List<Test> AllTestsDone { get; private set; }
         public List<Test> AllTests { get; private set; }
         public List<Questions> CurrentQuestions { get; private set; }
-      //  public List<Option> CurrentOptions { get; private set; }
         public List<Student> CurrentStudents { get; private set; }
         public Student CurrentStudent { get; private set; }
         public int StudentTime { get; private set; }

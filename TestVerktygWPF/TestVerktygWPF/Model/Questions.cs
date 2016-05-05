@@ -26,6 +26,5 @@ namespace TestVerktygWPF.Model
         //    Options = new List<Option>();
 
         //}
-           
     }
 }
