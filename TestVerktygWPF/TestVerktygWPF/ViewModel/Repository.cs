@@ -10,7 +10,7 @@ namespace TestVerktygWPF.ViewModel
     class Repository
     {
 
-       
+
         public User GetUser()
         {
             return null;
@@ -37,12 +37,15 @@ namespace TestVerktygWPF.ViewModel
             Test xTest = new Test();
             using (var db = new DbModel())
             {
-                var querry = from test in db.Tests
-                             where test.ID == iD
-                             select test;
-                xTest = querry as Test;
+                var querry = from Qtest in db.Tests
+                             where Qtest.ID == iD
+                             select Qtest;
+                foreach (var item in querry)
+                {
+                    xTest = item;
+                }
+                //xTest = querry as Test;
             }
-
             return xTest;
         }
 
@@ -52,7 +55,7 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectTest = from test in db.Tests
-                                     select test;
+                                 select test;
 
                 foreach (var item in selectTest)
                 {
@@ -91,7 +94,10 @@ namespace TestVerktygWPF.ViewModel
                                  where test.Name == sName
                                  select test;
 
-                xTest = selectTest as Test;
+                foreach (var item in selectTest)
+                {
+                    xTest = item;
+                }
             }
             return xTest;
         }
@@ -119,10 +125,10 @@ namespace TestVerktygWPF.ViewModel
         }
 
 
-        public Questions GetQuestion()
-        {
-            return null;
-        }
+        //public Questions GetQuestion()
+        //{
+        //    return null;
+        //}
 
         public List<StudentClass> GetClasses()
         {
@@ -130,7 +136,7 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectClass = from xclass in db.StudentClasses
-                                     select xclass;
+                                  select xclass;
 
                 foreach (var item in selectClass)
                 {
@@ -148,8 +154,8 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectStudent = from student in db.Students
-                                 where student.FirstName == sName
-                                 select student;
+                                    where student.FirstName == sName
+                                    select student;
 
                 xTest = selectStudent as Student;
             }
@@ -194,7 +200,7 @@ namespace TestVerktygWPF.ViewModel
             {
                 var querry = from Time in db.StudentTests
                              where Time.StudentRefFk == xStudent.ID
-                             where Time.TestRefFk  == xText.ID
+                             where Time.TestRefFk == xText.ID
                              select Time;
                 xTest = querry as StudentTest;
             }
@@ -221,8 +227,8 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectTeachers = from teacher in db.Users
-                    where teacher.OccupationFk == 1 
-                    select teacher;
+                                     where teacher.OccupationFk == 1
+                                     select teacher;
                 foreach (var item in selectTeachers)
                 {
                     liAllTeachers.Add(item);
@@ -238,7 +244,7 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var selectAdmins = from admin in db.Users
-                                   where admin.OccupationFk ==2
+                                   where admin.OccupationFk == 2
                                    select admin;
                 foreach (var item in selectAdmins)
                 {
@@ -272,7 +278,7 @@ namespace TestVerktygWPF.ViewModel
         {
             using (var db = new DbModel())
             {
-                
+
                 db.Tests.Add(xTest);
                 db.SaveChanges();
 
@@ -305,8 +311,8 @@ namespace TestVerktygWPF.ViewModel
             using (var db = new DbModel())
             {
                 var deleteUser = from user in db.Users
-                                    where user.ID == xUser.ID
-                                    select user;
+                                 where user.ID == xUser.ID
+                                 select user;
                 foreach (var user in deleteUser)
                 {
                     db.Users.Remove(user);
@@ -315,7 +321,7 @@ namespace TestVerktygWPF.ViewModel
             }
         }
 
-       
+
         public void RemoveTest() { }
 
 
@@ -345,13 +351,13 @@ namespace TestVerktygWPF.ViewModel
             }
         }
 
-       public void EditUser(User xUser)
+        public void EditUser(User xUser)
         {
             using (var db = new DbModel())
             {
                 var selectedUser = from user in db.Users
-                                    where user.ID == xUser.ID
-                                    select user;
+                                   where user.ID == xUser.ID
+                                   select user;
                 foreach (var item in selectedUser)
                 {
                     item.FirstName = xUser.FirstName;
@@ -365,7 +371,7 @@ namespace TestVerktygWPF.ViewModel
         }
         public void EditTest() { }
 
- 
+
 
     }
 }

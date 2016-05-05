@@ -23,6 +23,7 @@ namespace TestVerktygWPF.ViewModel
         {
             xRepo = new Repository();
             AllTests = xRepo.GetAllTests();
+            CurrentTest = new Test();
             m_lxAllTestsDone = new List<Test>();
             AllTests = new List<Test>();
             CurrentQuestions = new List<Questions>();
@@ -34,12 +35,17 @@ namespace TestVerktygWPF.ViewModel
         public void SetCurrentTest(int ID)
         {
             CurrentTest = xRepo.GetTest(ID);
-            SetCurrentQuestions(CurrentTest);
-            SetCurrentStudents(CurrentTest);
+            if (CurrentTest != null)
+            {
+                SetCurrentQuestions(CurrentTest);
+                SetCurrentStudents(CurrentTest);
+            }
+          
         }
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);
+            Console.WriteLine(sName);
             SetCurrentQuestions(CurrentTest);
             SetCurrentStudents(CurrentTest);
         }
@@ -92,6 +98,10 @@ namespace TestVerktygWPF.ViewModel
             foreach (var item in lxIds)
             {
                 AllTestsDone.Add(xRepo.GetTest(item));
+            }
+            foreach (var item in AllTestsDone)
+            {
+                Console.WriteLine(item.Name);
             }
             return AllTestsDone;
         }
