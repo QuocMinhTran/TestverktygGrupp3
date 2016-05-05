@@ -23,7 +23,14 @@ namespace TestVerktygWPF.ViewModel
         {
             xRepo = new Repository();
             AllTests = xRepo.GetAllTests();
-        }
+            m_lxAllTestsDone = new List<Test>();
+            AllTests = new List<Test>();
+            CurrentQuestions = new List<Questions>();
+            CurrentStudents = new List<Student>();
+            CurrentAnswers = new List<Answer>();
+            CurrentStudent = new Student();
+
+    }
         public void SetCurrentTest(int ID)
         {
             CurrentTest = xRepo.GetTest(ID);
