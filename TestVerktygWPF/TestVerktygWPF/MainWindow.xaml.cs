@@ -26,13 +26,12 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
-           // _Frame.Navigate(new View.AdminUserManagementPage());
+            // _Frame.Navigate(new View.AdminUserManagementPage());
             _Frame.Navigate(new View.AdminCreateUserPage());
 
 
            //  AddDataToBase();
-
-        }
+   }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -44,32 +43,33 @@ namespace TestVerktygWPF
             if (e.Key.Equals(Key.Enter))
                 btnLogin_Click(sender, e);
         }
-
-
-
-        //private void AddData()
-        //{
-        //    using (var db = new DbModel())
-        //    {
-        //        Student xStudent = new Student();
-        //        xStudent.FirstName = "Hej";
-        //        xStudent.LasttName = "Glensson";
-        //        xStudent.Email = "Glenn";
-        //        xStudent.UserName = "ASDGF";
-        //        db.Students.Add(xStudent);
-        //        db.SaveChanges();
-        //    }
-        //}
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             MenuItem btn = sender as MenuItem;
             switch (btn.Header.ToString())
             {
+                case "Startsida Admin":
+                    _Frame.Navigate(new MainPageAdmin());
+                    break;
+                case "Hantera Användare":
+                    _Frame.Navigate(new AdminUserManagementPage());
+                    break;
+                case "Statistik":
+                    _Frame.Navigate(new StatistikMasterPage());
+                    break;
+                case "Skicka ut prov":
+
+                    break;
+                case "Rätt prov":
+                    _Frame.Navigate(new TeacherEvaluatePage());
+                    break;
+                case "Start Lärare":
+                    _Frame.Navigate(new MainPageTeacher());
+                    break;
                 case "Hantera Prov":
                     _Frame.Navigate(new TeacherTestManagementPage());
                     break;
-                case "GöraProv":
+                case "Skapa Prov":
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
@@ -157,7 +157,7 @@ namespace TestVerktygWPF
         private List<UserTest> AddUserTest()
         {
             List<UserTest> lxUserTest = new List<UserTest>();
-           
+
             UserTest xUserTets = new UserTest()
             {
                 UserFk = 2,

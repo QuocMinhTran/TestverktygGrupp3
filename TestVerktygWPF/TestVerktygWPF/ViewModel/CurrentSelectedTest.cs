@@ -11,6 +11,8 @@ namespace TestVerktygWPF.ViewModel
     {
         private static Repository xRepo;
         public Test CurrentTest { get; private set; }
+        public List<Test> AllTestsDone { get; private set; }
+        public List<Test> AllTests { get; private set; }
         public List<Questions> CurrentQuestions { get; private set; }
       //  public List<Option> CurrentOptions { get; private set; }
         public List<Student> CurrentStudents { get; private set; }
