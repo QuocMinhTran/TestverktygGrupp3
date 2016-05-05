@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+
     <Compile Include="Migrations\201605050720122_hej.cs" />
     <Compile Include="Migrations\201605050720122_hej.Designer.cs">
       <DependentUpon>201605050720122_hej.cs</DependentUpon>

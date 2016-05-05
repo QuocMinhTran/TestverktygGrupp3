@@ -26,9 +26,12 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
+           // _Frame.Navigate(new View.AdminUserManagementPage());
             _Frame.Navigate(new View.AdminCreateUserPage());
 
+
              //AddDataToBase();
+
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

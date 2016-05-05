@@ -11,18 +11,20 @@
     <Grid>
         <Label Content="Nya prov som behöver godkännas" Margin="0,20,0,0 "></Label>
         
-        <DataGrid x:Name="_DataGrid" Margin="0,40,0,0" HorizontalAlignment="Center" AutoGenerateColumns="True" IsReadOnly="True">
-            <!--<DataGrid.Columns>
+        <DataGrid x:Name="_DataGrid" 
+                  Margin="0,40,0,0" 
+                  HorizontalAlignment="Center" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True">
+            <DataGrid.Columns>
                 <DataGridTextColumn Header="Provnamn" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Lärare"/>
+                <DataGridTextColumn Header="Lärare" Binding="{Binding FirstName}"/>
 
-                <DataGridTextColumn Header="Kurs"/>
-                <DataGridTextColumn Header="Datum"/>
-
-                <DataGridTextColumn Header="kommentar"/>
-                <DataGridTextColumn Header="Klass/Elever"/>
-
-            </DataGrid.Columns>-->
+                <DataGridTextColumn Header="Kurs" Binding="{Binding CourseName}"/>
+                <DataGridTextColumn Header="StartDatum" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="SlutDatum" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Tid" Binding="{Binding TimeStampe}"/>
+            </DataGrid.Columns>
             <!--<DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>

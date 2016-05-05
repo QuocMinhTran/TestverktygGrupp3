@@ -30,15 +30,16 @@ namespace TestVerktygElev.ViewModel
             Answer opt5 = new Answer();
 
             q.Name = "fråga nummer ett";
+            q.QuestionType = "envalsfråga";
             opt.Text = "rätt svar";
             opt.RightAnswer = true;
             opt2.Text = "fel svar";
             opt2.RightAnswer = false;
             q.Answers.Add(opt);
             q.Answers.Add(opt2);
-            qList.Add(q);
 
             q2.Name = "fråga nummer två";
+            q2.QuestionType = "flervalsfråga";
             opt3.Text = "rätt";
             opt3.RightAnswer = true;
             opt4.Text = "rätt";
@@ -49,33 +50,26 @@ namespace TestVerktygElev.ViewModel
             q2.Answers.Add(opt4);
             q2.Answers.Add(opt5);
 
+            Question q3 = new Question();
+            Answer opt6 = new Answer();
+            Answer opt7 = new Answer();
+            Answer opt8 = new Answer();
+            Answer opt9 = new Answer();
+
+            q3.Name = "fråga nummer tre";
+            q3.QuestionType = "rangordning";
+            opt6.Text = "ett";
+            opt7.Text = "två";
+            opt8.Text = "tre";
+            opt9.Text = "fyra";
+            q3.Answers.Add(opt6);
+            q3.Answers.Add(opt7);
+            q3.Answers.Add(opt8);
+            q3.Answers.Add(opt9);
+
+            qList.Add(q);
             qList.Add(q2);
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    q.QuestionsLabel = "wow";
-            //    for (int j = 0; j < 2; j++)
-            //    {
-            //        opt.SelectivOption = "answer";
-            //        opt2.SelectivOption = "get your ass back down here now boy";
-            //        q.Options.Add(opt);
-            //        q.Options.Add(opt2);
-            //    }
-            //    qList.Add(q);
-            //}
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    q2.QuestionsLabel = "run run bodywash";
-            //    for (int j = 0; j < 2; j++)
-            //    {
-            //        opt3.SelectivOption = "get off the booze get off the dope";
-            //        opt4.SelectivOption = "yogg saron awakens";
-            //        opt5.SelectivOption = "my dream ends your nightmare begins";
-            //        q2.Options.Add(opt3);
-            //        q2.Options.Add(opt4);
-            //        q2.Options.Add(opt5);
-            //    }
-            //    qList.Add(q2);
-            //}
+            qList.Add(q3);
             return qList;
         }
     }
