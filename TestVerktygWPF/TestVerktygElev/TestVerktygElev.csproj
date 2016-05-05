@@ -69,8 +69,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Answer.cs" />
-    <Compile Include="Model\Course.cs" />
+
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\Cours.cs" />
+    <Compile Include="Model\CourseGradeClass.cs" />
+
     <Compile Include="Model\C__MigrationHistory.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupation.cs" />
