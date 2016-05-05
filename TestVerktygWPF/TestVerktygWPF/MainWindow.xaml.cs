@@ -28,7 +28,7 @@ namespace TestVerktygWPF
 
             _Frame.Navigate(new View.AdminCreateUserPage());
 
-            // AddDataToBase();
+             AddDataToBase();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -76,106 +76,264 @@ namespace TestVerktygWPF
         }
         private void AddDataToBase()
         {
-            List<Answer> lxAnswer = AddAnswer();
-            List<Course> lxCourse = AddCourse();
+            List<Answer> lxAnswer = AddAnswer();            //Done
+            List<Course> lxCourse = AddCourse();            //Done
             List<Occupation> lxOcc = AddOccupation();       //Done
             List<Questions> lxQuestions = AddQuestion();    //Done
 
-            List<Student> lxStudent = AddStudent();         //Done
-            List<StudentAnswer> lxStudentAnswer = AddStudentAwnser();
-            List<StudentClassCourse> lxSGC = AddStudentClassCourse();
-            List<StudentClass> lxSC = AddStudentClass();
-            List<StudentTest> lxStudentTest = AddStudentTest();
+            List<Student> lxStudent = AddStudent();                  //Done
+            List<StudentAnswer> lxStudentAnswer = AddStudentAwnser();//Done
+            List<StudentClassCourse> lxSGC = AddStudentClassCourse(); //Done
+            List<StudentClass> lxSC = AddStudentClass();    //Done
+            List<StudentTest> lxStudentTest = AddStudentTest(); //Done
 
             List<Test> lxTest = AddTest();                  //Done
             List<User> lxUser = AddUser();                  //Done
-            List<UserTest> lxUserTest = AddUserTest();
+            List<UserTest> lxUserTest = AddUserTest();      //Done
             #region UsingDB
             using (var db = new DbModel())
             {
-                foreach (var item in lxAnswer)
+                foreach (var item in lxOcc)
                 {
-                    db.Answers.Add(item);
+                    db.Occupations.Add(item);
                 }
                 foreach (var item in lxCourse)
                 {
                     db.Courses.Add(item);
                 }
-                foreach (var item in lxOcc)
-                {
-                    db.Occupations.Add(item);
-                }
-                foreach (var item in lxQuestions)
-                {
-                    db.Questions.Add(item);
-                }
-                /////////////////START////////////////////STUDENT////////////////////START////////////////////////
-                foreach (var item in lxStudent)
-                {
-                    db.Students.Add(item);
-                }
-                foreach (var item in lxStudentAnswer)
-                {
-                    db.StudentAnswers.Add(item);
-                }
-                foreach (var item in lxSGC)
-                {
-                    db.StudentClassCourses.Add(item);
-                }
+                //foreach (var item in lxSC)
+                //{
+                //    db.StudentClasses.Add(item);
+                //}
+                //foreach (var item in lxSGC)
+                //{
+                //    db.StudentClassCourses.Add(item);
+                //}
+                //foreach (var item in lxStudent)
+                //{
+                //    db.Students.Add(item);
+                //}
 
-                foreach (var item in lxSC)
-                {
-                    db.StudentClasses.Add(item);
-                }
-                foreach (var item in lxStudentTest)
-                {
-                    db.StudentTests.Add(item);
-                }
-                //////////////END///////////////////////STUDENT///////////////////////////END/////////////////
-                foreach (var item in lxTest)
-                {
-                    db.Tests.Add(item);
-                }
+                //foreach (var item in lxUser)
+                //{
+                //    db.Users.Add(item);
+                //}
+                //foreach (var item in lxUserTest)
+                //{
+                //    db.UserTests.Add(item);
+                //}
+                //foreach (var item in lxTest)
+                //{
+                //    db.Tests.Add(item);
+                //}
+                //foreach (var item in lxQuestions)
+                //{
+                //    db.Questions.Add(item);
+                //}
 
-                foreach (var item in lxUser)
-                {
-                    db.Users.Add(item);
-                }
-                foreach (var item in lxUserTest)
-                {
-                    db.UserTests.Add(item);
-                }
-
+                //foreach (var item in lxAnswer)
+                //{
+                //    db.Answers.Add(item);
+                //}
+                //foreach (var item in lxStudentTest)
+                //{
+                //    db.StudentTests.Add(item);
+                //}
+                //foreach (var item in lxStudentAnswer)
+                //{
+                //    db.StudentAnswers.Add(item);
+                //}
+                db.SaveChanges();
             }
             #endregion
 
         }
-
         private List<UserTest> AddUserTest()
         {
-            throw new NotImplementedException();
-        }
+            List<UserTest> lxUserTest = new List<UserTest>();
+           
+            UserTest xUserTets = new UserTest()
+            {
+                UserFk = 1,
+                TestFk = 1,
+            };
+            UserTest xUserTets1 = new UserTest()
+            {
+                UserFk = 3,
+                TestFk = 1,
+            };
+            UserTest xUserTets2 = new UserTest()
+            {
+                UserFk = 3,
+                TestFk = 2,
+            };
+            UserTest xUserTets3 = new UserTest()
+            {
+                UserFk = 4,
+                TestFk = 1,
+            };
 
+            lxUserTest.Add(xUserTets);
+            lxUserTest.Add(xUserTets1);
+            lxUserTest.Add(xUserTets2);
+            lxUserTest.Add(xUserTets3);
+
+            return lxUserTest;
+        }
         private List<StudentTest> AddStudentTest()
         {
-            throw new NotImplementedException();
-        }
+            List<StudentTest> lxStudentTest = new List<StudentTest>();
+            StudentTest xStudentTest = new StudentTest()
+            {
+                StudentRefFk = 1,
+                TestRefFk = 1,
+                WritenTime = 10,
+                IsTestDone = true,
+                Score = 2,
+                ID = 1,
+            };
+            StudentTest xStudentTest2 = new StudentTest()
+            {
+                StudentRefFk = 2,
+                TestRefFk = 1,
+                WritenTime = 0,
+                IsTestDone = false,
+                Score = 0,
+                ID = 2,
+            };
+            StudentTest xStudentTest3 = new StudentTest()
+            {
+                StudentRefFk = 3,
+                TestRefFk = 1,
+                WritenTime = 0,
+                IsTestDone = false,
+                Score = 0,
+                ID = 3,
+            };
+            StudentTest xStudentTest4 = new StudentTest()
+            {
+                StudentRefFk = 1,
+                TestRefFk = 2,
+                WritenTime = 0,
+                IsTestDone = false,
+                Score = 0,
+                ID = 4,
+            };
 
+            StudentTest xStudentTest5 = new StudentTest()
+            {
+                StudentRefFk = 2,
+                TestRefFk = 2,
+                WritenTime = 0,
+                IsTestDone = false,
+                Score = 0,
+                ID = 1,
+            };
+            lxStudentTest.Add(xStudentTest);
+            lxStudentTest.Add(xStudentTest2);
+            lxStudentTest.Add(xStudentTest3);
+            lxStudentTest.Add(xStudentTest4);
+            lxStudentTest.Add(xStudentTest5);
+            return lxStudentTest;
+        }
         private List<StudentClassCourse> AddStudentClassCourse()
         {
-            throw new NotImplementedException();
-        }
+            List<StudentClassCourse> lxStudentClassCo = new List<StudentClassCourse>();
+            StudentClassCourse xSCC = new StudentClassCourse()
+            {
+                CouseRefID = 1,
+                StudentClassRefID = 2,
+            };
+            StudentClassCourse xSCC6 = new StudentClassCourse()
+            {
+                CouseRefID = 1,
+                StudentClassRefID = 3,
+            };
 
+
+            StudentClassCourse xSCC2 = new StudentClassCourse()
+            {
+                CouseRefID = 2,
+                StudentClassRefID = 2,
+            };
+            StudentClassCourse xSCC3 = new StudentClassCourse()
+            {
+                CouseRefID = 2,
+                StudentClassRefID = 3,
+            };
+
+
+            StudentClassCourse xSCC4 = new StudentClassCourse()
+            {
+                CouseRefID = 3,
+                StudentClassRefID = 2,
+            };
+            StudentClassCourse xSCC5 = new StudentClassCourse()
+            {
+                CouseRefID = 3,
+                StudentClassRefID = 3,
+            };
+            lxStudentClassCo.Add(xSCC);
+            lxStudentClassCo.Add(xSCC2);
+            lxStudentClassCo.Add(xSCC3);
+            lxStudentClassCo.Add(xSCC4);
+            lxStudentClassCo.Add(xSCC5);
+            lxStudentClassCo.Add(xSCC6);
+            return lxStudentClassCo;
+
+        }
         private List<StudentClass> AddStudentClass()
         {
-            throw new NotImplementedException();
+            List<StudentClass> lxStudentClass = new List<StudentClass>();
+            StudentClass xStudent = new StudentClass()
+            {
+                ID = 1,
+                Name = "admin",
+            };
+            StudentClass xStudent2 = new StudentClass()
+            {
+                ID = 2,
+                Name = "Programmerare"
+            };
+            StudentClass xStudent3 = new StudentClass()
+            {
+                ID = 3,
+                Name = "Databas"
+            };
+            lxStudentClass.Add(xStudent);
+            lxStudentClass.Add(xStudent2);
+            lxStudentClass.Add(xStudent3);
+            return lxStudentClass;
         }
-
         private List<StudentAnswer> AddStudentAwnser()
         {
-            throw new NotImplementedException();
+            List<StudentAnswer> lxStudAnwer = new List<StudentAnswer>();
+            StudentAnswer xStudA = new StudentAnswer()
+            {
+                StudentTestFk = 1,
+                Question = 1,
+                Answer = 1,
+            };
+            StudentAnswer xStudA2 = new StudentAnswer()
+            {
+                StudentTestFk = 1,
+                Question = 2,
+                Answer = 1,
+            };
+            StudentAnswer xStudA3 = new StudentAnswer()
+            {
+                StudentTestFk = 1,
+                Question = 3,
+                Answer = 1,
+            };
+            StudentAnswer xStudA4 = new StudentAnswer()
+            {
+                StudentTestFk = 1,
+                Question = 3,
+                Answer = 2,
+            };
+            return lxStudAnwer;
         }
-
         private List<Answer> AddAnswer()
         {
             List<Answer> lxAnswer = new List<Answer>();
@@ -184,62 +342,62 @@ namespace TestVerktygWPF
                 Text = "Röd",
                 RightAnswer = false,
                 QuestionFk = 1
-              
+
             };
-            Answer xOptions11 = new Answer()
+            Answer xOptions1 = new Answer()
             {
                 Text = "Djur",
                 RightAnswer = true,
                 QuestionFk = 1
-        };
-            Answer xOptions12 = new Answer()
+            };
+            Answer xOptions2 = new Answer()
             {
 
                 Text = "Stolpe",
                 RightAnswer = false,
                 QuestionFk = 1
             };
-            Answer xOptions13 = new Answer()
+            Answer xOptions3 = new Answer()
             {
 
                 Text = "Röd",
                 RightAnswer = false,
                 QuestionFk = 2
             };
-            Answer xOption14 = new Answer()
+            Answer xOptions4 = new Answer()
             {
 
                 Text = "Bil",
                 RightAnswer = true,
                 QuestionFk = 2
             };
-            Answer xOptions115= new Answer()
+            Answer xOptions5 = new Answer()
             {
 
                 Text = "Bi",
                 RightAnswer = false,
                 QuestionFk = 2
             };
-            Answer xOptions16 = new Answer()
+            Answer xOptions6 = new Answer()
             {
 
                 Text = "8/4",
                 RightAnswer = true,
                 QuestionFk = 3
             };
-            Answer xOptions17 = new Answer()
+            Answer xOptions7 = new Answer()
             {
                 Text = "2*1",
                 RightAnswer = true,
                 QuestionFk = 3
             };
-            Answer xOptions18 = new Answer()
+            Answer xOptions8 = new Answer()
             {
                 Text = "9-5",
                 RightAnswer = false,
                 QuestionFk = 3
             };
-            Answer xOptions19 = new Answer()
+            Answer xOptions9 = new Answer()
             {
                 Text = "4",
                 RightAnswer = true,
@@ -251,32 +409,32 @@ namespace TestVerktygWPF
                 RightAnswer = false,
                 QuestionFk = 4
             };
-            Answer xOptions1 = new Answer()
+            Answer xOptions11 = new Answer()
             {
                 Text = "6",
                 RightAnswer = false,
                 QuestionFk = 4
             };
-            Answer xOptions2 = new Answer()
+            Answer xOptions12 = new Answer()
             {
                 Text = "5*1+4",
                 RightAnswer = true,
                 QuestionFk = 5,
-               // OrderPosistion = 1
+                OrderPosition = 1
             };
-            Answer xOptions3 = new Answer()
+            Answer xOptions13 = new Answer()
             {
                 Text = "4+2+5/5",
                 RightAnswer = true,
                 QuestionFk = 5,
-                // OrderPosistion = 2
+                OrderPosition = 2
             };
-            Answer xOption4 = new Answer()
+            Answer xOptions14 = new Answer()
             {
                 Text = "4+2+8*0",
                 RightAnswer = true,
                 QuestionFk = 5,
-                // OrderPosistion = 3
+                OrderPosition = 3
             };
             Answer xOptions15 = new Answer()
             {
@@ -284,49 +442,70 @@ namespace TestVerktygWPF
                 RightAnswer = false,
                 QuestionFk = 6
             };
-            Answer xOptions6 = new Answer()
+            Answer xOptions16 = new Answer()
             {
                 Text = "Blå",
                 RightAnswer = true,
                 QuestionFk = 6
             };
-            Answer xOptions7 = new Answer()
+            Answer xOptions17 = new Answer()
             {
                 Text = "Gul",
                 RightAnswer = true,
                 QuestionFk = 6
             };
-            Answer xOptions8 = new Answer()
+            Answer xOptions18 = new Answer()
             {
                 Text = "Blåval",
                 RightAnswer = false,
-                QuestionFk = 7
-                // OrderPosistion = 1
+                QuestionFk = 7,
+                OrderPosition = 1
             };
-            Answer xOptions9 = new Answer()
+            Answer xOptions19 = new Answer()
             {
                 Text = "Elefant",
                 RightAnswer = false,
-                QuestionFk = 7
-                // OrderPosistion = 2
+                QuestionFk = 7,
+                OrderPosition = 2
             };
-            Answer xOptions28 = new Answer()
+            Answer xOptions20 = new Answer()
             {
                 Text = "Bil",
                 RightAnswer = false,
-                QuestionFk = 7
-                // OrderPosistion = 3
+                QuestionFk = 7,
+                OrderPosition = 3
             };
-            Answer xOptions29 = new Answer()
+            Answer xOptions21 = new Answer()
             {
                 Text = "Människa",
                 RightAnswer = false,
-                QuestionFk = 7
-                // OrderPosistion = 4
+                QuestionFk = 7,
+                OrderPosition = 4
             };
-            return null;
-        }
 
+            lxAnswer.Add(xOptions);
+            lxAnswer.Add(xOptions2);
+            lxAnswer.Add(xOptions3);
+            lxAnswer.Add(xOptions4);
+            lxAnswer.Add(xOptions5);
+            lxAnswer.Add(xOptions6);
+            lxAnswer.Add(xOptions7);
+            lxAnswer.Add(xOptions8);
+            lxAnswer.Add(xOptions9);
+            lxAnswer.Add(xOptions10);
+            lxAnswer.Add(xOptions11);
+            lxAnswer.Add(xOptions12);
+            lxAnswer.Add(xOptions13);
+            lxAnswer.Add(xOptions14);
+            lxAnswer.Add(xOptions15);
+            lxAnswer.Add(xOptions16);
+            lxAnswer.Add(xOptions17);
+            lxAnswer.Add(xOptions18);
+            lxAnswer.Add(xOptions19);
+            lxAnswer.Add(xOptions20);
+            lxAnswer.Add(xOptions21);
+            return lxAnswer;
+        }
         private List<Questions> AddQuestion()
         {
             List<Questions> lxQuestion = new List<Questions>();
@@ -386,26 +565,37 @@ namespace TestVerktygWPF
             lxQuestion.Add(xQuest5);
             lxQuestion.Add(xQuest6);
             lxQuestion.Add(xQuest7);
-            
+
 
             return lxQuestion;
         }
-
-        private List<Course> AddCourse() {
-            return null;
-        }
-        private List<StudentClassCourse> AddCoruseGradeClass() {
-            return null;
-        }
-        private List<StudentClass> AddGradeClass() {
-            return null;
+        private List<Course> AddCourse()
+        {
+            List<Course> lxCourse = new List<Course>();
+            Course xCourse = new Course()
+            {
+                CourseName = "Programmering"
+            };
+            Course xCourse2 = new Course()
+            {
+                CourseName = "Matte"
+            };
+            Course xCourse3 = new Course()
+            {
+                CourseName = "Databas"
+            };
+            lxCourse.Add(xCourse);
+            lxCourse.Add(xCourse2);
+            lxCourse.Add(xCourse3);
+            return lxCourse;
         }
         private List<Occupation> AddOccupation()
         {
             List<Occupation> lxOccupation = new List<Occupation>();
             Occupation xOccup = new Occupation()
             {
-                ID = 1, Occupations = "lärare",     
+                ID = 1,
+                Occupations = "lärare",
             };
             Occupation xOccup2 = new Occupation()
             {
@@ -423,11 +613,6 @@ namespace TestVerktygWPF
 
             return lxOccupation;
         }
-        private List<Answer> AddOptions()
-        {
-            return null;
-        }
-
         private List<Test> AddTest()
         {
             List<Test> lxTest = new List<Test>();
@@ -463,6 +648,7 @@ namespace TestVerktygWPF
 
             User xAdmin = new User()
             {
+                ID = 1,
                 FirstName = "Jan",
                 UserName = "JanBen01",
                 Password = "ASd",
@@ -474,6 +660,7 @@ namespace TestVerktygWPF
 
             User xAdmin2 = new User()
             {
+                ID = 2,
                 FirstName = "Glenn",
                 UserName = "GlenBen01",
                 Password = "ASd",
@@ -492,7 +679,7 @@ namespace TestVerktygWPF
                 LastName = "Årersson",
                 OccupationFk = 1,
                 StudentClassFk = 3,
-                
+
             };
 
             User xTeacher2 = new User()
@@ -525,7 +712,7 @@ namespace TestVerktygWPF
                 LastName = "Åkersson",
                 OccupationFk = 3,
                 StudentClassFk = 3,
-               
+
             };
 
             Student xStudent2 = new Student()

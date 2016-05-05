@@ -14,6 +14,7 @@ namespace TestVerktygWPF.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Text = c.String(),
                         RightAnswer = c.Boolean(nullable: false),
+                        OrderPosition = c.Int(),
                         QuestionFk = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
