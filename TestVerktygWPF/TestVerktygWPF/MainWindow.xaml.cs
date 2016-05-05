@@ -28,7 +28,7 @@ namespace TestVerktygWPF
 
             _Frame.Navigate(new View.AdminCreateUserPage());
 
-             AddDataToBase();
+             //AddDataToBase();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -101,48 +101,51 @@ namespace TestVerktygWPF
                 {
                     db.Courses.Add(item);
                 }
-                //foreach (var item in lxSC)
-                //{
-                //    db.StudentClasses.Add(item);
-                //}
-                //foreach (var item in lxSGC)
-                //{
-                //    db.StudentClassCourses.Add(item);
-                //}
-                //foreach (var item in lxStudent)
-                //{
-                //    db.Students.Add(item);
-                //}
+                foreach (var item in lxSC)
+                {
+                    db.StudentClasses.Add(item);
+                }
+                foreach (var item in lxSGC)
+                {
+                    db.StudentClassCourses.Add(item);
+                }
+                foreach (var item in lxStudent)
+                {
+                    db.Students.Add(item);
+                }
 
-                //foreach (var item in lxUser)
-                //{
-                //    db.Users.Add(item);
-                //}
-                //foreach (var item in lxUserTest)
-                //{
-                //    db.UserTests.Add(item);
-                //}
-                //foreach (var item in lxTest)
-                //{
-                //    db.Tests.Add(item);
-                //}
-                //foreach (var item in lxQuestions)
-                //{
-                //    db.Questions.Add(item);
-                //}
+                foreach (var item in lxUser)
+                {
+                    db.Users.Add(item);
+                }
+                foreach (var item in lxTest)
+                {
+                    db.Tests.Add(item);
+                }
 
-                //foreach (var item in lxAnswer)
-                //{
-                //    db.Answers.Add(item);
-                //}
-                //foreach (var item in lxStudentTest)
-                //{
-                //    db.StudentTests.Add(item);
-                //}
-                //foreach (var item in lxStudentAnswer)
-                //{
-                //    db.StudentAnswers.Add(item);
-                //}
+                foreach (var item in lxUserTest)
+                {
+                    db.UserTests.Add(item);
+                }
+
+                foreach (var item in lxQuestions)
+                {
+                    db.Questions.Add(item);
+                }
+
+                foreach (var item in lxAnswer)
+                {
+                    db.Answers.Add(item);
+                }
+                foreach (var item in lxStudentTest)
+                {
+                    db.StudentTests.Add(item);
+                }
+                foreach (var item in lxStudentAnswer)
+                {
+                    Console.WriteLine(item.Answer);
+                    db.StudentAnswers.Add(item);
+                }
                 db.SaveChanges();
             }
             #endregion
@@ -332,6 +335,11 @@ namespace TestVerktygWPF
                 Question = 3,
                 Answer = 2,
             };
+            lxStudAnwer.Add(xStudA);
+            lxStudAnwer.Add(xStudA2);
+            lxStudAnwer.Add(xStudA3);
+            lxStudAnwer.Add(xStudA4);
+
             return lxStudAnwer;
         }
         private List<Answer> AddAnswer()
@@ -618,21 +626,25 @@ namespace TestVerktygWPF
             List<Test> lxTest = new List<Test>();
             Test xTest = new Test()
             {
+                ID = 1,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
             };
             Test xTest2 = new Test()
             {
+                ID = 2,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
             };
             Test xTest3 = new Test()
             {
+                ID = 3,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
             };
             Test xTest4 = new Test()
             {
+                ID = 4,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
             };
