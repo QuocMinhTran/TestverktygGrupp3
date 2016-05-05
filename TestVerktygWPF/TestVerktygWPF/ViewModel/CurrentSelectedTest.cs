@@ -11,16 +11,18 @@ namespace TestVerktygWPF.ViewModel
     {
         private static Repository xRepo;
         public Test CurrentTest { get; private set; }
-        public List<Test> AllTestsDone { get; private set; }
+        private List<Test> m_lxAllTestsDone { get; set; }
         public List<Test> AllTests { get; private set; }
         public List<Questions> CurrentQuestions { get; private set; }
         public List<Student> CurrentStudents { get; private set; }
+        public List<Answer> CurrentAnswers { get; private set; }
         public Student CurrentStudent { get; private set; }
         public int StudentTime { get; private set; }
         public int StudentScore { get; private set; }
         public CurrentSelectedTest()
         {
             xRepo = new Repository();
+            AllTests = xRepo.GetAllTests();
         }
         public void SetCurrentTest(int ID)
         {
@@ -30,9 +32,11 @@ namespace TestVerktygWPF.ViewModel
         }
         public void SetCurrentTest(string sName)
         {
-
+            CurrentTest = xRepo.GetTest(sName);
+            SetCurrentQuestions(CurrentTest);
+            SetCurrentStudents(CurrentTest);
         }
-            
+
         private void SetCurrentQuestions(Test xCurrentTest)
         {
             CurrentQuestions = xRepo.GetQuestion(xCurrentTest.ID);
@@ -46,9 +50,11 @@ namespace TestVerktygWPF.ViewModel
         //        /// CurrentOptions = xRepo.GetOptions(item.id);
         //    }
         //}
-        public void SetCurrentStudent(string sName)
+        public void SetCurrentStudent(string sFirstName, string sLastName)
         {
-
+            CurrentStudent = xRepo.GetStudent(sFirstName, sLastName);
+            SetScoreForStudent(CurrentStudent);
+            SetTimeForStudent(CurrentStudent);
         }
         public void SetCurrentStudent(int ID)
         {
@@ -66,13 +72,22 @@ namespace TestVerktygWPF.ViewModel
         }
         private void SetTimeForStudent(Student xStudent)
         {
-            StudentTime = xRepo.GetTestInfoTime(xStudent);
+            StudentTime = xRepo.GetTestInfoTime(xStudent, CurrentTest);
         }
         private void SetScoreForStudent(Student xStudent)
         {
-            StudentScore = xRepo.GetTestInfoScore(xStudent);
+            StudentScore = xRepo.GetTestInfoScore(xStudent, CurrentTest);
         }
-
+        private List<Test> AllTestsDone()
+        {
+            List<Test> AllTestsDone = new List<Test>();
+            List<int> lxIds = xRepo.GetWritenTestsID();
+            foreach (var item in lxIds)
+            {
+                AllTestsDone.Add(xRepo.GetTest(item));
+            }
+            return AllTestsDone;
+        }
 
     }
 }
