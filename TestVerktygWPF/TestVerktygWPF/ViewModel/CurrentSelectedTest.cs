@@ -71,6 +71,7 @@ namespace TestVerktygWPF.ViewModel
         public void SetCurrentStudent(int ID)
         {
             CurrentStudent = xRepo.GetStudent(ID);
+            Console.WriteLine(CurrentStudent.ID);
             SetScoreForStudent(CurrentStudent);
             SetTimeForStudent(CurrentStudent);
         }

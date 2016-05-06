@@ -21,7 +21,11 @@ namespace TestVerktygWPF.ViewModel
                 var querry = from studnet in db.Students
                              where studnet.ID == ID
                              select studnet;
-                xStudent = querry as Student;
+                foreach (var item in querry)
+                {
+                    xStudent = item;
+                }
+                
             }
             return xStudent;
         }
@@ -99,12 +103,10 @@ namespace TestVerktygWPF.ViewModel
             
             using (var db = new DbModel())
             {
-                var selected = from student in db.StudentTests
-                               join name in db.Students on student.ID equals name.ID  
-                               where xTest.ID == student.TestRefFk
-                               select name;
-
-                
+                var selected = from studentTest in db.StudentTests
+                               join student in db.Students on studentTest.StudentRefFk equals student.ID  
+                               where xTest.ID == studentTest.TestRefFk
+                               select student;
               
                 foreach (var item in selected)
                 {
@@ -252,7 +254,11 @@ namespace TestVerktygWPF.ViewModel
                              where Time.StudentRefFk == xStudent.ID
                              where Time.TestRefFk == xText.ID
                              select Time;
-                xTest = querry as StudentTest;
+                foreach (var item in querry)
+                {
+                    xTest = item;
+                }
+               
             }
             return xTest.WritenTime;
         }
