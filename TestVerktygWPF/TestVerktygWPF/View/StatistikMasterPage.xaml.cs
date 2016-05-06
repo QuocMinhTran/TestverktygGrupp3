@@ -74,7 +74,7 @@ namespace TestVerktygWPF.View
 
         private void CbxSelectTest_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            spClass.Visibility = Visibility.Visible;
+          
             spStudent.Visibility = Visibility.Collapsed;
             var varSender = sender as ComboBox;
            
@@ -86,7 +86,12 @@ namespace TestVerktygWPF.View
                 csTest.SetCurrentTest(SelectedTest.ID);
                 foreach (var item in csTest.CurrentStudents)
                 {
-                    csTest.SetCurrentStudent(item.ID);
+                   // Console.WriteLine(item.FirstName);
+                }
+             
+                foreach (var item in csTest.CurrentStudents)
+                {
+                    //csTest.SetCurrentStudent(item.ID);
                     lvClassStatistics.Items.Add(csTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
                 }
 
@@ -99,13 +104,13 @@ namespace TestVerktygWPF.View
 
         private void DisplayAvrageInfo()
         {
-            //tbNameOfTest.Text = SelectedTest.Name;
-            //tbAverageTimeOnTest.Text = AvrageTimeForTest.ToString();
+            tbNameOfTest.Text = "Namn på provet: " + SelectedTest.Name;
+            tbAverageTimeOnTest.Text = "Genomsnittstid på provet: "+ AvrageTimeForTest.ToString();
         }
 
         private void CbxSelectStudent_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            spClass.Visibility = Visibility.Collapsed;
+           
             spStudent.Visibility = Visibility.Visible;
             //cbxSelectTest.SelectedIndex = 0;
             
