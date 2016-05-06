@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TestVerktygWPF.View
 {
     /// <summary>
-    /// Interaction logic for AdminTestDetailManagementPage.xaml
+    /// Interaction logic for AdminTestDetailManagement.xaml
     /// </summary>
-    public partial class AdminTestDetailManagementPage : Page
+    public partial class AdminTestDetailManagement : Page
     {
-        public AdminTestDetailManagementPage()
+        public AdminTestDetailManagement()
         {
             InitializeComponent();
         }
