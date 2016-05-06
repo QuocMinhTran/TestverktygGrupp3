@@ -45,7 +45,6 @@ namespace TestVerktygWPF.ViewModel
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);
-            Console.WriteLine(sName);
             SetCurrentQuestions(CurrentTest);
             SetCurrentStudents(CurrentTest);
         }
@@ -100,10 +99,7 @@ namespace TestVerktygWPF.ViewModel
             {
                 AllTestsDone.Add(xRepo.GetTest(item));
             }
-            foreach (var item in AllTestsDone)
-            {
-                Console.WriteLine(item.Name);
-            }
+           
             return AllTestsDone;
         }
 
