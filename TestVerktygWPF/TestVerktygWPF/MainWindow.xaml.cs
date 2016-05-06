@@ -25,6 +25,18 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
+            //ViewModel.Repository x = new ViewModel.Repository();
+            //Student xStudent = new Student();
+            //xStudent.ID = 1;
+
+            //Test xTest = new Test();
+            //xTest.ID = 1;
+            //int iX = x.GetTestInfoScore(xStudent, xTest);
+            //Console.WriteLine(iX +"SCORE" );
+            //foreach (var item in xStudent)
+            //{
+            //    Console.WriteLine(item.FirstName);
+            //}
             //  AddDataToBase();
         }
 
