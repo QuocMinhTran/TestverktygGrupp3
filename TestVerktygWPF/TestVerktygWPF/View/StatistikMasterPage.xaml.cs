@@ -31,6 +31,9 @@ namespace TestVerktygWPF.View
         public int NumberOfTests;
         public double TotalTestTime;
         public double AvrageTimeForTest;
+        public int StudentsScoreOfTest;
+        public int NumberOfQuestionsInSelectedTest;
+        public double ResulSocreQuestion;
 
         public StatistikMasterPage()
         {
@@ -74,38 +77,57 @@ namespace TestVerktygWPF.View
 
         private void CbxSelectTest_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            spClass.Visibility = Visibility.Visible;
+          
             spStudent.Visibility = Visibility.Collapsed;
             var varSender = sender as ComboBox;
            
             CurrentSelectedTest csTest = new CurrentSelectedTest();
             csTest.SetCurrentTest(varSender.SelectedItem.ToString());
             SelectedTest = csTest.CurrentTest;
+            NumberOfQuestionsInSelectedTest = csTest.CurrentQuestions.Count();
+           
+
+
             if (SelectedTest != null)
             {
+                lvClassStatistics.Items.Clear();
+                StudentsScoreOfTest = 0;
                 csTest.SetCurrentTest(SelectedTest.ID);
+               
                 foreach (var item in csTest.CurrentStudents)
                 {
+                    Console.WriteLine( "Student id från valt prov " + item.ID);
                     csTest.SetCurrentStudent(item.ID);
-                    lvClassStatistics.Items.Add(csTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
+                    lvClassStatistics.Items.Add("Namn "+ csTest.CurrentStudent.FirstName + csTest.CurrentStudent.LastName + " Poäng " +csTest.StudentScore + " Tid "+ csTest.StudentTime);
+                    StudentsScoreOfTest += csTest.StudentScore;
                 }
-
-
+              
             }
 
             AvrageTestTime();
             DisplayAvrageInfo();
+            AvrageScoreForTest();
+        }
+
+        private void AvrageScoreForTest()
+        {
+            ResulSocreQuestion = 0;
+            ResulSocreQuestion = (double)NumberOfQuestionsInSelectedTest/ StudentsScoreOfTest;
+            Console.WriteLine("Antal frågor "+NumberOfQuestionsInSelectedTest);
+            Console.WriteLine("StudentScore " + StudentsScoreOfTest);
+            Console.WriteLine("Frågor/Score = " + ResulSocreQuestion);
+           
         }
 
         private void DisplayAvrageInfo()
         {
-            //tbNameOfTest.Text = SelectedTest.Name;
-            //tbAverageTimeOnTest.Text = AvrageTimeForTest.ToString();
+            tbNameOfTest.Text = "Namn på provet: " + SelectedTest.Name;
+            tbAverageTimeOnTest.Text = "Genomsnittstid på provet: "+ AvrageTimeForTest.ToString();
         }
 
         private void CbxSelectStudent_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            spClass.Visibility = Visibility.Collapsed;
+           
             spStudent.Visibility = Visibility.Visible;
             //cbxSelectTest.SelectedIndex = 0;
             

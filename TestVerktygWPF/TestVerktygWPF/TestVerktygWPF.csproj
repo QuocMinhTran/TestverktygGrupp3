@@ -67,7 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-
     <Compile Include="Migrations\201605050720122_hej.cs" />
     <Compile Include="Migrations\201605050720122_hej.Designer.cs">
       <DependentUpon>201605050720122_hej.cs</DependentUpon>
@@ -92,8 +91,8 @@
     <Compile Include="View\AdminCreateUserPage.xaml.cs">
       <DependentUpon>AdminCreateUserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AdminTestDetailManagementPage.xaml.cs">
-      <DependentUpon>AdminTestDetailManagementPage.xaml</DependentUpon>
+    <Compile Include="View\AdminTestDetailManagement.xaml.cs">
+      <DependentUpon>AdminTestDetailManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AdminTestManagementPage.xaml.cs">
       <DependentUpon>AdminTestManagementPage.xaml</DependentUpon>
@@ -120,7 +119,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AdminTestDetailManagementPage.xaml">
+    <Page Include="View\AdminTestDetailManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

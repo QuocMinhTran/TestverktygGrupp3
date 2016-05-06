@@ -16,24 +16,19 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ComboBox Grid.Row="0" HorizontalAlignment="Left" Name="cbxSelectTest" SelectionChanged="CbxSelectTest_OnSelectionChanged" >
-            <ComboBoxItem Content="--Välj Prov--"/>
-        </ComboBox>
-        <ComboBox Grid.Row="0" HorizontalAlignment="Right" Name="cbxSelectStudent" SelectionChanged="CbxSelectStudent_OnSelectionChanged">
-            <ComboBoxItem  Content="--Välj elev--" />
-        </ComboBox>
-        <StackPanel x:Name="spClass" Grid.Row="1" Visibility="Hidden">
-            <TextBlock Text="Namn på provet:">
-                <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
-            </TextBlock>
-            <TextBlock Text="Genomsnitts tid på provet">
-                <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
-            </TextBlock>
-            <TextBlock Text="Elev och Betyg">
-                <TextBlock Text="Bind Elev och betyg"></TextBlock>
-            </TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Label Content="Välj prov" Margin="5,0,5,0"/>
+            <ComboBox Name="cbxSelectTest" SelectionChanged="CbxSelectTest_OnSelectionChanged" />
+            <Label Content="Välj elev" Margin="50,0,5,0"/>
+            <ComboBox   Name="cbxSelectStudent" SelectionChanged="CbxSelectStudent_OnSelectionChanged">
+
+            </ComboBox>
         </StackPanel>
-        <StackPanel Name="spTest" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
+
+        <StackPanel Name="spTest" Grid.Row="1" Orientation="Vertical" >
+            <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
+            <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
+            <TextBlock Text="Bind Elev och betyg"></TextBlock>
             <ListView Name="lvClassStatistics">
             </ListView>
         </StackPanel>

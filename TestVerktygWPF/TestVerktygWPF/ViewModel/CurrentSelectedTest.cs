@@ -45,7 +45,6 @@ namespace TestVerktygWPF.ViewModel
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);
-            Console.WriteLine(sName);
             SetCurrentQuestions(CurrentTest);
             SetCurrentStudents(CurrentTest);
         }
@@ -72,6 +71,7 @@ namespace TestVerktygWPF.ViewModel
         public void SetCurrentStudent(int ID)
         {
             CurrentStudent = xRepo.GetStudent(ID);
+            Console.WriteLine(CurrentStudent.ID);
             SetScoreForStudent(CurrentStudent);
             SetTimeForStudent(CurrentStudent);
         }
@@ -81,7 +81,7 @@ namespace TestVerktygWPF.ViewModel
         }
         private void SetCurrentStudents(Test xTest)
         {
-            //CurrentStudents = xRepo.geta(xTest);
+            CurrentStudents = xRepo.GetAllStudents(xTest);
         }
         private void SetTimeForStudent(Student xStudent)
         {
@@ -99,10 +99,7 @@ namespace TestVerktygWPF.ViewModel
             {
                 AllTestsDone.Add(xRepo.GetTest(item));
             }
-            foreach (var item in AllTestsDone)
-            {
-                Console.WriteLine(item.Name);
-            }
+           
             return AllTestsDone;
         }
 

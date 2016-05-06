@@ -9,8 +9,6 @@ namespace TestVerktygWPF.ViewModel
 {
     class Repository
     {
-
-
         public User GetUser()
         {
             return null;
@@ -23,7 +21,11 @@ namespace TestVerktygWPF.ViewModel
                 var querry = from studnet in db.Students
                              where studnet.ID == ID
                              select studnet;
-                xStudent = querry as Student;
+                foreach (var item in querry)
+                {
+                    xStudent = item;
+                }
+                
             }
             return xStudent;
         }
@@ -47,6 +49,16 @@ namespace TestVerktygWPF.ViewModel
                 //xTest = querry as Test;
             }
             return xTest;
+        }
+
+        internal void SaveAnwnser(Answer itemAnswer)
+        {
+            using (var db = new DbModel())
+            {
+                Console.WriteLine(itemAnswer + "SAVING ANWNSER");
+                db.Answers.Add(itemAnswer);
+                db.SaveChanges();
+            }
         }
 
         public List<Test> GetAllTests()
@@ -83,6 +95,25 @@ namespace TestVerktygWPF.ViewModel
                 }
             }
             return liList;
+        }
+
+        public List<Student> GetAllStudents(Test xTest)
+        {
+            List<Student> lxStudent = new List<Student>();
+            
+            using (var db = new DbModel())
+            {
+                var selected = from studentTest in db.StudentTests
+                               join student in db.Students on studentTest.StudentRefFk equals student.ID  
+                               where xTest.ID == studentTest.TestRefFk
+                               select student;
+              
+                foreach (var item in selected)
+                {
+                    lxStudent.Add(item);
+                }
+            }
+            return lxStudent;
         }
 
         public Test GetTest(string sName)
@@ -198,11 +229,18 @@ namespace TestVerktygWPF.ViewModel
             StudentTest xTest = new StudentTest();
             using (var db = new DbModel())
             {
-                var querry = from Time in db.StudentTests
-                             where Time.StudentRefFk == xStudent.ID
-                             where Time.TestRefFk == xText.ID
-                             select Time;
-                xTest = querry as StudentTest;
+                Console.WriteLine(xStudent.ID + " STUDENT ID " + xTest.ID + " TEST ID");
+                var querry = from qTime in db.StudentTests
+                             where qTime.StudentRefFk == xStudent.ID
+                             where qTime.TestRefFk == xText.ID
+                             select qTime;
+            
+            foreach (var item in querry)
+            {
+                xTest = item;
+            }
+               
+               
             }
             return xTest.Score;
         }
@@ -216,7 +254,11 @@ namespace TestVerktygWPF.ViewModel
                              where Time.StudentRefFk == xStudent.ID
                              where Time.TestRefFk == xText.ID
                              select Time;
-                xTest = querry as StudentTest;
+                foreach (var item in querry)
+                {
+                    xTest = item;
+                }
+               
             }
             return xTest.WritenTime;
         }
@@ -281,11 +323,31 @@ namespace TestVerktygWPF.ViewModel
 
                 db.Tests.Add(xTest);
                 db.SaveChanges();
-
+  
             }
         }
 
-        public void SaveQuestion() { }
+        public int SaveQuestion(Questions xQuestion)
+        {
+            Questions xQuest = new Questions();
+            using (var db = new DbModel())
+            {
+                
+                db.Questions.Add(xQuestion);
+                db.SaveChanges();
+
+                var selectedTest = from test in db.Questions
+                                   where test.ID == xQuestion.ID
+                                   select test;
+                foreach (var item in selectedTest)
+                {
+                    xQuest = item;
+                }
+                Console.WriteLine(xQuest.ID + "SaveQuestion ID");
+            }
+            return xQuest.ID;
+        
+        }
 
 
         //Delete

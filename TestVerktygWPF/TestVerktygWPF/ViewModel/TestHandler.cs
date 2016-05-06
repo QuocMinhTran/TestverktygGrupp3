@@ -19,29 +19,28 @@ namespace TestVerktygWPF.ViewModel
             xQuestions = new List<Questions>();
             xTest = new Test();
         }
-        public void RemoveTest()
-        {
 
-        }
-        public void AddTest()
+        public bool CreateTest(Test xTest, List<Questions> xQuestions, List<Answer> xAnswer)
         {
-
-        }
-        public void EditTest()
-        {
-
-        }
-        public void Init()
-        {
-            //Todo GetList From Reposatory
-        }
-        public void SaveTestToDatabase()
-        {
-
-        }
-        public Test GetTest()
-        {
-            return null;
+            Repository xRepo = new Repository();
+            xRepo.SaveTest(xTest);
+            int temp;
+            int iTestID = xRepo.GetTest(xTest.Name).ID;
+            foreach (var item in xQuestions)
+            {
+                int tempo = item.ID;
+                item.TestFk = iTestID;
+                temp =  xRepo.SaveQuestion(item);
+                foreach(var ItemAnswer in xAnswer)
+                {
+                    if(ItemAnswer.QuestionFk == tempo)
+                    {
+                        ItemAnswer.QuestionFk = temp;
+                        xRepo.SaveAnwnser(ItemAnswer);
+                    }
+                }
+            }
+            return true;
         }
 
     }

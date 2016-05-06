@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygWPF.Model;
 using TestVerktygWPF.View;
+using TestVerktygWPF.ViewModel;
 
 namespace TestVerktygWPF
 {
@@ -26,6 +27,20 @@ namespace TestVerktygWPF
         {
             InitializeComponent();
 
+            //ViewModel.Repository x = new ViewModel.Repository();
+            //Student xStudent = new Student();
+            //xStudent.ID = 1;
+            //CurrentSelectedTest xCst = new CurrentSelectedTest();
+            //xCst.SetCurrentStudent(1);
+            //Console.WriteLine(xCst.StudentScore);
+            //Test xTest = new Test();
+            //xTest.ID = 1;
+            //int iX = x.GetTestInfoScore(xStudent, xTest);
+            //Console.WriteLine(iX +"SCORE" );
+            //foreach (var item in xStudent)
+            //{
+            //    Console.WriteLine(item.FirstName);
+            //}
             //  AddDataToBase();
         }
 
@@ -54,7 +69,7 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new StatistikMasterPage());
                     break;
                 case "Skicka ut prov":
-
+                    _Frame.Navigate(new TeacherTestManagementPage());
                     break;
                 case "Rätt prov":
                     _Frame.Navigate(new TeacherEvaluatePage());
@@ -63,13 +78,13 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new MainPageTeacher());
                     break;
                 case "Hantera Prov":
-                    _Frame.Navigate(new TeacherTestManagementPage());
+                    _Frame.Navigate(new AdminTestManagementPage());
                     break;
                 case "Skapa Prov":
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestManagementPage());
+                    _Frame.Navigate(new AdminTestDetailManagementPage());
                     break;
             }
         }
