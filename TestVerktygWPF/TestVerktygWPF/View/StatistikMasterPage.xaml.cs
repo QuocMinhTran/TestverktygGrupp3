@@ -91,7 +91,7 @@ namespace TestVerktygWPF.View
              
                 foreach (var item in csTest.CurrentStudents)
                 {
-                    //csTest.SetCurrentStudent(item.ID);
+                    csTest.SetCurrentStudent(item.ID);
                     lvClassStatistics.Items.Add(csTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
                 }
 
