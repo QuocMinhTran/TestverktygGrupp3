@@ -84,15 +84,12 @@ namespace TestVerktygWPF.View
             if (SelectedTest != null)
             {
                 csTest.SetCurrentTest(SelectedTest.ID);
+               
                 foreach (var item in csTest.CurrentStudents)
                 {
-                   // Console.WriteLine(item.FirstName);
-                }
-             
-                foreach (var item in csTest.CurrentStudents)
-                {
+                    Console.WriteLine( "Student id från valt prov " + item.ID);
                     csTest.SetCurrentStudent(item.ID);
-                    lvClassStatistics.Items.Add(csTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
+                    lvClassStatistics.Items.Add(CurrentSelectedTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
                 }
 
 
