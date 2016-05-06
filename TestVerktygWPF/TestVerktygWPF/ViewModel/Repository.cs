@@ -9,8 +9,6 @@ namespace TestVerktygWPF.ViewModel
 {
     class Repository
     {
-
-
         public User GetUser()
         {
             return null;
@@ -58,24 +56,6 @@ namespace TestVerktygWPF.ViewModel
                 db.SaveChanges();
             }
         }
-
-        //public int CreateTest(Test xTest)
-        //{
-
-        //    using (var db = new DbModel())
-        //    {
-        //        db.Tests.Add(xTest);
-        //        var selectedTest = from test in db.Tests
-        //                           where xTest.Name == test.Name
-        //                           select test;
-        //        foreach (var item in selectedTest)
-        //        {
-        //            xTest = item;
-        //        }
-        //        db.SaveChanges();
-        //    }
-        //    return xTest.ID;
-        //}
 
         public List<Test> GetAllTests()
         {
@@ -247,11 +227,18 @@ namespace TestVerktygWPF.ViewModel
             StudentTest xTest = new StudentTest();
             using (var db = new DbModel())
             {
-                var querry = from Time in db.StudentTests
-                             where Time.StudentRefFk == xStudent.ID
-                             where Time.TestRefFk == xText.ID
-                             select Time;
-                xTest = querry as StudentTest;
+                Console.WriteLine(xStudent.ID + " STUDENT ID " + xTest.ID + " TEST ID");
+                var querry = from qTime in db.StudentTests
+                             where qTime.StudentRefFk == xStudent.ID
+                             where qTime.TestRefFk == xText.ID
+                             select qTime;
+            
+            foreach (var item in querry)
+            {
+                xTest = item;
+            }
+               
+               
             }
             return xTest.Score;
         }
@@ -337,7 +324,6 @@ namespace TestVerktygWPF.ViewModel
         public int SaveQuestion(Questions xQuestion)
         {
             Questions xQuest = new Questions();
-            int temp = 0;
             using (var db = new DbModel())
             {
                 

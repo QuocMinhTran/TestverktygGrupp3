@@ -167,18 +167,7 @@ namespace TestVerktygWPF.View
             Test xTest = new Test();
             xTest.Name = txtBoxTestName.Text;
             xTestHandler.CreateTest(xTest,m_lxQuestions,m_lxAnswer);
-            //Console.WriteLine(txtBoxTestName.Text);
-            //foreach (var item in m_lxQuestions)
-            //{
-            //    Console.WriteLine(item.Name + item.ID);
-            //    foreach (var xAnswer in m_lxAnswer)
-            //    {
-            //        if (xAnswer.QuestionFk == item.ID)
-            //        {
-            //            Console.WriteLine(xAnswer.Text);
-            //        }
-            //    }
-            //}
+
             Clear(true);
         }
         private StackPanel CreateQuestion()
@@ -195,11 +184,10 @@ namespace TestVerktygWPF.View
                     xStackPanel.Children.Add(AddItemRadioButton());
                     break;
                 case 1:
-
-                    xStackPanel.Children.Add(AddItemComboBox());
+                    xStackPanel.Children.Add(AddItemCheckBox());
                     break;
                 case 2:
-                    xStackPanel.Children.Add(AddItemCheckBox());
+                    xStackPanel.Children.Add(AddItemComboBox());
                     break;
                 default:
                     break;
