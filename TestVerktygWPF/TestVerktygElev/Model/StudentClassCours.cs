@@ -7,7 +7,7 @@ namespace TestVerktygElev
     using System.Data.Entity.Spatial;
 
     [Table("StudentClassCourses")]
-    public partial class StudentClassCourse
+    public partial class StudentClassCours
     {
         public int ID { get; set; }
 
@@ -15,7 +15,7 @@ namespace TestVerktygElev
 
         public int CouseRefID { get; set; }
 
-        public virtual Course Course { get; set; }
+        public virtual Cours Cours { get; set; }
 
         public virtual StudentClass StudentClass { get; set; }
     }

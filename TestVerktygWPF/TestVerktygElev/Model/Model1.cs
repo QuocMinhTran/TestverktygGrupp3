@@ -14,11 +14,11 @@ namespace TestVerktygElev
 
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
-        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<Occupation> Occupations { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<StudentAnswer> StudentAnswers { get; set; }
-        public virtual DbSet<StudentClassCourse> StudentClassCourses { get; set; }
+        public virtual DbSet<StudentClassCours> StudentClassCourses { get; set; }
         public virtual DbSet<StudentClass> StudentClasses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentTest> StudentTests { get; set; }
@@ -28,9 +28,9 @@ namespace TestVerktygElev
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Course>()
+            modelBuilder.Entity<Cours>()
                 .HasMany(e => e.StudentClassCourses)
-                .WithRequired(e => e.Course)
+                .WithRequired(e => e.Cours)
                 .HasForeignKey(e => e.CouseRefID);
 
             modelBuilder.Entity<Occupation>()
