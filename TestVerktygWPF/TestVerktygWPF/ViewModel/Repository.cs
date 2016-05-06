@@ -49,6 +49,34 @@ namespace TestVerktygWPF.ViewModel
             return xTest;
         }
 
+        internal void SaveAnwnser(Answer itemAnswer)
+        {
+            using (var db = new DbModel())
+            {
+                Console.WriteLine(itemAnswer + "SAVING ANWNSER");
+                db.Answers.Add(itemAnswer);
+                db.SaveChanges();
+            }
+        }
+
+        //public int CreateTest(Test xTest)
+        //{
+
+        //    using (var db = new DbModel())
+        //    {
+        //        db.Tests.Add(xTest);
+        //        var selectedTest = from test in db.Tests
+        //                           where xTest.Name == test.Name
+        //                           select test;
+        //        foreach (var item in selectedTest)
+        //        {
+        //            xTest = item;
+        //        }
+        //        db.SaveChanges();
+        //    }
+        //    return xTest.ID;
+        //}
+
         public List<Test> GetAllTests()
         {
             List<Test> lxTests = new List<Test>();
@@ -83,6 +111,27 @@ namespace TestVerktygWPF.ViewModel
                 }
             }
             return liList;
+        }
+
+        public List<Student> GetAllStudents(Test xTest)
+        {
+            List<Student> lxStudent = new List<Student>();
+            
+            using (var db = new DbModel())
+            {
+                var selected = from student in db.StudentTests
+                               join name in db.Students on student.ID equals name.ID  
+                               where xTest.ID == student.TestRefFk
+                               select name;
+
+                
+              
+                foreach (var item in selected)
+                {
+                    lxStudent.Add(item);
+                }
+            }
+            return lxStudent;
         }
 
         public Test GetTest(string sName)
@@ -281,11 +330,32 @@ namespace TestVerktygWPF.ViewModel
 
                 db.Tests.Add(xTest);
                 db.SaveChanges();
-
+  
             }
         }
 
-        public void SaveQuestion() { }
+        public int SaveQuestion(Questions xQuestion)
+        {
+            Questions xQuest = new Questions();
+            int temp = 0;
+            using (var db = new DbModel())
+            {
+                
+                db.Questions.Add(xQuestion);
+                db.SaveChanges();
+
+                var selectedTest = from test in db.Questions
+                                   where test.ID == xQuestion.ID
+                                   select test;
+                foreach (var item in selectedTest)
+                {
+                    xQuest = item;
+                }
+                Console.WriteLine(xQuest.ID + "SaveQuestion ID");
+            }
+            return xQuest.ID;
+        
+        }
 
 
         //Delete

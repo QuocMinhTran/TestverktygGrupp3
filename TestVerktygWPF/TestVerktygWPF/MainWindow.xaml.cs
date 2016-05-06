@@ -25,7 +25,6 @@ namespace TestVerktygWPF
         public MainWindow()
         {
             InitializeComponent();
-
             //  AddDataToBase();
         }
 
@@ -54,7 +53,7 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new StatistikMasterPage());
                     break;
                 case "Skicka ut prov":
-
+                    _Frame.Navigate(new TeacherTestManagementPage());
                     break;
                 case "Rätt prov":
                     _Frame.Navigate(new TeacherEvaluatePage());
@@ -63,13 +62,13 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new MainPageTeacher());
                     break;
                 case "Hantera Prov":
-                    _Frame.Navigate(new TeacherTestManagementPage());
+                    _Frame.Navigate(new AdminTestManagementPage());
                     break;
                 case "Skapa Prov":
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestManagementPage());
+                    _Frame.Navigate(new AdminTestDetailManagementPage());
                     break;
             }
         }

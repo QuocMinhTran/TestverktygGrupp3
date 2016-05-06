@@ -81,7 +81,7 @@ namespace TestVerktygWPF.ViewModel
         }
         private void SetCurrentStudents(Test xTest)
         {
-            //CurrentStudents = xRepo.geta(xTest);
+            CurrentStudents = xRepo.GetAllStudents(xTest);
         }
         private void SetTimeForStudent(Student xStudent)
         {
