@@ -31,6 +31,9 @@ namespace TestVerktygWPF.View
         public int NumberOfTests;
         public double TotalTestTime;
         public double AvrageTimeForTest;
+        public int StudentsScoreOfTest;
+        public int NumberOfQuestionsInSelectedTest;
+        public double ResulSocreQuestion;
 
         public StatistikMasterPage()
         {
@@ -81,22 +84,39 @@ namespace TestVerktygWPF.View
             CurrentSelectedTest csTest = new CurrentSelectedTest();
             csTest.SetCurrentTest(varSender.SelectedItem.ToString());
             SelectedTest = csTest.CurrentTest;
+            NumberOfQuestionsInSelectedTest = csTest.CurrentQuestions.Count();
+           
+
+
             if (SelectedTest != null)
             {
+                lvClassStatistics.Items.Clear();
+                StudentsScoreOfTest = 0;
                 csTest.SetCurrentTest(SelectedTest.ID);
                
                 foreach (var item in csTest.CurrentStudents)
                 {
                     Console.WriteLine( "Student id från valt prov " + item.ID);
                     csTest.SetCurrentStudent(item.ID);
-                    lvClassStatistics.Items.Add(CurrentSelectedTest.CurrentStudent + csTest.StudentScore.ToString() + csTest.StudentTime);
+                    lvClassStatistics.Items.Add("Namn "+ csTest.CurrentStudent.FirstName + csTest.CurrentStudent.LastName + " Poäng " +csTest.StudentScore + " Tid "+ csTest.StudentTime);
+                    StudentsScoreOfTest += csTest.StudentScore;
                 }
-
-
+              
             }
 
             AvrageTestTime();
             DisplayAvrageInfo();
+            AvrageScoreForTest();
+        }
+
+        private void AvrageScoreForTest()
+        {
+            ResulSocreQuestion = 0;
+            ResulSocreQuestion = (double)NumberOfQuestionsInSelectedTest/ StudentsScoreOfTest;
+            Console.WriteLine("Antal frågor "+NumberOfQuestionsInSelectedTest);
+            Console.WriteLine("StudentScore " + StudentsScoreOfTest);
+            Console.WriteLine("Frågor/Score = " + ResulSocreQuestion);
+           
         }
 
         private void DisplayAvrageInfo()
