@@ -37,8 +37,7 @@ namespace TestVerktygWPF.View
 
         public double NumberOfQuestionsInSelectedTest; //maxpoäng
         public double StudentsScoreOfTest; // AllasPoäng
-        public double ResultA;
-        public double AvrageProcentGrade;
+
         public double NumberOfstudents;
 
         public StatistikMasterPage()
@@ -68,7 +67,7 @@ namespace TestVerktygWPF.View
         private void AvrageTestTime()
         {
 
-            double TotalTestTime =0;
+            double TotalTestTime = 0;
             int NumberOfTests = 0;
             List<StudentTest> lxStudentTest = new List<StudentTest>();
             Repository Repo = new Repository();
@@ -136,17 +135,15 @@ namespace TestVerktygWPF.View
         private void AvrageScoreForTest()
         {
 
-            
-            ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
+            double ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
             Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
             Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
             Console.WriteLine("ResultatA : " + ResultA);
-            AvrageProcentGrade = ResultA/NumberOfQuestionsInSelectedTest;
+            double AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
 
 
-            
             Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
-            
+
 
         }
 
@@ -164,7 +161,7 @@ namespace TestVerktygWPF.View
             lvStudentStatistics.Items.Clear();
             var varSender = sender as ComboBox;
             SelectedStudent = liAllStudents[varSender.SelectedIndex];
-            Console.WriteLine("SelectedStudent är: "+ SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
+            Console.WriteLine("SelectedStudent är: " + SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
             Repository repo = new Repository();
             StudentsTests = repo.GetStudentsTests(SelectedStudent.ID);
             CurrentSelectedTest csTest = new CurrentSelectedTest();

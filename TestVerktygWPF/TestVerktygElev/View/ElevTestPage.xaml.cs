@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygElev.ViewModel;
+using System.Windows.Threading;
 
 namespace TestVerktygElev
 {
@@ -22,12 +23,16 @@ namespace TestVerktygElev
     /// </summary>
     public partial class ElevTestPage : Page
     {
-        List<Question> questionList = new List<Question>();
+
+        List<Question> lxQuestionList = new List<Question>();
+        List<StudentAnswer> lxStudAnwers = new List<StudentAnswer>();
+        List<Answer> lxAnswers = new List<Answer>();
         Question currentQuestion = new Question();
         List<StackPanel> listCheckedAnswers = new List<StackPanel>();
-        Test test = new Test();
-        int qIndex = 0;
-        
+        List<Test> test = new List<Test>();
+        int iIndex = 0;
+        int Time = 10;
+
         public ElevTestPage()
         {
             InitializeComponent();
@@ -43,8 +48,13 @@ namespace TestVerktygElev
         {
             Repository repo = new Repository();
             test = repo.GetTest();
-            txtBlockTestName.Text = test.Name;
-            questionList = repo.GetQuestion();
+            //txtBlockTestName.Text = test.Name;
+            foreach (var item in test)
+            {
+                Console.WriteLine(item.ID + item.Name);
+            }
+            lxQuestionList = repo.GetQuestion(1);
+          
             RenderQuestions();
             ProcessQuestion();
             StartTimer();
@@ -52,113 +62,180 @@ namespace TestVerktygElev
 
         private void StartTimer()
         {
-            Timer timer = new Timer(1000);
-            timer.Elapsed += OnTimedEvent;
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += OnTimedEvent;
             timer.Start();
         }
 
-        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        private void OnTimedEvent(object sender, EventArgs e)
         {
-            Console.WriteLine("Hej");
-            //TODO: update timer
+            lblTimer.Content = Time;
+            Time -= 1;
         }
 
         private void ProcessQuestion()
         {
-            foreach (var item in listCheckedAnswers)
-            {
-                item.Visibility = Visibility.Collapsed;
-            }
-            txtBlockQuestions.Text = (qIndex + 1).ToString() + "/" + questionList.Count.ToString();
-            txtBlockQuestionName.Text = questionList[qIndex].Name;
-            listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
+            splAnswers.Children.Clear();
+            Console.WriteLine(lxQuestionList[iIndex].Name);
 
-            //ProcessAnswers();
+
+            foreach (var item in lxQuestionList[iIndex].Answers)
+            {
+                Console.WriteLine(item.Text + " " + item.RightAnswer);
+                Label xLable = new Label();
+                xLable.Content = item.Text;
+                splAnswers.Children.Add(xLable);
+                switch (lxQuestionList[iIndex].QuestionType)
+                {
+
+                    case "envalsfråga":
+                        RadioButton radioBtn = new RadioButton();
+                        splAnswers.Children.Add(radioBtn);
+                        break;
+                    case "flervalsfråga":
+                        CheckBox chkBox = new CheckBox();
+                        splAnswers.Children.Add(chkBox);
+                        break;
+                    case "rangordning":
+                        ComboBox cbBox = new ComboBox();
+                        splAnswers.Children.Add(cbBox);
+                        break;
+                }
+
+                //foreach (var item in listCheckedAnswers)
+                //{
+                //    item.Visibility = Visibility.Collapsed;
+                //}
+                //txtBlockQuestions.Text = (qIndex + 1).ToString() + "/" + questionList.Count.ToString();
+                //txtBlockQuestionName.Text = questionList[qIndex].Name;
+                //listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
+
+                //ProcessAnswers();
+            }
+        }
+        private void AddAnswer()
+        {
+            
         }
 
         private void RenderQuestions()
         {
-            for (int i = 0; i < questionList.Count; i++)
-            {
-                StackPanel answerControl = new StackPanel();
-                answerControl.Visibility = Visibility.Collapsed;
-                foreach (var item in questionList[i].Answers)
-                {
-                    TextBlock txtBlock = new TextBlock();
+            //for (int i = 0; i < questionList.Count; i++)
+            //{
+            //    StackPanel answerControl = new StackPanel();
+            //    answerControl.Visibility = Visibility.Collapsed;
+            //    foreach (var item in questionList[i].Answers)
+            //    {
+            //        TextBlock txtBlock = new TextBlock();
 
-                    txtBlock.Text = item.Text;
-                    answerControl.Children.Add(txtBlock);
+            //        txtBlock.Text = item.Text;
+            //        answerControl.Children.Add(txtBlock);
 
-                    switch (questionList[i].QuestionType)
-                    {
-                        case "envalsfråga":
-                            RadioButton radioBtn = new RadioButton();
-                            answerControl.Children.Add(radioBtn);
-                            break;
-                        case "flervalsfråga":
-                            CheckBox chkBox = new CheckBox();
-                            answerControl.Children.Add(chkBox);
-                            break;
-                        case "rangordning":
-                            ComboBox cbBox = new ComboBox();
-                            List<string> answerStringList = new List<string>();
-                            Random rnd = new Random();
-                            answerControl.Children.Add(cbBox);
-                            //foreach (var item2 in questionList[i].Answers)
-                            //{
-                            //    answerArray[]
-                            //}
-                            foreach (var item2 in questionList[i].Answers)
-                            {
-                                answerStringList.Add(item2.Text);
-                            }
-                            int n = answerStringList.Count;
-                            while (n > 1)
-                            {
-                                n--;
-                                int k = rnd.Next(n + 1);
-                                string value = answerStringList[k];
-                                answerStringList[k] = answerStringList[n];
-                                answerStringList[n] = value;
-                            }
-                            cbBox.ItemsSource = answerStringList;
-                            break;
-                        default:
-                            break;
-                    }
+            //        switch (questionList[i].QuestionType)
+            //        {
+            //            case "envalsfråga":
+            //                RadioButton radioBtn = new RadioButton();
+            //                answerControl.Children.Add(radioBtn);
+            //                break;
+            //            case "flervalsfråga":
+            //                CheckBox chkBox = new CheckBox();
+            //                answerControl.Children.Add(chkBox);
+            //                break;
+            //            case "rangordning":
+            //                ComboBox cbBox = new ComboBox();
+            //                List<string> answerStringList = new List<string>();
+            //                Random rnd = new Random();
+            //                answerControl.Children.Add(cbBox);
 
-                }
-                listCheckedAnswers.Add(answerControl);
-                splAnswers.Children.Add(answerControl);
-            }
+            //                foreach (var item2 in questionList[i].Answers)
+            //                {
+            //                    answerStringList.Add(item2.Text);
+            //                }
+            //                int n = answerStringList.Count;
+            //                while (n > 1)
+            //                {
+            //                    n--;
+            //                    int k = rnd.Next(n + 1);
+            //                    string value = answerStringList[k];
+            //                    answerStringList[k] = answerStringList[n];
+            //                    answerStringList[n] = value;
+            //                }
+            //                cbBox.ItemsSource = answerStringList;
+            //                break;
+            //            default:
+            //                break;
+            //        }
+
+            //    }
+            //    listCheckedAnswers.Add(answerControl);
+            //    splAnswers.Children.Add(answerControl);
+            //}
         }
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-            qIndex--;
+            iIndex--;
             ProcessQuestion();
-            if (qIndex == 0)
+            if (iIndex == 0)
                 btnPrevious.IsEnabled = false;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            if (qIndex + 1 >= questionList.Count)
+
+            StudentAnswer xStudentAnswer = new StudentAnswer();
+            if (iIndex + 1 >= lxQuestionList.Count)
             {
                 CorrectTest();
             }
 
             else
             {
-                qIndex++;
+                iIndex++;
                 btnPrevious.IsEnabled = true;
+                foreach (var item in splAnswers.Children)
+                {
+                    Label y = item as Label;
+                    if (y != null)
+                    {
+                        Console.WriteLine(" CONTENT = "+y.Content);
+                    }
+                    Console.WriteLine(item.GetType());
+                    RadioButton x = item as RadioButton;
+                    if (x != null)
+                    {
+                      Console.WriteLine("Is Checked =" + x.IsChecked);
+
+                        if (x.IsChecked == true)
+                        {
+                            
+                        }
+                    }
+                    xStudentAnswer.Question = iIndex;
+                    lxStudAnwers.Add(xStudentAnswer);
+                }
+
                 ProcessQuestion();
             }
         }
 
         private void CorrectTest()
         {
-            
+            for (int i = 0; i < lxQuestionList.Count; i++)
+            {
+                Console.WriteLine(lxQuestionList[i].Answers);
+                RightAnswer(lxQuestionList[i].Answers, lxQuestionList[i].Name);
+
+            }
+        }
+        private void RightAnswer(ICollection<Answer> xAnswer, string sQuestion)
+        {
+            foreach (var item in xAnswer)
+            {
+                Console.WriteLine(sQuestion + " " + item.Question + " " + item.RightAnswer + " svar: "  /*lxStudAnwers[].Answer*/);
+
+            }
         }
     }
 }

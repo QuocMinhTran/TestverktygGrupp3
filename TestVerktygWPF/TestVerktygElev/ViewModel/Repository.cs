@@ -8,14 +8,14 @@ namespace TestVerktygElev.ViewModel
 {
     class Repository
     {
-        public Test GetTest()
-        {
-            Test test = new Test();
-            test.Name = "testes";
-            test.StartDate = DateTime.Today;
-            test.EndDate = DateTime.Today.AddDays(1);
-            return test;
-        }
+        //public Test GetTest()
+        //{
+        //    Test test = new Test();
+        //    test.Name = "testes";
+        //    test.StartDate = DateTime.Today;
+        //    test.EndDate = DateTime.Today.AddDays(1);
+        //    return test;
+        //}
 
         public List<Question> GetQuestion()
         {
@@ -71,6 +71,55 @@ namespace TestVerktygElev.ViewModel
             qList.Add(q2);
             qList.Add(q3);
             return qList;
+
+
+        }
+
+        public List<Question> GetQuestion(int ID)
+        {
+            //List<Question> lxQuestions = new List<Question>();
+            List<Answer> lxAnswer = new List<Answer>();
+            //using (var db = new Model1())
+            //{
+            //    var querry = from Quest in db.Questions
+            //                 where Quest.TestFk == ID
+            //                 select Quest;
+
+            //    foreach (var item in querry)
+            //    {
+            //        lxQuestions.Add(querry);
+            //    }
+            //}
+            //return lxQuestions;
+                  
+            List<Question> lxQuestion = new List<Question>();
+            using (var db = new Model1())
+            {
+                var selectTest = from question in db.Questions
+                                 where question.TestFk == ID
+                                 select question;
+
+                foreach (var item in selectTest)
+                {
+                    lxQuestion.Add(item);
+                }
+            }
+            return lxQuestion;
+        }
+
+        public List<Test> GetTest()
+        {
+            List<Test> lxTest = new List<Test>();
+            using (var db = new Model1())
+            {
+                var querry = from Ts in db.Tests
+                             select Ts;
+                foreach (var item in querry)
+                {
+                    lxTest.Add(item);
+                }
+            }
+            return lxTest;
         }
     }
 }

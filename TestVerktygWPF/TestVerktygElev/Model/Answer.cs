@@ -14,6 +14,8 @@ namespace TestVerktygElev
 
         public bool RightAnswer { get; set; }
 
+        public int? OrderPosition { get; set; }
+
         public int QuestionFk { get; set; }
 
         public virtual Question Question { get; set; }

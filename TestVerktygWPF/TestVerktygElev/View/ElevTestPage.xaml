@@ -22,6 +22,7 @@
         <StackPanel Grid.Row="1">
             <TextBlock Name="txtBlockQuestionName" FontSize="18" HorizontalAlignment="Left" />
             <TextBlock Name="txtBlockTimeLeft" />
+            <Label Name="lblTimer"></Label>
             <Separator BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Stretch" />
 
             <StackPanel Name="splAnswers" />
