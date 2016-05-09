@@ -31,9 +31,14 @@ namespace TestVerktygWPF.View
         public int NumberOfTests;
         public double TotalTestTime;
         public double AvrageTimeForTest;
-        public int StudentsScoreOfTest;
-        public int NumberOfQuestionsInSelectedTest;
-        public double ResulSocreQuestion;
+
+
+
+        public double NumberOfQuestionsInSelectedTest; //maxpoäng
+        public double StudentsScoreOfTest; // AllasPoäng
+        public double ResultA;
+        public double AvrageProcentGrade;
+        public double NumberOfstudents;
 
         public StatistikMasterPage()
         {
@@ -85,9 +90,7 @@ namespace TestVerktygWPF.View
             csTest.SetCurrentTest(varSender.SelectedItem.ToString());
             SelectedTest = csTest.CurrentTest;
             NumberOfQuestionsInSelectedTest = csTest.CurrentQuestions.Count();
-           
-
-
+            NumberOfstudents = csTest.CurrentStudents.Count();
             if (SelectedTest != null)
             {
                 lvClassStatistics.Items.Clear();
@@ -111,12 +114,17 @@ namespace TestVerktygWPF.View
 
         private void AvrageScoreForTest()
         {
-            ResulSocreQuestion = 0;
-            ResulSocreQuestion = (double)NumberOfQuestionsInSelectedTest/ StudentsScoreOfTest;
-            Console.WriteLine("Antal frågor "+NumberOfQuestionsInSelectedTest);
-            Console.WriteLine("StudentScore " + StudentsScoreOfTest);
-            Console.WriteLine("Frågor/Score = " + ResulSocreQuestion);
-           
+            
+            ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
+            Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
+            Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
+            Console.WriteLine("ResultatA : " + ResultA);
+            AvrageProcentGrade = ResultA/NumberOfQuestionsInSelectedTest;
+
+
+            
+            Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
+            
         }
 
         private void DisplayAvrageInfo()
