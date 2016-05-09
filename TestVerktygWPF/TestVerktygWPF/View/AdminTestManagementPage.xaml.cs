@@ -138,6 +138,7 @@ namespace TestVerktygWPF.View
 
         private void Sendbtn_Click(object sender, RoutedEventArgs e)
         {
+
             using (var db = new DbModel())
             {
                 var xtests = from ut in db.UserTests
@@ -158,6 +159,7 @@ namespace TestVerktygWPF.View
             Updatelist();
             pup.Child = null;
             pup.IsOpen = false;
+
         }
     }
 }
