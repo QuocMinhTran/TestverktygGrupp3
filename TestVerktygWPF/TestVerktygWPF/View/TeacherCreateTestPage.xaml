@@ -69,6 +69,7 @@
                    Foreground="Red"/>
             </StackPanel>
             <Button Content="Spara fråga"
+                    Name="btnSaveQuestion"
                     HorizontalAlignment="Center"
                     Click="SaveQuestion" />
             
@@ -83,12 +84,12 @@
                     HorizontalAlignment="Center"
                     Margin="0,40,0,0"
                     IsEnabled="False"/>
-            <Button Content="Redigera Fråga" 
-                    Name="btnEditQuestion"
-                    Click="EditQ"
-                    HorizontalAlignment="Center"
-                    Margin="0,40,0,0"
-                    IsEnabled="False"/>
+                <Button Content="Redigera Fråga" 
+                        Name="btnEditQuestion"
+                        Click="EditQ"
+                        HorizontalAlignment="Center"
+                        Margin="0,40,0,0"
+                        IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Page>

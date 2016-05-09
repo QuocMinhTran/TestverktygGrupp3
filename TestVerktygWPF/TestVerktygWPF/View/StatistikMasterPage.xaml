@@ -20,21 +20,20 @@
             <Label Content="Välj prov" Margin="5,0,5,0"/>
             <ComboBox Name="cbxSelectTest" SelectionChanged="CbxSelectTest_OnSelectionChanged" />
             <Label Content="Välj elev" Margin="50,0,5,0"/>
-            <ComboBox   Name="cbxSelectStudent" SelectionChanged="CbxSelectStudent_OnSelectionChanged">
-
-            </ComboBox>
+            <ComboBox   Name="cbxSelectStudent" SelectionChanged="CbxSelectStudent_OnSelectionChanged"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5,10,0,0">
+            <StackPanel Name="spTest"  Orientation="Vertical" >
+                <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
+                <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
+                <TextBlock Text="Bind Elev och betyg"></TextBlock>
+                <ListView Name="lvClassStatistics" Margin="0,10,0,0">
+                </ListView>
 
-        <StackPanel Name="spTest" Grid.Row="1" Orientation="Vertical" >
-            <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
-            <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
-            <TextBlock Text="Bind Elev och betyg"></TextBlock>
-            <ListView Name="lvClassStatistics">
-            </ListView>
-        </StackPanel>
-        <StackPanel Name="spStudent" Grid.Row="1" Orientation="Horizontal" Visibility="Collapsed">
-            <ListView Name="lvStudentStatistics">
-            </ListView>
+            </StackPanel>
+            <StackPanel Name="spStudent" Orientation="Horizontal" >
+                <ListView Name="lvStudentStatistics" Margin="0,5,0,0" SelectionChanged="LvStudentStatistics_OnSelectionChanged"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

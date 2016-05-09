@@ -259,6 +259,7 @@ namespace TestVerktygWPF.View
                 xAnswer.QuestionFk = xQuest.ID;
                 m_lxAnswer.Add(xAnswer);
             }
+            btnSaveQuestion.IsEnabled = true;
         }
 
         private void SaveTest(object sender, RoutedEventArgs e)
@@ -390,6 +391,7 @@ namespace TestVerktygWPF.View
         }
         private void Clear(bool All)
         {
+            btnSaveQuestion.IsEnabled = false;
             txtBoxQuestion.Text = "";
             if (All)
             {
