@@ -25,7 +25,7 @@ namespace TestVerktygWPF.ViewModel
                 {
                     xStudent = item;
                 }
-                
+
             }
             return xStudent;
         }
@@ -97,17 +97,34 @@ namespace TestVerktygWPF.ViewModel
             return liList;
         }
 
-        public List<Student> GetAllStudents(Test xTest)
+        public List<StudentTest> GetTestDone(int iD)
         {
-            List<Student> lxStudent = new List<Student>();
-            
+            List<StudentTest> lxStudent = new List<StudentTest>();
             using (var db = new DbModel())
             {
                 var selected = from studentTest in db.StudentTests
-                               join student in db.Students on studentTest.StudentRefFk equals student.ID  
+                               where studentTest.TestRefFk == iD
+                               select studentTest;
+
+                foreach (var item in selected)
+                {
+                    lxStudent.Add(item);
+                }
+            }
+            return lxStudent;
+        }
+
+        public List<Student> GetAllStudents(Test xTest)
+        {
+            List<Student> lxStudent = new List<Student>();
+
+            using (var db = new DbModel())
+            {
+                var selected = from studentTest in db.StudentTests
+                               join student in db.Students on studentTest.StudentRefFk equals student.ID
                                where xTest.ID == studentTest.TestRefFk
                                select student;
-              
+
                 foreach (var item in selected)
                 {
                     lxStudent.Add(item);
@@ -234,13 +251,13 @@ namespace TestVerktygWPF.ViewModel
                              where qTime.StudentRefFk == xStudent.ID
                              where qTime.TestRefFk == xText.ID
                              select qTime;
-            
-            foreach (var item in querry)
-            {
-                xTest = item;
-            }
-               
-               
+
+                foreach (var item in querry)
+                {
+                    xTest = item;
+                }
+
+
             }
             return xTest.Score;
         }
@@ -258,7 +275,7 @@ namespace TestVerktygWPF.ViewModel
                 {
                     xTest = item;
                 }
-               
+
             }
             return xTest.WritenTime;
         }
@@ -323,7 +340,7 @@ namespace TestVerktygWPF.ViewModel
 
                 db.Tests.Add(xTest);
                 db.SaveChanges();
-  
+
             }
         }
 
@@ -332,7 +349,7 @@ namespace TestVerktygWPF.ViewModel
             Questions xQuest = new Questions();
             using (var db = new DbModel())
             {
-                
+
                 db.Questions.Add(xQuestion);
                 db.SaveChanges();
 
@@ -346,7 +363,7 @@ namespace TestVerktygWPF.ViewModel
                 Console.WriteLine(xQuest.ID + "SaveQuestion ID");
             }
             return xQuest.ID;
-        
+
         }
 
 
