@@ -28,6 +28,7 @@ namespace TestVerktygWPF.View
         public List<Test> liAllTests = new List<Test>();
         public List<Student> liAllStudents = new List<Student>();
         public Student SelectedStudent = new Student();
+        public List<StudentTest> StudentsTests = new List<StudentTest>();
         // public int NumberOfTests;
 
         public double AvrageTimeForTest;
@@ -44,8 +45,6 @@ namespace TestVerktygWPF.View
         {
             InitializeComponent();
             CurrentSelectedTest csTest = new CurrentSelectedTest();
-
-            cbxSelectTest.Items.Add("kalle");
             liAllTests = csTest.AllTestsDone();
             //cbxSelectTest.SelectedIndex = 0;
             Console.WriteLine(liAllStudents.Count);
@@ -101,8 +100,9 @@ namespace TestVerktygWPF.View
 
         private void CbxSelectTest_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            spTest.Visibility = Visibility.Visible;
             spStudent.Visibility = Visibility.Collapsed;
+
             var varSender = sender as ComboBox;
 
             CurrentSelectedTest csTest = new CurrentSelectedTest();
@@ -160,12 +160,21 @@ namespace TestVerktygWPF.View
         {
 
             spStudent.Visibility = Visibility.Visible;
-            //cbxSelectTest.SelectedIndex = 0;
+            spTest.Visibility = Visibility.Collapsed;
+            lvStudentStatistics.Items.Clear();
+            var varSender = sender as ComboBox;
+            SelectedStudent = liAllStudents[varSender.SelectedIndex];
+            Console.WriteLine("SelectedStudent är: "+ SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
+            Repository repo = new Repository();
+            StudentsTests = repo.GetStudentsTests(SelectedStudent.ID);
+            CurrentSelectedTest csTest = new CurrentSelectedTest();
 
-            //SelectedStudent = sender as Student;
-            //SelectedStudent = (Student)cbxSelectStudent.SelectedItem;
-            var x = sender as ComboBox;
-            Console.WriteLine(x.SelectedItem.ToString());
+            foreach (var item in StudentsTests)
+            {
+                csTest.SetCurrentTest(item.ID);
+                lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
+                                              csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
+            }
 
 
 

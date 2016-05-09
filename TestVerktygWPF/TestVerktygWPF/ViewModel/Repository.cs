@@ -113,6 +113,22 @@ namespace TestVerktygWPF.ViewModel
             }
             return lxStudent;
         }
+        public List<StudentTest> GetStudentsTests(int iD)
+        {
+            List<StudentTest> lxStudent = new List<StudentTest>();
+            using (var db = new DbModel())
+            {
+                var selected = from studentTest in db.StudentTests
+                               where studentTest.StudentRefFk == iD
+                               select studentTest;
+
+                foreach (var item in selected)
+                {
+                    lxStudent.Add(item);
+                }
+            }
+            return lxStudent;
+        }
 
         public List<Student> GetAllStudents(Test xTest)
         {
