@@ -177,14 +177,16 @@ namespace TestVerktygWPF.View
 
             }
 
-
+            StatistikDetailPage.Questionses = csTest.CurrentQuestions;
 
         }
 
 
         private void LvStudentStatistics_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Student xStudent = new Student();
+            
+          
+           
            
             if (lvStudentStatistics.SelectedItem != null)
             {

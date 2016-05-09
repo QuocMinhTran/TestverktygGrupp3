@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Annotations;
 using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.ViewModel
@@ -329,6 +331,24 @@ namespace TestVerktygWPF.ViewModel
             }
 
             return liAllAdmins;
+        }
+
+
+        public Answer GetCorrectAnswer(int id)
+        {
+            Answer correctAnswer = new Answer();
+            using (var db = new DbModel())
+            {
+                var getAnswer = from theAnswer in db.Answers
+                    where theAnswer.QuestionFk == id
+                    where theAnswer.RightAnswer == true
+                    select theAnswer;
+                foreach (var item in getAnswer)
+                {
+                    correctAnswer = item;
+                }
+            }
+            return correctAnswer;
         }
         //Save
         public void SaveStudent(Student xStudent)
