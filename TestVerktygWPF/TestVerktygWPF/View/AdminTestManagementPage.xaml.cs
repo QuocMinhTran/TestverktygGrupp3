@@ -114,7 +114,7 @@ namespace TestVerktygWPF.View
         private void Sendbtn_Click(object sender, RoutedEventArgs e)
         {
             StudentTest sdtTest = new StudentTest();
-            sdtTest.
+           
         }
     }
 }

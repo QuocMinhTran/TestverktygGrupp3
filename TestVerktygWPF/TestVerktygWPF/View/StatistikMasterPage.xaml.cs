@@ -68,7 +68,7 @@ namespace TestVerktygWPF.View
         private void AvrageTestTime()
         {
 
-            double TotalTestTime =0;
+            double TotalTestTime = 0;
             int NumberOfTests = 0;
             List<StudentTest> lxStudentTest = new List<StudentTest>();
             Repository Repo = new Repository();
@@ -136,17 +136,17 @@ namespace TestVerktygWPF.View
         private void AvrageScoreForTest()
         {
 
-            
+
             ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
             Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
             Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
             Console.WriteLine("ResultatA : " + ResultA);
-            AvrageProcentGrade = ResultA/NumberOfQuestionsInSelectedTest;
+            AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
 
 
-            
+
             Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
-            
+
 
         }
 
@@ -164,7 +164,7 @@ namespace TestVerktygWPF.View
             lvStudentStatistics.Items.Clear();
             var varSender = sender as ComboBox;
             SelectedStudent = liAllStudents[varSender.SelectedIndex];
-            Console.WriteLine("SelectedStudent är: "+ SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
+            Console.WriteLine("SelectedStudent är: " + SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
             Repository repo = new Repository();
             StudentsTests = repo.GetStudentsTests(SelectedStudent.ID);
             CurrentSelectedTest csTest = new CurrentSelectedTest();
@@ -174,9 +174,26 @@ namespace TestVerktygWPF.View
                 csTest.SetCurrentTest(item.ID);
                 lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
                                               csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
+
             }
 
 
+
+        }
+
+
+        private void LvStudentStatistics_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Student xStudent = new Student();
+           
+            if (lvStudentStatistics.SelectedItem != null)
+            {
+                Window newWindow = new NavigationWindow(); 
+                newWindow.Show();
+                
+                newWindow.Content = new StatistikDetailPage();
+
+            }
 
         }
     }
