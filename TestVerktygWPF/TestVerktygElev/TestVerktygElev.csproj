@@ -69,12 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\Cours.cs" />
-    <Compile Include="Model\CourseGradeClass.cs" />
-
     <Compile Include="Model\C__MigrationHistory.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupation.cs" />
@@ -82,7 +78,7 @@
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
     <Compile Include="Model\StudentClass.cs" />
-    <Compile Include="Model\StudentClassCourse.cs" />
+    <Compile Include="Model\StudentClassCours.cs" />
     <Compile Include="Model\StudentTest.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\User.cs" />
@@ -170,7 +166,9 @@
   <ItemGroup>
     <Resource Include="Assets\Images\NewtonLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestVerktygWPF\TestVerktygWPF.csproj">
       <Project>{0C4AAA86-1300-4D42-B04B-5B237E446BE7}</Project>

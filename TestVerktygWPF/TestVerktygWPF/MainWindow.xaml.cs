@@ -84,7 +84,7 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestDetailManagement());
+            _Frame.Navigate(new AdminTestDetailManagement());
                     break;
             }
         }
