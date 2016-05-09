@@ -47,6 +47,7 @@ namespace TestVerktygElev
             questionList = repo.GetQuestion();
             RenderQuestions();
             ProcessQuestion();
+            StartTimer();
         }
 
         private void StartTimer()
@@ -58,6 +59,7 @@ namespace TestVerktygElev
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
+            Console.WriteLine("Hej");
             //TODO: update timer
         }
 
