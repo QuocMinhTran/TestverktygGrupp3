@@ -32,8 +32,7 @@
 
             </StackPanel>
             <StackPanel Name="spStudent" Orientation="Horizontal" >
-                <ListView Name="lvStudentStatistics" Margin="0,5,0,0">
-                </ListView>
+                <ListView Name="lvStudentStatistics" Margin="0,5,0,0" SelectionChanged="LvStudentStatistics_OnSelectionChanged"/>
             </StackPanel>
         </StackPanel>
     </Grid>

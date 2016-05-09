@@ -135,11 +135,16 @@ namespace TestVerktygWPF.View
         private void AvrageScoreForTest()
         {
 
-            double ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
+            double ResultA;
+           
+            double AvrageProcentGrade;
+
+            ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
             Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
             Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
             Console.WriteLine("ResultatA : " + ResultA);
-            double AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
+            AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
+
 
 
             Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
@@ -171,9 +176,28 @@ namespace TestVerktygWPF.View
                 csTest.SetCurrentTest(item.ID);
                 lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
                                               csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
+
             }
 
+            StatistikDetailPage.Questionses = csTest.CurrentQuestions;
 
+        }
+
+
+        private void LvStudentStatistics_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+          
+           
+           
+            if (lvStudentStatistics.SelectedItem != null)
+            {
+                Window newWindow = new NavigationWindow(); 
+                newWindow.Show();
+                
+                newWindow.Content = new StatistikDetailPage();
+
+            }
 
         }
     }

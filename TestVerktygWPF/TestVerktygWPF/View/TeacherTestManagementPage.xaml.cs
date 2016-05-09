@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygWPF.Model;
+using TestVerktygWPF.ViewModel;
 
 namespace TestVerktygWPF.View
 {
@@ -23,12 +24,16 @@ namespace TestVerktygWPF.View
     {
         IList<Test> tests = new List<Test>();
         Test test;
+
         public TeacherTestManagementPage()
         {
             InitializeComponent();
             using (var db = new DbModel())
             {
                 var query = (from t in db.Tests
+                             join ut in db.UserTests on t.ID equals ut.TestFk
+                             join u in db.Users on ut.UserFk equals u.ID
+                             where u.OccupationFk == 1 // add the condition of the user after we finish login site, now we can see only all tests of teachers
                              select t).ToList();
                 foreach (var item in query)
                 {
@@ -61,17 +66,15 @@ namespace TestVerktygWPF.View
         {
             using (var db = new DbModel())
             {
-                //ComboBox cbb = sender as ComboBox;
-                //var query = from grade in db.GradeClasss
-                //            where grade.Name == cbSelectClass.SelectedItem.ToString()
-                //            select grade.Studends.ToList();
-                //List<string> Names = new List<string>();
-                //foreach (var item in query)
-                //{
-                //    Console.WriteLine(item);
-                //}
-                cbSelectStudent.ItemsSource = db.Students.ToList();
+                var query = from s in db.Students
+                            join stc in db.StudentClasses on s.StudentClassFk equals stc.ID
+                            join u in db.Users on stc.ID equals u.StudentClassFk
+                            where u.OccupationFk == 1 // add the condition of the user after we finish login site, now we can see only all tests of teachers
+                            select s;
+                //cbSelectStudent.Items.Add("Alla");
+                cbSelectStudent.ItemsSource = query.ToList();
                 cbSelectStudent.DisplayMemberPath = "FirstName";
+                cbSelectStudent.Items.Add("Alla");
             }
         }
 
@@ -83,7 +86,71 @@ namespace TestVerktygWPF.View
 
         private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, object selectedItem1, object selectedItem2)
         {
-            throw new NotImplementedException();
+            if (listViewTestToSend.SelectedItem != null && DatePickerStartDate.SelectedDate != null && DatePickerEndDate != null)
+            {
+                using (var db = new DbModel())
+                {
+                    var query = from t in db.Tests
+                                where t.ID == test.ID
+                                select t;
+                    foreach (var item in query.ToList())
+                    {
+                        item.TimeStampe = int.Parse(txtBoxTestTime.Text);
+                        item.StartDate = DatePickerStartDate.SelectedDate;
+                        item.EndDate = DatePickerEndDate.SelectedDate;
+                        var query2 = from t in db.Users
+                                     where t.OccupationFk == 2
+                                     select t;
+                        foreach (var item2 in query2.ToList())
+                        {
+                            UserTest toAdmin = new UserTest();
+                            toAdmin.TestFk = item.ID;
+                            toAdmin.UserFk = item2.ID;
+                            db.UserTests.Add(toAdmin);
+                        }
+                    }
+                    if (cbSelectStudent.SelectedValue.ToString() == "Alla" && cbSelectClass.SelectedItem != null)
+                    {
+                        var xstudents = from s in db.Students
+                                        join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
+                                        where sc.Name == cbSelectClass.SelectedValue.ToString()
+                                        select s;
+                        foreach (var item in xstudents.ToList())
+                        {
+                            StudentTest newTest = new StudentTest();
+                            newTest.TestRefFk = test.ID;
+                            newTest.StudentRefFk = item.ID;
+                            newTest.IsChecked = false;
+                            db.StudentTests.Add(newTest);
+                        }
+                    }
+                    else if (cbSelectClass.SelectedItem != null && cbSelectStudent.SelectedItem != null)
+                    {
+                        var xstudents = from s in db.Students
+                                        where s.FirstName == cbSelectStudent.SelectedValue.ToString()
+                                        select s;
+                        foreach (var item in xstudents.ToList())
+                        {
+                            StudentTest newTest = new StudentTest();
+                            newTest.TestRefFk = test.ID;
+                            newTest.StudentRefFk = item.ID;
+                            newTest.IsChecked = false;
+                            db.StudentTests.Add(newTest);
+                        }
+                    }
+
+                    DatePickerStartDate.SelectedDate = null;
+                    DatePickerEndDate.SelectedDate = null;
+
+                    db.SaveChanges();
+                }
+            }
+
+        }
+
+        private void listViewTestToSend_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            test = sender as Test;
         }
     }
 }

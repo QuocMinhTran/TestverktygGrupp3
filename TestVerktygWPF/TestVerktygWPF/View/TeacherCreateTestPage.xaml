@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="40,0,0,0">
@@ -23,13 +23,28 @@
                 <ComboBoxItem Content="Enval"/>
                 <ComboBoxItem Content="Flerval"/>
                 <ComboBoxItem Content="Rangordning"/>
-                <ComboBoxItem Content="Fritext"/>
             </ComboBox>
+            <Label>Autorätta prov?</Label>
+            <CheckBox Name="chkBoxAutoCorrectTest" />
             <StackPanel Orientation="Horizontal">
                 <Label>Alternativ 1</Label>
-                <Label Margin="100,0,0,0">Kryssa i rätta svaret</Label>
+                <Label Name="lblQTypeInstructions" Margin="100,0,0,0" />
             </StackPanel>
-            <StackPanel  x:Name="_StackPanel">
+            <StackPanel x:Name="_StackPanel">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" 
+                                Value="0,5,0,0" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                    </Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Margin"
+                                Value="0,5,0,0" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                    </Style>
+                </StackPanel.Resources>
                 <!--<TextBox Name="txtBoxOption1" Width="170"/>
                 <CheckBox  Margin="10,0,0,0"/>
             </StackPanel>
@@ -46,16 +61,35 @@
             
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                 <Label>Alternativ</Label>
-                <Button Name="btnAddOption" Click="AddAlternatives" Content="+"/>
+                <Button Name="btnAddOption"
+                        Click="AddAlternatives" 
+                        Content="+"/>
                 <Button Name="btnRemoveOption" Click="RemoveAlternatives" Content="-" Margin="10,0,0,0"/>
+                <Label Name="lblWarning"
+                   Foreground="Red"/>
             </StackPanel>
-            <Button Content="Spara fråga" Width="70" Click="SaveQuestion" Margin="0,40,0,0"/>
+            <Button Content="Spara fråga"
+                    Name="btnSaveQuestion"
+                    HorizontalAlignment="Center"
+                    Click="SaveQuestion" />
+            
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,20,0" >
             <Label>Frågor som är tillagda</Label>
-            <ListView Name="listViewAddedQuestions" ></ListView>
-            <Button Content="Spara prov" Width="70" Click="SaveTest" IsEnabled="False" Name="btnSaveQuestion" Margin="0,40,0,0"/>
-            <Button Content="Edit Fråga" Width="70" Click="EditQ" IsEnabled="False" Name="btnEditQuestion" Margin="20,40,0,0" />
+            <ListView Name="listViewAddedQuestions"
+                      SelectionChanged="listViewAddedQuestions_SelectionChanged"/>
+            <Button Content="Spara prov" 
+                    Name="btnSaveTest"
+                    Click="SaveTest" 
+                    HorizontalAlignment="Center"
+                    Margin="0,40,0,0"
+                    IsEnabled="False"/>
+                <Button Content="Redigera Fråga" 
+                        Name="btnEditQuestion"
+                        Click="EditQ"
+                        HorizontalAlignment="Center"
+                        Margin="0,40,0,0"
+                        IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Page>
