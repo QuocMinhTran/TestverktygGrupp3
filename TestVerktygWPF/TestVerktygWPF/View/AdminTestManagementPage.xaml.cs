@@ -49,11 +49,11 @@ namespace TestVerktygWPF.View
             StackPanel stkPanel = new StackPanel();
             using (var db = new DbModel())
             {
-                var query = from t in db.Tests
-                            join q in db.Questions on t.ID equals q.TestFk
-                            join a in db.Answers on q.ID equals a.QuestionFk
-                            where t.ID == test.ID
-                            select new { QuestionText = q.Name, QuestionType = q.QuestionType, Answer = a.Text };
+                //var query = from t in db.Tests
+                //            join q in db.Questions on t.ID equals q.TestFk
+                //            join a in db.Answers on q.ID equals a.QuestionFk
+                //            where t.ID == test.ID
+                //            select new { QuestionText = q.Name, QuestionType = q.QuestionType, Answer = a.Text };
                 pup.Child = stkPanel;
                 foreach (var item in db.Questions.ToList())
                 {
@@ -71,14 +71,17 @@ namespace TestVerktygWPF.View
                                     case "envalfråga":
                                         RadioButton ans = new RadioButton();
                                         ans.Content = a.Text;
+                                        stkPanel.Children.Add(ans);
                                         break;
                                     case "flervalfråga":
                                         CheckBox ans2 = new CheckBox();
                                         ans2.Content = a.Text;
+                                        stkPanel.Children.Add(ans2);
                                         break;
                                     case "rangordningfråga":
                                         TextBlock ans3 = new TextBlock();
                                         ans3.Text = a.Text;
+                                        stkPanel.Children.Add(ans3);
                                         break;
                                     default:
                                         break;
@@ -89,7 +92,29 @@ namespace TestVerktygWPF.View
 
                     }
                 }
+                TextBox newtbx = new TextBox();
+                Button sendbtn = new Button();
+                Button nobtn = new Button();
+                stkPanel.Children.Add(newtbx);
+                stkPanel.Children.Add(sendbtn);
+                stkPanel.Children.Add(nobtn);
+                sendbtn.Click += Sendbtn_Click;
+                nobtn.Click += Nobtn_Click;
+                pup.IsOpen = true;
+                pup.StaysOpen = true;
             }
+        }
+
+        private void Nobtn_Click(object sender, RoutedEventArgs e)
+        {
+            pup.Child = null;
+            pup.IsOpen = false;
+        }
+
+        private void Sendbtn_Click(object sender, RoutedEventArgs e)
+        {
+            StudentTest sdtTest = new StudentTest();
+            sdtTest.
         }
     }
 }
