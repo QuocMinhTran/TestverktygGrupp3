@@ -71,6 +71,10 @@
     <Compile Include="Migrations\201605050720122_hej.Designer.cs">
       <DependentUpon>201605050720122_hej.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605091219372_updateDB.cs" />
+    <Compile Include="Migrations\201605091219372_updateDB.Designer.cs">
+      <DependentUpon>201605091219372_updateDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
     <Compile Include="Model\User.cs" />
@@ -194,6 +198,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201605050720122_hej.resx">
       <DependentUpon>201605050720122_hej.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605091219372_updateDB.resx">
+      <DependentUpon>201605091219372_updateDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
