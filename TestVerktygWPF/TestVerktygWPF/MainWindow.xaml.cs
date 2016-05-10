@@ -23,6 +23,10 @@ namespace TestVerktygWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        Repository repo = new Repository();
+        public List<User> LsUsers;
+
+        public User SelectedUser = new User();
         public MainWindow()
         {
             InitializeComponent();
@@ -41,12 +45,44 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-             //AddDataToBase();
+            //AddDataToBase();
+            MenuTab.Visibility = Visibility.Visible; // must change to collapsed later
+            LoginPage.Visibility = Visibility.Collapsed;
+            GetAllUsers();
+
+        }
+
+        private void GetAllUsers()
+        {
+            Repository repo = new Repository();
+            LsUsers = repo.GetAllUsers();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //TODO: send UserName and Password to database and login if there is a match
+            foreach (var item in LsUsers)
+            {
+                if (txtBoxUserNameInput.Text == item.UserName && txtBoxPasswordInput.Password == item.Password)
+                {
+                    LoginPage.Visibility = Visibility.Collapsed;
+                    LogoutTabs.Visibility = Visibility.Visible;
+                    SelectedUser = item;
+                    if (item.OccupationFk == 2)
+                    {
+                        AdminTabs.Visibility = Visibility.Visible;
+                        _Frame.Navigate(new MainPageAdmin(), SelectedUser);
+                    }
+                    else
+                    {
+                        TeacherTabs.Visibility = Visibility.Visible;
+                        _Frame.Navigate(new MainPageTeacher(), SelectedUser);
+                    }
+                    break;
+                }
+            }
+            MessageBox.Show("Wrong information");
+
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -60,31 +96,31 @@ namespace TestVerktygWPF
             switch (btn.Header.ToString())
             {
                 case "Startsida Admin":
-                    _Frame.Navigate(new MainPageAdmin());
+                    _Frame.Navigate(new MainPageAdmin(), SelectedUser);
                     break;
                 case "Hantera Användare":
-                    _Frame.Navigate(new AdminUserManagementPage());
+                    _Frame.Navigate(new AdminUserManagementPage(), SelectedUser);
                     break;
                 case "Statistik":
-                    _Frame.Navigate(new StatistikMasterPage());
+                    _Frame.Navigate(new StatistikMasterPage(), SelectedUser);
                     break;
                 case "Skicka ut prov":
-                    _Frame.Navigate(new TeacherTestManagementPage());
+                    _Frame.Navigate(new TeacherTestManagementPage(), SelectedUser);
                     break;
                 case "Rätt prov":
-                    _Frame.Navigate(new TeacherEvaluatePage());
+                    _Frame.Navigate(new TeacherEvaluatePage(), SelectedUser);
                     break;
                 case "Start Lärare":
-                    _Frame.Navigate(new MainPageTeacher());
+                    _Frame.Navigate(new MainPageTeacher(), SelectedUser);
                     break;
                 case "Hantera Prov":
-                    _Frame.Navigate(new AdminTestManagementPage());
+                    _Frame.Navigate(new AdminTestManagementPage(), SelectedUser);
                     break;
                 case "Skapa Prov":
-                    _Frame.Navigate(new TeacherCreateTestPage());
+                    _Frame.Navigate(new TeacherCreateTestPage(), SelectedUser);
                     break;
                 case "Godkänna Prov":
-            _Frame.Navigate(new AdminTestDetailManagement());
+                    _Frame.Navigate(new AdminTestDetailManagement(), SelectedUser);
                     break;
             }
         }
@@ -165,7 +201,7 @@ namespace TestVerktygWPF
             #endregion
 
         }
-        
+
         private List<UserTest> AddUserTest()
         {
             List<UserTest> lxUserTest = new List<UserTest>();
@@ -804,5 +840,11 @@ namespace TestVerktygWPF
             return lxStudent;
         }
 
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            _Frame.Visibility = Visibility.Collapsed;
+            LoginPage.Visibility = Visibility.Visible;
+            SelectedUser = null;
+        }
     }
 }
