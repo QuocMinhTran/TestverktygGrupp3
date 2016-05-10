@@ -334,9 +334,9 @@ namespace TestVerktygWPF.ViewModel
         }
 
 
-        public Answer GetCorrectAnswer(int id)
+        public  List<Answer> GetCorrectAnswer(int id)
         {
-            Answer correctAnswer = new Answer();
+            List<Answer> correctAnswer = new List<Answer>();
             using (var db = new DbModel())
             {
                 var getAnswer = from theAnswer in db.Answers
@@ -345,7 +345,7 @@ namespace TestVerktygWPF.ViewModel
                     select theAnswer;
                 foreach (var item in getAnswer)
                 {
-                    correctAnswer = item;
+                    correctAnswer.Add(item);
                 }
             }
             return correctAnswer;

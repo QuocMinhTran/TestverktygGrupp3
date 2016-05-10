@@ -104,9 +104,10 @@ namespace TestVerktygWPF.ViewModel
             return AllTestsDone;
         }
 
-        public Answer GetCorrectAnswer(int idQuestions)
+        public List<Answer> GetCorrectAnswer(int idQuestions)
         {
-            Answer ansewer = new Answer();
+            List<Answer> ansewer = new List<Answer>();
+
             return ansewer = xRepo.GetCorrectAnswer(idQuestions);
         }
 

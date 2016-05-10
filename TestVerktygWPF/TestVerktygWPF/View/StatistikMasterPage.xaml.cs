@@ -29,6 +29,7 @@ namespace TestVerktygWPF.View
         public List<Student> liAllStudents = new List<Student>();
         public Student SelectedStudent = new Student();
         public List<StudentTest> StudentsTests = new List<StudentTest>();
+        public List<Test> LiStudentsDoneTests = new List<Test>();
         // public int NumberOfTests;
 
         public double AvrageTimeForTest;
@@ -123,6 +124,7 @@ namespace TestVerktygWPF.View
                     csTest.SetCurrentStudent(item.ID);
                     lvClassStatistics.Items.Add("Namn " + csTest.CurrentStudent.FirstName + csTest.CurrentStudent.LastName + " Poäng " + csTest.StudentScore + " Tid " + csTest.StudentTime);
                     StudentsScoreOfTest += csTest.StudentScore;
+
                 }
 
             }
@@ -136,7 +138,7 @@ namespace TestVerktygWPF.View
         {
 
             double ResultA;
-           
+
             double AvrageProcentGrade;
 
             ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
@@ -176,26 +178,23 @@ namespace TestVerktygWPF.View
                 csTest.SetCurrentTest(item.ID);
                 lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
                                               csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
-
+                LiStudentsDoneTests.Add(csTest.CurrentTest);
             }
 
-            StatistikDetailPage.Questionses = csTest.CurrentQuestions;
 
         }
 
 
         private void LvStudentStatistics_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-          
-           
-           
             if (lvStudentStatistics.SelectedItem != null)
             {
-                Window newWindow = new NavigationWindow(); 
+                Window newWindow = new NavigationWindow();
                 newWindow.Show();
-                
+                newWindow.Topmost = true;
                 newWindow.Content = new StatistikDetailPage();
+
+                StatistikDetailPage.SelectedTest.ID = LiStudentsDoneTests[lvStudentStatistics.SelectedIndex].ID;
 
             }
 
