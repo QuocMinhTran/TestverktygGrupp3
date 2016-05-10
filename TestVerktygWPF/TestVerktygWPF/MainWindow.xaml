@@ -14,6 +14,7 @@
         <Menu Grid.Row="0" Name="MenuTab">
             <MenuItem Header="Admin" Name="AdminTabs">
                 <MenuItem Header="Startsida Admin" Click="MenuItem_Click"/>
+                <MenuItem Header="Skapa Användare" Click="MenuItem_Click"/>
                 <MenuItem Header="Hantera Användare" Click="MenuItem_Click"/>
                 <MenuItem Header="Hantera Prov" Click="MenuItem_Click"/>
                 <MenuItem Header="Godkänna Prov" Click="MenuItem_Click"/>

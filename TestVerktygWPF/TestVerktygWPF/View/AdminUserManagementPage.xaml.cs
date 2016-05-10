@@ -35,7 +35,7 @@ namespace TestVerktygWPF.View
         public bool IsSelectedUser = false;
         public bool IsSelectedUserStudent = false;
 
-        public AdminUserManagementPage()
+        public AdminUserManagementPage(User user)
         {
             InitializeComponent();
 

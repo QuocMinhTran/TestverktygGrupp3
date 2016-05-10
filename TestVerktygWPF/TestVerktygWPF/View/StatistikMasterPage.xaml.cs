@@ -41,7 +41,7 @@ namespace TestVerktygWPF.View
 
         public double NumberOfstudents;
 
-        public StatistikMasterPage()
+        public StatistikMasterPage(User user)
         {
             InitializeComponent();
             CurrentSelectedTest csTest = new CurrentSelectedTest();

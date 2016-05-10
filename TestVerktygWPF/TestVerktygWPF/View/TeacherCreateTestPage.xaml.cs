@@ -26,8 +26,10 @@ namespace TestVerktygWPF.View
         private List<Questions> m_lxQuestions;
         private List<Answer> m_lxAnswer;
         static int iID;
-        public TeacherCreateTestPage()
+        User theTeacher;
+        public TeacherCreateTestPage(User user)
         {
+            theTeacher = user;
             iID = 0;
             InitializeComponent();
             m_lxQuestions = new List<Questions>();

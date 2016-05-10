@@ -25,7 +25,7 @@ namespace TestVerktygWPF.View
         public List<StudentClass> liAlClasses = new List<StudentClass>();
         public int SelectedIntClass = 0;
 
-        public AdminCreateUserPage()
+        public AdminCreateUserPage(User user)
         {
             InitializeComponent();
             Repository repo = new Repository();

@@ -1,5 +1,6 @@
 namespace TestVerktygWPF.Migrations
 {
+    using Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -25,7 +26,15 @@ namespace TestVerktygWPF.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+            ////
+            //context.Courses.AddOrUpdate(
+            //    c => c.CourseName,
+            //    new Course { CourseName = "Datateknik" },
+            //    new Course { CourseName = "Database" },
+            //    new Course { CourseName = "OOP" }
+            //    );
+            //context.StudentClasses.AddOrUpdate(
+            //    stc => stc.)
         }
     }
 }
