@@ -332,7 +332,20 @@ namespace TestVerktygWPF.ViewModel
 
             return liAllAdmins;
         }
-
+        public List<User> GetAllUsers()
+        {
+            List<User> liAllUsers = new List<User>();
+            using (var db = new DbModel())
+            {
+                var selectUsers = from users in db.Users
+                                  select users;
+                foreach (var item in selectUsers)
+                {
+                    liAllUsers.Add(item);
+                }
+            }
+            return liAllUsers;
+        }
 
         public  List<Answer> GetCorrectAnswer(int id)
         {
