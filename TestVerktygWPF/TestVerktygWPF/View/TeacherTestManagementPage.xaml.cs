@@ -74,7 +74,7 @@ namespace TestVerktygWPF.View
                 //cbSelectStudent.Items.Add("Alla");
                 cbSelectStudent.ItemsSource = query.ToList();
                 cbSelectStudent.DisplayMemberPath = "FirstName";
-                cbSelectStudent.Items.Add("Alla");
+                //cbSelectStudent.Items.Add("Alla");
             }
         }
 
