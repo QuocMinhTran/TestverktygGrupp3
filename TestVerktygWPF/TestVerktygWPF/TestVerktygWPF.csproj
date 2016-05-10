@@ -67,13 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201605050720122_hej.cs" />
-    <Compile Include="Migrations\201605050720122_hej.Designer.cs">
-      <DependentUpon>201605050720122_hej.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605091219372_updateDB.cs" />
-    <Compile Include="Migrations\201605091219372_updateDB.Designer.cs">
-      <DependentUpon>201605091219372_updateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201605100932174_funka.cs" />
+    <Compile Include="Migrations\201605100932174_funka.Designer.cs">
+      <DependentUpon>201605100932174_funka.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
@@ -196,11 +192,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201605050720122_hej.resx">
-      <DependentUpon>201605050720122_hej.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605091219372_updateDB.resx">
-      <DependentUpon>201605091219372_updateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605100932174_funka.resx">
+      <DependentUpon>201605100932174_funka.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

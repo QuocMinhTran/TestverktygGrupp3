@@ -3,7 +3,7 @@ namespace TestVerktygWPF.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class hej : DbMigration
+    public partial class funka : DbMigration
     {
         public override void Up()
         {
@@ -44,6 +44,7 @@ namespace TestVerktygWPF.Migrations
                         EndDate = c.DateTime(),
                         StartDate = c.DateTime(),
                         TimeStampe = c.Double(nullable: false),
+                        IsAutoCorrect = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -89,6 +90,7 @@ namespace TestVerktygWPF.Migrations
                         WritenTime = c.Int(nullable: false),
                         StudentRefFk = c.Int(nullable: false),
                         TestRefFk = c.Int(nullable: false),
+                        IsChecked = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Students", t => t.StudentRefFk, cascadeDelete: true)

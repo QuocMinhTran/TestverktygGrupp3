@@ -19,7 +19,7 @@ namespace TestVerktygWPF.ViewModel
         public Student CurrentStudent { get; private set; }
         public int StudentTime { get; private set; }
         public int StudentScore { get; private set; }
-        public Answer CorrecAnswer { get; set; }
+        public Answer CorrecAnswer { get; set; } 
         public CurrentSelectedTest()
         {
             xRepo = new Repository();
@@ -43,6 +43,11 @@ namespace TestVerktygWPF.ViewModel
             }
           
         }
+
+        public List<Answer> GetStudentsAnswers()
+        {
+            return null;
+        } 
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);
