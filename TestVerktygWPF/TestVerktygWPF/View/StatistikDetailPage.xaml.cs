@@ -22,21 +22,32 @@ namespace TestVerktygWPF.View
     /// </summary>
     public partial class StatistikDetailPage : Page
     {
-        
-        public static List<Questions> Questionses = new List<Questions>(); 
+
+        public List<Questions> Questionses = new List<Questions>();
+        public static Test SelectedTest = new Test();
         public StatistikDetailPage()
         {
             InitializeComponent();
+
             CurrentSelectedTest csTest = new CurrentSelectedTest();
-         
-            //Questionses = csTest.CurrentQuestions;
-         
+            csTest.SetCurrentTest(SelectedTest.ID);
+
+            Questionses = csTest.CurrentQuestions;
+
             foreach (var item in Questionses)
             {
-                Console.WriteLine("Qurrrentqustion detailstat :"+ item.Name);
-               lvDetails.Items.Add("Fråga:" + item.Name);
-                lvDetails.Items.Add(csTest.GetCorrectAnswer(item.ID).Text);
+               
+                lvDetails.Items.Add("Fråga: " + item.Name);
+                foreach (var answer in csTest.GetCorrectAnswer(item.ID))
+                {
+                    lvDetails.Items.Add(answer.Text);
+                }
+               
             }
+
+
+
         }
+
     }
 }
