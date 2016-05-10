@@ -147,19 +147,19 @@ namespace TestVerktygWPF
                 //    db.Questions.Add(item);
                 //}
 
-                foreach (var item in lxAnswer)
-                {
-                    db.Answers.Add(item);
-                }
-                foreach (var item in lxStudentTest)
-                {
-                    db.StudentTests.Add(item);
-                }
-                foreach (var item in lxStudentAnswer)
-                {
-                    Console.WriteLine(item.Answer);
-                    db.StudentAnswers.Add(item);
-                }
+                //foreach (var item in lxAnswer)
+                //{
+                //    db.Answers.Add(item);
+                //}
+                //foreach (var item in lxStudentTest)
+                //{
+                //    db.StudentTests.Add(item);
+                //}
+                //foreach (var item in lxStudentAnswer)
+                //{
+                //    Console.WriteLine(item.Answer);
+                //    db.StudentAnswers.Add(item);
+                //}
                 db.SaveChanges();
             }
             #endregion
@@ -177,7 +177,7 @@ namespace TestVerktygWPF
             };
             UserTest xUserTets1 = new UserTest()
             {
-                UserFk = 3,
+                UserFk = 1,
                 TestFk = 1,
             };
             UserTest xUserTets2 = new UserTest()
@@ -644,24 +644,28 @@ namespace TestVerktygWPF
                 ID = 1,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest2 = new Test()
             {
                 ID = 2,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest3 = new Test()
             {
                 ID = 3,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest4 = new Test()
             {
                 ID = 4,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             lxTest.Add(xTest);
             lxTest.Add(xTest2);
