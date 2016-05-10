@@ -26,16 +26,10 @@ namespace TestVerktygElev
         {
             InitializeComponent();
 
-            AddDummyData();
-            _frame.Navigate(new ElevTestPage());
+            _frame.Navigate(new MainPage());
                 
         }
 
-        private void AddDummyData()
-        {
-
-            
-        }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {

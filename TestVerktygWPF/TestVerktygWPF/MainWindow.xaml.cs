@@ -41,7 +41,7 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-            //  AddDataToBase();
+             //AddDataToBase();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -84,7 +84,7 @@ namespace TestVerktygWPF
                     _Frame.Navigate(new TeacherCreateTestPage());
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestDetailManagement());
+            _Frame.Navigate(new AdminTestDetailManagement());
                     break;
             }
         }
@@ -137,29 +137,29 @@ namespace TestVerktygWPF
                 //    db.Tests.Add(item);
                 //}
 
-                foreach (var item in lxUserTest)
-                {
-                    db.UserTests.Add(item);
-                }
+                //foreach (var item in lxUserTest)
+                //{
+                //    db.UserTests.Add(item);
+                //}
 
                 //foreach (var item in lxQuestions)
                 //{
                 //    db.Questions.Add(item);
                 //}
 
-                //foreach (var item in lxAnswer)
-                //{
-                //    db.Answers.Add(item);
-                //}
-                //foreach (var item in lxStudentTest)
-                //{
-                //    db.StudentTests.Add(item);
-                //}
-                //foreach (var item in lxStudentAnswer)
-                //{
-                //    Console.WriteLine(item.Answer);
-                //    db.StudentAnswers.Add(item);
-                //}
+                foreach (var item in lxAnswer)
+                {
+                    db.Answers.Add(item);
+                }
+                foreach (var item in lxStudentTest)
+                {
+                    db.StudentTests.Add(item);
+                }
+                foreach (var item in lxStudentAnswer)
+                {
+                    Console.WriteLine(item.Answer);
+                    db.StudentAnswers.Add(item);
+                }
                 db.SaveChanges();
             }
             #endregion

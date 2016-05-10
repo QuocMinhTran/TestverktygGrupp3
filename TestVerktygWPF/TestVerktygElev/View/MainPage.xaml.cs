@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygElev.ViewModel;
 
 namespace TestVerktygElev
 {
@@ -20,9 +21,26 @@ namespace TestVerktygElev
     /// </summary>
     public partial class MainPage : Page
     {
+        public List<Test> m_lxTest;
         public MainPage()
         {
+            Repository xRepository = new Repository();
             InitializeComponent();
+            m_lxTest = new List<Test>();
+            m_lxTest = xRepository.GetTestForStudent(1);
+            foreach (var item in m_lxTest)
+            {
+                Console.WriteLine("Name of Test" + item.Name + " Test ID " + item.ID);
+            }
+            lbInfo.ItemsSource = m_lxTest;
+            
+        }
+
+        private void StartTest(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("TimeToStartTest");
+            ElevTestPage xElevTestPage= new ElevTestPage(1);
+            NavigationService.Navigate(xElevTestPage);
         }
     }
 }

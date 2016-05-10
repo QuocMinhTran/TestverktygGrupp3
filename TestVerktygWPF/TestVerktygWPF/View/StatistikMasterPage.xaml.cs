@@ -37,8 +37,7 @@ namespace TestVerktygWPF.View
 
         public double NumberOfQuestionsInSelectedTest; //maxpoäng
         public double StudentsScoreOfTest; // AllasPoäng
-        public double ResultA;
-        public double AvrageProcentGrade;
+
         public double NumberOfstudents;
 
         public StatistikMasterPage()
@@ -136,6 +135,9 @@ namespace TestVerktygWPF.View
         private void AvrageScoreForTest()
         {
 
+            double ResultA;
+           
+            double AvrageProcentGrade;
 
             ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
             Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
