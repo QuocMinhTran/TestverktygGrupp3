@@ -23,42 +23,39 @@ namespace TestVerktygElev
     /// </summary>
     public partial class ElevTestPage : Page
     {
+        private Test m_xTest;
+        private List<Question> m_lxQuestions;
+        private Repository m_xRepository;
 
-        List<Question> lxQuestionList = new List<Question>();
-        List<StudentAnswer> lxStudAnwers = new List<StudentAnswer>();
-        List<Answer> lxAnswers = new List<Answer>();
-        Question currentQuestion = new Question();
-        List<StackPanel> listCheckedAnswers = new List<StackPanel>();
-        List<Test> test = new List<Test>();
-        int iIndex = 0;
-        int Time = 10;
+        
+        private int m_iTime;
 
-        public ElevTestPage()
+        public ElevTestPage(int p_IDTest)
         {
             InitializeComponent();
-            InitTest();
-            //CreateDummyTest();
-            //currentQuestion = questionList.FirstOrDefault();
-            //UpdateQuestionsCounter();
-            //txtBlockTestName.Text = test.Name;
-            //StartTimer();
+            m_xRepository = new Repository();
+            m_xTest = m_xRepository.GetTest(p_IDTest);
+            m_iTime = (int)m_xTest.TimeStampe;
+            txtBlockTestName.Text = m_xTest.Name;
+            m_lxQuestions = m_xRepository.GetQuestions(p_IDTest);
+            foreach (var item in m_lxQuestions)
+            {
+                Console.WriteLine("Questions In the Questions" + item.Name);
+            }
+            StartTimer();
+
         }
 
-        private void InitTest()
-        {
-            Repository repo = new Repository();
-            test = repo.GetTest();
-            //txtBlockTestName.Text = test.Name;
-            foreach (var item in test)
-            {
-                Console.WriteLine(item.ID + item.Name);
-            }
-            lxQuestionList = repo.GetQuestion(1);
-          
-            RenderQuestions();
-            ProcessQuestion();
-            StartTimer();
-        }
+        //private void InitTest()
+        //{
+
+        //    //foreach (var item in test)
+        //    //{
+        //    //    Console.WriteLine(item.ID + item.Name);
+        //    //}
+        //    ProcessQuestion();
+
+        //}
 
         private void StartTimer()
         {
@@ -70,38 +67,38 @@ namespace TestVerktygElev
 
         private void OnTimedEvent(object sender, EventArgs e)
         {
-            lblTimer.Content = Time;
-            Time -= 1;
+            lblTimer.Content = m_iTime;
+            m_iTime -= 1;
         }
 
         private void ProcessQuestion()
         {
-            splAnswers.Children.Clear();
-            Console.WriteLine(lxQuestionList[iIndex].Name);
+            //splAnswers.Children.Clear();
+            //Console.WriteLine(lxQuestionList[iIndex].Name);
 
 
-            foreach (var item in lxQuestionList[iIndex].Answers)
-            {
-                Console.WriteLine(item.Text + " " + item.RightAnswer);
-                Label xLable = new Label();
-                xLable.Content = item.Text;
-                splAnswers.Children.Add(xLable);
-                switch (lxQuestionList[iIndex].QuestionType)
-                {
+            //foreach (var item in lxQuestionList[iIndex].Answers)
+            //{
+            //    Console.WriteLine(item.Text + " " + item.RightAnswer);
+            //    Label xLable = new Label();
+            //    xLable.Content = item.Text;
+            //    splAnswers.Children.Add(xLable);
+            //    switch (lxQuestionList[iIndex].QuestionType)
+            //    {
 
-                    case "envalsfråga":
-                        RadioButton radioBtn = new RadioButton();
-                        splAnswers.Children.Add(radioBtn);
-                        break;
-                    case "flervalsfråga":
-                        CheckBox chkBox = new CheckBox();
-                        splAnswers.Children.Add(chkBox);
-                        break;
-                    case "rangordning":
-                        ComboBox cbBox = new ComboBox();
-                        splAnswers.Children.Add(cbBox);
-                        break;
-                }
+            //        case "envalsfråga":
+            //            RadioButton radioBtn = new RadioButton();
+            //            splAnswers.Children.Add(radioBtn);
+            //            break;
+            //        case "flervalsfråga":
+            //            CheckBox chkBox = new CheckBox();
+            //            splAnswers.Children.Add(chkBox);
+            //            break;
+            //        case "rangordning":
+            //            ComboBox cbBox = new ComboBox();
+            //            splAnswers.Children.Add(cbBox);
+            //            break;
+            //    }
 
                 //foreach (var item in listCheckedAnswers)
                 //{
@@ -112,12 +109,12 @@ namespace TestVerktygElev
                 //listCheckedAnswers[qIndex].Visibility = Visibility.Visible;
 
                 //ProcessAnswers();
-            }
+            //}
         }
-        private void AddAnswer()
-        {
+        //private void AddAnswer()
+        //{
             
-        }
+        //}
 
         private void RenderQuestions()
         {
@@ -175,67 +172,67 @@ namespace TestVerktygElev
 
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
-            iIndex--;
-            ProcessQuestion();
-            if (iIndex == 0)
-                btnPrevious.IsEnabled = false;
+            //iIndex--;
+            //ProcessQuestion();
+            //if (iIndex == 0)
+            //    btnPrevious.IsEnabled = false;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
 
-            StudentAnswer xStudentAnswer = new StudentAnswer();
-            if (iIndex + 1 >= lxQuestionList.Count)
-            {
-                CorrectTest();
-            }
+            //StudentAnswer xStudentAnswer = new StudentAnswer();
+            //if (iIndex + 1 >= lxQuestionList.Count)
+            //{
+            //    CorrectTest();
+            //}
 
-            else
-            {
-                iIndex++;
-                btnPrevious.IsEnabled = true;
-                foreach (var item in splAnswers.Children)
-                {
-                    Label y = item as Label;
-                    if (y != null)
-                    {
-                        Console.WriteLine(" CONTENT = "+y.Content);
-                    }
-                    Console.WriteLine(item.GetType());
-                    RadioButton x = item as RadioButton;
-                    if (x != null)
-                    {
-                      Console.WriteLine("Is Checked =" + x.IsChecked);
+            //else
+            //{
+            //    iIndex++;
+            //    btnPrevious.IsEnabled = true;
+            //    foreach (var item in splAnswers.Children)
+            //    {
+            //        Label y = item as Label;
+            //        if (y != null)
+            //        {
+            //            Console.WriteLine(" CONTENT = "+y.Content);
+            //        }
+            //        Console.WriteLine(item.GetType());
+            //        RadioButton x = item as RadioButton;
+            //        if (x != null)
+            //        {
+            //          Console.WriteLine("Is Checked =" + x.IsChecked);
 
-                        if (x.IsChecked == true)
-                        {
+            //            if (x.IsChecked == true)
+            //            {
                             
-                        }
-                    }
-                    xStudentAnswer.Question = iIndex;
-                    lxStudAnwers.Add(xStudentAnswer);
-                }
+            //            }
+            //        }
+            //        xStudentAnswer.Question = iIndex;
+            //        lxStudAnwers.Add(xStudentAnswer);
+            //    }
 
-                ProcessQuestion();
-            }
+            //    ProcessQuestion();
+            //}
         }
 
         private void CorrectTest()
         {
-            for (int i = 0; i < lxQuestionList.Count; i++)
-            {
-                Console.WriteLine(lxQuestionList[i].Answers);
-                RightAnswer(lxQuestionList[i].Answers, lxQuestionList[i].Name);
+            //for (int i = 0; i < lxQuestionList.Count; i++)
+            //{
+            //    Console.WriteLine(lxQuestionList[i].Answers);
+            //    RightAnswer(lxQuestionList[i].Answers, lxQuestionList[i].Name);
 
-            }
+            //}
         }
         private void RightAnswer(ICollection<Answer> xAnswer, string sQuestion)
         {
-            foreach (var item in xAnswer)
-            {
-                Console.WriteLine(sQuestion + " " + item.Question + " " + item.RightAnswer + " svar: "  /*lxStudAnwers[].Answer*/);
+            //foreach (var item in xAnswer)
+            //{
+            //    Console.WriteLine(sQuestion + " " + item.Question + " " + item.RightAnswer + " svar: "  /*lxStudAnwers[].Answer*/);
 
-            }
+            //}
         }
     }
 }
