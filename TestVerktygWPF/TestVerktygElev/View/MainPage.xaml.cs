@@ -27,19 +27,25 @@ namespace TestVerktygElev
             Repository xRepository = new Repository();
             InitializeComponent();
             m_lxTest = new List<Test>();
-            m_lxTest = xRepository.GetTestForStudent(1);
+            m_lxTest = xRepository.GetTestForStudent(2);
             foreach (var item in m_lxTest)
             {
                 Console.WriteLine("Name of Test" + item.Name + " Test ID " + item.ID);
             }
             lbInfo.ItemsSource = m_lxTest;
-            
+
         }
 
         private void StartTest(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("TimeToStartTest");
-            ElevTestPage xElevTestPage= new ElevTestPage(1);
+
+            Test xTest = ((FrameworkElement)e.OriginalSource).DataContext as Test;
+            if (xTest != null)
+            {
+                Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
+            }
+            
+            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID);
             NavigationService.Navigate(xElevTestPage);
         }
     }

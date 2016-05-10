@@ -8,24 +8,36 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ElevTestPage">
 
-    <Grid Background="White">        
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0">
             <TextBlock Name="txtBlockTestName" HorizontalAlignment="Center" FontSize="20" />
             <TextBlock Name="txtBlockQuestions" />
         </StackPanel>
-        
+
         <StackPanel Grid.Row="1">
             <TextBlock Name="txtBlockQuestionName" FontSize="18" HorizontalAlignment="Left" />
             <TextBlock Name="txtBlockTimeLeft" />
             <Label Name="lblTimer"></Label>
             <Separator BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Stretch" />
 
-            <StackPanel Name="splAnswers" />
+
+            <TextBlock Name="tbQuestion"></TextBlock>
+            <ListView Name="lbAnswer" Focusable="False">
+                <!--<ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="{Binding Text}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+                
+            </ListView>
+                
             <Separator BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Stretch" />
 
             <StackPanel x:Name="splNavigation" Orientation="Horizontal" HorizontalAlignment="Center">

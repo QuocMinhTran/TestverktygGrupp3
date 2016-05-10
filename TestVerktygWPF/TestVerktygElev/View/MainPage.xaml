@@ -8,6 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage">
 
+
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -22,14 +23,12 @@
                    FontSize="18"
                    Grid.Column="0"
                    Grid.Row="0" />
-
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5" >
             <Label Content="Prov som ska göras" FontSize="14" />
-           <!-- <DataGrid Name="IncompleteTests" Grid.Column="0" />-->
-            <ListBox Name="lbInfo" MouseDoubleClick="StartTest" >
-                <ListBox.ItemTemplate>
+            <ListBox Name="lbInfo" MouseDoubleClick="StartTest">
+                <ListBox.ItemTemplate >
                     <DataTemplate>
-                        <StackPanel >
+                        <StackPanel>
                             <Label>Prov:</Label>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text=" Ämne:" />
