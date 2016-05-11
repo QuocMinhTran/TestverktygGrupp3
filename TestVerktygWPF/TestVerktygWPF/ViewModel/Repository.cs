@@ -46,6 +46,8 @@ namespace TestVerktygWPF.ViewModel
                              select Qtest;
                 foreach (var item in querry)
                 {
+                    Console.WriteLine("insent id: " + iD);
+                    Console.WriteLine("Repo get test : " + item.ID + item.Name);
                     xTest = item;
                 }
                 //xTest = querry as Test;
@@ -347,15 +349,15 @@ namespace TestVerktygWPF.ViewModel
             return liAllUsers;
         }
 
-        public  List<Answer> GetCorrectAnswer(int id)
+        public List<Answer> GetCorrectAnswer(int id)
         {
             List<Answer> correctAnswer = new List<Answer>();
             using (var db = new DbModel())
             {
                 var getAnswer = from theAnswer in db.Answers
-                    where theAnswer.QuestionFk == id
-                    where theAnswer.RightAnswer == true
-                    select theAnswer;
+                                where theAnswer.QuestionFk == id
+                                where theAnswer.RightAnswer == true
+                                select theAnswer;
                 foreach (var item in getAnswer)
                 {
                     correctAnswer.Add(item);
@@ -363,31 +365,41 @@ namespace TestVerktygWPF.ViewModel
             }
             return correctAnswer;
         }
-        //public List<Answer> GetTestForStudent(int p_iID)
-        //{
-        //    List<Answer> lxAnswer = new List<Answer>();
-        //    using (var db = new DbModel())
-        //    {
-        //        var querry = from StudentTest in db.StudentTests
-        //                     join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID
-        //            join SudentAnswer in db.StudentAnswers on StudentTest.ID equals SudentAnswer.Id
-        //            joi
-                
-                
-                             
-        //                     //into Group
-        //                     //from TestGroup in Group
-        //                     //where TestGroup.ID == p_iID
-        //                     //select Test;
-        //        foreach (var item in querry)
-        //        {
-        //            Console.WriteLine(item.Name + " Name of Test From DataBase");
-        //            lxTest.Add(item);
+        public List<Answer> GetStudetAnswers(int p_iID)
+        {
+            List<Answer> lxAnswer = new List<Answer>();
+            using (var db = new DbModel())
+            {
+                var querry =
+                    from p in db.StudentTests
+                        //where p.TestRefFk == p_iID
+                    join pc in db.StudentAnswers on p.TestRefFk equals p_iID
+                    join c in db.Answers on pc.Answer equals c.ID
+                    select c;
 
-        //        }
-        //    }
-        //    return null; //lxTest;
-        //}
+                //var querry = from x in db.StudentTests
+                //             join xSudent in db.StudentTests on x.ID equals  xSudent.TestRefFk into Group
+                //             from y in Group
+                //             join xtest in db.Tests on x.TestRefFk equals p_iID
+                //             join xQuestion in db.Questions on xtest.ID equals xQuestion.TestFk
+                //             join answer in db.Answers on xQuestion.ID equals answer.QuestionFk
+                //             select answer;
+
+                Console.WriteLine("Querry körs" + querry.Count());
+
+                for (int i = 0; i < querry.Count(); i++)
+                {
+                    Console.WriteLine("for loop " + i);
+                }
+                foreach (var item in querry)
+                {
+                    lxAnswer.Add(item);
+                    Console.WriteLine("item :" + item.Text);
+                }
+
+            }
+            return lxAnswer;
+        }
 
         //public List<Answer> GetStudentAnswers(int id)
         //{
@@ -398,7 +410,7 @@ namespace TestVerktygWPF.ViewModel
         //                        where studentAnswers.IsTestDone == true
         //    }
         //    return null;
-        //} 
+        //}
         //Save
         public void SaveStudent(Student xStudent)
         {

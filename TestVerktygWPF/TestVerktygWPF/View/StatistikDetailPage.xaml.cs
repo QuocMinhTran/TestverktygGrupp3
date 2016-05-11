@@ -33,14 +33,20 @@ namespace TestVerktygWPF.View
             csTest.SetCurrentTest(SelectedTest.ID);
 
             Questionses = csTest.CurrentQuestions;
+            //Answer _studentsAnswers = new Answer();
 
             foreach (var item in Questionses)
             {
                
                 lvDetails.Items.Add("Fråga: " + item.Name);
+                foreach (var studentsAnswer in csTest.GetStudentsAnswers(item.ID))
+                {
+                    Console.WriteLine(studentsAnswer.Text);
+                    lvDetails.Items.Add("Elevens svar :" + studentsAnswer.Text);
+                }
                 foreach (var answer in csTest.GetCorrectAnswer(item.ID))
                 {
-                    lvDetails.Items.Add(answer.Text);
+                    lvDetails.Items.Add("Korrekt svar: " + answer.Text);
                 }
                
             }
