@@ -21,9 +21,11 @@ namespace TestVerktygElev
     /// </summary>
     public partial class MainPage : Page
     {
+        Student theStudent;
         public List<Test> m_lxTest;
-        public MainPage()
+        public MainPage(Student student)
         {
+            theStudent = student;
             Repository xRepository = new Repository();
             InitializeComponent();
             m_lxTest = new List<Test>();

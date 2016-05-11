@@ -94,5 +94,19 @@ namespace TestVerktygElev.ViewModel
             }
             return lxAnwsers;
         }
+        public List<Student> GetAllStudents()
+        {
+            List<Student> students = new List<Student>();
+            using (var db = new Model1())
+            {
+                var query = from s in db.Students
+                            select s;
+                foreach (var item in query)
+                {
+                    students.Add(item);
+                }
+            }
+            return students;
+        }
     }
 }
