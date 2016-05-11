@@ -441,6 +441,15 @@ namespace TestVerktygWPF.ViewModel
             }
         }
 
+        public void SaveUserTest(UserTest xUserTest)
+        {
+            using (var db = new DbModel())
+            {
+                db.UserTests.Add(xUserTest);
+                db.SaveChanges();
+            }
+        }
+
         public int SaveQuestion(Questions xQuestion)
         {
             Questions xQuest = new Questions();
@@ -460,9 +469,7 @@ namespace TestVerktygWPF.ViewModel
                 Console.WriteLine(xQuest.ID + "SaveQuestion ID");
             }
             return xQuest.ID;
-
         }
-
 
         //Delete
         public void RemoveQuestion() { }

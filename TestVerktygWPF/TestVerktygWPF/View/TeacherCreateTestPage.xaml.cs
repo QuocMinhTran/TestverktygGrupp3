@@ -307,7 +307,8 @@ namespace TestVerktygWPF.View
                 xTest.IsAutoCorrect = false;
 
             xTest.Name = txtBoxTestName.Text;
-            xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer);
+            
+            xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer, theTeacher.ID);
 
             Clear(true);
         }
