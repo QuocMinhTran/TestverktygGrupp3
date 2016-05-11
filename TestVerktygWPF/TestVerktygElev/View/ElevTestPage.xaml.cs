@@ -251,7 +251,7 @@ namespace TestVerktygElev
             StudentAnswer xStudentAnswer = new StudentAnswer();
             xStudentAnswer.StudentTestFk = m_iStudentTestID;
             xStudentAnswer.Answer = m_liIndexes[p_iIndex];
-            xStudentAnswer.OrderPostition = p_iOrderPos;
+            xStudentAnswer.OrderPostition = p_iOrderPos+1;
             xStudentAnswer.Question = m_iTempID;
             m_lxStudentAnswer.Add(xStudentAnswer);
         }
@@ -286,15 +286,12 @@ namespace TestVerktygElev
                                         bScore = false;
                                     }
                                 }
-                                int temp = (int)item.OrderPostition;
-                                temp += 1;
-
-                                if (m_lxAnswer[j].OrderPosition == temp)
+                                if (m_lxAnswer[j].OrderPosition == (int)item.OrderPostition)
                                 {
                                     iForScore++;
                                     iSeIfRight++;
                                 }
-                                else if (m_lxAnswer[j].OrderPosition != temp)
+                                else if (m_lxAnswer[j].OrderPosition != (int)item.OrderPostition)
                                 {
                                     iForScore++;
                                     iSeIfRight--;
@@ -310,7 +307,7 @@ namespace TestVerktygElev
                     iForScore = 0;
                 }
                 //TODO SAVE TO DATABASE
-                m_xRepository.SaveTest(m_lxStudentAnswer,m_iIndex);
+                m_xRepository.SaveTest(m_lxStudentAnswer,m_iIndex,30);
                 StatisticPage xStatisticPage = new StatisticPage(m_xTest,iScore);
                 NavigationService.Navigate(xStatisticPage);
             }

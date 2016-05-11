@@ -45,7 +45,7 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-           // AddDataToBase();
+            //AddDataToBase();
             AdminTabs.Visibility = Visibility.Collapsed; // must change to collapsed later
             TeacherTabs.Visibility = Visibility.Collapsed;
             LogoutTabs.Visibility = Visibility.Collapsed;
@@ -217,23 +217,23 @@ namespace TestVerktygWPF
 
             UserTest xUserTets = new UserTest()
             {
-                UserFk = 13,
-                TestFk = 1,
+                UserFk = 5,
+                TestFk = 5,
             };
             UserTest xUserTets1 = new UserTest()
             {
-                UserFk = 1,
-                TestFk = 1,
+                UserFk = 5,
+                TestFk = 6,
             };
             UserTest xUserTets2 = new UserTest()
             {
-                UserFk = 13,
-                TestFk = 2,
+                UserFk = 6,
+                TestFk = 6,
             };
             UserTest xUserTets3 = new UserTest()
             {
-                UserFk = 17,
-                TestFk = 1,
+                UserFk = 6,
+                TestFk = 5,
             };
 
             lxUserTest.Add(xUserTets);
@@ -249,7 +249,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 18,
+                TestRefFk = 5,
                 WritenTime = 10,
                 IsTestDone = true,
                 Score = 2,
@@ -258,7 +258,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest2 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 18,
+                TestRefFk = 5,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -267,7 +267,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest3 = new StudentTest()
             {
                 StudentRefFk = 3,
-                TestRefFk = 18,
+                TestRefFk = 5,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -276,7 +276,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest4 = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 20,
+                TestRefFk = 6,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -286,7 +286,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest5 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 20,
+                TestRefFk = 6,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -409,145 +409,145 @@ namespace TestVerktygWPF
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 5
+                QuestionFk = 1
 
             };
             Answer xOptions1 = new Answer()
             {
                 Text = "Djur",
                 RightAnswer = true,
-                QuestionFk = 5
+                QuestionFk = 1
             };
             Answer xOptions2 = new Answer()
             {
 
                 Text = "Stolpe",
                 RightAnswer = false,
-                QuestionFk = 5
+                QuestionFk = 1
             };
             Answer xOptions3 = new Answer()
             {
 
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 6
+                QuestionFk = 2
             };
             Answer xOptions4 = new Answer()
             {
 
                 Text = "Bil",
                 RightAnswer = true,
-                QuestionFk = 6
+                QuestionFk = 2
             };
             Answer xOptions5 = new Answer()
             {
 
                 Text = "Bi",
                 RightAnswer = false,
-                QuestionFk = 6
+                QuestionFk = 2
             };
             Answer xOptions6 = new Answer()
             {
 
                 Text = "8/4",
                 RightAnswer = true,
-                QuestionFk = 7
+                QuestionFk = 3
             };
             Answer xOptions7 = new Answer()
             {
                 Text = "2*1",
                 RightAnswer = true,
-                QuestionFk = 7
+                QuestionFk = 3
             };
             Answer xOptions8 = new Answer()
             {
                 Text = "9-5",
                 RightAnswer = false,
-                QuestionFk = 7
+                QuestionFk = 3
             };
             Answer xOptions9 = new Answer()
             {
                 Text = "4",
                 RightAnswer = true,
-                QuestionFk = 8
+                QuestionFk = 4
             };
             Answer xOptions10 = new Answer()
             {
                 Text = "5",
                 RightAnswer = false,
-                QuestionFk = 8
+                QuestionFk = 4
             };
             Answer xOptions11 = new Answer()
             {
                 Text = "6",
                 RightAnswer = false,
-                QuestionFk = 8
+                QuestionFk = 4
             };
             Answer xOptions12 = new Answer()
             {
                 Text = "5*1+4",
                 RightAnswer = true,
-                QuestionFk = 9,
+                QuestionFk = 5,
                 OrderPosition = 1
             };
             Answer xOptions13 = new Answer()
             {
                 Text = "4+2+5/5",
                 RightAnswer = true,
-                QuestionFk = 9,
+                QuestionFk = 5,
                 OrderPosition = 2
             };
             Answer xOptions14 = new Answer()
             {
                 Text = "4+2+8*0",
                 RightAnswer = true,
-                QuestionFk = 9,
+                QuestionFk = 5,
                 OrderPosition = 3
             };
             Answer xOptions15 = new Answer()
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 10
+                QuestionFk = 6
             };
             Answer xOptions16 = new Answer()
             {
                 Text = "Blå",
                 RightAnswer = true,
-                QuestionFk = 10
+                QuestionFk = 6
             };
             Answer xOptions17 = new Answer()
             {
                 Text = "Gul",
                 RightAnswer = true,
-                QuestionFk = 10
+                QuestionFk = 6
             };
             Answer xOptions18 = new Answer()
             {
                 Text = "Blåval",
                 RightAnswer = false,
-                QuestionFk = 11,
+                QuestionFk = 7,
                 OrderPosition = 1
             };
             Answer xOptions19 = new Answer()
             {
                 Text = "Elefant",
                 RightAnswer = false,
-                QuestionFk = 11,
+                QuestionFk = 7,
                 OrderPosition = 2
             };
             Answer xOptions20 = new Answer()
             {
                 Text = "Bil",
                 RightAnswer = false,
-                QuestionFk = 11,
+                QuestionFk = 7,
                 OrderPosition = 3
             };
             Answer xOptions21 = new Answer()
             {
                 Text = "Människa",
                 RightAnswer = false,
-                QuestionFk = 11,
+                QuestionFk = 7,
                 OrderPosition = 4
             };
 
@@ -581,49 +581,49 @@ namespace TestVerktygWPF
             {
                 Name = "Vad är kanin en kanin?",
                 QuestionType = "envalsfråga",
-                TestFk = 18,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest2 = new Questions()
             {
                 Name = "Vad är en Bil",
                 QuestionType = "envalsfråga",
-                TestFk = 18,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest3 = new Questions()
             {
                 Name = "1+5*0+3",
                 QuestionType = "Flervalsfråga",
-                TestFk = 18,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest4 = new Questions()
             {
                 Name = "2+2",
                 QuestionType = "envalsfråga",
-                TestFk = 20,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest5 = new Questions()
             {
                 Name = "Vilken Är störst",
                 QuestionType = "rangordning",
-                TestFk = 21,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest6 = new Questions()
             {
                 Name = "Vilka färger ser du?",
                 QuestionType = "Flervalsfråga",
-                TestFk = 19,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest7 = new Questions()
             {
                 Name = "Vilken är längst?",
                 QuestionType = "rangordning",
-                TestFk = 19,
+                TestFk = 6,
                 AppData = "",
             };
             lxQuestion.Add(xQuest);

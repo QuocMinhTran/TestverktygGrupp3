@@ -7,13 +7,13 @@ namespace TestVerktygWPF.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class waow : IMigrationMetadata
+    public sealed partial class hej : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(waow));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(hej));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605110739275_waow"; }
+            get { return "201605111119462_hej"; }
         }
         
         string IMigrationMetadata.Source
