@@ -10,7 +10,7 @@
 
     <Page.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="5,10,0,0" />
+            <Setter Property="Margin" Value="0,10,0,0" />
             <Setter Property="MinWidth" Value="20" />
             <Setter Property="Padding" Value="5,0" />
         </Style>
@@ -39,6 +39,11 @@
             <TextBox Name="txtBoxQuestion"
                      HorizontalAlignment="Left"
                      MinWidth="200" />
+            <Button Content="Hämta bild"
+                    HorizontalAlignment="Left"
+                    Click="Button_Click"/>
+            <Image Name="imgQuestion"  />
+
             <Label Content="Frågetyp" />
             <ComboBox x:Name="SelectionBox"
                       Width="200"

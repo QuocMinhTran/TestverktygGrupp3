@@ -23,13 +23,15 @@ namespace TestVerktygElev
     {
         Student theStudent;
         public List<Test> m_lxTest;
+        Repository xRepository;
         public MainPage(Student student)
         {
             theStudent = student;
-            Repository xRepository = new Repository();
+            Repository xRepository = new Repository();       
             InitializeComponent();
             m_lxTest = new List<Test>();
             m_lxTest = xRepository.GetTestForStudent(2);
+            Console.WriteLine("ID From test Stuffz" + xRepository.GetStudentTestID(1, 1));
             foreach (var item in m_lxTest)
             {
                 Console.WriteLine("Name of Test" + item.Name + " Test ID " + item.ID);
@@ -47,7 +49,7 @@ namespace TestVerktygElev
                 Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
             }
             
-            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID);
+            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(2,xTest.ID));
             NavigationService.Navigate(xElevTestPage);
 
         }

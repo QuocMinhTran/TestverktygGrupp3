@@ -29,6 +29,29 @@ namespace TestVerktygElev.ViewModel
             }
             return lxTest;
         }
+        public int GetStudentTestID(int p_iStudentID, int p_iTestID)
+        {
+            StudentTest xStudentTest = new StudentTest();
+            using (var db = new Model1())
+            {
+                var querry = from StudentTest in db.StudentTests
+                             join xTest in db.Tests on StudentTest.TestRefFk equals xTest.ID into GroupT
+                             join xStuden in db.Students on StudentTest.StudentRefFk equals xStuden.ID into Group
+                             from xGroup in Group
+                             where xGroup.ID == p_iStudentID
+                             from xGroupT in GroupT
+                             where xGroupT.ID == p_iTestID
+                             select StudentTest;
+                foreach (var item in querry)
+                {
+                    xStudentTest = item;
+                }
+
+
+
+            }
+            return xStudentTest.ID;
+        }
 
         internal Test GetTest(int p_IDTest)
         {
@@ -94,6 +117,7 @@ namespace TestVerktygElev.ViewModel
             }
             return lxAnwsers;
         }
+
         public List<Student> GetAllStudents()
         {
             List<Student> students = new List<Student>();
@@ -107,6 +131,16 @@ namespace TestVerktygElev.ViewModel
                 }
             }
             return students;
+        }
+
+        public void SaveTest(List<StudentAnswer> m_lxStudentAnswer, int p_iAmountOfQuestions)
+        {
+            Console.WriteLine("ASD" + p_iAmountOfQuestions);
+            foreach (var item in m_lxStudentAnswer)
+            {
+                Console.WriteLine(" FK- "+item.StudentTestFk+" QuestionID-"+item.Question+" AnswerID-" + item.Answer );
+            }
+
         }
     }
 }
