@@ -53,6 +53,31 @@ namespace TestVerktygElev.ViewModel
             return xStudentTest.ID;
         }
 
+        public List<StudentAnswer> GetStudentAnswers(int p_iStudentiD, int p_iTestiD)
+        {
+            List<StudentAnswer> lxStudentAnswer = new List<StudentAnswer>();
+            using (var db = new Model1())
+            {
+                var querry = from xTest in db.StudentTests
+                             join xStudent in db.Students on xTest.StudentRefFk equals xStudent.ID
+                             join xAnswers in db.StudentAnswers on xTest.ID equals xAnswers.StudentTestFk
+                             where xTest.ID == p_iTestiD
+                             //where xStudent.ID == p_iStudentiD
+                             select xAnswers;
+
+                //var querry = from x in db.StudentAnswers
+                //             select x;
+
+                Console.WriteLine(querry.ToString());
+                foreach (var item in querry)
+                {
+                    lxStudentAnswer.Add(item);
+                }
+            }
+            
+            return lxStudentAnswer;
+        }
+
         internal Test GetTest(int p_IDTest)
         {
             Test xTest = new Test();

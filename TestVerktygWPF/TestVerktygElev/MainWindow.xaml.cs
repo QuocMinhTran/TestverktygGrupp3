@@ -24,8 +24,8 @@ namespace TestVerktygElev
     public partial class MainWindow : Window
     {
         Repository repo = new Repository();
-        List<Student> students;
-        Student SelectedUser;
+        //List<Student> students;
+        //Student SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,8 +33,59 @@ namespace TestVerktygElev
             xStudent.FirstName = "Kom Och";
             xStudent.LastName = " Hjälp Mig";
             xStudent.ID = 1;
+
+            TestFunctions(xStudent);
+
+
             _frame.Navigate(new MainPage(xStudent));
-          //  MenuTabs.Visibility = Visibility.Collapsed;
+        }
+        private void TestFunctions(Student p_xStudent)
+        {
+            Test xTest = repo.GetTest(1);        
+            List<Question> lxQuestions = repo.GetQuestions(xTest.ID);
+            List<Answer> lxAnswers = repo.GetAllAnswers(xTest);
+
+           
+
+            foreach (var item in lxQuestions)
+            {
+                Console.WriteLine("Fråga-" + item.Name);
+                foreach (var item2 in lxAnswers)
+                {
+                    if (item.ID == item2.QuestionFk)
+                    {
+                        Console.WriteLine("Svar-" + item2.Text);
+                    }
+                }
+            }
+            List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
+            lxStudentAnswers = repo.GetStudentAnswers(p_xStudent.ID,xTest.ID);
+            foreach (var item in lxStudentAnswers)
+            {
+                Console.WriteLine(item.Answer + item.Question);
+            }
+            for (int i = 0; i < lxQuestions.Count; i++)
+            {
+                for (int j = 0; j < lxAnswers.Count; j++)
+                {
+                    foreach (var item in lxStudentAnswers)
+                    {
+                        if (lxQuestions[i].ID == lxAnswers[j].QuestionFk)
+                        {
+                            if (item.Answer == lxAnswers[j].ID)
+                            {
+                                if (lxAnswers[j].RightAnswer)
+                                {
+                                    Console.WriteLine("RÄtt");
+                                }
+                                else  Console.WriteLine("Fel");
+
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
 

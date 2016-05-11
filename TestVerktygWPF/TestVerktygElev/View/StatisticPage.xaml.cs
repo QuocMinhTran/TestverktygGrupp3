@@ -35,5 +35,11 @@ namespace TestVerktygElev
             MainPage xMainPage = new MainPage(Stuent);
             NavigationService.Navigate(xMainPage);
         }
+        private void InitData()
+        {
+            TextBlock xTextBlock = new TextBlock();
+            xTextBlock.Text = "Hej";
+            ListViewCompletedTest.Items.Add(xTextBlock);
+        }
     }
 }
