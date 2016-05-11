@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="20,0,20,0">
+        <StackPanel Grid.Column="0" Margin="20,0,20,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <StackPanel.Resources>
                 <Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0,5,0,0" />
@@ -41,8 +41,15 @@
                      MinWidth="200" />
             <Button Content="Hämta bild"
                     HorizontalAlignment="Left"
-                    Click="Button_Click"/>
-            <Image Name="imgQuestion"  />
+                    Name="btnFindImage"
+                    Click="btnFindImage_Click"/>
+            <Button Content="Ta bort bild"
+                    HorizontalAlignment="Left"
+                    Name="btnRemoveImg"
+                    Click="btnRemoveImg_Click"/>
+            <Image Name="imgQuestion" 
+                   MaxWidth="400"
+                   MaxHeight="400"  />
 
             <Label Content="Frågetyp" />
             <ComboBox x:Name="SelectionBox"
