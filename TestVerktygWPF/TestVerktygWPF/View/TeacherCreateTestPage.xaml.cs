@@ -44,9 +44,14 @@ namespace TestVerktygWPF.View
         private void NewStackPanel(List<Answer> lxAnswers)
         {
             int iIndex = 0;
-            for (int i = 0; i < lxAnswers.Count; i++)
+            //for (int i = 0; i < lxAnswers.Count; i++)
+            //{
+            //    _StackPanel.Children.Add(CreateQuestion());
+            //}
+            foreach (var item in lxAnswers)
             {
-                _StackPanel.Children.Add(CreateQuestion());
+                Answer ans = item as Answer;
+                _StackPanel.Children.Add(CreateQuestion(ans.RightAnswer));
             }
             foreach (var item in _StackPanel.Children)
             {
@@ -78,8 +83,9 @@ namespace TestVerktygWPF.View
             }
         }
 
-        private void SaveQuestion(object sender, RoutedEventArgs e)
+        private void btnSaveQuestion_Click(object sender, RoutedEventArgs e)
         {
+            txtBlockWarning.Text = "";
             bool oneOrMoreAlternativesEmpty = false;
             bool isThereACorrectAnswer = false;
             foreach (var item in _StackPanel.Children)
@@ -88,17 +94,20 @@ namespace TestVerktygWPF.View
                 StackPanel stackPanelAlternatives = item as StackPanel;
                 foreach (var item2 in stackPanelAlternatives.Children)
                 {
+                    Console.WriteLine(item2.ToString());
                     if (item2.GetType() == typeof(TextBox))
                     {
                         Console.WriteLine("objektet är en textbox");
                         TextBox txtBoxAlternative = item2 as TextBox;
+
                         if (String.IsNullOrEmpty(txtBoxAlternative.Text) == true)
                         {
                             oneOrMoreAlternativesEmpty = true;
                             txtBoxAlternative.BorderBrush = Brushes.Red;
                             Console.WriteLine("alternativet måste ha text");
-                            lblWarning.Content = "Varje alternativ måste en text";
+                            txtBlockWarning.Text = "Varje alternativ måste en text.\n";
                         }
+
                         else
                         {
                             txtBoxAlternative.ClearValue(TextBox.BorderBrushProperty);
@@ -109,50 +118,56 @@ namespace TestVerktygWPF.View
                     {
                         RadioButton rbCorrectAlternative = item2 as RadioButton;
                         if (!isThereACorrectAnswer)
-                        {
                             if (rbCorrectAlternative.IsChecked == true)
-                            {
                                 isThereACorrectAnswer = true;
-                            }
-                        }
                     }
+
                     else if (item2.GetType() == typeof(CheckBox))
                     {
-                        CheckBox cbkBoxCorrectAlternative = item2 as CheckBox;
+                        CheckBox chkBoxCorrectAlternative = item2 as CheckBox;
                         if (!isThereACorrectAnswer)
-                            if (chkBoxAutoCorrectTest.IsChecked == true)
+                            if (chkBoxCorrectAlternative.IsChecked == true)
                                 isThereACorrectAnswer = true;
                     }
-                    //else if (item2.GetType() == typeof(ComboBox))
-                    //{
-                    //    oneOrMoreAlternativesEmpty = CheckCboAlternatives();
-                    //    break;
-                    //}
                 }
-
-                if (String.IsNullOrEmpty(txtBoxQuestion.Text))
-                    txtBoxQuestion.BorderBrush = Brushes.Red;
-                else
-                    txtBoxQuestion.ClearValue(TextBox.BorderBrushProperty);
             }
 
-            if (oneOrMoreAlternativesEmpty == false && isThereACorrectAnswer == true)
+            if (String.IsNullOrEmpty(txtBoxQuestion.Text) == false)
             {
-                Questions xQuest = new Questions();
-                xQuest.Name = txtBoxQuestion.Text;
-                xQuest.QuestionType = GetQuestionType(SelectionBox.SelectedIndex);
-                xQuest.ID = iID;
-                SaveAnwers(xQuest);
-                m_lxQuestions.Add(xQuest);
-                iID++;
-                listViewAddedQuestions.Items.Add(xQuest.Name);
-                btnSaveTest.IsEnabled = true;
-                Clear(false);
+                txtBoxQuestion.ClearValue(TextBox.BorderBrushProperty);
+
+                if (oneOrMoreAlternativesEmpty == false && isThereACorrectAnswer == true && SelectionBox.SelectedIndex != 2)
+                    AddQuestionToTest();
+
+                else if (oneOrMoreAlternativesEmpty == false && SelectionBox.SelectedIndex == 2)
+                    AddQuestionToTest();
+
+                else if (isThereACorrectAnswer == false && SelectionBox.SelectedIndex != 2)
+                    txtBlockWarning.Text = "Markera ett korrekt svar";
+
+                else if (oneOrMoreAlternativesEmpty = true && isThereACorrectAnswer == false)
+                    txtBlockWarning.Text = "Fyll i de markerade fälten och ett korrekt svar";
             }
+
             else
             {
-                lblWarning.Content = "Fyll i de markerade fälten";
+                txtBoxQuestion.BorderBrush = Brushes.Red;
+                txtBlockWarning.Text += "Frågan måste ha ett namn innan du sparar den.\n";
             }
+        }
+
+        private void AddQuestionToTest()
+        {
+            Questions xQuest = new Questions();
+            xQuest.Name = txtBoxQuestion.Text;
+            xQuest.QuestionType = GetQuestionType(SelectionBox.SelectedIndex);
+            xQuest.ID = iID;
+            SaveAnwers(xQuest);
+            m_lxQuestions.Add(xQuest);
+            iID++;
+            listViewAddedQuestions.Items.Add(xQuest.Name);
+            btnSaveTest.IsEnabled = true;
+            Clear(false);
         }
 
         //private bool CheckCboAlternatives()
@@ -264,40 +279,55 @@ namespace TestVerktygWPF.View
             btnSaveQuestion.IsEnabled = true;
         }
 
-        private void SaveTest(object sender, RoutedEventArgs e)
+        private void btnSaveTest_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(txtBoxTestName.Text) == false)
             {
-                TestHandler xTestHandler = new TestHandler();
-                Test xTest = new Test();
-                xTest.Name = txtBoxTestName.Text;
-                xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer);
-
-                Clear(true);
+                txtBoxTestName.ClearValue(TextBox.BorderBrushProperty);
+                txtBlockWarning.Text = "";
+                SaveTest();
             }
             else
             {
-                Console.WriteLine("ett test måste ha ett namn");
+                txtBlockWarning.Text = "Testet måste ha ett namn innan du sparar den.";
+                txtBoxTestName.BorderBrush = Brushes.Red;
             }
-            
+
         }
-        private StackPanel CreateQuestion()
+
+        private void SaveTest()
+        {
+            TestHandler xTestHandler = new TestHandler();
+            Test xTest = new Test();
+
+            if (chkBoxAutoCorrectTest.IsEnabled)
+                xTest.IsAutoCorrect = true;
+            else
+                xTest.IsAutoCorrect = false;
+
+            xTest.Name = txtBoxTestName.Text;
+            xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer);
+
+            Clear(true);
+        }
+
+        private StackPanel CreateQuestion(bool correctAnswer = false)
         {
             StackPanel xStackPanel = new StackPanel();
             TextBox xTextBox = new TextBox();
             xTextBox.Text = "";
-            xTextBox.Width = 170;
+            xTextBox.Width = 200;
             xStackPanel.Children.Add(xTextBox);
             
 
             switch (SelectionBox.SelectedIndex)
             {
                 case 0:
-                    xStackPanel.Children.Add(AddItemRadioButton());
+                    xStackPanel.Children.Add(AddItemRadioButton(correctAnswer));
                     lblQTypeInstructions.Content = "Markera det korrekta svaret";
                     break;
                 case 1:
-                    xStackPanel.Children.Add(AddItemCheckBox());
+                    xStackPanel.Children.Add(AddItemCheckBox(correctAnswer));
                     lblQTypeInstructions.Content = "Markera ett eller fler korrekta svar";
                     break;
                 case 2:
@@ -350,34 +380,35 @@ namespace TestVerktygWPF.View
                 }
             }
         }
-        private CheckBox AddItemCheckBox()
+        //private ComboBox AddItemComboBox()
+        //{
+        //    Thickness xThickness = new Thickness();
+        //    ComboBox xComboBox = new ComboBox();
+        //    xThickness.Left = 10;
+        //    xComboBox.VerticalAlignment = VerticalAlignment.Center;
+        //    xComboBox.Margin = xThickness;
+        //    return xComboBox;
+        //}
+        private CheckBox AddItemCheckBox(bool correctAnswer = false)
         {
             Thickness xThickness = new Thickness();
             CheckBox xCheckBox = new CheckBox();
             xThickness.Left = 10;
+            if (correctAnswer)
+                xCheckBox.IsChecked = true;
 
             xCheckBox.Margin = xThickness;
             return xCheckBox;
         }
-        private ComboBox AddItemComboBox()
-        {
-            Thickness xThickness = new Thickness();
-            ComboBox xComboBox = new ComboBox();
-            xThickness.Left = 10;
-            xComboBox.VerticalAlignment = VerticalAlignment.Center;
-            xComboBox.HorizontalAlignment = HorizontalAlignment.Left;
-            xComboBox.Margin = xThickness;
-            return xComboBox;
-        }
-        private RadioButton AddItemRadioButton()
+        private RadioButton AddItemRadioButton(bool correctAnswer = false)
         {
             Thickness xThickness = new Thickness();
             xThickness.Left = 10;
             RadioButton xRadioButton = new RadioButton();
-            xRadioButton.VerticalAlignment = VerticalAlignment.Center;
-            xRadioButton.HorizontalAlignment = HorizontalAlignment.Left;
             xRadioButton.GroupName = "Question";
             xRadioButton.Margin = xThickness;
+            if (correctAnswer)
+                xRadioButton.IsChecked = true;
             return xRadioButton;
         }
         private TextBlock AddItemRanking(int i)
@@ -385,15 +416,13 @@ namespace TestVerktygWPF.View
             Thickness xThickness = new Thickness();
             xThickness.Left = 10;
             TextBlock xTxtBlock = new TextBlock();
-            xTxtBlock.VerticalAlignment = VerticalAlignment.Center;
-            xTxtBlock.HorizontalAlignment = HorizontalAlignment.Left;
             xTxtBlock.Margin = xThickness;
             xTxtBlock.Text = (i + 1).ToString();
             return xTxtBlock;
         }
         private void Clear(bool All)
         {
-            btnSaveQuestion.IsEnabled = false;
+            btnSaveQuestion.IsEnabled = true;
             txtBoxQuestion.Text = "";
             if (All)
             {
@@ -439,18 +468,26 @@ namespace TestVerktygWPF.View
                 listViewAddedQuestions.Items.Remove(listViewAddedQuestions.Items[listViewAddedQuestions.SelectedIndex]);
                 NewStackPanel(lxAwnser);
             }
-            else
-            {
-                Console.WriteLine("du måste välja en fråga");
-            }
         }
 
         private void listViewAddedQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Console.WriteLine(listViewAddedQuestions.SelectedIndex);
             if (listViewAddedQuestions.SelectedItem != null)
+            {
                 btnEditQuestion.IsEnabled = true;
+                btnRemoveQuestion.IsEnabled = true;
+            }
             else
+            {
                 btnEditQuestion.IsEnabled = false;
+                btnRemoveQuestion.IsEnabled = false;
+            }
+        }
+
+        private void btnRemoveQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            listViewAddedQuestions.Items.Remove(listViewAddedQuestions.SelectedItem);
         }
     }
 }

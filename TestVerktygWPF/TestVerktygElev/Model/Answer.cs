@@ -5,7 +5,7 @@ namespace TestVerktygElev
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
+    using System.Windows.Controls.Primitives;
     public partial class Answer
     {
         public int ID { get; set; }
@@ -19,5 +19,6 @@ namespace TestVerktygElev
         public int QuestionFk { get; set; }
 
         public virtual Question Question { get; set; }
+
     }
 }
