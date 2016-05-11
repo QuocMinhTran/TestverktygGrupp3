@@ -27,10 +27,10 @@ namespace TestVerktygElev
         public MainPage(Student student)
         {
             theStudent = student;
-            Repository xRepository = new Repository();       
+            xRepository = new Repository();       
             InitializeComponent();
             m_lxTest = new List<Test>();
-            m_lxTest = xRepository.GetTestForStudent(2);
+            m_lxTest = xRepository.GetTestForStudent(student.ID);
             Console.WriteLine("ID From test Stuffz" + xRepository.GetStudentTestID(1, 1));
             foreach (var item in m_lxTest)
             {

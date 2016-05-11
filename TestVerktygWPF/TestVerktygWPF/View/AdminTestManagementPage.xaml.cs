@@ -24,8 +24,10 @@ namespace TestVerktygWPF.View
     {
         //IList<Test> Tests = new List<Test>();
         Test selectedTest;
+        User theAdmin;
         public AdminTestManagementPage(User user)
         {
+            theAdmin = user;
             InitializeComponent();
             Updatelist();
         }
@@ -120,11 +122,12 @@ namespace TestVerktygWPF.View
                 var query = from t in db.Tests
                             join ut in db.UserTests on t.ID equals ut.TestFk
                             join u in db.Users on ut.UserFk equals u.ID
-                            join sc in db.StudentClasses on u.StudentClassFk equals sc.ID
-                            join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
-                            join c in db.Courses on scc.CouseRefID equals c.ID
-                            where t.EndDate >= DateTime.Now && u.OccupationFk == 2
-                            select new { Provnamn = t.Name, StartDatum = t.StartDate, SlutDatum = t.EndDate, Tid = t.TimeStampe };
+                            //join sc in db.StudentClasses on u.StudentClassFk equals sc.ID
+                            //join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
+                            //join c in db.Courses on scc.CouseRefID equals c.ID
+                            where u.ID == theAdmin.ID
+                            select t; 
+                            //new { Provnamn = t.Name, StartDatum = t.StartDate, SlutDatum = t.EndDate, Tid = t.TimeStampe };
                 _DataGrid.ItemsSource = query.ToList();
 
             }

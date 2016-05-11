@@ -30,7 +30,9 @@ namespace TestVerktygElev
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            MainPage xMainPage = new MainPage();
+            Student Stuent = new Student();
+            Stuent.ID = 1;
+            MainPage xMainPage = new MainPage(Stuent);
             NavigationService.Navigate(xMainPage);
         }
     }
