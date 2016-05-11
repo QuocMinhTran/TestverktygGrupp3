@@ -175,7 +175,7 @@ namespace TestVerktygWPF.View
 
             foreach (var item in StudentsTests)
             {
-                csTest.SetCurrentTest(item.ID);
+                csTest.SetCurrentTest(item.TestRefFk);
                 lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
                                               csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
                 LiStudentsDoneTests.Add(csTest.CurrentTest);
@@ -189,12 +189,13 @@ namespace TestVerktygWPF.View
         {
             if (lvStudentStatistics.SelectedItem != null)
             {
+                StatistikDetailPage.SelectedTest.ID = LiStudentsDoneTests[lvStudentStatistics.SelectedIndex].ID;
                 Window newWindow = new NavigationWindow();
                 newWindow.Show();
                 newWindow.Topmost = true;
                 newWindow.Content = new StatistikDetailPage();
 
-                StatistikDetailPage.SelectedTest.ID = LiStudentsDoneTests[lvStudentStatistics.SelectedIndex].ID;
+                
 
             }
 
