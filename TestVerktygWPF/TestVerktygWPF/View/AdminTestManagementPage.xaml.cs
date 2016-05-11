@@ -23,7 +23,7 @@ namespace TestVerktygWPF.View
     public partial class AdminTestManagementPage : Page
     {
         //IList<Test> Tests = new List<Test>();
-        Test selectedTest;
+        Test selectedTest = new Test();
         User theAdmin;
         public AdminTestManagementPage(User user)
         {
@@ -35,68 +35,71 @@ namespace TestVerktygWPF.View
         private void _ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedTest = _ListView.SelectedItem as Test;
-            Console.WriteLine(selectedTest.ToString());
-            StackPanel stkPanel = new StackPanel();
-            using (var db = new DbModel())
+            if (selectedTest != null)
             {
-                //var query = from t in db.Tests
-                //            join q in db.Questions on t.ID equals q.TestFk
-                //            join a in db.Answers on q.ID equals a.QuestionFk
-                //            where t.ID == test.ID
-                //            select new { QuestionText = q.Name, QuestionType = q.QuestionType, Answer = a.Text };
-                pup.Child = stkPanel;
-                foreach (var item in db.Questions.ToList())
+                using (var db = new DbModel())
                 {
-                    if (item.TestFk == selectedTest.ID)
+                    //var query = from t in db.Tests
+                    //            join q in db.Questions on t.ID equals q.TestFk
+                    //            join a in db.Answers on q.ID equals a.QuestionFk
+                    //            where t.ID == test.ID
+                    //            select new { QuestionText = q.Name, QuestionType = q.QuestionType, Answer = a.Text };
+                    foreach (var item in db.Questions.ToList())
                     {
-                        TextBlock txt = new TextBlock();
-                        txt.Text = item.Name;
-                        stkPanel.Children.Add(txt);
-                        foreach (var a in db.Answers.ToList())
+                        int i = 0;
+                        if (item.TestFk == selectedTest.ID)
                         {
-                            if (a.QuestionFk == item.ID)
-                            {
-                                switch (item.QuestionType)
-                                {
-                                    case "envalfråga":
-                                        RadioButton ans = new RadioButton();
-                                        ans.Content = a.Text;
-                                        stkPanel.Children.Add(ans);
-                                        break;
-                                    case "flervalfråga":
-                                        CheckBox ans2 = new CheckBox();
-                                        ans2.Content = a.Text;
-                                        stkPanel.Children.Add(ans2);
-                                        break;
-                                    case "rangordningfråga":
-                                        TextBlock ans3 = new TextBlock();
-                                        ans3.Text = a.Text;
-                                        stkPanel.Children.Add(ans3);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                
-                            }
-                        }
+                            i++;
+                            TextBlock txtBlock = new TextBlock();
+                            txtBlock.Text = "Fråga " + i;
+                            splSelectedTest.Children.Add(txtBlock);
+                            TextBlock txt = new TextBlock();
+                            txt.Text = item.Name;
+                            splSelectedTest.Children.Add(txt);
 
+                            foreach (var a in db.Answers.ToList())
+                            {
+                                if (a.QuestionFk == item.ID)
+                                {
+
+                                    switch (item.QuestionType)
+                                    {
+                                        case "envalsfråga":
+                                            RadioButton ans = new RadioButton();
+                                            ans.Content = a.Text;
+                                            splSelectedTest.Children.Add(ans);
+                                            break;
+                                        case "Flervalsfråga":
+                                            CheckBox ans2 = new CheckBox();
+                                            ans2.Content = a.Text;
+                                            splSelectedTest.Children.Add(ans2);
+                                            break;
+                                        case "rangordning":
+                                            TextBlock ans3 = new TextBlock();
+                                            ans3.Text = a.Text;
+                                            splSelectedTest.Children.Add(ans3);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
+                            }
+
+                        }
                     }
+
+                    Button sendbtn = new Button();
+                    Button sendBackbtn = new Button();
+                    sendbtn.Content = "Skicka till studenter";
+                    sendBackbtn.Content = "Skicka till lärare";
+                    splSelectedTest.Children.Add(sendbtn);
+                    splSelectedTest.Children.Add(sendBackbtn);
+                    sendbtn.Click += Sendbtn_Click;
+                    sendBackbtn.Click += SendBackbtn_Click;
                 }
-                
-                Button sendbtn = new Button();
-                Button sendBackbtn = new Button();
-                Button nobtn = new Button();                
-                stkPanel.Children.Add(sendbtn);
-                stkPanel.Children.Add(sendBackbtn);
-                stkPanel.Children.Add(nobtn);
-                sendbtn.Click += Sendbtn_Click;
-                sendBackbtn.Click += SendBackbtn_Click;
-                nobtn.Click += Nobtn_Click;
-                pup.IsOpen = true;
-                pup.StaysOpen = true;
             }
         }
-
         private void SendBackbtn_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new DbModel())
@@ -110,8 +113,6 @@ namespace TestVerktygWPF.View
                     db.UserTests.Remove(item);
                 }
                 db.SaveChanges();
-                pup.Child = null;
-                pup.IsOpen = false;
                 Updatelist();
             }
         }
@@ -130,19 +131,14 @@ namespace TestVerktygWPF.View
 
                             select t;
                 List<Test> listTest = new List<Test>();
-                foreach (var item in query)
+                foreach (var item in query.ToList())
                 {
                     listTest.Add(item);
                 }
                 _ListView.ItemsSource = listTest;
+                _ListView.DisplayMemberPath = "Name";
 
             }
-        }
-
-        private void Nobtn_Click(object sender, RoutedEventArgs e)
-        {
-            pup.Child = null;
-            pup.IsOpen = false;
         }
 
         private void Sendbtn_Click(object sender, RoutedEventArgs e)
@@ -151,7 +147,9 @@ namespace TestVerktygWPF.View
             using (var db = new DbModel())
             {
                 var xtests = from ut in db.UserTests
+                             where ut.TestFk == selectedTest.ID
                              select ut;
+
                 foreach (var item in xtests.ToList())
                 {
                     db.UserTests.Remove(item);
@@ -166,9 +164,6 @@ namespace TestVerktygWPF.View
                 db.SaveChanges();
             }
             Updatelist();
-            pup.Child = null;
-            pup.IsOpen = false;
-
         }
     }
 }
