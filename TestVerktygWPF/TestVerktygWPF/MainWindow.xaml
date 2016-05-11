@@ -34,9 +34,13 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>-->
-            <StackPanel Margin="10" Width="500" Name="LoginPage"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"
-                        Grid.Row="1">
+        <ScrollViewer Height="Auto" 
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="1">
+            <StackPanel Margin="10" 
+                        Width="500" 
+                        Name="LoginPage"
+                        >
                 <Image Source="Assets/Images/NewtonLogo.png" HorizontalAlignment="Center" Grid.Row="0" Stretch="None" />
                 <TextBlock Text="Välkommen till Newtons automatiska provtagare!" HorizontalAlignment="Center" FontSize="20" Margin="10,10"/>
                 <Label Content="Användarnamn" Margin="0,0,0,10" FontSize="20"/>
@@ -45,6 +49,7 @@
                 <PasswordBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
                 <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
             </StackPanel>
+        </ScrollViewer>
         <Frame Grid.Row="1" x:Name="_Frame"></Frame>
     </Grid>
 </Window>
