@@ -20,9 +20,25 @@ namespace TestVerktygElev
     /// </summary>
     public partial class StatisticPage : Page
     {
-        public StatisticPage()
+        public StatisticPage(Test p_xTest,int p_iScore)
         {
             InitializeComponent();
+            TextBlockTestName.Text = p_xTest.Name;
+            TextBlockTime.Text = p_xTest.TimeStampe.ToString();
+            TextBlockGrade.Text = p_iScore.ToString();
+        }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+<<<<<<< HEAD
+        {
+            Student Stuent = new Student();
+            Stuent.ID = 1;
+            MainPage xMainPage = new MainPage(Stuent);
+=======
+        { 
+            MainPage xMainPage = new MainPage();
+>>>>>>> origin/master
+            NavigationService.Navigate(xMainPage);
         }
     }
 }

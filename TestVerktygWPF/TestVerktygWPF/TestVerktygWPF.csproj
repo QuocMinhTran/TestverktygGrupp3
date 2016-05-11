@@ -192,13 +192,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Model\Migrations\201605100932174_funka.resx">
-      <DependentUpon>201605100932174_funka.cs</DependentUpon>
-=======
+
     <EmbeddedResource Include="Migrations\201605110739275_waow.resx">
       <DependentUpon>201605110739275_waow.cs</DependentUpon>
->>>>>>> origin/master
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

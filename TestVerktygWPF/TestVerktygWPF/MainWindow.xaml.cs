@@ -45,7 +45,7 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-            AddDataToBase();
+           // AddDataToBase();
             AdminTabs.Visibility = Visibility.Collapsed; // must change to collapsed later
             TeacherTabs.Visibility = Visibility.Collapsed;
             LogoutTabs.Visibility = Visibility.Collapsed;
