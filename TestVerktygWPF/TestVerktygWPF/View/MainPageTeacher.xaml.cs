@@ -24,6 +24,7 @@ namespace TestVerktygWPF
         public MainPageTeacher(User user)
         {
             InitializeComponent();
+            teacherName.Text = user.FirstName + " " + user.LastName;
         }
     }
 }

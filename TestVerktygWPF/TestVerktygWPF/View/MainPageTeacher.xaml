@@ -18,7 +18,7 @@
 
                 <Image Source="/TestVerktygWPF;component/Assets/Images/NewtonLogo.png" Margin="10,10,10,10" HorizontalAlignment="Center"/>
                 <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Välkommen</TextBlock>
-                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center">Lärare</TextBlock>
+                <TextBlock FontSize="30" VerticalAlignment="Center" Margin="10,10" HorizontalAlignment="Center" Name="teacherName"></TextBlock>
             </StackPanel>
         </DockPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
