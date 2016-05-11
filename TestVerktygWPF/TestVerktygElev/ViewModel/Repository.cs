@@ -133,14 +133,37 @@ namespace TestVerktygElev.ViewModel
             return students;
         }
 
-        public void SaveTest(List<StudentAnswer> m_lxStudentAnswer, int p_iAmountOfQuestions)
+        public void SaveTest(List<StudentAnswer> m_lxStudentAnswer, int p_iScore,int p_iWritenTime)
         {
-            Console.WriteLine("ASD" + p_iAmountOfQuestions);
-            foreach (var item in m_lxStudentAnswer)
+            int Id = 0;
+            using (var db = new Model1())
             {
-                Console.WriteLine(" FK- "+item.StudentTestFk+" QuestionID-"+item.Question+" AnswerID-" + item.Answer );
+                foreach (var item in m_lxStudentAnswer)
+                {
+                    db.StudentAnswers.Add(item);
+                    Id = item.StudentTestFk;
+                }
+                db.SaveChanges();
             }
-
+            UpdateStudentTest(Id,p_iScore,p_iWritenTime);
+        }
+        public void UpdateStudentTest(int p_iStudentTest, int p_iScore ,int p_iWritenTime)
+        {
+            using (var db = new Model1())
+            {
+                var querry = from xStudentTest in db.StudentTests
+                             where xStudentTest.ID == p_iStudentTest
+                             select xStudentTest;
+                foreach (var item in querry)
+                {
+                    Console.WriteLine("I HAVE I LIFE FOR NOW ::::" + item.ID + "ADASD");
+                    item.IsTestDone = true;
+                    item.Score = p_iScore;
+                    item.WritenTime = p_iWritenTime;
+                    
+                }
+                db.SaveChanges();
+            }
         }
     }
 }
