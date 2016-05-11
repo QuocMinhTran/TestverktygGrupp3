@@ -34,59 +34,10 @@ namespace TestVerktygElev
             xStudent.LastName = " Hjälp Mig";
             xStudent.ID = 1;
 
-            TestFunctions(xStudent);
-
-
             _frame.Navigate(new MainPage(xStudent));
+            //_frame.Navigate(new StatisticPage(null,1));
         }
-        private void TestFunctions(Student p_xStudent)
-        {
-            Test xTest = repo.GetTest(1);        
-            List<Question> lxQuestions = repo.GetQuestions(xTest.ID);
-            List<Answer> lxAnswers = repo.GetAllAnswers(xTest);
-
-           
-
-            foreach (var item in lxQuestions)
-            {
-                Console.WriteLine("Fråga-" + item.Name);
-                foreach (var item2 in lxAnswers)
-                {
-                    if (item.ID == item2.QuestionFk)
-                    {
-                        Console.WriteLine("Svar-" + item2.Text);
-                    }
-                }
-            }
-            List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
-            lxStudentAnswers = repo.GetStudentAnswers(p_xStudent.ID,xTest.ID);
-            foreach (var item in lxStudentAnswers)
-            {
-                Console.WriteLine(item.Answer + item.Question);
-            }
-            for (int i = 0; i < lxQuestions.Count; i++)
-            {
-                for (int j = 0; j < lxAnswers.Count; j++)
-                {
-                    foreach (var item in lxStudentAnswers)
-                    {
-                        if (lxQuestions[i].ID == lxAnswers[j].QuestionFk)
-                        {
-                            if (item.Answer == lxAnswers[j].ID)
-                            {
-                                if (lxAnswers[j].RightAnswer)
-                                {
-                                    Console.WriteLine("RÄtt");
-                                }
-                                else  Console.WriteLine("Fel");
-
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
+ 
 
 
         //private void btnLogin_Click(object sender, RoutedEventArgs e)

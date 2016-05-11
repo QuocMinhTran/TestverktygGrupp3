@@ -15,6 +15,7 @@ namespace TestVerktygElev.ViewModel
             using (var db = new Model1())
             {
                 var querry = from StudentTest in db.StudentTests
+                             where StudentTest.IsTestDone == false
                              join Test in db.Tests on StudentTest.TestRefFk equals Test.ID
                              join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID into Group
                              from TestGroup in Group
@@ -22,9 +23,9 @@ namespace TestVerktygElev.ViewModel
                              select Test;
                 foreach (var item in querry)
                 {
+                    
                     Console.WriteLine(item.Name + " Name of Test From DataBase");
                     lxTest.Add(item);
-
                 }
             }
             return lxTest;
