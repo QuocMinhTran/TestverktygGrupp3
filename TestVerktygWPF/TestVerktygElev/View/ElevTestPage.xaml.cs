@@ -32,12 +32,13 @@ namespace TestVerktygElev
         private int m_iIndex = 0;
         private int m_iTime;
         private int m_iTempID;
+        private int m_iStudentTestID;
         //private int m_iScore = 0;
 
-        public ElevTestPage(int p_IDTest)
+        public ElevTestPage(int p_IDTest, int p_iStudentTestID)
         {
-
             InitializeComponent();
+            m_iStudentTestID = p_iStudentTestID;
             m_liIndexes = new List<int>();
             m_xRepository = new Repository();
             m_lxStudentAnswer = new List<StudentAnswer>();
@@ -52,10 +53,12 @@ namespace TestVerktygElev
         }
         private void SpawnQuestion()
         {
+            List<int> liAnswers = new List<int>();
             List<Answer> lxAnswer;
             tbQuestion.Text = m_lxQuestions[m_iIndex].Name;
             m_iTempID = m_lxQuestions[m_iIndex].ID;
             lxAnswer = m_xRepository.GetAnwsers(m_iTempID);
+
             foreach (var item in lxAnswer)
             {
                 m_liIndexes.Add(item.ID);
@@ -96,7 +99,7 @@ namespace TestVerktygElev
                         ComboBox xCombo = new ComboBox();
                         for (int j = 0; j < lxAnswer.Count; j++)
                         {
-                            xCombo.Items.Add(j+1);
+                            xCombo.Items.Add(j + 1);
                         }
                         foreach (var item in m_lxStudentAnswer)
                         {
@@ -110,8 +113,6 @@ namespace TestVerktygElev
                     default:
                         break;
                 }
-
-
             }
         }
         private void StartTimer()
@@ -141,7 +142,7 @@ namespace TestVerktygElev
             bool bRemoveQuestion = false;
             foreach (var item in lbAnswer.Items)
             {
-                if (!bRemoveQuestion )
+                if (!bRemoveQuestion)
                 {
                     bRemoveQuestion = RemoveQuestionAnswer();
                 }
@@ -207,13 +208,13 @@ namespace TestVerktygElev
                 ComboBox xComboBox = item as ComboBox;
                 if (xComboBox != null)
                 {
-                    AddAnswer(iTemp,xComboBox.SelectedIndex);
+                    AddAnswer(iTemp, xComboBox.SelectedIndex);
                     iTemp++;
                 }
             }
 
             m_iIndex++;
-            
+
             lbAnswer.Items.Clear();
             m_liIndexes.Clear();
             if (m_iIndex < m_lxQuestions.Count)
@@ -227,7 +228,7 @@ namespace TestVerktygElev
         private bool RemoveQuestionAnswer()
         {
             List<StudentAnswer> lxStudentAnswers = m_lxStudentAnswer;
-            List<StudentAnswer> Removable = new List<StudentAnswer>(); 
+            List<StudentAnswer> Removable = new List<StudentAnswer>();
             if (lxStudentAnswers.Count != 0)
             {
                 foreach (var item in lxStudentAnswers)
@@ -245,9 +246,10 @@ namespace TestVerktygElev
             return true;
         }
 
-        private void AddAnswer(int p_iIndex,int p_iOrderPos)
+        private void AddAnswer(int p_iIndex, int p_iOrderPos)
         {
             StudentAnswer xStudentAnswer = new StudentAnswer();
+            xStudentAnswer.StudentTestFk = m_iStudentTestID;
             xStudentAnswer.Answer = m_liIndexes[p_iIndex];
             xStudentAnswer.OrderPostition = p_iOrderPos;
             xStudentAnswer.Question = m_iTempID;
@@ -255,41 +257,48 @@ namespace TestVerktygElev
         }
         private void CorrectTest()
         {
-            int iTemp = 0;
-            int iSeIfRight = 0;
-            int iScore = 0;
-            int iForScore = 0;
-            for (int i = 0; i < m_lxQuestions.Count; i++)
+            if (NavigationService != null)
             {
-                for (int j = 0; j < m_lxAnswer.Count; j++)
+                int iTemp = 0;
+                int iSeIfRight = 0;
+                int iScore = 0;
+                int iForScore = 0;
+                bool bScore = true;
+                for (int i = 0; i < m_lxQuestions.Count; i++)
                 {
-                    foreach (var item in m_lxStudentAnswer)
+                    for (int j = 0; j < m_lxAnswer.Count; j++)
                     {
-                        if (item.Answer == m_lxAnswer[j].ID && item.Question == m_lxQuestions[i].ID)
+                        foreach (var item in m_lxStudentAnswer)
                         {
-                            Console.WriteLine("Frågra: " + m_lxQuestions[i].ID + " " + m_lxQuestions[i].Name);
-                            Console.WriteLine("Alternativ :" + m_lxAnswer[j].ID + " " + m_lxAnswer[j].Text + " Rätt svar :" + m_lxAnswer[j].RightAnswer);
-                            Console.WriteLine(" Svar" + item.Answer + "RättSvar?" + m_lxAnswer[j].RightAnswer);
-                            if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "envalsfråga") iScore++;
-                            if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID != iTemp)
+                            if (item.Answer == m_lxAnswer[j].ID && item.Question == m_lxQuestions[i].ID)
                             {
-                                iScore++;
-                                iTemp = m_lxQuestions[i].ID;
-                            }
-                            if (!m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID == iTemp) iScore--;
-                            int temp = (int)item.OrderPostition;
-                            temp += 1;
-                            Console.WriteLine(m_lxAnswer[j].OrderPosition + " ORDERPOSSSISTIONASDASDASd " + temp);
+                                if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "envalsfråga") iScore++;
+                                if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID != iTemp)
+                                {
+                                    iScore++;
+                                    iTemp = m_lxQuestions[i].ID;
+                                }
+                                if (!m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID == iTemp)
+                                {
+                                    if (bScore)
+                                    {
+                                        iScore--;
+                                        bScore = false;
+                                    }
+                                }
+                                int temp = (int)item.OrderPostition;
+                                temp += 1;
 
-                            if (m_lxAnswer[j].OrderPosition == temp)
-                            {
-                                iForScore++;
-                                iSeIfRight++;
-                            }
-                            else if (m_lxAnswer[j].OrderPosition != temp)
-                            {
-                                iForScore++;
-                                iSeIfRight--;
+                                if (m_lxAnswer[j].OrderPosition == temp)
+                                {
+                                    iForScore++;
+                                    iSeIfRight++;
+                                }
+                                else if (m_lxAnswer[j].OrderPosition != temp)
+                                {
+                                    iForScore++;
+                                    iSeIfRight--;
+                                }
                             }
                         }
                     }
@@ -297,17 +306,15 @@ namespace TestVerktygElev
                     {
                         iScore++;
                     }
+                    iSeIfRight = 0;
                     iForScore = 0;
                 }
+                //TODO SAVE TO DATABASE
+                m_xRepository.SaveTest(m_lxStudentAnswer,m_iIndex);
+                StatisticPage xStatisticPage = new StatisticPage(m_xTest,iScore);
+                NavigationService.Navigate(xStatisticPage);
             }
-            //TODO SAVE TO DATABASE
-            Console.WriteLine("Score;" + iScore);
-            if (NavigationService != null)
-            {
-                MainPage xMainPage = new MainPage();
-                NavigationService.Navigate(xMainPage);
-            }
-           
+
         }
     }
 }

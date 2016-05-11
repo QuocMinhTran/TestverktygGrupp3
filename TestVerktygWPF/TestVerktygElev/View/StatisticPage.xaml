@@ -36,6 +36,6 @@
         <Button Name="btnGoBack" 
                 Content="Gå tillbaka" 
                 Grid.Row="2"
-                Width="Auto" HorizontalAlignment="Left" Margin="10"/>
+                Width="Auto" HorizontalAlignment="Left" Margin="10" Click="btnGoBack_Click"/>
     </Grid>
 </Page>
