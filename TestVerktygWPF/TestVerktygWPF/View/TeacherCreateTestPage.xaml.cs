@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -488,6 +489,21 @@ namespace TestVerktygWPF.View
         private void btnRemoveQuestion_Click(object sender, RoutedEventArgs e)
         {
             listViewAddedQuestions.Items.Remove(listViewAddedQuestions.SelectedItem);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                String stringPath = openFileDialog.FileName;
+                Console.WriteLine(stringPath);
+                Uri imgUri = new Uri(stringPath);
+                BitmapImage imgBitMap = new BitmapImage(imgUri);
+                imgQuestion.Source = imgBitMap;
+            }
         }
     }
 }
