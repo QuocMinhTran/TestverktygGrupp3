@@ -21,21 +21,22 @@ namespace TestVerktygElev
     /// </summary>
     public partial class MainPage : Page
     {
-        Student theStudent;
+        public Student m_xStudent;
         public List<Test> m_lxTest;
         Repository xRepository;
-        public MainPage(Student student)
+        public MainPage(Student p_xStudent)
         {
-            theStudent = student;
-            xRepository = new Repository();       
             InitializeComponent();
+            m_xStudent = p_xStudent;
+            xRepository = new Repository();
+            TextBlockUserWelcome.Text = "Välkommen " + m_xStudent.FirstName + " " + m_xStudent.LastName;
             m_lxTest = new List<Test>();
-            m_lxTest = xRepository.GetTestForStudent(student.ID);
-            Console.WriteLine("ID From test Stuffz" + xRepository.GetStudentTestID(1, 1));
-            foreach (var item in m_lxTest)
-            {
-                Console.WriteLine("Name of Test" + item.Name + " Test ID " + item.ID);
-            }
+            m_lxTest = xRepository.GetTestForStudent(m_xStudent.ID);
+            //Console.WriteLine("ID From test Stuffz" + xRepository.GetStudentTestID(1, 1));
+            //foreach (var item in m_lxTest)
+            //{
+            //    Console.WriteLine("Name of Test" + item.Name + " Test ID " + item.ID);
+            //}
             lbInfo.ItemsSource = m_lxTest;
 
         }
@@ -49,7 +50,7 @@ namespace TestVerktygElev
                 Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
             }
             
-            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(2,xTest.ID));
+            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(m_xStudent.ID,xTest.ID));
             NavigationService.Navigate(xElevTestPage);
 
         }
