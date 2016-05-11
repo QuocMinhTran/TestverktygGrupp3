@@ -126,8 +126,8 @@ namespace TestVerktygWPF.View
                             //join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
                             //join c in db.Courses on scc.CouseRefID equals c.ID
                             where u.ID == theAdmin.ID
-                            select t; 
-                            //new { Provnamn = t.Name, StartDatum = t.StartDate, SlutDatum = t.EndDate, Tid = t.TimeStampe };
+
+                            select t;
                 _DataGrid.ItemsSource = query.ToList();
 
             }
