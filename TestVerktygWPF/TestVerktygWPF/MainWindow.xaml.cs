@@ -26,7 +26,7 @@ namespace TestVerktygWPF
         Repository repo = new Repository();
         public List<User> LsUsers;
 
-        public User SelectedUser = new User();
+        public User SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
