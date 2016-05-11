@@ -26,7 +26,7 @@ namespace TestVerktygWPF
         Repository repo = new Repository();
         public List<User> LsUsers;
 
-        public User SelectedUser = new User();
+        public User SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,9 +45,11 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-            //AddDataToBase();
-            MenuTab.Visibility = Visibility.Visible; // must change to collapsed later
-            LoginPage.Visibility = Visibility.Collapsed;
+            AddDataToBase();
+            AdminTabs.Visibility = Visibility.Collapsed; // must change to collapsed later
+            TeacherTabs.Visibility = Visibility.Collapsed;
+            LogoutTabs.Visibility = Visibility.Collapsed;
+            //LoginPage.Visibility = Visibility.Collapsed;
             GetAllUsers();
 
         }
@@ -57,7 +59,7 @@ namespace TestVerktygWPF
             Repository repo = new Repository();
             LsUsers = repo.GetAllUsers();
         }
-
+        bool matched = false;
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //TODO: send UserName and Password to database and login if there is a match
@@ -71,17 +73,21 @@ namespace TestVerktygWPF
                     if (item.OccupationFk == 2)
                     {
                         AdminTabs.Visibility = Visibility.Visible;
-                        _Frame.Navigate(new MainPageAdmin(), SelectedUser);
+                        _Frame.Navigate(new MainPageAdmin(SelectedUser));
                     }
-                    else
+                    else if (item.OccupationFk == 1)
                     {
                         TeacherTabs.Visibility = Visibility.Visible;
-                        _Frame.Navigate(new MainPageTeacher(), SelectedUser);
+                        _Frame.Navigate(new MainPageTeacher(SelectedUser));
                     }
+                    matched = true;
                     break;
                 }
             }
-            MessageBox.Show("Wrong information");
+            if (!matched)
+            { 
+                MessageBox.Show("Wrong information");
+            }
 
         }
 
@@ -96,31 +102,34 @@ namespace TestVerktygWPF
             switch (btn.Header.ToString())
             {
                 case "Startsida Admin":
-                    _Frame.Navigate(new MainPageAdmin(), SelectedUser);
+                    _Frame.Navigate(new MainPageAdmin(SelectedUser));
+                    break;
+                case "Skapa Användare":
+                    _Frame.Navigate(new AdminCreateUserPage(SelectedUser));
                     break;
                 case "Hantera Användare":
-                    _Frame.Navigate(new AdminUserManagementPage(), SelectedUser);
+                    _Frame.Navigate(new AdminUserManagementPage(SelectedUser));
                     break;
                 case "Statistik":
-                    _Frame.Navigate(new StatistikMasterPage(), SelectedUser);
+                    _Frame.Navigate(new StatistikMasterPage(SelectedUser));
                     break;
                 case "Skicka ut prov":
-                    _Frame.Navigate(new TeacherTestManagementPage(), SelectedUser);
+                    _Frame.Navigate(new TeacherTestManagementPage(SelectedUser));
                     break;
                 case "Rätt prov":
-                    _Frame.Navigate(new TeacherEvaluatePage(), SelectedUser);
+                    _Frame.Navigate(new TeacherEvaluatePage(SelectedUser));
                     break;
                 case "Start Lärare":
-                    _Frame.Navigate(new MainPageTeacher(), SelectedUser);
+                    _Frame.Navigate(new MainPageTeacher(SelectedUser));
                     break;
                 case "Hantera Prov":
-                    _Frame.Navigate(new AdminTestManagementPage(), SelectedUser);
+                    _Frame.Navigate(new AdminTestManagementPage(SelectedUser));
                     break;
                 case "Skapa Prov":
-                    _Frame.Navigate(new TeacherCreateTestPage(), SelectedUser);
+                    _Frame.Navigate(new TeacherCreateTestPage(SelectedUser));
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestDetailManagement(), SelectedUser);
+                    _Frame.Navigate(new AdminTestDetailManagement(SelectedUser));
                     break;
             }
         }
@@ -208,7 +217,7 @@ namespace TestVerktygWPF
 
             UserTest xUserTets = new UserTest()
             {
-                UserFk = 2,
+                UserFk = 13,
                 TestFk = 1,
             };
             UserTest xUserTets1 = new UserTest()
@@ -218,12 +227,12 @@ namespace TestVerktygWPF
             };
             UserTest xUserTets2 = new UserTest()
             {
-                UserFk = 3,
+                UserFk = 13,
                 TestFk = 2,
             };
             UserTest xUserTets3 = new UserTest()
             {
-                UserFk = 4,
+                UserFk = 17,
                 TestFk = 1,
             };
 
@@ -240,7 +249,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 1,
+                TestRefFk = 18,
                 WritenTime = 10,
                 IsTestDone = true,
                 Score = 2,
@@ -249,7 +258,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest2 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 1,
+                TestRefFk = 18,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -258,7 +267,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest3 = new StudentTest()
             {
                 StudentRefFk = 3,
-                TestRefFk = 1,
+                TestRefFk = 18,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -267,7 +276,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest4 = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 2,
+                TestRefFk = 20,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -277,7 +286,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest5 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 2,
+                TestRefFk = 20,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -400,145 +409,145 @@ namespace TestVerktygWPF
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 1
+                QuestionFk = 5
 
             };
             Answer xOptions1 = new Answer()
             {
                 Text = "Djur",
                 RightAnswer = true,
-                QuestionFk = 1
+                QuestionFk = 5
             };
             Answer xOptions2 = new Answer()
             {
 
                 Text = "Stolpe",
                 RightAnswer = false,
-                QuestionFk = 1
+                QuestionFk = 5
             };
             Answer xOptions3 = new Answer()
             {
 
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 2
+                QuestionFk = 6
             };
             Answer xOptions4 = new Answer()
             {
 
                 Text = "Bil",
                 RightAnswer = true,
-                QuestionFk = 2
+                QuestionFk = 6
             };
             Answer xOptions5 = new Answer()
             {
 
                 Text = "Bi",
                 RightAnswer = false,
-                QuestionFk = 2
+                QuestionFk = 6
             };
             Answer xOptions6 = new Answer()
             {
 
                 Text = "8/4",
                 RightAnswer = true,
-                QuestionFk = 3
+                QuestionFk = 7
             };
             Answer xOptions7 = new Answer()
             {
                 Text = "2*1",
                 RightAnswer = true,
-                QuestionFk = 3
+                QuestionFk = 7
             };
             Answer xOptions8 = new Answer()
             {
                 Text = "9-5",
                 RightAnswer = false,
-                QuestionFk = 3
+                QuestionFk = 7
             };
             Answer xOptions9 = new Answer()
             {
                 Text = "4",
                 RightAnswer = true,
-                QuestionFk = 4
+                QuestionFk = 8
             };
             Answer xOptions10 = new Answer()
             {
                 Text = "5",
                 RightAnswer = false,
-                QuestionFk = 4
+                QuestionFk = 8
             };
             Answer xOptions11 = new Answer()
             {
                 Text = "6",
                 RightAnswer = false,
-                QuestionFk = 4
+                QuestionFk = 8
             };
             Answer xOptions12 = new Answer()
             {
                 Text = "5*1+4",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 9,
                 OrderPosition = 1
             };
             Answer xOptions13 = new Answer()
             {
                 Text = "4+2+5/5",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 9,
                 OrderPosition = 2
             };
             Answer xOptions14 = new Answer()
             {
                 Text = "4+2+8*0",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 9,
                 OrderPosition = 3
             };
             Answer xOptions15 = new Answer()
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 6
+                QuestionFk = 10
             };
             Answer xOptions16 = new Answer()
             {
                 Text = "Blå",
                 RightAnswer = true,
-                QuestionFk = 6
+                QuestionFk = 10
             };
             Answer xOptions17 = new Answer()
             {
                 Text = "Gul",
                 RightAnswer = true,
-                QuestionFk = 6
+                QuestionFk = 10
             };
             Answer xOptions18 = new Answer()
             {
                 Text = "Blåval",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 11,
                 OrderPosition = 1
             };
             Answer xOptions19 = new Answer()
             {
                 Text = "Elefant",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 11,
                 OrderPosition = 2
             };
             Answer xOptions20 = new Answer()
             {
                 Text = "Bil",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 11,
                 OrderPosition = 3
             };
             Answer xOptions21 = new Answer()
             {
                 Text = "Människa",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 11,
                 OrderPosition = 4
             };
 
@@ -572,49 +581,49 @@ namespace TestVerktygWPF
             {
                 Name = "Vad är kanin en kanin?",
                 QuestionType = "envalsfråga",
-                TestFk = 1,
+                TestFk = 18,
                 AppData = "",
             };
             Questions xQuest2 = new Questions()
             {
                 Name = "Vad är en Bil",
                 QuestionType = "envalsfråga",
-                TestFk = 1,
+                TestFk = 18,
                 AppData = "",
             };
             Questions xQuest3 = new Questions()
             {
                 Name = "1+5*0+3",
                 QuestionType = "Flervalsfråga",
-                TestFk = 1,
+                TestFk = 18,
                 AppData = "",
             };
             Questions xQuest4 = new Questions()
             {
                 Name = "2+2",
                 QuestionType = "envalsfråga",
-                TestFk = 2,
+                TestFk = 20,
                 AppData = "",
             };
             Questions xQuest5 = new Questions()
             {
                 Name = "Vilken Är störst",
                 QuestionType = "rangordning",
-                TestFk = 3,
+                TestFk = 21,
                 AppData = "",
             };
             Questions xQuest6 = new Questions()
             {
                 Name = "Vilka färger ser du?",
                 QuestionType = "Flervalsfråga",
-                TestFk = 4,
+                TestFk = 19,
                 AppData = "",
             };
             Questions xQuest7 = new Questions()
             {
                 Name = "Vilken är längst?",
                 QuestionType = "rangordning",
-                TestFk = 4,
+                TestFk = 19,
                 AppData = "",
             };
             lxQuestion.Add(xQuest);
@@ -847,8 +856,12 @@ namespace TestVerktygWPF
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             _Frame.Visibility = Visibility.Collapsed;
+            AdminTabs.Visibility = Visibility.Collapsed; 
+            TeacherTabs.Visibility = Visibility.Collapsed;
+            LogoutTabs.Visibility = Visibility.Collapsed;
             LoginPage.Visibility = Visibility.Visible;
             SelectedUser = null;
+            txtBoxPasswordInput.Password = "";
         }
     }
 }

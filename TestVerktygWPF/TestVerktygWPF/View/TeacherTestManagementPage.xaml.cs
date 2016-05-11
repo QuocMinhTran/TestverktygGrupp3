@@ -24,23 +24,28 @@ namespace TestVerktygWPF.View
     {
         IList<Test> tests = new List<Test>();
         Test test;
+        User theTeacher;
 
-        public TeacherTestManagementPage()
+        public TeacherTestManagementPage(User user)
         {
+            theTeacher = user;
             InitializeComponent();
             using (var db = new DbModel())
             {
                 var query = (from t in db.Tests
                              join ut in db.UserTests on t.ID equals ut.TestFk
                              join u in db.Users on ut.UserFk equals u.ID
-                             where u.OccupationFk == 1 // add the condition of the user after we finish login site, now we can see only all tests of teachers
+                             where u.UserName == theTeacher.UserName // add the condition of the user after we finish login site, now we can see only all tests of teachers
                              select t).ToList();
                 foreach (var item in query)
                 {
                     tests.Add(item);
                 }
+                 
                 cbSelectClass.ItemsSource = db.StudentClasses.ToList();
                 cbSelectClass.DisplayMemberPath = "Name";
+                //cbSelectStudent.ItemsSource = db.Students.ToList();
+                //cbSelectStudent.DisplayMemberPath = "UserName";
             }
             listViewTestToSend.ItemsSource = tests;
         }
@@ -66,12 +71,18 @@ namespace TestVerktygWPF.View
         {
             using (var db = new DbModel())
             {
+                List<Student> students = new List<Student>();
                 var query = from s in db.Students
                             join stc in db.StudentClasses on s.StudentClassFk equals stc.ID
-                            join u in db.Users on stc.ID equals u.StudentClassFk
-                            where u.OccupationFk == 1 // add the condition of the user after we finish login site, now we can see only all tests of teachers
+                            where stc.ID == cbSelectClass.SelectedIndex +1
                             select s;
                 //cbSelectStudent.Items.Add("Alla");
+                //ComboBoxItem chosen = cbSelectClass.SelectedItem as ComboBoxItem;
+                //Console.WriteLine(chosen.Content);
+                //foreach (var item in query.ToList())
+                //{
+                //    students.Add(item);
+                //}
                 cbSelectStudent.ItemsSource = query.ToList();
                 cbSelectStudent.DisplayMemberPath = "FirstName";
                 //cbSelectStudent.Items.Add("Alla");
@@ -109,7 +120,7 @@ namespace TestVerktygWPF.View
                             db.UserTests.Add(toAdmin);
                         }
                     }
-                    if (cbSelectStudent.SelectedValue.ToString() == "Alla" && cbSelectClass.SelectedItem != null)
+                    if (cbSelectStudent.SelectedValue.ToString() == null  && cbSelectClass.SelectedItem != null)
                     {
                         var xstudents = from s in db.Students
                                         join sc in db.StudentClasses on s.StudentClassFk equals sc.ID

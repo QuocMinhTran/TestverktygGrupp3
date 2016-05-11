@@ -24,7 +24,7 @@ namespace TestVerktygWPF.View
     {
         //IList<Test> Tests = new List<Test>();
         Test selectedTest;
-        public AdminTestManagementPage()
+        public AdminTestManagementPage(User user)
         {
             InitializeComponent();
             Updatelist();

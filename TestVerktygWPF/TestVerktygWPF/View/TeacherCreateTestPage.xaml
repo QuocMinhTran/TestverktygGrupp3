@@ -8,43 +8,54 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="TeacherCreateTestPage">
 
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,10,0,0" />
+            <Setter Property="MinWidth" Value="20" />
+            <Setter Property="Padding" Value="5,0" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="0,5,0,0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="MinWidth" Value="200" />
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="40,0,0,0">
-            <Label>Namn på provet</Label>
-            <TextBox Name="txtBoxTestName"/>
+        <StackPanel Grid.Column="0" Margin="20,0,20,0">
+            <StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,5,0,0" />
+                </Style>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Margin" Value="0,5,0,0" />
+                </Style>
+            </StackPanel.Resources>
             <Label>Fråga</Label>
-            <TextBox Name="txtBoxQuestion"/>
-            <Label>Hur ska svarsalternativen vara</Label>
-            <ComboBox x:Name="SelectionBox" SelectionChanged="SelectedQuestionType">
+            <TextBox Name="txtBoxQuestion"
+                     HorizontalAlignment="Left"
+                     MinWidth="200" />
+            <Label Content="Frågetyp" />
+            <ComboBox x:Name="SelectionBox"
+                      Width="200"
+                      SelectionChanged="SelectedQuestionType" 
+                      HorizontalAlignment="Left">
                 <ComboBoxItem Content="Enval"/>
                 <ComboBoxItem Content="Flerval"/>
                 <ComboBoxItem Content="Rangordning"/>
             </ComboBox>
-            <Label>Autorätta prov?</Label>
-            <CheckBox Name="chkBoxAutoCorrectTest" />
             <StackPanel Orientation="Horizontal">
                 <Label>Alternativ 1</Label>
-                <Label Name="lblQTypeInstructions" Margin="100,0,0,0" />
+                <Label Name="lblQTypeInstructions" 
+                       Margin="100,0,0,0" 
+                       HorizontalAlignment="Left" />
             </StackPanel>
             <StackPanel x:Name="_StackPanel">
-                <StackPanel.Resources>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Margin" 
-                                Value="0,5,0,0" />
-                        <Setter Property="VerticalAlignment"
-                                Value="Center" />
-                    </Style>
-                    <Style TargetType="RadioButton">
-                        <Setter Property="Margin"
-                                Value="0,5,0,0" />
-                        <Setter Property="VerticalAlignment"
-                                Value="Center" />
-                    </Style>
-                </StackPanel.Resources>
+                
                 <!--<TextBox Name="txtBoxOption1" Width="170"/>
                 <CheckBox  Margin="10,0,0,0"/>
             </StackPanel>
@@ -60,36 +71,55 @@
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                <Label>Alternativ</Label>
+                <Label Content="Alternativ" />
                 <Button Name="btnAddOption"
                         Click="AddAlternatives" 
-                        Content="+"/>
-                <Button Name="btnRemoveOption" Click="RemoveAlternatives" Content="-" Margin="10,0,0,0"/>
-                <Label Name="lblWarning"
-                   Foreground="Red"/>
+                        Content="+" />
+                <Button Name="btnRemoveOption" 
+                        Click="RemoveAlternatives" 
+                        Content="-" />
             </StackPanel>
             <Button Content="Spara fråga"
                     Name="btnSaveQuestion"
                     HorizontalAlignment="Center"
-                    Click="SaveQuestion" />
-            
+                    Click="btnSaveQuestion_Click" />
+            <TextBlock Name="txtBlockWarning"
+                       FontWeight="Bold"
+                       Foreground="Red"
+                       TextWrapping="WrapWithOverflow"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20,0,20,0" >
-            <Label>Frågor som är tillagda</Label>
+        
+        <StackPanel Grid.Column="1" Margin="20,0,20,0" >
+            <Label Content="Tillagda frågor" />
             <ListView Name="listViewAddedQuestions"
-                      SelectionChanged="listViewAddedQuestions_SelectionChanged"/>
-            <Button Content="Spara prov" 
-                    Name="btnSaveTest"
-                    Click="SaveTest" 
-                    HorizontalAlignment="Center"
-                    Margin="0,40,0,0"
-                    IsEnabled="False"/>
+                      SelectionChanged="listViewAddedQuestions_SelectionChanged"
+                      SelectionMode="Single"/>
+            <StackPanel Orientation="Horizontal">
                 <Button Content="Redigera Fråga" 
                         Name="btnEditQuestion"
                         Click="EditQ"
-                        HorizontalAlignment="Center"
-                        Margin="0,40,0,0"
-                        IsEnabled="False"/>
+                        IsEnabled="False"
+                        HorizontalAlignment="Left" />
+                <Button Content="Ta bort Fråga"
+                        Name="btnRemoveQuestion"
+                        Click="btnRemoveQuestion_Click"
+                        IsEnabled="False"
+                        HorizontalAlignment="Left" />
+            </StackPanel>
+            <Separator Margin="0,8"  />
+                <Label Content="Provnamn" />
+                <TextBox Name="txtBoxTestName"
+                         HorizontalAlignment="Left"
+                         Width="Auto" />
+            <StackPanel Orientation="Vertical">
+                <Label Content="Autorätta prov?" />
+                <CheckBox Name="chkBoxAutoCorrectTest" />
+            </StackPanel>
+            <Button Content="Spara prov" 
+                    Name="btnSaveTest"
+                    Click="btnSaveTest_Click" 
+                    HorizontalAlignment="Left"
+                    IsEnabled="False"/>
         </StackPanel>
     </Grid>
 </Page>

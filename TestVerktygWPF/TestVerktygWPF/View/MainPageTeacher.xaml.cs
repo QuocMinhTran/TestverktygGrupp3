@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF
 {
@@ -20,7 +21,7 @@ namespace TestVerktygWPF
     /// </summary>
     public partial class MainPageTeacher : Page
     {
-        public MainPageTeacher()
+        public MainPageTeacher(User user)
         {
             InitializeComponent();
         }

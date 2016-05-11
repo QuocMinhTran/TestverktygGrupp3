@@ -85,7 +85,6 @@
     <Compile Include="Model\UserTest.cs" />
     <Compile Include="ViewModel\MockRepo.cs" />
     <Compile Include="ViewModel\Repository.cs" />
-    <Compile Include="ViewModel\StudentQuestions.cs" />
     <Compile Include="View\ElevTestPage.xaml.cs">
       <DependentUpon>ElevTestPage.xaml</DependentUpon>
     </Compile>
@@ -94,9 +93,6 @@
     </Compile>
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ElevTestPage.xaml">
       <SubType>Designer</SubType>
@@ -126,10 +122,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\StatisticPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

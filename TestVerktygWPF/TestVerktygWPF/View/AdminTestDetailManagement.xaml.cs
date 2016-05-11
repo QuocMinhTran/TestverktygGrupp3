@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.View
 {
@@ -20,7 +21,7 @@ namespace TestVerktygWPF.View
     /// </summary>
     public partial class AdminTestDetailManagement : Page
     {
-        public AdminTestDetailManagement()
+        public AdminTestDetailManagement(User user)
         {
             InitializeComponent();
         }
