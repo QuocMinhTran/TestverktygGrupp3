@@ -363,6 +363,42 @@ namespace TestVerktygWPF.ViewModel
             }
             return correctAnswer;
         }
+        //public List<Answer> GetTestForStudent(int p_iID)
+        //{
+        //    List<Answer> lxAnswer = new List<Answer>();
+        //    using (var db = new DbModel())
+        //    {
+        //        var querry = from StudentTest in db.StudentTests
+        //                     join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID
+        //            join SudentAnswer in db.StudentAnswers on StudentTest.ID equals SudentAnswer.Id
+        //            joi
+                
+                
+                             
+        //                     //into Group
+        //                     //from TestGroup in Group
+        //                     //where TestGroup.ID == p_iID
+        //                     //select Test;
+        //        foreach (var item in querry)
+        //        {
+        //            Console.WriteLine(item.Name + " Name of Test From DataBase");
+        //            lxTest.Add(item);
+
+        //        }
+        //    }
+        //    return null; //lxTest;
+        //}
+
+        //public List<Answer> GetStudentAnswers(int id)
+        //{
+        //    using (var db = new DbModel())
+        //    {
+        //        var getAnswer = from studentAnswers in db.StudentTests
+        //                        where studentAnswers.TestRefFk == id
+        //                        where studentAnswers.IsTestDone == true
+        //    }
+        //    return null;
+        //} 
         //Save
         public void SaveStudent(Student xStudent)
         {

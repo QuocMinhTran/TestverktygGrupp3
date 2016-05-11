@@ -222,7 +222,7 @@ namespace TestVerktygWPF
             };
             UserTest xUserTets1 = new UserTest()
             {
-                UserFk = 17,
+                UserFk = 1,
                 TestFk = 1,
             };
             UserTest xUserTets2 = new UserTest()
@@ -689,24 +689,28 @@ namespace TestVerktygWPF
                 ID = 1,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest2 = new Test()
             {
                 ID = 2,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest3 = new Test()
             {
                 ID = 3,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest4 = new Test()
             {
                 ID = 4,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             lxTest.Add(xTest);
             lxTest.Add(xTest2);
