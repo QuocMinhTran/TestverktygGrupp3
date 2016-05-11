@@ -9,13 +9,17 @@
       Title="AdminTestManagementPage">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Label Content="Nya prov som behöver godkännas" Margin="0,20,0,0 "></Label>
         
-        <DataGrid x:Name="_DataGrid" 
+        <ListView x:Name="_ListView"
+                  Grid.Column="0"
                   Margin="0,40,0,0" 
                   HorizontalAlignment="Center" 
-                  AutoGenerateColumns="True" 
-                  IsReadOnly="True" SelectionChanged="_DataGrid_SelectionChanged">
+                  SelectionChanged="_ListView_SelectionChanged">
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Provnamn" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Lärare" Binding="{Binding FirstName}"/>
@@ -30,8 +34,12 @@
                     <TextBlock Text="Hej Jag kommer bli en binding" Margin="10"></TextBlock>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>-->            
-        </DataGrid>
-        <Popup Placement="Center" AllowsTransparency="True" PopupAnimation="Fade" Name="pup" VerticalOffset="-100">            
-        </Popup>
+        </ListView>
+        <Popup Placement="Center" AllowsTransparency="True" PopupAnimation="Fade" Name="pup" VerticalOffset="-100" />
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1">
+            <StackPanel Name="splSelectedTest" />
+        </ScrollViewer>
+
     </Grid>
 </Page>
