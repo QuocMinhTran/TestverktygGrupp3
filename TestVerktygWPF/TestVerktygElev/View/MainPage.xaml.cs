@@ -47,6 +47,7 @@ namespace TestVerktygElev
             
             ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID);
             NavigationService.Navigate(xElevTestPage);
+
         }
     }
 }
