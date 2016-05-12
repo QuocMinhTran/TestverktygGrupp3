@@ -12,6 +12,7 @@
         <ScrollViewer>
             <StackPanel Name="spDetailStatistic" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
                 <ListView Name="lvDetails"  Margin="0,0,0,10"/>
+                <Button Content="Spara till PDF" Name="btnSaveToPdf" Click="BtnSaveToPdf_OnClick"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

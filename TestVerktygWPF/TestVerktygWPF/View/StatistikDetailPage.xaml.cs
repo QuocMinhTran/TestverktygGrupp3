@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygWPF.Model;
 using TestVerktygWPF.ViewModel;
+using iTextSharp;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace TestVerktygWPF.View
 {
@@ -31,7 +35,9 @@ namespace TestVerktygWPF.View
 
             CurrentSelectedTest csTest = new CurrentSelectedTest();
             csTest.SetCurrentTest(SelectedTest.ID);
-
+             
+            csTest.SetCurrentTest(SelectedTest.ID);
+            Test testnamn = csTest.CurrentTest;
             liQuestionses = csTest.CurrentQuestions;
 
             Repository xRepository = new Repository();
@@ -39,13 +45,18 @@ namespace TestVerktygWPF.View
             List<Answer> lxAnswers = xRepository.GetAllAnswers(xTest);
             List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
             lxStudentAnswers = xRepository.GetStudentAnswers(SelectedStudent.ID, xTest.ID);
-
+            TextBlock txtbStudentName = new TextBlock();
+            txtbStudentName.Text = SelectedStudent.FirstName + " " + SelectedStudent.LastName + " Prov: " + testnamn.Name ;
+            lvDetails.Items.Add(txtbStudentName);
             for (int i = 0; i < liQuestionses.Count; i++)
             {
+                TextBlock xQuestion = new TextBlock();
+                xQuestion.Text = "Fråga : ";
                 TextBlock xBlock = new TextBlock();
                 xBlock.Text = liQuestionses[i].Name;
                 xBlock.FontWeight = FontWeights.Bold;
                 xBlock.FontSize = 18;
+                lvDetails.Items.Add(xQuestion);
                 lvDetails.Items.Add(xBlock);
                 for (int j = 0; j < lxAnswers.Count; j++)
                 {
@@ -56,7 +67,7 @@ namespace TestVerktygWPF.View
                             if (item.Answer == lxAnswers[j].ID)
                             {
                                 TextBlock xAnswer = new TextBlock();
-                                xAnswer.Text = lxAnswers[j].Text;
+                                xAnswer.Text = "Svar: "+lxAnswers[j].Text;
                                 xAnswer.FontSize = 16;
 
                                 TextBlock xCorrectAnswer = new TextBlock();
@@ -93,6 +104,7 @@ namespace TestVerktygWPF.View
                                         }
                                     }
                                 }
+
                                 lvDetails.Items.Add(xAnswer);
                                 lvDetails.Items.Add(xCorrectAnswer);
                             }
@@ -100,32 +112,37 @@ namespace TestVerktygWPF.View
                     }
                 }
             }
-
-
-
-
-
-            //Answer _studentsAnswers = new Answer();
-
-            //foreach (var item in Questionses)
-            //{
-
-            //    lvDetails.Items.Add("Fråga: " + item.Name);
-            //    foreach (var studentsAnswer in csTest.GetStudentsAnswers(item.ID))
-            //    {
-            //        Console.WriteLine(studentsAnswer.Text);
-            //        lvDetails.Items.Add("Elevens svar :" + studentsAnswer.Text);
-            //    }
-            //    foreach (var answer in csTest.GetCorrectAnswer(item.ID))
-            //    {
-            //        lvDetails.Items.Add("Korrekt svar: " + answer.Text);
-            //    }
-
-            //}
-
-
-
+           
+            
         }
 
+        private void BtnSaveToPdf_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.IO.FileStream fs = new FileStream("Test.pdf", FileMode.Create);
+            Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+            // Create an instance to the PDF file by creating an instance of the PDF 
+            // Writer class using the document and the filestrem in the constructor.
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+
+            document.Open();
+            // Add a simple and wellknown phrase to the document in a flow layout manner
+           
+            List<string> list = lvDetails.Items.Cast<TextBlock>().Select(x => x.Text).ToList();
+
+            foreach (var item in list)
+            {
+               
+                document.Add(new iTextSharp.text.Paragraph(item));
+                
+            }
+
+            // Close the document
+            document.Close();
+            // Close the writer instance
+            writer.Close();
+            // Always close open filehandles explicity
+            fs.Close();
+
+        }
     }
 }
