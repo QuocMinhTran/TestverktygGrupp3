@@ -44,11 +44,11 @@ namespace TestVerktygWPF.ViewModel
           
         }
 
-        public List<Answer> GetStudentsAnswers(int Id)
-        {
-            List<Answer> liAnswer = new List<Answer>();
-            return liAnswer = xRepo.GetStudetAnswers(Id);
-        } 
+        //public List<Answer> GetStudentsAnswers(int Id)
+        //{
+        //    List<Answer> liAnswer = new List<Answer>();
+        //    return liAnswer = xRepo.GetStudetAnswers(Id);
+        //} 
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);

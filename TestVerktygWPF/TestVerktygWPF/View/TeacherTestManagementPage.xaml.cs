@@ -31,6 +31,12 @@ namespace TestVerktygWPF.View
         {
             theTeacher = user;
             InitializeComponent();
+            UpdateList();
+            
+        }
+
+        private void UpdateList()
+        {
             using (var db = new DbModel())
             {
                 var query = (from t in db.Tests
@@ -44,6 +50,7 @@ namespace TestVerktygWPF.View
                 }
             }
             listViewTestToSend.ItemsSource = tests;
+            listViewTestToSend.DisplayMemberPath = "Name";
         }
 
         private void btnTimeUp_Click(object sender, RoutedEventArgs e)
@@ -145,12 +152,26 @@ namespace TestVerktygWPF.View
                         db.StudentTests.Add(newTest);
                     }
 
+                    //var teacherUserTest = from u in db.UserTests
+                    //                      where u.UserFk == theTeacher.ID
+                    //                      select u;
+                    //foreach (var item in teacherUserTest.ToList())
+                    //{
+                    //    db.UserTests.Remove(item);
+                    //}
 
+                    MessageBox.Show("Provet har skickats till Admin");
+                    UpdateList();
+                    txtBoxTestTime.Text = "1";
                     DatePickerStartDate.SelectedDate = null;
                     DatePickerEndDate.SelectedDate = null;
 
                     db.SaveChanges();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Ange noggrann alla information");
             }
 
         }
