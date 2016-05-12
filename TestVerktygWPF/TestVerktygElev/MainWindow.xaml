@@ -34,6 +34,6 @@
             <PasswordBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
             <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
         </StackPanel>-->
-        <Frame Grid.Row="1" x:Name="_frame"></Frame>
+        <Frame Grid.Row="1" x:Name="_frame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

@@ -50,6 +50,6 @@
                 <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
             </StackPanel>
         </ScrollViewer>
-        <Frame Grid.Row="1" x:Name="_Frame"></Frame>
+        <Frame Grid.Row="1" x:Name="_Frame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>
