@@ -471,6 +471,15 @@ namespace TestVerktygWPF.ViewModel
             }
         }
 
+        public void SaveUserTest(UserTest userTest)
+        {
+            using (var db = new DbModel())
+            {
+                db.UserTests.Add(userTest);
+                db.SaveChanges();
+            }
+        }
+
         public void SaveTest(Test xTest)
         {
             using (var db = new DbModel())

@@ -25,7 +25,8 @@
                    Grid.Row="0" />
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="5" >
             <Label Content="Prov som ska göras" FontSize="14" />
-            <ListBox Name="lbInfo" MouseDoubleClick="StartTest">
+            <Label Content="Dubbelklicka för att starta ett prov" FontFamily="12" Foreground="Gray" />
+            <!--<ListBox Name="lbInfo" MouseDoubleClick="StartTest">
                 <ListBox.ItemTemplate >
                     <DataTemplate>
                         <StackPanel>
@@ -35,11 +36,48 @@
                                 <TextBlock Text="{Binding Name}" />
                                 <TextBlock Text=" Tid:" />
                                 <TextBlock Text="{Binding TimeStampe}"/>
+                                <TextBlock Text="Datum: " />
+                                <TextBlock Text="{Binding StartDate}"/>
+                                <TextBlock Text="Slutdatum: " />
+                                <TextBlock Text="{Binding EndDate}" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
+            <!--<DataGrid Name="dgStudentTests"
+                      MouseDoubleClick="StartTest" 
+                      AutoGenerateColumns="False"
+                      ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ämne" 
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Tidsbegränsning" 
+                                        Binding="{Binding TimeStampe}" />
+                    <DataGridTextColumn Header="Startdatum"
+                                        Binding="{Binding StartDate, StringFormat=d}" />
+                    <DataGridTextColumn Header="Slutdatum"
+                                        Binding="{Binding EndDate, StringFormat=d}" />
+                </DataGrid.Columns>
+            </DataGrid>-->
+            <ListView Name="lstViewStudentTests"
+                      SelectionMode="Single"
+                      MouseDoubleClick="StartTest">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Ämne" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Tidsbegränsning i minuter" 
+                                        DisplayMemberBinding="{Binding TimeStampe}" />
+                        <GridViewColumn Header="Startdatum"
+                                        DisplayMemberBinding="{Binding StartDate, StringFormat=d}" />
+                        <GridViewColumn Header="Slutdatum" 
+                                        DisplayMemberBinding="{Binding EndDate, StringFormat=d}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Name="lblWarning"
+                   FontWeight="Bold"
+                   Foreground="Red"/>
         </StackPanel>
     </Grid>
 </Page>

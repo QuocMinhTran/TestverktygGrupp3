@@ -32,18 +32,30 @@ namespace TestVerktygElev
             TextBlockUserWelcome.Text = "Välkommen " + m_xStudent.FirstName + " " + m_xStudent.LastName;
             m_lxTest = new List<Test>();
             m_lxTest = xRepository.GetTestForStudent(m_xStudent.ID);
-            lbInfo.ItemsSource = m_lxTest;
+
+            //lbInfo.ItemsSource = m_lxTest;
+            //StudentTests.ItemsSource = m_lxTest;
+            lstViewStudentTests.ItemsSource = m_lxTest;
         }
 
         private void StartTest(object sender, MouseButtonEventArgs e)
         {
+            lblWarning.Content = "";
             Test xTest = ((FrameworkElement)e.OriginalSource).DataContext as Test;
+            DateTime? selectedDateTime = xTest.StartDate;
             if (xTest != null)
             {
-                Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
+                if (DateTime.Now >= selectedDateTime)
+                {
+                    Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
 
-                ElevTestPage xElevTestPage = new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(m_xStudent.ID, xTest.ID), m_xStudent);
-                NavigationService.Navigate(xElevTestPage);
+                    ElevTestPage xElevTestPage = new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(m_xStudent.ID, xTest.ID), m_xStudent);
+                    NavigationService.Navigate(xElevTestPage);
+                }
+                else
+                {
+                    lblWarning.Content = "Testet har inte nått sitt startdatum än. \n";
+                } 
             }
 
         }

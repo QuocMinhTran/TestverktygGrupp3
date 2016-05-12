@@ -74,13 +74,11 @@ namespace TestVerktygWPF.View
                                         select s;
                             foreach (var item2 in query)
                             {
-                                foreach (var item3 in StudentToTest)
+                                if (!StudentToTest.Exists(s => s.ID == item2.ID))
                                 {
-                                    if (item2 == item3)
-                                    {
-                                        StudentToTest.Add(item2);
-                                    }
+                                    StudentToTest.Add(item2);
                                 }
+                                
                             }
                         }
                     }
