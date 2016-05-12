@@ -136,21 +136,25 @@ namespace TestVerktygWPF.View
 
         private void AvrageScoreForTest()
         {
+            double dAvarage = StudentsScoreOfTest / NumberOfstudents;
+            double dGrade = dAvarage / NumberOfQuestionsInSelectedTest;
 
-            double ResultA;
+            if (dGrade >= 0.6)
+            {
+                if (dGrade >= 0.8)
+                {
+                    tbxAvrageGrade.Text = "Medelbetyg VG";
+                }
+                else
+                {
+                    tbxAvrageGrade.Text = " Medelbetyg G";
+                }
 
-            double AvrageProcentGrade;
-
-            ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
-            Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
-            Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
-            Console.WriteLine("ResultatA : " + ResultA);
-            AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
-
-
-
-            Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
-
+            }
+            else
+            {
+                tbxAvrageGrade.Text = "Medelbetyg IG";
+            }
 
         }
 
@@ -196,7 +200,7 @@ namespace TestVerktygWPF.View
                 newWindow.Topmost = true;
                 newWindow.Content = new StatistikDetailPage();
 
-                
+
 
             }
 
