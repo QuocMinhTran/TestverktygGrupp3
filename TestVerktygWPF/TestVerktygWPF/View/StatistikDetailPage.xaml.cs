@@ -81,7 +81,7 @@ namespace TestVerktygWPF.View
                                     xAnswer.Background = Brushes.Red;
                                     foreach (var correctAns in lxAnswers)
                                     {
-                                        if (correctAns.RightAnswer == true)
+                                        if (correctAns.RightAnswer == true && correctAns.QuestionFk == liQuestionses[i].ID)
                                         {
                                             xCorrectAnswer.Text = "Korrekt svar: " + correctAns.Text;
                                         }
@@ -98,7 +98,8 @@ namespace TestVerktygWPF.View
                                     xAnswer.Background = Brushes.Red;
                                     foreach (var correctAns in lxAnswers)
                                     {
-                                        if (correctAns.RightAnswer == true)
+                                      
+                                        if (correctAns.RightAnswer == true && correctAns.QuestionFk == liQuestionses[i].ID )
                                         {
                                             xCorrectAnswer.Text = "Korrekt svar: " + correctAns.Text;
                                         }
