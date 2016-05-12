@@ -27,17 +27,17 @@ namespace TestVerktygElev
             InitializeComponent();
             string sGrade;
             double dGrade = (double)p_iScore / (double)p_iTotalPoint ;
+            int iTime = (int)p_xTest.TimeStampe - p_iTime;
             m_xStudent = p_xStudent;
             TextBlockTestName.Text = p_xTest.Name;
-            Console.WriteLine(dGrade + " GRADEEEEASDAD");
             if (dGrade >= 0.6)
             {
                 if (dGrade >= 0.8) sGrade = "VG";
                 else sGrade = "G";
             }
             else sGrade = "IG";
-
-            TextBlockTime.Text = p_iTime.ToString() +" / " + p_xTest.TimeStampe.ToString();
+            if (iTime < 0) iTime = 0;
+            TextBlockTime.Text = iTime.ToString();
             TextBlockGrade.Text = sGrade;
 
             TestFunctions(p_xStudent);
@@ -74,15 +74,22 @@ namespace TestVerktygElev
                                 TextBlock xAnswer = new TextBlock();
                                 xAnswer.Text = lxAnswers[j].Text;
 
-                                if (lxAnswers[j].RightAnswer)
+                                if (lxAnswers[j].RightAnswer && lxQuestions[i].QuestionType != "rangordning")
                                 {
                                     xAnswer.Background = Brushes.Green;
-                                    Console.WriteLine("RÄtt");
                                 }
-                                else
+                                else if(!lxAnswers[j].RightAnswer && lxQuestions[i].QuestionType != "rangordning")
                                 {
                                     xAnswer.Background = Brushes.Red;
-                                    Console.WriteLine("Fel");
+                                }
+
+                                if (lxAnswers[j].OrderPosition == item.OrderPostition && lxQuestions[i].QuestionType == "rangordning")
+                                {
+                                    xAnswer.Background = Brushes.Green;
+                                }
+                                else if (lxAnswers[j].OrderPosition != item.OrderPostition && lxQuestions[i].QuestionType == "rangordning")
+                                {
+                                    xAnswer.Background = Brushes.Red;
                                 }
                                 ListViewCompletedTest.Items.Add(xAnswer);
                             }
