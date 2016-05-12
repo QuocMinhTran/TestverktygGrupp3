@@ -45,7 +45,7 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-            //AddDataToBase();
+           // AddDataToBase();
             AdminTabs.Visibility = Visibility.Collapsed; // must change to collapsed later
             TeacherTabs.Visibility = Visibility.Collapsed;
             LogoutTabs.Visibility = Visibility.Collapsed;
@@ -85,7 +85,7 @@ namespace TestVerktygWPF
                 }
             }
             if (!matched)
-            { 
+            {
                 MessageBox.Show("Wrong information");
             }
 
@@ -150,61 +150,94 @@ namespace TestVerktygWPF
             List<User> lxUser = AddUser();                  //Done
             List<UserTest> lxUserTest = AddUserTest();      //Done
             #region UsingDB
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxOcc)
+            //    {
+            //        db.Occupations.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxCourse)
+            //    {
+            //        db.Courses.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxSC)
+            //    {
+            //        db.StudentClasses.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxSGC)
+            //    {
+            //        db.StudentClassCourses.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxStudent)
+            //    {
+            //        db.Students.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+
+            //    foreach (var item in lxUser)
+            //    {
+            //        db.Users.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxTest)
+            //    {
+            //        db.Tests.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxUserTest)
+            //    {
+            //        db.UserTests.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxQuestions)
+            //    {
+            //        db.Questions.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+            //using (var db = new DbModel())
+            //{
+            //    foreach (var item in lxAnswer)
+            //    {
+            //        db.Answers.Add(item);
+            //    }
+            //    db.SaveChanges();
+            //}
+
             using (var db = new DbModel())
             {
-                //foreach (var item in lxOcc)
-                //{
-                //    db.Occupations.Add(item);
-                //}
-                //foreach (var item in lxCourse)
-                //{
-                //    db.Courses.Add(item);
-                //}
-                //foreach (var item in lxSC)
-                //{
-                //    db.StudentClasses.Add(item);
-                //}
-                //foreach (var item in lxSGC)
-                //{
-                //    db.StudentClassCourses.Add(item);
-                //}
-                //foreach (var item in lxStudent)
-                //{
-                //    db.Students.Add(item);
-                //}
-
-                //foreach (var item in lxUser)
-                //{
-                //    db.Users.Add(item);
-                //}
-                //foreach (var item in lxTest)
-                //{
-                //    db.Tests.Add(item);
-                //}
-
-                //foreach (var item in lxUserTest)
-                //{
-                //    db.UserTests.Add(item);
-                //}
-
-                //foreach (var item in lxQuestions)
-                //{
-                //    db.Questions.Add(item);
-                //}
-
-                //foreach (var item in lxAnswer)
-                //{
-                //    db.Answers.Add(item);
-                //}
-                //foreach (var item in lxStudentTest)
-                //{
-                //    db.StudentTests.Add(item);
-                //}
-                //foreach (var item in lxStudentAnswer)
-                //{
-                //    Console.WriteLine(item.Answer);
-                //    db.StudentAnswers.Add(item);
-                //}
+                foreach (var item in lxStudentTest)
+                {
+                    db.StudentTests.Add(item);
+                }
                 db.SaveChanges();
             }
             #endregion
@@ -249,7 +282,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 5,
+                TestRefFk = 1,
                 WritenTime = 10,
                 IsTestDone = true,
                 Score = 2,
@@ -258,7 +291,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest2 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 5,
+                TestRefFk = 1,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -267,7 +300,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest3 = new StudentTest()
             {
                 StudentRefFk = 3,
-                TestRefFk = 5,
+                TestRefFk = 1,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -276,7 +309,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest4 = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 6,
+                TestRefFk = 2,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -286,7 +319,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest5 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 6,
+                TestRefFk = 2,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -409,149 +442,150 @@ namespace TestVerktygWPF
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 1
+                QuestionFk = 2
 
             };
             Answer xOptions1 = new Answer()
             {
                 Text = "Djur",
                 RightAnswer = true,
-                QuestionFk = 1
+                QuestionFk = 2
             };
             Answer xOptions2 = new Answer()
             {
 
                 Text = "Stolpe",
                 RightAnswer = false,
-                QuestionFk = 1
+                QuestionFk = 2
             };
             Answer xOptions3 = new Answer()
             {
 
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 2
+                QuestionFk = 3
             };
             Answer xOptions4 = new Answer()
             {
 
                 Text = "Bil",
                 RightAnswer = true,
-                QuestionFk = 2
+                QuestionFk = 3
             };
             Answer xOptions5 = new Answer()
             {
 
                 Text = "Bi",
                 RightAnswer = false,
-                QuestionFk = 2
+                QuestionFk = 3
             };
             Answer xOptions6 = new Answer()
             {
 
                 Text = "8/4",
                 RightAnswer = true,
-                QuestionFk = 3
+                QuestionFk = 4
             };
             Answer xOptions7 = new Answer()
             {
                 Text = "2*1",
                 RightAnswer = true,
-                QuestionFk = 3
+                QuestionFk = 4
             };
             Answer xOptions8 = new Answer()
             {
                 Text = "9-5",
                 RightAnswer = false,
-                QuestionFk = 3
+                QuestionFk = 4
             };
             Answer xOptions9 = new Answer()
             {
                 Text = "4",
                 RightAnswer = true,
-                QuestionFk = 4
+                QuestionFk = 5
             };
             Answer xOptions10 = new Answer()
             {
                 Text = "5",
                 RightAnswer = false,
-                QuestionFk = 4
+                QuestionFk = 5
             };
             Answer xOptions11 = new Answer()
             {
                 Text = "6",
                 RightAnswer = false,
-                QuestionFk = 4
+                QuestionFk = 5
             };
             Answer xOptions12 = new Answer()
             {
                 Text = "5*1+4",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 6,
                 OrderPosition = 1
             };
             Answer xOptions13 = new Answer()
             {
                 Text = "4+2+5/5",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 6,
                 OrderPosition = 2
             };
             Answer xOptions14 = new Answer()
             {
                 Text = "4+2+8*0",
                 RightAnswer = true,
-                QuestionFk = 5,
+                QuestionFk = 6,
                 OrderPosition = 3
             };
             Answer xOptions15 = new Answer()
             {
                 Text = "Röd",
                 RightAnswer = false,
-                QuestionFk = 6
+                QuestionFk = 7
             };
             Answer xOptions16 = new Answer()
             {
                 Text = "Blå",
                 RightAnswer = true,
-                QuestionFk = 6
+                QuestionFk = 7
             };
             Answer xOptions17 = new Answer()
             {
                 Text = "Gul",
                 RightAnswer = true,
-                QuestionFk = 6
+                QuestionFk = 7
             };
             Answer xOptions18 = new Answer()
             {
                 Text = "Blåval",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 8,
                 OrderPosition = 1
             };
             Answer xOptions19 = new Answer()
             {
                 Text = "Elefant",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 8,
                 OrderPosition = 2
             };
             Answer xOptions20 = new Answer()
             {
                 Text = "Bil",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 8,
                 OrderPosition = 3
             };
             Answer xOptions21 = new Answer()
             {
                 Text = "Människa",
                 RightAnswer = false,
-                QuestionFk = 7,
+                QuestionFk = 8,
                 OrderPosition = 4
             };
 
             lxAnswer.Add(xOptions);
+            lxAnswer.Add(xOptions1);
             lxAnswer.Add(xOptions2);
             lxAnswer.Add(xOptions3);
             lxAnswer.Add(xOptions4);
@@ -581,49 +615,49 @@ namespace TestVerktygWPF
             {
                 Name = "Vad är kanin en kanin?",
                 QuestionType = "envalsfråga",
-                TestFk = 5,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest2 = new Questions()
             {
                 Name = "Vad är en Bil",
                 QuestionType = "envalsfråga",
-                TestFk = 5,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest3 = new Questions()
             {
                 Name = "1+5*0+3",
                 QuestionType = "Flervalsfråga",
-                TestFk = 5,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest4 = new Questions()
             {
                 Name = "2+2",
                 QuestionType = "envalsfråga",
-                TestFk = 6,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest5 = new Questions()
             {
                 Name = "Vilken Är störst",
                 QuestionType = "rangordning",
-                TestFk = 6,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest6 = new Questions()
             {
                 Name = "Vilka färger ser du?",
                 QuestionType = "Flervalsfråga",
-                TestFk = 6,
+                TestFk = 1,
                 AppData = "",
             };
             Questions xQuest7 = new Questions()
             {
                 Name = "Vilken är längst?",
                 QuestionType = "rangordning",
-                TestFk = 6,
+                TestFk = 1,
                 AppData = "",
             };
             lxQuestion.Add(xQuest);
@@ -856,7 +890,7 @@ namespace TestVerktygWPF
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             _Frame.Visibility = Visibility.Collapsed;
-            AdminTabs.Visibility = Visibility.Collapsed; 
+            AdminTabs.Visibility = Visibility.Collapsed;
             TeacherTabs.Visibility = Visibility.Collapsed;
             LogoutTabs.Visibility = Visibility.Collapsed;
             LoginPage.Visibility = Visibility.Visible;
