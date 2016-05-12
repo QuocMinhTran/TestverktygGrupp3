@@ -22,6 +22,7 @@ namespace TestVerktygWPF.Model
         [ForeignKey("TestRefFk")]
         public Test TestFk { get; set; }
         public int TestRefFk { get; set; }
+        public bool IsChecked { get; set; }
 
     }
 }

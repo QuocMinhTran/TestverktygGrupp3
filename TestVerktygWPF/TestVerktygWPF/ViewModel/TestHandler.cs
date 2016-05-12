@@ -12,20 +12,22 @@ namespace TestVerktygWPF.ViewModel
         private Test xTest;
         private List<Questions> xQuestions;
         private List<Answer> xAnswer;
+        private UserTest xUserTest;
 
         public TestHandler()
         {
             xAnswer = new List<Answer>();
             xQuestions = new List<Questions>();
             xTest = new Test();
+            xUserTest = new UserTest();
         }
 
-        public bool CreateTest(Test xTest, List<Questions> xQuestions, List<Answer> xAnswer)
+        public bool CreateTest(Test xTest, List<Questions> xQuestions, List<Answer> xAnswer, int teacherID)
         {
             Repository xRepo = new Repository();
             xRepo.SaveTest(xTest);
             int temp;
-            int iTestID = xRepo.GetTest(xTest.Name).ID;
+            int iTestID = xRepo.GetTest(xTest.Name).ID; 
             foreach (var item in xQuestions)
             {
                 int tempo = item.ID;
@@ -40,6 +42,9 @@ namespace TestVerktygWPF.ViewModel
                     }
                 }
             }
+            xUserTest.TestFk = iTestID;
+            xUserTest.UserFk = teacherID;
+          //  xRepo.SaveUserTest(xUserTest);
             return true;
         }
 

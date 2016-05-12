@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestVerktygElev
+namespace TestVerktygWPF.View
 {
     /// <summary>
-    /// Interaction logic for TestPage.xaml
+    /// Interaction logic for AdminCorrectTestPage.xaml
     /// </summary>
-    public partial class TestPage : Page
+    public partial class AdminCorrectTestPage : Page
     {
-        public TestPage()
+        public AdminCorrectTestPage()
         {
             InitializeComponent();
         }

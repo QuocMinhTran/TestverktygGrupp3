@@ -67,9 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201605050720122_hej.cs" />
-    <Compile Include="Migrations\201605050720122_hej.Designer.cs">
-      <DependentUpon>201605050720122_hej.cs</DependentUpon>
+    <Compile Include="Migrations\201605111119462_hej.cs" />
+    <Compile Include="Migrations\201605111119462_hej.Designer.cs">
+      <DependentUpon>201605111119462_hej.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
@@ -88,6 +88,9 @@
     <Compile Include="ViewModel\CurrentSelectedTest.cs" />
     <Compile Include="ViewModel\Repository.cs" />
     <Compile Include="ViewModel\TestHandler.cs" />
+    <Compile Include="View\AdminCorrectTestPage.xaml.cs">
+      <DependentUpon>AdminCorrectTestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminCreateUserPage.xaml.cs">
       <DependentUpon>AdminCreateUserPage.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
     <Compile Include="View\TeacherTestManagementPage.xaml.cs">
       <DependentUpon>TeacherTestManagementPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AdminCorrectTestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminCreateUserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,8 +199,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201605050720122_hej.resx">
-      <DependentUpon>201605050720122_hej.cs</DependentUpon>
+
+    <EmbeddedResource Include="Migrations\201605111119462_hej.resx">
+      <DependentUpon>201605111119462_hej.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

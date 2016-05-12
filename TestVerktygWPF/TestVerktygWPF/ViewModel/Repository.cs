@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Annotations;
 using TestVerktygWPF.Model;
 
 namespace TestVerktygWPF.ViewModel
@@ -44,6 +46,8 @@ namespace TestVerktygWPF.ViewModel
                              select Qtest;
                 foreach (var item in querry)
                 {
+                    Console.WriteLine("insent id: " + iD);
+                    Console.WriteLine("Repo get test : " + item.ID + item.Name);
                     xTest = item;
                 }
                 //xTest = querry as Test;
@@ -330,6 +334,124 @@ namespace TestVerktygWPF.ViewModel
 
             return liAllAdmins;
         }
+        public List<User> GetAllUsers()
+        {
+            List<User> liAllUsers = new List<User>();
+            using (var db = new DbModel())
+            {
+                var selectUsers = from users in db.Users
+                                  select users;
+                foreach (var item in selectUsers)
+                {
+                    liAllUsers.Add(item);
+                }
+            }
+            return liAllUsers;
+        }
+
+        public List<Answer> GetCorrectAnswer(int id)
+        {
+            List<Answer> correctAnswer = new List<Answer>();
+            using (var db = new DbModel())
+            {
+                var getAnswer = from theAnswer in db.Answers
+                                where theAnswer.QuestionFk == id
+                                where theAnswer.RightAnswer == true
+                                select theAnswer;
+                foreach (var item in getAnswer)
+                {
+                    correctAnswer.Add(item);
+                }
+            }
+            return correctAnswer;
+        }
+        //Svikans
+        //public List<Answer> GetStudetAnswers(int p_iID)
+        //{
+        //    List<Answer> lxAnswer = new List<Answer>();
+        //    using (var db = new DbModel())
+        //    {
+        //        var querry =
+        //            from p in db.StudentTests
+        //                //where p.TestRefFk == p_iID
+        //            join pc in db.StudentAnswers on p.TestRefFk equals p_iID
+        //            join c in db.Answers on pc.Answer equals c.ID
+        //            select c;
+
+        //        //var querry = from x in db.StudentTests
+        //        //             join xSudent in db.StudentTests on x.ID equals  xSudent.TestRefFk into Group
+        //        //             from y in Group
+        //        //             join xtest in db.Tests on x.TestRefFk equals p_iID
+        //        //             join xQuestion in db.Questions on xtest.ID equals xQuestion.TestFk
+        //        //             join answer in db.Answers on xQuestion.ID equals answer.QuestionFk
+        //        //             select answer;
+
+        //        Console.WriteLine("Querry körs" + querry.Count());
+
+        //        for (int i = 0; i < querry.Count(); i++)
+        //        {
+        //            Console.WriteLine("for loop " + i);
+        //        }
+        //        foreach (var item in querry)
+        //        {
+        //            lxAnswer.Add(item);
+        //            Console.WriteLine("item :" + item.Text);
+        //        }
+
+        //    }
+        //    return lxAnswer;
+        //}
+        //Gurras
+        public List<StudentAnswer> GetStudentAnswers(int p_iStudentiD, int p_iTestiD)
+        {
+            List<StudentAnswer> lxStudentAnswer = new List<StudentAnswer>();
+            using (var db = new DbModel())
+            {
+                var querry = from xTest in db.StudentTests
+                             join xStudent in db.Students on xTest.StudentRefFk equals xStudent.ID
+                             join xAnswers in db.StudentAnswers on xTest.ID equals xAnswers.StudentTestFk
+                             where xTest.TestRefFk == p_iTestiD
+                             //where xStudent.ID == p_iStudentiD
+                             select xAnswers;
+
+                //var querry = from x in db.StudentAnswers
+                //             select x;
+
+                Console.WriteLine(querry.ToString());
+                foreach (var item in querry)
+                {
+                    lxStudentAnswer.Add(item);
+                }
+            }
+
+            return lxStudentAnswer;
+        }
+        internal List<Answer> GetAllAnswers(Test m_xTest)
+        {
+            List<Answer> lxAnwsers = new List<Answer>();
+            using (var db = new DbModel())
+            {
+                var querry = from Ans in db.Answers
+                             join quest in db.Questions on Ans.QuestionFk equals quest.ID
+                             join test in db.Tests on quest.TestFk equals test.ID
+                             select Ans;
+                foreach (var item in querry)
+                {
+                    lxAnwsers.Add(item);
+                }
+            }
+            return lxAnwsers;
+        }
+        //public List<Answer> GetStudentAnswers(int id)
+        //{
+        //    using (var db = new DbModel())
+        //    {
+        //        var getAnswer = from studentAnswers in db.StudentTests
+        //                        where studentAnswers.TestRefFk == id
+        //                        where studentAnswers.IsTestDone == true
+        //    }
+        //    return null;
+        //}
         //Save
         public void SaveStudent(Student xStudent)
         {

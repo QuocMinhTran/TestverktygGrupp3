@@ -23,6 +23,10 @@ namespace TestVerktygWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        Repository repo = new Repository();
+        public List<User> LsUsers;
+
+        public User SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,12 +45,50 @@ namespace TestVerktygWPF
             //{
             //    Console.WriteLine(item.FirstName);
             //}
-            //  AddDataToBase();
+            //AddDataToBase();
+            AdminTabs.Visibility = Visibility.Collapsed; // must change to collapsed later
+            TeacherTabs.Visibility = Visibility.Collapsed;
+            LogoutTabs.Visibility = Visibility.Collapsed;
+            //LoginPage.Visibility = Visibility.Collapsed;
+            GetAllUsers();
+
         }
 
+        private void GetAllUsers()
+        {
+            Repository repo = new Repository();
+            LsUsers = repo.GetAllUsers();
+        }
+        bool matched = false;
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //TODO: send UserName and Password to database and login if there is a match
+            foreach (var item in LsUsers)
+            {
+                if (txtBoxUserNameInput.Text == item.UserName && txtBoxPasswordInput.Password == item.Password)
+                {
+                    LoginPage.Visibility = Visibility.Collapsed;
+                    LogoutTabs.Visibility = Visibility.Visible;
+                    SelectedUser = item;
+                    if (item.OccupationFk == 2)
+                    {
+                        AdminTabs.Visibility = Visibility.Visible;
+                        _Frame.Navigate(new MainPageAdmin(SelectedUser));
+                    }
+                    else if (item.OccupationFk == 1)
+                    {
+                        TeacherTabs.Visibility = Visibility.Visible;
+                        _Frame.Navigate(new MainPageTeacher(SelectedUser));
+                    }
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched)
+            { 
+                MessageBox.Show("Wrong information");
+            }
+
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
@@ -60,31 +102,34 @@ namespace TestVerktygWPF
             switch (btn.Header.ToString())
             {
                 case "Startsida Admin":
-                    _Frame.Navigate(new MainPageAdmin());
+                    _Frame.Navigate(new MainPageAdmin(SelectedUser));
+                    break;
+                case "Skapa Användare":
+                    _Frame.Navigate(new AdminCreateUserPage(SelectedUser));
                     break;
                 case "Hantera Användare":
-                    _Frame.Navigate(new AdminUserManagementPage());
+                    _Frame.Navigate(new AdminUserManagementPage(SelectedUser));
                     break;
                 case "Statistik":
-                    _Frame.Navigate(new StatistikMasterPage());
+                    _Frame.Navigate(new StatistikMasterPage(SelectedUser));
                     break;
                 case "Skicka ut prov":
-                    _Frame.Navigate(new TeacherTestManagementPage());
+                    _Frame.Navigate(new TeacherTestManagementPage(SelectedUser));
                     break;
                 case "Rätt prov":
-                    _Frame.Navigate(new TeacherEvaluatePage());
+                    _Frame.Navigate(new TeacherEvaluatePage(SelectedUser));
                     break;
                 case "Start Lärare":
-                    _Frame.Navigate(new MainPageTeacher());
+                    _Frame.Navigate(new MainPageTeacher(SelectedUser));
                     break;
                 case "Hantera Prov":
-                    _Frame.Navigate(new AdminTestManagementPage());
+                    _Frame.Navigate(new AdminTestManagementPage(SelectedUser));
                     break;
                 case "Skapa Prov":
-                    _Frame.Navigate(new TeacherCreateTestPage());
+                    _Frame.Navigate(new TeacherCreateTestPage(SelectedUser));
                     break;
                 case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestDetailManagement());
+                    _Frame.Navigate(new AdminTestDetailManagement(SelectedUser));
                     break;
             }
         }
@@ -137,10 +182,10 @@ namespace TestVerktygWPF
                 //    db.Tests.Add(item);
                 //}
 
-                foreach (var item in lxUserTest)
-                {
-                    db.UserTests.Add(item);
-                }
+                //foreach (var item in lxUserTest)
+                //{
+                //    db.UserTests.Add(item);
+                //}
 
                 //foreach (var item in lxQuestions)
                 //{
@@ -165,30 +210,30 @@ namespace TestVerktygWPF
             #endregion
 
         }
-        
+
         private List<UserTest> AddUserTest()
         {
             List<UserTest> lxUserTest = new List<UserTest>();
 
             UserTest xUserTets = new UserTest()
             {
-                UserFk = 2,
-                TestFk = 1,
+                UserFk = 5,
+                TestFk = 5,
             };
             UserTest xUserTets1 = new UserTest()
             {
-                UserFk = 3,
-                TestFk = 1,
+                UserFk = 5,
+                TestFk = 6,
             };
             UserTest xUserTets2 = new UserTest()
             {
-                UserFk = 3,
-                TestFk = 2,
+                UserFk = 6,
+                TestFk = 6,
             };
             UserTest xUserTets3 = new UserTest()
             {
-                UserFk = 4,
-                TestFk = 1,
+                UserFk = 6,
+                TestFk = 5,
             };
 
             lxUserTest.Add(xUserTets);
@@ -204,7 +249,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 1,
+                TestRefFk = 5,
                 WritenTime = 10,
                 IsTestDone = true,
                 Score = 2,
@@ -213,7 +258,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest2 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 1,
+                TestRefFk = 5,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -222,7 +267,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest3 = new StudentTest()
             {
                 StudentRefFk = 3,
-                TestRefFk = 1,
+                TestRefFk = 5,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -231,7 +276,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest4 = new StudentTest()
             {
                 StudentRefFk = 1,
-                TestRefFk = 2,
+                TestRefFk = 6,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -241,7 +286,7 @@ namespace TestVerktygWPF
             StudentTest xStudentTest5 = new StudentTest()
             {
                 StudentRefFk = 2,
-                TestRefFk = 2,
+                TestRefFk = 6,
                 WritenTime = 0,
                 IsTestDone = false,
                 Score = 0,
@@ -536,49 +581,49 @@ namespace TestVerktygWPF
             {
                 Name = "Vad är kanin en kanin?",
                 QuestionType = "envalsfråga",
-                TestFk = 1,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest2 = new Questions()
             {
                 Name = "Vad är en Bil",
                 QuestionType = "envalsfråga",
-                TestFk = 1,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest3 = new Questions()
             {
                 Name = "1+5*0+3",
                 QuestionType = "Flervalsfråga",
-                TestFk = 1,
+                TestFk = 5,
                 AppData = "",
             };
             Questions xQuest4 = new Questions()
             {
                 Name = "2+2",
                 QuestionType = "envalsfråga",
-                TestFk = 2,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest5 = new Questions()
             {
                 Name = "Vilken Är störst",
                 QuestionType = "rangordning",
-                TestFk = 3,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest6 = new Questions()
             {
                 Name = "Vilka färger ser du?",
                 QuestionType = "Flervalsfråga",
-                TestFk = 4,
+                TestFk = 6,
                 AppData = "",
             };
             Questions xQuest7 = new Questions()
             {
                 Name = "Vilken är längst?",
                 QuestionType = "rangordning",
-                TestFk = 4,
+                TestFk = 6,
                 AppData = "",
             };
             lxQuestion.Add(xQuest);
@@ -644,24 +689,28 @@ namespace TestVerktygWPF
                 ID = 1,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest2 = new Test()
             {
                 ID = 2,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest3 = new Test()
             {
                 ID = 3,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             Test xTest4 = new Test()
             {
                 ID = 4,
                 Name = "FirstTest",
                 TimeStampe = 10.0d,
+                IsAutoCorrect = true
             };
             lxTest.Add(xTest);
             lxTest.Add(xTest2);
@@ -804,5 +853,15 @@ namespace TestVerktygWPF
             return lxStudent;
         }
 
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            _Frame.Visibility = Visibility.Collapsed;
+            AdminTabs.Visibility = Visibility.Collapsed; 
+            TeacherTabs.Visibility = Visibility.Collapsed;
+            LogoutTabs.Visibility = Visibility.Collapsed;
+            LoginPage.Visibility = Visibility.Visible;
+            SelectedUser = null;
+            txtBoxPasswordInput.Password = "";
+        }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestVerktygWPF.Model;
+using TestVerktygWPF.ViewModel;
 
 namespace TestVerktygWPF.View
 {
@@ -23,21 +24,33 @@ namespace TestVerktygWPF.View
     {
         IList<Test> tests = new List<Test>();
         Test test;
-        public TeacherTestManagementPage()
+        User theTeacher;
+        Repository repo = new Repository();
+
+        public TeacherTestManagementPage(User user)
         {
+            theTeacher = user;
             InitializeComponent();
+            UpdateList();
+            
+        }
+
+        private void UpdateList()
+        {
             using (var db = new DbModel())
             {
                 var query = (from t in db.Tests
+                             join ut in db.UserTests on t.ID equals ut.TestFk
+                             join u in db.Users on ut.UserFk equals u.ID
+                             where u.UserName == theTeacher.UserName // add the condition of the user after we finish login site, now we can see only all tests of teachers
                              select t).ToList();
                 foreach (var item in query)
                 {
                     tests.Add(item);
                 }
-                cbSelectClass.ItemsSource = db.StudentClasses.ToList();
-                cbSelectClass.DisplayMemberPath = "Name";
             }
             listViewTestToSend.ItemsSource = tests;
+            listViewTestToSend.DisplayMemberPath = "Name";
         }
 
         private void btnTimeUp_Click(object sender, RoutedEventArgs e)
@@ -57,33 +70,168 @@ namespace TestVerktygWPF.View
             }
         }
 
-        private void cbSelectClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            using (var db = new DbModel())
-            {
-                //ComboBox cbb = sender as ComboBox;
-                //var query = from grade in db.GradeClasss
-                //            where grade.Name == cbSelectClass.SelectedItem.ToString()
-                //            select grade.Studends.ToList();
-                //List<string> Names = new List<string>();
-                //foreach (var item in query)
-                //{
-                //    Console.WriteLine(item);
-                //}
-                cbSelectStudent.ItemsSource = db.Students.ToList();
-                cbSelectStudent.DisplayMemberPath = "FirstName";
-            }
-        }
-
         private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
         {
             test = listViewTestToSend.SelectedItem as Test;
-            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, cbSelectClass.SelectedItem, cbSelectStudent.SelectedItem);
+            List<Student> StudentToTest = new List<Student>();
+            foreach (var item in listStk.Children)
+            {
+                var boxes = item as CheckBox;
+                if (rbnClass.IsChecked == true)
+                {
+                    using (var db = new DbModel())
+                    {
+                        var query = from s in db.Students
+                                    join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
+                                    join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
+                                    join c in db.Courses on scc.CouseRefID equals c.ID
+                                    where c.CourseName == boxes.Content.ToString()
+                                    select s;
+                        foreach (var item2 in query)
+                        {
+                            foreach (var item3 in StudentToTest)
+                            {
+                                if (item2 == item3)
+                                {
+                                    StudentToTest.Add(item2);
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (rbnElev.IsChecked == true)
+                {
+                    using (var db = new DbModel())
+                    {
+                        var query = from s in db.Students
+                                    where s.UserName == boxes.Content.ToString()
+                                    select s;
+                        foreach (var item2 in query)
+                        {
+                            StudentToTest.Add(item2);
+                        }
+
+                    }
+                }
+            }
+            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, StudentToTest);
         }
 
-        private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, object selectedItem1, object selectedItem2)
+        private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, List<Student> students)
         {
-            throw new NotImplementedException();
+            if (listViewTestToSend.SelectedItem != null && DatePickerStartDate.SelectedDate != null && DatePickerEndDate != null && students != null)
+            {
+                using (var db = new DbModel())
+                {
+                    var query = from t in db.Tests
+                                where t.ID == test.ID
+                                select t;
+                    foreach (var item in query.ToList())
+                    {
+                        item.TimeStampe = int.Parse(txtBoxTestTime.Text);
+                        item.StartDate = DatePickerStartDate.SelectedDate;
+                        item.EndDate = DatePickerEndDate.SelectedDate;
+                        var query2 = from t in db.Users
+                                     where t.OccupationFk == 2
+                                     select t;
+                        foreach (var item2 in query2.ToList())
+                        {
+                            UserTest toAdmin = new UserTest();
+                            toAdmin.TestFk = item.ID;
+                            toAdmin.UserFk = item2.ID;
+                            db.UserTests.Add(toAdmin);
+                        }
+                    }
+
+                    foreach (var item in students)
+                    {
+                        StudentTest newTest = new StudentTest();
+                        newTest.TestRefFk = test.ID;
+                        newTest.StudentRefFk = item.ID;
+                        newTest.IsChecked = false;
+                        db.StudentTests.Add(newTest);
+                    }
+
+                    //var teacherUserTest = from u in db.UserTests
+                    //                      where u.UserFk == theTeacher.ID
+                    //                      select u;
+                    //foreach (var item in teacherUserTest.ToList())
+                    //{
+                    //    db.UserTests.Remove(item);
+                    //}
+
+                    MessageBox.Show("Provet har skickats till Admin");
+                    UpdateList();
+                    txtBoxTestTime.Text = "1";
+                    DatePickerStartDate.SelectedDate = null;
+                    DatePickerEndDate.SelectedDate = null;
+
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ange noggrann alla information");
+            }
+
+        }
+
+        private void listViewTestToSend_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            test = sender as Test;
+        }
+
+        private void generateList(object sender, RoutedEventArgs e)
+        {
+            RadioButton rbn = sender as RadioButton;
+            switch (rbn.Name.ToString())
+            {
+                case "rbnClass":
+                    listStk.Children.Clear();
+                    generateClassList();
+                    break;
+                case "rbnElev":
+                    listStk.Children.Clear();
+                    generateStudentList();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void generateClassList()
+        {
+            using (var db = new DbModel())
+            {
+                var query = from c in db.Courses
+                            join stc in db.StudentClassCourses on c.ID equals stc.CouseRefID
+                            join st in db.StudentClasses on stc.StudentClassRefID equals st.ID
+                            join u in db.Users on st.ID equals u.StudentClassFk
+                            where u.ID == theTeacher.ID
+                            select c;
+                foreach (var item in query)
+                {
+                    CheckBox box = new CheckBox();
+                    box.Content = item.CourseName;
+                    listStk.Children.Add(box);
+                }
+            }
+        }
+
+        private void generateStudentList()
+        {
+            using (var db = new DbModel())
+            {
+                var query = from s in db.Students
+                            where s.StudentClassFk == theTeacher.StudentClassFk
+                            select s;
+                foreach (var item in query)
+                {
+                    CheckBox box = new CheckBox();
+                    box.Content = item.UserName;
+                    listStk.Children.Add(box);
+                }
+            }
         }
     }
 }

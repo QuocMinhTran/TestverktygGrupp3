@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,10 @@ namespace TestVerktygWPF.View
         private List<Questions> m_lxQuestions;
         private List<Answer> m_lxAnswer;
         static int iID;
-        public TeacherCreateTestPage()
+        User theTeacher;
+        public TeacherCreateTestPage(User user)
         {
+            theTeacher = user;
             iID = 0;
             InitializeComponent();
             m_lxQuestions = new List<Questions>();
@@ -42,9 +45,14 @@ namespace TestVerktygWPF.View
         private void NewStackPanel(List<Answer> lxAnswers)
         {
             int iIndex = 0;
-            for (int i = 0; i < lxAnswers.Count; i++)
+            //for (int i = 0; i < lxAnswers.Count; i++)
+            //{
+            //    _StackPanel.Children.Add(CreateQuestion());
+            //}
+            foreach (var item in lxAnswers)
             {
-                _StackPanel.Children.Add(CreateQuestion());
+                Answer ans = item as Answer;
+                _StackPanel.Children.Add(CreateQuestion(ans.RightAnswer));
             }
             foreach (var item in _StackPanel.Children)
             {
@@ -76,18 +84,101 @@ namespace TestVerktygWPF.View
             }
         }
 
-        private void SaveQuestion(object sender, RoutedEventArgs e)
+        private void btnSaveQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            txtBlockWarning.Text = "";
+            bool oneOrMoreAlternativesEmpty = false;
+            bool isThereACorrectAnswer = false;
+            foreach (var item in _StackPanel.Children)
+            {
+                Console.WriteLine(item.ToString());
+                StackPanel stackPanelAlternatives = item as StackPanel;
+                foreach (var item2 in stackPanelAlternatives.Children)
+                {
+                    Console.WriteLine(item2.ToString());
+                    if (item2.GetType() == typeof(TextBox))
+                    {
+                        Console.WriteLine("objektet är en textbox");
+                        TextBox txtBoxAlternative = item2 as TextBox;
+
+                        if (String.IsNullOrEmpty(txtBoxAlternative.Text) == true)
+                        {
+                            oneOrMoreAlternativesEmpty = true;
+                            txtBoxAlternative.BorderBrush = Brushes.Red;
+                            Console.WriteLine("alternativet måste ha text");
+                            txtBlockWarning.Text = "Varje alternativ måste en text.\n";
+                        }
+
+                        else
+                        {
+                            txtBoxAlternative.ClearValue(TextBox.BorderBrushProperty);
+                        }
+                    }
+
+                    else if (item2.GetType() == typeof(RadioButton))
+                    {
+                        RadioButton rbCorrectAlternative = item2 as RadioButton;
+                        if (!isThereACorrectAnswer)
+                            if (rbCorrectAlternative.IsChecked == true)
+                                isThereACorrectAnswer = true;
+                    }
+
+                    else if (item2.GetType() == typeof(CheckBox))
+                    {
+                        CheckBox chkBoxCorrectAlternative = item2 as CheckBox;
+                        if (!isThereACorrectAnswer)
+                            if (chkBoxCorrectAlternative.IsChecked == true)
+                                isThereACorrectAnswer = true;
+                    }
+                }
+            }
+
+            if (String.IsNullOrEmpty(txtBoxQuestion.Text) == false)
+            {
+                txtBoxQuestion.ClearValue(TextBox.BorderBrushProperty);
+
+                if (oneOrMoreAlternativesEmpty == false && isThereACorrectAnswer == true && SelectionBox.SelectedIndex != 2)
+                    AddQuestionToTest();
+
+                else if (oneOrMoreAlternativesEmpty == false && SelectionBox.SelectedIndex == 2)
+                    AddQuestionToTest();
+
+                else if (isThereACorrectAnswer == false && SelectionBox.SelectedIndex != 2)
+                    txtBlockWarning.Text = "Markera ett korrekt svar";
+
+                else if (oneOrMoreAlternativesEmpty = true && isThereACorrectAnswer == false)
+                    txtBlockWarning.Text = "Fyll i de markerade fälten och ett korrekt svar";
+            }
+
+            else
+            {
+                txtBoxQuestion.BorderBrush = Brushes.Red;
+                txtBlockWarning.Text += "Frågan måste ha ett namn innan du sparar den.\n";
+            }
+        }
+
+        private void AddQuestionToTest()
         {
             Questions xQuest = new Questions();
             xQuest.Name = txtBoxQuestion.Text;
             xQuest.QuestionType = GetQuestionType(SelectionBox.SelectedIndex);
             xQuest.ID = iID;
+            try
+            {
+                if (!String.IsNullOrEmpty(imgQuestion.Source.ToString()))
+                    xQuest.AppData = imgQuestion.Source.ToString();
+            }
+            catch (Exception)
+            {
+            }
             SaveAnwers(xQuest);
             m_lxQuestions.Add(xQuest);
             iID++;
             listViewAddedQuestions.Items.Add(xQuest.Name);
+            btnSaveTest.IsEnabled = true;
             Clear(false);
         }
+
         private string GetQuestionType(int Selected)
         {
             string xName = "";
@@ -162,33 +253,65 @@ namespace TestVerktygWPF.View
             btnSaveQuestion.IsEnabled = true;
         }
 
-        private void SaveTest(object sender, RoutedEventArgs e)
+        private void btnSaveTest_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtBoxTestName.Text) == false)
+            {
+                txtBoxTestName.ClearValue(TextBox.BorderBrushProperty);
+                txtBlockWarning.Text = "";
+                SaveTest();
+            }
+            else
+            {
+                txtBlockWarning.Text = "Testet måste ha ett namn innan du sparar den.";
+                txtBoxTestName.BorderBrush = Brushes.Red;
+            }
+
+        }
+
+        private void SaveTest()
         {
             TestHandler xTestHandler = new TestHandler();
             Test xTest = new Test();
+
+            if (chkBoxAutoCorrectTest.IsEnabled)
+                xTest.IsAutoCorrect = true;
+            else
+                xTest.IsAutoCorrect = false;
+
             xTest.Name = txtBoxTestName.Text;
-            xTestHandler.CreateTest(xTest,m_lxQuestions,m_lxAnswer);
+            
+            
+            xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer, theTeacher.ID);
 
             Clear(true);
         }
-        private StackPanel CreateQuestion()
+
+        private StackPanel CreateQuestion(bool correctAnswer = false)
         {
             StackPanel xStackPanel = new StackPanel();
             TextBox xTextBox = new TextBox();
             xTextBox.Text = "";
-            xTextBox.Width = 170;
+            xTextBox.Width = 200;
             xStackPanel.Children.Add(xTextBox);
+            
 
             switch (SelectionBox.SelectedIndex)
             {
                 case 0:
-                    xStackPanel.Children.Add(AddItemRadioButton());
+                    xStackPanel.Children.Add(AddItemRadioButton(correctAnswer));
+                    lblQTypeInstructions.Content = "Markera det korrekta svaret";
                     break;
                 case 1:
-                    xStackPanel.Children.Add(AddItemCheckBox());
+                    xStackPanel.Children.Add(AddItemCheckBox(correctAnswer));
+                    lblQTypeInstructions.Content = "Markera ett eller fler korrekta svar";
                     break;
                 case 2:
-                    xStackPanel.Children.Add(AddItemComboBox());
+                    int newQuestionIndex = 0;
+                    for (int i = 0; i < _StackPanel.Children.Count; i++)
+                        newQuestionIndex++;
+                    xStackPanel.Children.Add(AddItemRanking(newQuestionIndex));
+                    lblQTypeInstructions.Content = "Skriv frågorna i stigande ordning";
                     break;
                 default:
                     break;
@@ -200,11 +323,14 @@ namespace TestVerktygWPF.View
         private void SelectedQuestionType(object sender, SelectionChangedEventArgs e)
         {
             Console.WriteLine("Hej");
+            int j = -1;
             foreach (var item in _StackPanel.Children)
             {
+                j++;
                 StackPanel xStackPanel = item as StackPanel;
                 for (int i = 0; i < xStackPanel.Children.Count; i++)
                 {
+                    Console.WriteLine(j + "question type loop");
                     if (xStackPanel.Children[i].GetType() != typeof(TextBox))
                     {
                         xStackPanel.Children.RemoveAt(i);
@@ -212,12 +338,16 @@ namespace TestVerktygWPF.View
                         {
                             case 0:
                                 xStackPanel.Children.Add(AddItemRadioButton());
+                                lblQTypeInstructions.Content = "Markera det korrekta svaret";
                                 break;
                             case 1:
                                 xStackPanel.Children.Add(AddItemCheckBox());
+                                lblQTypeInstructions.Content = "Markera ett eller fler korrekta svar";
                                 break;
                             case 2:
-                                xStackPanel.Children.Add(AddItemComboBox());
+                                //xStackPanel.Children.Add(AddItemComboBox());
+                                xStackPanel.Children.Add(AddItemRanking(j));
+                                lblQTypeInstructions.Content = "Skriv frågorna i stigande ordning";
                                 break;
                             default:
                                 break;
@@ -226,36 +356,49 @@ namespace TestVerktygWPF.View
                 }
             }
         }
-        private CheckBox AddItemCheckBox()
+        //private ComboBox AddItemComboBox()
+        //{
+        //    Thickness xThickness = new Thickness();
+        //    ComboBox xComboBox = new ComboBox();
+        //    xThickness.Left = 10;
+        //    xComboBox.VerticalAlignment = VerticalAlignment.Center;
+        //    xComboBox.Margin = xThickness;
+        //    return xComboBox;
+        //}
+        private CheckBox AddItemCheckBox(bool correctAnswer = false)
         {
             Thickness xThickness = new Thickness();
             CheckBox xCheckBox = new CheckBox();
             xThickness.Left = 10;
+            if (correctAnswer)
+                xCheckBox.IsChecked = true;
 
             xCheckBox.Margin = xThickness;
             return xCheckBox;
         }
-        private ComboBox AddItemComboBox()
-        {
-            Thickness xThickness = new Thickness();
-            ComboBox xComboBox = new ComboBox();
-            xThickness.Left = 10;
-
-            xComboBox.Margin = xThickness;
-            return xComboBox;
-        }
-        private RadioButton AddItemRadioButton()
+        private RadioButton AddItemRadioButton(bool correctAnswer = false)
         {
             Thickness xThickness = new Thickness();
             xThickness.Left = 10;
             RadioButton xRadioButton = new RadioButton();
             xRadioButton.GroupName = "Question";
             xRadioButton.Margin = xThickness;
+            if (correctAnswer)
+                xRadioButton.IsChecked = true;
             return xRadioButton;
+        }
+        private TextBlock AddItemRanking(int i)
+        {
+            Thickness xThickness = new Thickness();
+            xThickness.Left = 10;
+            TextBlock xTxtBlock = new TextBlock();
+            xTxtBlock.Margin = xThickness;
+            xTxtBlock.Text = (i + 1).ToString();
+            return xTxtBlock;
         }
         private void Clear(bool All)
         {
-            btnSaveQuestion.IsEnabled = false;
+            btnSaveQuestion.IsEnabled = true;
             txtBoxQuestion.Text = "";
             if (All)
             {
@@ -265,6 +408,7 @@ namespace TestVerktygWPF.View
                 m_lxAnswer.Clear();
             }
             _StackPanel.Children.Clear();
+            imgQuestion.Source = null;
             SelectionBox.SelectedIndex = 0;
             for (int i = 0; i < 3; i++)
             {
@@ -278,26 +422,76 @@ namespace TestVerktygWPF.View
 
         private void EditQ(object sender, RoutedEventArgs e)
         {
-            Clear(false);
-            List<Answer> lxAwnser = new List<Answer>();
-            Console.WriteLine(listViewAddedQuestions.SelectedIndex);
-            txtBoxQuestion.Text = m_lxQuestions[listViewAddedQuestions.SelectedIndex].Name;
-            foreach (var item in m_lxAnswer)
+            if (listViewAddedQuestions.SelectedIndex != -1)
             {
-                if (item.QuestionFk == m_lxQuestions[listViewAddedQuestions.SelectedIndex].ID)
+                Clear(false);
+                List<Answer> lxAwnser = new List<Answer>();
+                Console.WriteLine(listViewAddedQuestions.SelectedIndex);
+                txtBoxQuestion.Text = m_lxQuestions[listViewAddedQuestions.SelectedIndex].Name;
+                if (!String.IsNullOrEmpty(m_lxQuestions[listViewAddedQuestions.SelectedIndex].AppData))
                 {
-                    lxAwnser.Add(item);
-                   
-                    RemoveStackPanel();
-                    SetQuestionType(m_lxQuestions[listViewAddedQuestions.SelectedIndex].QuestionType);
+                    Uri imgUri = new Uri(m_lxQuestions[listViewAddedQuestions.SelectedIndex].AppData);
+                    BitmapImage imgBitMap = new BitmapImage(imgUri);
+                    imgQuestion.Source = imgBitMap;
                 }
+
+                foreach (var item in m_lxAnswer)
+                {
+                    if (item.QuestionFk == m_lxQuestions[listViewAddedQuestions.SelectedIndex].ID)
+                    {
+                        lxAwnser.Add(item);
+
+                        RemoveStackPanel();
+                        SetQuestionType(m_lxQuestions[listViewAddedQuestions.SelectedIndex].QuestionType);
+                    }
+                }
+                foreach (var item in lxAwnser)
+                {
+                    m_lxAnswer.Remove(item);
+                }
+                listViewAddedQuestions.Items.Remove(listViewAddedQuestions.Items[listViewAddedQuestions.SelectedIndex]);
+                NewStackPanel(lxAwnser);
             }
-            foreach (var item in lxAwnser)
+        }
+
+        private void listViewAddedQuestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Console.WriteLine(listViewAddedQuestions.SelectedIndex);
+            if (listViewAddedQuestions.SelectedItem != null)
             {
-                m_lxAnswer.Remove(item);
+                btnEditQuestion.IsEnabled = true;
+                btnRemoveQuestion.IsEnabled = true;
             }
-            listViewAddedQuestions.Items.Remove(listViewAddedQuestions.Items[listViewAddedQuestions.SelectedIndex]);
-            NewStackPanel(lxAwnser);
+            else
+            {
+                btnEditQuestion.IsEnabled = false;
+                btnRemoveQuestion.IsEnabled = false;
+            }
+        }
+
+        private void btnRemoveQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            listViewAddedQuestions.Items.Remove(listViewAddedQuestions.SelectedItem);
+        }
+
+        private void btnRemoveImg_Click(object sender, RoutedEventArgs e)
+        {
+            imgQuestion.Source = null;
+        }
+
+        private void btnFindImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                String stringPath = openFileDialog.FileName;
+                Console.WriteLine(stringPath);
+                Uri imgUri = new Uri(stringPath);
+                BitmapImage imgBitMap = new BitmapImage(imgUri);
+                imgQuestion.Source = imgBitMap;
+            }
         }
     }
 }

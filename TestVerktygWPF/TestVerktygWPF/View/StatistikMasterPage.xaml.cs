@@ -29,6 +29,7 @@ namespace TestVerktygWPF.View
         public List<Student> liAllStudents = new List<Student>();
         public Student SelectedStudent = new Student();
         public List<StudentTest> StudentsTests = new List<StudentTest>();
+        public List<Test> LiStudentsDoneTests = new List<Test>();
         // public int NumberOfTests;
 
         public double AvrageTimeForTest;
@@ -37,11 +38,10 @@ namespace TestVerktygWPF.View
 
         public double NumberOfQuestionsInSelectedTest; //maxpoäng
         public double StudentsScoreOfTest; // AllasPoäng
-        public double ResultA;
-        public double AvrageProcentGrade;
+
         public double NumberOfstudents;
 
-        public StatistikMasterPage()
+        public StatistikMasterPage(User user)
         {
             InitializeComponent();
             CurrentSelectedTest csTest = new CurrentSelectedTest();
@@ -68,7 +68,7 @@ namespace TestVerktygWPF.View
         private void AvrageTestTime()
         {
 
-            double TotalTestTime =0;
+            double TotalTestTime = 0;
             int NumberOfTests = 0;
             List<StudentTest> lxStudentTest = new List<StudentTest>();
             Repository Repo = new Repository();
@@ -124,6 +124,7 @@ namespace TestVerktygWPF.View
                     csTest.SetCurrentStudent(item.ID);
                     lvClassStatistics.Items.Add("Namn " + csTest.CurrentStudent.FirstName + csTest.CurrentStudent.LastName + " Poäng " + csTest.StudentScore + " Tid " + csTest.StudentTime);
                     StudentsScoreOfTest += csTest.StudentScore;
+
                 }
 
             }
@@ -136,17 +137,20 @@ namespace TestVerktygWPF.View
         private void AvrageScoreForTest()
         {
 
-            
+            double ResultA;
+
+            double AvrageProcentGrade;
+
             ResultA = NumberOfQuestionsInSelectedTest - StudentsScoreOfTest;
             Console.WriteLine("Studenternas sammanlagda poäng : " + StudentsScoreOfTest);
             Console.WriteLine("Antal frågor i testet : " + NumberOfQuestionsInSelectedTest);
             Console.WriteLine("ResultatA : " + ResultA);
-            AvrageProcentGrade = ResultA/NumberOfQuestionsInSelectedTest;
+            AvrageProcentGrade = ResultA / NumberOfQuestionsInSelectedTest;
 
 
-            
+
             Console.WriteLine("procent av provet i svar : " + AvrageProcentGrade);
-            
+
 
         }
 
@@ -164,19 +168,37 @@ namespace TestVerktygWPF.View
             lvStudentStatistics.Items.Clear();
             var varSender = sender as ComboBox;
             SelectedStudent = liAllStudents[varSender.SelectedIndex];
-            Console.WriteLine("SelectedStudent är: "+ SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
+            Console.WriteLine("SelectedStudent är: " + SelectedStudent.FirstName + SelectedStudent.LastName + SelectedStudent.ID);
             Repository repo = new Repository();
             StudentsTests = repo.GetStudentsTests(SelectedStudent.ID);
             CurrentSelectedTest csTest = new CurrentSelectedTest();
 
             foreach (var item in StudentsTests)
             {
-                csTest.SetCurrentTest(item.ID);
+                csTest.SetCurrentTest(item.TestRefFk);
                 lvStudentStatistics.Items.Add("Prov: " + csTest.CurrentTest.Name + " Poäng: " + item.Score + " Maxpoäng: " +
                                               csTest.CurrentQuestions.Count() + " Tid: " + item.WritenTime);
+                LiStudentsDoneTests.Add(csTest.CurrentTest);
             }
 
 
+        }
+
+
+        private void LvStudentStatistics_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvStudentStatistics.SelectedItem != null)
+            {
+                StatistikDetailPage.SelectedTest.ID = LiStudentsDoneTests[lvStudentStatistics.SelectedIndex].ID;
+                StatistikDetailPage.SelectedStudent = SelectedStudent;
+                Window newWindow = new NavigationWindow();
+                newWindow.Show();
+                newWindow.Topmost = true;
+                newWindow.Content = new StatistikDetailPage();
+
+                
+
+            }
 
         }
     }

@@ -13,7 +13,7 @@ namespace TestVerktygWPF.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201605050720122_hej"; }
+            get { return "201605111119462_hej"; }
         }
         
         string IMigrationMetadata.Source

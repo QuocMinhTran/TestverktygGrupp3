@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Sql;
+using TestVerktygElev.ViewModel;
 
 namespace TestVerktygElev
 {
@@ -22,30 +23,62 @@ namespace TestVerktygElev
     /// </summary>
     public partial class MainWindow : Window
     {
+        Repository repo = new Repository();
+        //List<Student> students;
+        //Student SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
+            Student xStudent = new Student();
+            xStudent.FirstName = "Kom Och";
+            xStudent.LastName = " Hjälp Mig";
 
-            AddDummyData();
-            _frame.Navigate(new ElevTestPage());
-                
+            xStudent.ID = 7;
+
+
+            _frame.Navigate(new MainPage(xStudent));
+            //_frame.Navigate(new StatisticPage(null,1));
         }
+ 
 
-        private void AddDummyData()
-        {
 
-            
-        }
+        //private void btnLogin_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //TODO: send UserName and Password to database and login if there is a match
+        //    students = repo.GetAllStudents();
+        //    foreach (var item in students)
+        //    {
+        //        if (txtBoxUserNameInput.Text == item.UserName && txtBoxPasswordInput.Password == item.Password)
+        //        {
+        //            SelectedUser = item;
+        //            loginPanel.Visibility = Visibility.Collapsed;
+        //            MenuTabs.Visibility = Visibility.Visible;
+        //            _frame.Navigate(new MainPage(item));
+        //        }
+        //    }
+        //}
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: send UserName and Password to database and login if there is a match
-        }
+        //private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key.Equals(Key.Enter))
+        //        btnLogin_Click(sender, e);
+        //}
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key.Equals(Key.Enter))
-                btnLogin_Click(sender, e);
-        }
+        //private void Menu_Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    MenuItem btn = sender as MenuItem;
+        //    switch (btn.Header.ToString())
+        //    {
+        //        case "Startsida":
+        //            _frame.Navigate(new MainPage(SelectedUser));
+        //            break;
+        //        case "Logga ut":
+        //            SelectedUser = null;
+        //            loginPanel.Visibility = Visibility.Visible;
+        //            MenuTabs.Visibility = Visibility.Collapsed;
+        //            _frame.Navigate(new MainWindow());
+        //            break;
+        //    }
+        //}
     }
 }

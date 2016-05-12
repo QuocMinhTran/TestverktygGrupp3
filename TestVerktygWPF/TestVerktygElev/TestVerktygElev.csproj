@@ -70,7 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Answer.cs" />
-    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Cours.cs" />
     <Compile Include="Model\C__MigrationHistory.cs" />
     <Compile Include="Model\Model1.cs" />
     <Compile Include="Model\Occupation.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\StudentAnswer.cs" />
     <Compile Include="Model\StudentClass.cs" />
-    <Compile Include="Model\StudentClassCourse.cs" />
+    <Compile Include="Model\StudentClassCours.cs" />
     <Compile Include="Model\StudentTest.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\User.cs" />
@@ -93,9 +93,6 @@
     </Compile>
     <Compile Include="View\StatisticPage.xaml.cs">
       <DependentUpon>StatisticPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ElevTestPage.xaml">
       <SubType>Designer</SubType>
@@ -125,10 +122,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\StatisticPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,9 +159,7 @@
   <ItemGroup>
     <Resource Include="Assets\Images\NewtonLogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\TestVerktygWPF\TestVerktygWPF.csproj">
       <Project>{0C4AAA86-1300-4D42-B04B-5B237E446BE7}</Project>

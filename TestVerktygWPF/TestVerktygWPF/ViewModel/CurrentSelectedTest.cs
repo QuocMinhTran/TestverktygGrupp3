@@ -19,6 +19,7 @@ namespace TestVerktygWPF.ViewModel
         public Student CurrentStudent { get; private set; }
         public int StudentTime { get; private set; }
         public int StudentScore { get; private set; }
+        public Answer CorrecAnswer { get; set; } 
         public CurrentSelectedTest()
         {
             xRepo = new Repository();
@@ -42,6 +43,12 @@ namespace TestVerktygWPF.ViewModel
             }
           
         }
+
+        //public List<Answer> GetStudentsAnswers(int Id)
+        //{
+        //    List<Answer> liAnswer = new List<Answer>();
+        //    return liAnswer = xRepo.GetStudetAnswers(Id);
+        //} 
         public void SetCurrentTest(string sName)
         {
             CurrentTest = xRepo.GetTest(sName);
@@ -101,6 +108,13 @@ namespace TestVerktygWPF.ViewModel
             }
            
             return AllTestsDone;
+        }
+
+        public List<Answer> GetCorrectAnswer(int idQuestions)
+        {
+            List<Answer> ansewer = new List<Answer>();
+
+            return ansewer = xRepo.GetCorrectAnswer(idQuestions);
         }
 
     }

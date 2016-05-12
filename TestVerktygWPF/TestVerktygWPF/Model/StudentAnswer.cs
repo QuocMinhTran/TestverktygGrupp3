@@ -18,5 +18,8 @@ namespace TestVerktygWPF.Model
         [ForeignKey("StudentTestFk")]
         public StudentTest StudentTest { get; set; }
         public int StudentTestFk { get; set; }
+
+       
+
     }
 }

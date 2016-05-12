@@ -8,69 +8,188 @@ namespace TestVerktygElev.ViewModel
 {
     class Repository
     {
-        public Test GetTest()
+
+        public List<Test> GetTestForStudent(int p_iID)
         {
-            Test test = new Test();
-            test.Name = "testes";
-            test.StartDate = DateTime.Today;
-            test.EndDate = DateTime.Today.AddDays(1);
-            return test;
+            List<Test> lxTest = new List<Test>();
+            using (var db = new Model1())
+            {
+                var querry = from StudentTest in db.StudentTests
+                             where StudentTest.IsTestDone == false
+                             join Test in db.Tests on StudentTest.TestRefFk equals Test.ID
+                             join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID into Group
+                             from TestGroup in Group
+                             where TestGroup.ID == p_iID
+                             select Test;
+                foreach (var item in querry)
+                {
+                    
+                    Console.WriteLine(item.Name + " Name of Test From DataBase");
+                    lxTest.Add(item);
+                }
+            }
+            return lxTest;
+        }
+        public int GetStudentTestID(int p_iStudentID, int p_iTestID)
+        {
+            StudentTest xStudentTest = new StudentTest();
+            using (var db = new Model1())
+            {
+                var querry = from StudentTest in db.StudentTests
+                             join xTest in db.Tests on StudentTest.TestRefFk equals xTest.ID into GroupT
+                             join xStuden in db.Students on StudentTest.StudentRefFk equals xStuden.ID into Group
+                             from xGroup in Group
+                             where xGroup.ID == p_iStudentID
+                             from xGroupT in GroupT
+                             where xGroupT.ID == p_iTestID
+                             select StudentTest;
+                foreach (var item in querry)
+                {
+                    xStudentTest = item;
+                }
+
+
+
+            }
+            return xStudentTest.ID;
         }
 
-        public List<Question> GetQuestion()
+        public List<StudentAnswer> GetStudentAnswers(int p_iStudentiD, int p_iTestiD)
         {
-            List<Question> qList = new List<Question>();
-            Question q = new Question();
-            Answer opt = new Answer();
-            Answer opt2 = new Answer();
+            List<StudentAnswer> lxStudentAnswer = new List<StudentAnswer>();
+            using (var db = new Model1())
+            {
+                var querry = from xTest in db.StudentTests
+                             join xStudent in db.Students on xTest.StudentRefFk equals xStudent.ID
+                             join xAnswers in db.StudentAnswers on xTest.ID equals xAnswers.StudentTestFk
+                             where xTest.ID == p_iTestiD
+                             //where xStudent.ID == p_iStudentiD
+                             select xAnswers;
 
-            Question q2 = new Question();
-            Answer opt3 = new Answer();
-            Answer opt4 = new Answer();
-            Answer opt5 = new Answer();
+                //var querry = from x in db.StudentAnswers
+                //             select x;
 
-            q.Name = "fråga nummer ett";
-            q.QuestionType = "envalsfråga";
-            opt.Text = "rätt svar";
-            opt.RightAnswer = true;
-            opt2.Text = "fel svar";
-            opt2.RightAnswer = false;
-            q.Answers.Add(opt);
-            q.Answers.Add(opt2);
+                Console.WriteLine(querry.ToString());
+                foreach (var item in querry)
+                {
+                    lxStudentAnswer.Add(item);
+                }
+            }
+            
+            return lxStudentAnswer;
+        }
 
-            q2.Name = "fråga nummer två";
-            q2.QuestionType = "flervalsfråga";
-            opt3.Text = "rätt";
-            opt3.RightAnswer = true;
-            opt4.Text = "rätt";
-            opt4.RightAnswer = true;
-            opt5.Text = "fel";
-            opt5.RightAnswer = false;
-            q2.Answers.Add(opt3);
-            q2.Answers.Add(opt4);
-            q2.Answers.Add(opt5);
+        internal Test GetTest(int p_IDTest)
+        {
+            Test xTest = new Test();
+            using (var db = new Model1())
+            {
+                var querry = from test in db.Tests
+                             where test.ID == p_IDTest
+                             select test;
+                foreach (var item in querry)
+                {
+                    xTest = item;
+                }
+            }
+            return xTest;
+        }
 
-            Question q3 = new Question();
-            Answer opt6 = new Answer();
-            Answer opt7 = new Answer();
-            Answer opt8 = new Answer();
-            Answer opt9 = new Answer();
+        internal List<Answer> GetAllAnswers(Test m_xTest)
+        {
+            List<Answer> lxAnwsers = new List<Answer>();
+            using (var db = new Model1())
+            {
+                var querry = from Ans in db.Answers
+                             join quest in db.Questions on Ans.QuestionFk equals quest.ID
+                             join test in db.Tests on quest.TestFk equals test.ID
+                             select Ans;
+                foreach (var item in querry)
+                {
+                    lxAnwsers.Add(item);
+                }
+            }
+            return lxAnwsers;
+        }
 
-            q3.Name = "fråga nummer tre";
-            q3.QuestionType = "rangordning";
-            opt6.Text = "ett";
-            opt7.Text = "två";
-            opt8.Text = "tre";
-            opt9.Text = "fyra";
-            q3.Answers.Add(opt6);
-            q3.Answers.Add(opt7);
-            q3.Answers.Add(opt8);
-            q3.Answers.Add(opt9);
+        public List<Question> GetQuestions(int p_IDTest)
+        {
+            List<Question> xQuestion = new List<Question>();
+            using (var db = new Model1())
+            {
+                var querry = from Quest in db.Questions
+                             where Quest.TestFk == p_IDTest
+                             select Quest;
+                foreach (var item in querry)
+                {
+                    xQuestion.Add(item);
+                }
+            }
+            return xQuestion;
+        }
 
-            qList.Add(q);
-            qList.Add(q2);
-            qList.Add(q3);
-            return qList;
+        internal List<Answer> GetAnwsers(int p_iQuestionID)
+        {
+            List<Answer> lxAnwsers = new List<Answer>();
+            using (var db = new Model1())
+            {
+                var querry = from Ans in db.Answers
+                             where Ans.QuestionFk == p_iQuestionID
+                             select Ans;
+                foreach (var item in querry)
+                {
+                    lxAnwsers.Add(item);
+                }
+            }
+            return lxAnwsers;
+        }
+
+        public List<Student> GetAllStudents()
+        {
+            List<Student> students = new List<Student>();
+            using (var db = new Model1())
+            {
+                var query = from s in db.Students
+                            select s;
+                foreach (var item in query)
+                {
+                    students.Add(item);
+                }
+            }
+            return students;
+        }
+
+        public void SaveTest(List<StudentAnswer> m_lxStudentAnswer, int p_iScore,int p_iWritenTime)
+        {
+            int Id = 0;
+            using (var db = new Model1())
+            {
+                foreach (var item in m_lxStudentAnswer)
+                {
+                    db.StudentAnswers.Add(item);
+                    Id = item.StudentTestFk;
+                }
+                db.SaveChanges();
+            }
+            UpdateStudentTest(Id,p_iScore,p_iWritenTime);
+        }
+        public void UpdateStudentTest(int p_iStudentTest, int p_iScore ,int p_iWritenTime)
+        {
+            using (var db = new Model1())
+            {
+                var querry = from xStudentTest in db.StudentTests
+                             where xStudentTest.ID == p_iStudentTest
+                             select xStudentTest;
+                foreach (var item in querry)
+                {
+                    Console.WriteLine("I HAVE I LIFE FOR NOW ::::" + item.ID + "ADASD");
+                    item.IsTestDone = true;
+                    item.Score = p_iScore;
+                    item.WritenTime = p_iWritenTime;
+                    
+                }
+                db.SaveChanges();
+            }
         }
     }
 }

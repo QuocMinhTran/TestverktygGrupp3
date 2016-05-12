@@ -17,6 +17,7 @@ namespace TestVerktygWPF.Model
         public DateTime? EndDate { get; set; }
         public DateTime? StartDate { get; set; }
         public double TimeStampe { get; set; }
+        public  bool IsAutoCorrect { get; set; }
 
         //public Test()
         //{
