@@ -32,7 +32,7 @@ namespace TestVerktygWPF.View
             theTeacher = user;
             InitializeComponent();
             UpdateList();
-            
+
         }
 
         private void UpdateList()
@@ -52,23 +52,6 @@ namespace TestVerktygWPF.View
             listViewTestToSend.ItemsSource = tests;
         }
 
-        private void btnTimeUp_Click(object sender, RoutedEventArgs e)
-        {
-            txtBoxTestTime.Text = (int.Parse(txtBoxTestTime.Text) + 1).ToString();
-        }
-
-        private void btnTimeDown_Click(object sender, RoutedEventArgs e)
-        {
-            if (int.Parse(txtBoxTestTime.Text) > 1)
-            {
-                txtBoxTestTime.Text = (int.Parse(txtBoxTestTime.Text) - 1).ToString();
-            }
-            else
-            {
-                MessageBox.Show("Det räcker inter");
-            }
-        }
-
         private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
         {
             test = listViewTestToSend.SelectedItem as Test;
@@ -76,49 +59,57 @@ namespace TestVerktygWPF.View
             foreach (var item in listStk.Children)
             {
                 var boxes = item as CheckBox;
-                if (rbnClass.IsChecked == true)
-                {
-                    using (var db = new DbModel())
+                if (boxes.IsChecked == true)
+                { 
+                    if (rbnClass.IsChecked == true)
                     {
-                        var query = from s in db.Students
-                                    join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
-                                    join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
-                                    join c in db.Courses on scc.CouseRefID equals c.ID
-                                    where c.CourseName == boxes.Content.ToString()
-                                    select s;
-                        foreach (var item2 in query)
+                        using (var db = new DbModel())
                         {
-                            foreach (var item3 in StudentToTest)
+                            var query = from s in db.Students
+                                        join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
+                                        join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
+                                        join c in db.Courses on scc.CouseRefID equals c.ID
+                                        where c.CourseName == boxes.Content.ToString()
+                                        select s;
+                            foreach (var item2 in query)
                             {
-                                if (item2 == item3)
+                                foreach (var item3 in StudentToTest)
                                 {
-                                    StudentToTest.Add(item2);
+                                    if (item2 == item3)
+                                    {
+                                        StudentToTest.Add(item2);
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                else if (rbnElev.IsChecked == true)
-                {
-                    using (var db = new DbModel())
+                    else if (rbnElev.IsChecked == true)
                     {
-                        var query = from s in db.Students
-                                    where s.UserName == boxes.Content.ToString()
-                                    select s;
-                        foreach (var item2 in query)
+                        using (var db = new DbModel())
                         {
-                            StudentToTest.Add(item2);
-                        }
+                            var query = from s in db.Students
+                                        where s.UserName == boxes.Content.ToString()
+                                        select s;
+                            foreach (var item2 in query)
+                            {
+                                StudentToTest.Add(item2);
+                            }
 
+                        }
                     }
                 }
             }
-            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, StudentToTest);
+            SendTestToAdmin(test, txtBoxTimeInput.Text, DatePickerEndDate, DatePickerStartDate, StudentToTest);
         }
 
         private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, List<Student> students)
         {
-            if (listViewTestToSend.SelectedItem != null && DatePickerStartDate.SelectedDate != null && DatePickerEndDate != null && students != null)
+            ClearWarning();
+            if (listViewTestToSend.SelectedItem != null
+                && CheckTimeInput(text) == true
+                && CheckDates(DateTime.Now, datePickerStartDate.SelectedDate)
+                && CheckDates(datePickerStartDate.SelectedDate, datePickerEndDate.SelectedDate)
+                && students.Count >= 1)
             {
                 using (var db = new DbModel())
                 {
@@ -127,7 +118,7 @@ namespace TestVerktygWPF.View
                                 select t;
                     foreach (var item in query.ToList())
                     {
-                        item.TimeStampe = int.Parse(txtBoxTestTime.Text);
+                        item.TimeStampe = int.Parse(txtBoxTimeInput.Text);
                         item.StartDate = DatePickerStartDate.SelectedDate;
                         item.EndDate = DatePickerEndDate.SelectedDate;
                         var query2 = from t in db.Users
@@ -159,22 +150,81 @@ namespace TestVerktygWPF.View
                     //    db.UserTests.Remove(item);
                     //}
                     UpdateList();
-                    DatePickerStartDate.SelectedDate = null;
-                    DatePickerEndDate.SelectedDate = null;
+
+                    ClearSelection();
 
                     db.SaveChanges();
                 }
             }
 
+            else
+            {
+                if (students.Count < 1)
+                {
+                    lblWarning.Content += "Välj studenter som skall göra provet";
+                }
+            }
+        }
+
+        private void ClearSelection()
+        {
+            DatePickerStartDate.SelectedDate = null;
+            DatePickerEndDate.SelectedDate = null;
+            rbnClass.IsChecked = false;
+            rbnElev.IsChecked = false;
+            listStk.Visibility = Visibility.Collapsed;
+        }
+
+        private bool CheckTimeInput(string text)
+        {
+            int number;
+            bool result = Int32.TryParse(text, out number);
+            if (result == true && number >= 1)
+                return true;
+            else
+            {
+                lblWarning.Content += "Kontrollera tidsbegränsningen. Den ska endast bestå av positiva tal. \n";
+                txtBoxTimeInput.BorderBrush = Brushes.Red;
+                return false;
+            }
+        }
+
+        private bool CheckDates(DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate > endDate || startDate == null || endDate == null)
+            {
+                lblWarning.Content += "Kontrollera start- och slutdatum. \n";
+                DatePickerStartDate.BorderBrush = Brushes.Red;
+                DatePickerEndDate.BorderBrush = Brushes.Red;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void ClearWarning()
+        {
+            lblWarning.Content = "";
+            DatePickerStartDate.ClearValue(DatePicker.BorderBrushProperty);
+            DatePickerEndDate.ClearValue(DatePicker.BorderBrushProperty);
+            txtBoxTimeInput.ClearValue(TextBox.BorderBrushProperty);
         }
 
         private void listViewTestToSend_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             test = sender as Test;
+            if (listViewTestToSend.SelectedIndex == -1)
+                btnSendTestToAdmin.IsEnabled = false;
+            else
+                btnSendTestToAdmin.IsEnabled = true;
+
         }
 
         private void generateList(object sender, RoutedEventArgs e)
         {
+            listStk.Visibility = Visibility.Visible;
             RadioButton rbn = sender as RadioButton;
             switch (rbn.Name.ToString())
             {
