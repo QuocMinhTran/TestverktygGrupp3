@@ -190,6 +190,7 @@ namespace TestVerktygWPF.View
             if (lvStudentStatistics.SelectedItem != null)
             {
                 StatistikDetailPage.SelectedTest.ID = LiStudentsDoneTests[lvStudentStatistics.SelectedIndex].ID;
+                StatistikDetailPage.SelectedStudent = SelectedStudent;
                 Window newWindow = new NavigationWindow();
                 newWindow.Show();
                 newWindow.Topmost = true;
