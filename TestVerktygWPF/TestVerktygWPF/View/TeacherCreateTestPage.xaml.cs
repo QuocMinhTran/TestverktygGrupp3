@@ -281,7 +281,6 @@ namespace TestVerktygWPF.View
 
             xTest.Name = txtBoxTestName.Text;
             
-            
             xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer, theTeacher.ID);
 
             Clear(true);
@@ -482,7 +481,7 @@ namespace TestVerktygWPF.View
         private void btnFindImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonPictures);
             if (openFileDialog.ShowDialog() == true)
             {

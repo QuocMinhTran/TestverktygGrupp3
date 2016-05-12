@@ -44,7 +44,7 @@ namespace TestVerktygWPF.ViewModel
             }
             xUserTest.TestFk = iTestID;
             xUserTest.UserFk = teacherID;
-          //  xRepo.SaveUserTest(xUserTest);
+            xRepo.SaveUserTest(xUserTest);
             return true;
         }
 
