@@ -37,7 +37,7 @@ namespace TestVerktygWPF.View
             csTest.SetCurrentTest(SelectedTest.ID);
              
             csTest.SetCurrentTest(SelectedTest.ID);
-            //Test testnamn = csTest.CurrentTest;
+            Test testnamn = csTest.CurrentTest;
             liQuestionses = csTest.CurrentQuestions;
 
             Repository xRepository = new Repository();
@@ -46,7 +46,7 @@ namespace TestVerktygWPF.View
             List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
             lxStudentAnswers = xRepository.GetStudentAnswers(SelectedStudent.ID, xTest.ID);
             TextBlock txtbStudentName = new TextBlock();
-         //   txtbStudentName.Text = SelectedStudent.FirstName + " " + SelectedStudent.LastName + " Prov: " + testnamn.Name ;
+            txtbStudentName.Text = SelectedStudent.FirstName + " " + SelectedStudent.LastName + " Prov: " + testnamn.Name ;
             lvDetails.Items.Add(txtbStudentName);
             for (int i = 0; i < liQuestionses.Count; i++)
             {
