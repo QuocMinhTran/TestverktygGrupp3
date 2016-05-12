@@ -25,6 +25,7 @@ namespace TestVerktygWPF.View
         IList<Test> tests = new List<Test>();
         Test test;
         User theTeacher;
+        Repository repo = new Repository();
 
         public TeacherTestManagementPage(User user)
         {
@@ -41,11 +42,6 @@ namespace TestVerktygWPF.View
                 {
                     tests.Add(item);
                 }
-                 
-                cbSelectClass.ItemsSource = db.StudentClasses.ToList();
-                cbSelectClass.DisplayMemberPath = "Name";
-                //cbSelectStudent.ItemsSource = db.Students.ToList();
-                //cbSelectStudent.DisplayMemberPath = "UserName";
             }
             listViewTestToSend.ItemsSource = tests;
         }
@@ -67,37 +63,56 @@ namespace TestVerktygWPF.View
             }
         }
 
-        private void cbSelectClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            using (var db = new DbModel())
-            {
-                List<Student> students = new List<Student>();
-                var query = from s in db.Students
-                            join stc in db.StudentClasses on s.StudentClassFk equals stc.ID
-                            where stc.ID == cbSelectClass.SelectedIndex +1
-                            select s;
-                //cbSelectStudent.Items.Add("Alla");
-                //ComboBoxItem chosen = cbSelectClass.SelectedItem as ComboBoxItem;
-                //Console.WriteLine(chosen.Content);
-                //foreach (var item in query.ToList())
-                //{
-                //    students.Add(item);
-                //}
-                cbSelectStudent.ItemsSource = query.ToList();
-                cbSelectStudent.DisplayMemberPath = "FirstName";
-                //cbSelectStudent.Items.Add("Alla");
-            }
-        }
-
         private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
         {
             test = listViewTestToSend.SelectedItem as Test;
-            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, cbSelectClass.SelectedItem, cbSelectStudent.SelectedItem);
+            List<Student> StudentToTest = new List<Student>();
+            foreach (var item in listStk.Children)
+            {
+                var boxes = item as CheckBox;
+                if (rbnClass.IsChecked == true)
+                {
+                    using (var db = new DbModel())
+                    {
+                        var query = from s in db.Students
+                                    join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
+                                    join scc in db.StudentClassCourses on sc.ID equals scc.StudentClassRefID
+                                    join c in db.Courses on scc.CouseRefID equals c.ID
+                                    where c.CourseName == boxes.Content.ToString()
+                                    select s;
+                        foreach (var item2 in query)
+                        {
+                            foreach (var item3 in StudentToTest)
+                            {
+                                if (item2 == item3)
+                                {
+                                    StudentToTest.Add(item2);
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (rbnElev.IsChecked == true)
+                {
+                    using (var db = new DbModel())
+                    {
+                        var query = from s in db.Students
+                                    where s.UserName == boxes.Content.ToString()
+                                    select s;
+                        foreach (var item2 in query)
+                        {
+                            StudentToTest.Add(item2);
+                        }
+
+                    }
+                }
+            }
+            SendTestToAdmin(test, txtBoxTestTime.Text, DatePickerEndDate, DatePickerStartDate, StudentToTest);
         }
 
-        private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, object selectedItem1, object selectedItem2)
+        private void SendTestToAdmin(Test test, string text, DatePicker datePickerEndDate, DatePicker datePickerStartDate, List<Student> students)
         {
-            if (listViewTestToSend.SelectedItem != null && DatePickerStartDate.SelectedDate != null && DatePickerEndDate != null)
+            if (listViewTestToSend.SelectedItem != null && DatePickerStartDate.SelectedDate != null && DatePickerEndDate != null && students != null)
             {
                 using (var db = new DbModel())
                 {
@@ -120,35 +135,16 @@ namespace TestVerktygWPF.View
                             db.UserTests.Add(toAdmin);
                         }
                     }
-                    if (cbSelectStudent.SelectedValue.ToString() == null  && cbSelectClass.SelectedItem != null)
+
+                    foreach (var item in students)
                     {
-                        var xstudents = from s in db.Students
-                                        join sc in db.StudentClasses on s.StudentClassFk equals sc.ID
-                                        where sc.Name == cbSelectClass.SelectedValue.ToString()
-                                        select s;
-                        foreach (var item in xstudents.ToList())
-                        {
-                            StudentTest newTest = new StudentTest();
-                            newTest.TestRefFk = test.ID;
-                            newTest.StudentRefFk = item.ID;
-                            newTest.IsChecked = false;
-                            db.StudentTests.Add(newTest);
-                        }
+                        StudentTest newTest = new StudentTest();
+                        newTest.TestRefFk = test.ID;
+                        newTest.StudentRefFk = item.ID;
+                        newTest.IsChecked = false;
+                        db.StudentTests.Add(newTest);
                     }
-                    else if (cbSelectClass.SelectedItem != null && cbSelectStudent.SelectedItem != null)
-                    {
-                        var xstudents = from s in db.Students
-                                        where s.FirstName == cbSelectStudent.SelectedValue.ToString()
-                                        select s;
-                        foreach (var item in xstudents.ToList())
-                        {
-                            StudentTest newTest = new StudentTest();
-                            newTest.TestRefFk = test.ID;
-                            newTest.StudentRefFk = item.ID;
-                            newTest.IsChecked = false;
-                            db.StudentTests.Add(newTest);
-                        }
-                    }
+
 
                     DatePickerStartDate.SelectedDate = null;
                     DatePickerEndDate.SelectedDate = null;
@@ -162,6 +158,59 @@ namespace TestVerktygWPF.View
         private void listViewTestToSend_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             test = sender as Test;
+        }
+
+        private void generateList(object sender, RoutedEventArgs e)
+        {
+            RadioButton rbn = sender as RadioButton;
+            switch (rbn.Name.ToString())
+            {
+                case "rbnClass":
+                    listStk.Children.Clear();
+                    generateClassList();
+                    break;
+                case "rbnElev":
+                    listStk.Children.Clear();
+                    generateStudentList();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void generateClassList()
+        {
+            using (var db = new DbModel())
+            {
+                var query = from c in db.Courses
+                            join stc in db.StudentClassCourses on c.ID equals stc.CouseRefID
+                            join st in db.StudentClasses on stc.StudentClassRefID equals st.ID
+                            join u in db.Users on st.ID equals u.StudentClassFk
+                            where u.ID == theTeacher.ID
+                            select c;
+                foreach (var item in query)
+                {
+                    CheckBox box = new CheckBox();
+                    box.Content = item.CourseName;
+                    listStk.Children.Add(box);
+                }
+            }
+        }
+
+        private void generateStudentList()
+        {
+            using (var db = new DbModel())
+            {
+                var query = from s in db.Students
+                            where s.StudentClassFk == theTeacher.StudentClassFk
+                            select s;
+                foreach (var item in query)
+                {
+                    CheckBox box = new CheckBox();
+                    box.Content = item.UserName;
+                    listStk.Children.Add(box);
+                }
+            }
         }
     }
 }

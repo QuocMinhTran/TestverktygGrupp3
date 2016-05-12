@@ -32,9 +32,10 @@ namespace TestVerktygWPF.View
             Updatelist();
         }
 
-        private void _DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void _ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedTest = sender as Test;
+            selectedTest = _ListView.SelectedItem as Test;
+            Console.WriteLine(selectedTest.ToString());
             StackPanel stkPanel = new StackPanel();
             using (var db = new DbModel())
             {
@@ -128,7 +129,12 @@ namespace TestVerktygWPF.View
                             where u.ID == theAdmin.ID
 
                             select t;
-                _DataGrid.ItemsSource = query.ToList();
+                List<Test> listTest = new List<Test>();
+                foreach (var item in query)
+                {
+                    listTest.Add(item);
+                }
+                _ListView.ItemsSource = listTest;
 
             }
         }
