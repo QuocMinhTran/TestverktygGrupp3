@@ -33,7 +33,7 @@ namespace TestVerktygElev
             xStudent.FirstName = "Kom Och";
             xStudent.LastName = " Hjälp Mig";
 
-            xStudent.ID = 1;
+            xStudent.ID = 7;
 
 
             _frame.Navigate(new MainPage(xStudent));

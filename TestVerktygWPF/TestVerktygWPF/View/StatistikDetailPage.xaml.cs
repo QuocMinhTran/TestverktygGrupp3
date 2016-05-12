@@ -23,11 +23,6 @@ namespace TestVerktygWPF.View
     public partial class StatistikDetailPage : Page
     {
 
-        public List<Questions> Questionses = new List<Questions>();
-        public static Test SelectedTest = new Test();
-        public StatistikDetailPage()
-        {
-            InitializeComponent();
 
             CurrentSelectedTest csTest = new CurrentSelectedTest();
             csTest.SetCurrentTest(SelectedTest.ID);
