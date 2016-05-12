@@ -24,18 +24,22 @@ namespace TestVerktygElev
     public partial class MainWindow : Window
     {
         Repository repo = new Repository();
-        List<Student> students;
-        Student SelectedUser;
+        //List<Student> students;
+        //Student SelectedUser;
         public MainWindow()
         {
             InitializeComponent();
             Student xStudent = new Student();
             xStudent.FirstName = "Kom Och";
             xStudent.LastName = " Hjälp Mig";
-            xStudent.ID = 7;
+
+            xStudent.ID = 1;
+
+
             _frame.Navigate(new MainPage(xStudent));
-          //  MenuTabs.Visibility = Visibility.Collapsed;
+            //_frame.Navigate(new StatisticPage(null,1));
         }
+ 
 
 
         //private void btnLogin_Click(object sender, RoutedEventArgs e)

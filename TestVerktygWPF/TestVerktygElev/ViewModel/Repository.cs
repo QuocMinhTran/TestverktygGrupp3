@@ -15,6 +15,7 @@ namespace TestVerktygElev.ViewModel
             using (var db = new Model1())
             {
                 var querry = from StudentTest in db.StudentTests
+                             where StudentTest.IsTestDone == false
                              join Test in db.Tests on StudentTest.TestRefFk equals Test.ID
                              join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID into Group
                              from TestGroup in Group
@@ -22,9 +23,9 @@ namespace TestVerktygElev.ViewModel
                              select Test;
                 foreach (var item in querry)
                 {
+                    
                     Console.WriteLine(item.Name + " Name of Test From DataBase");
                     lxTest.Add(item);
-
                 }
             }
             return lxTest;
@@ -51,6 +52,31 @@ namespace TestVerktygElev.ViewModel
 
             }
             return xStudentTest.ID;
+        }
+
+        public List<StudentAnswer> GetStudentAnswers(int p_iStudentiD, int p_iTestiD)
+        {
+            List<StudentAnswer> lxStudentAnswer = new List<StudentAnswer>();
+            using (var db = new Model1())
+            {
+                var querry = from xTest in db.StudentTests
+                             join xStudent in db.Students on xTest.StudentRefFk equals xStudent.ID
+                             join xAnswers in db.StudentAnswers on xTest.ID equals xAnswers.StudentTestFk
+                             where xTest.ID == p_iTestiD
+                             //where xStudent.ID == p_iStudentiD
+                             select xAnswers;
+
+                //var querry = from x in db.StudentAnswers
+                //             select x;
+
+                Console.WriteLine(querry.ToString());
+                foreach (var item in querry)
+                {
+                    lxStudentAnswer.Add(item);
+                }
+            }
+            
+            return lxStudentAnswer;
         }
 
         internal Test GetTest(int p_IDTest)

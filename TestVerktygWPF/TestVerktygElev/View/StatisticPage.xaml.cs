@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TestVerktygElev.ViewModel;
 
 namespace TestVerktygElev
 {
@@ -20,20 +21,76 @@ namespace TestVerktygElev
     /// </summary>
     public partial class StatisticPage : Page
     {
-        public StatisticPage(Test p_xTest,int p_iScore)
+        private Student m_xStudent;
+        public StatisticPage(Test p_xTest,int p_iScore,Student p_xStudent,int p_iTime, int p_iTotalPoint)
         {
             InitializeComponent();
+            string sGrade;
+            double dGrade = (double)p_iScore / (double)p_iTotalPoint ;
+            m_xStudent = p_xStudent;
             TextBlockTestName.Text = p_xTest.Name;
-            TextBlockTime.Text = p_xTest.TimeStampe.ToString();
-            TextBlockGrade.Text = p_iScore.ToString();
+            Console.WriteLine(dGrade + " GRADEEEEASDAD");
+            if (dGrade >= 0.6)
+            {
+                if (dGrade >= 0.8) sGrade = "VG";
+                else sGrade = "G";
+            }
+            else sGrade = "IG";
+
+            TextBlockTime.Text = p_iTime.ToString() +" / " + p_xTest.TimeStampe.ToString();
+            TextBlockGrade.Text = sGrade;
+
+            TestFunctions(p_xStudent);
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            Student Stuent = new Student();
-            Stuent.ID = 1;
-            MainPage xMainPage = new MainPage(Stuent);
+            MainPage xMainPage = new MainPage(m_xStudent);
+            ListViewCompletedTest.Items.Clear();
             NavigationService.Navigate(xMainPage);
+        }
+        private void TestFunctions(Student p_xStudent)
+        {
+            Repository xRepository = new Repository();
+            Test xTest = xRepository.GetTest(1);
+            List<Question> lxQuestions = xRepository.GetQuestions(xTest.ID);
+            List<Answer> lxAnswers = xRepository.GetAllAnswers(xTest);
+            List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
+            lxStudentAnswers = xRepository.GetStudentAnswers(p_xStudent.ID, xTest.ID);
+         
+            for (int i = 0; i < lxQuestions.Count; i++)
+            {
+                TextBlock xBlock = new TextBlock();
+                xBlock.Text = lxQuestions[i].Name;
+                ListViewCompletedTest.Items.Add(xBlock);
+                for (int j = 0; j < lxAnswers.Count; j++)
+                {
+                    foreach (var item in lxStudentAnswers)
+                    {
+                        if (lxQuestions[i].ID == lxAnswers[j].QuestionFk)
+                        {
+                            if (item.Answer == lxAnswers[j].ID)
+                            {
+                                TextBlock xAnswer = new TextBlock();
+                                xAnswer.Text = lxAnswers[j].Text;
+
+                                if (lxAnswers[j].RightAnswer)
+                                {
+                                    xAnswer.Background = Brushes.Green;
+                                    Console.WriteLine("RÄtt");
+                                }
+                                else
+                                {
+                                    xAnswer.Background = Brushes.Red;
+                                    Console.WriteLine("Fel");
+                                }
+                                ListViewCompletedTest.Items.Add(xAnswer);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

@@ -163,6 +163,14 @@ namespace TestVerktygWPF.View
             xQuest.Name = txtBoxQuestion.Text;
             xQuest.QuestionType = GetQuestionType(SelectionBox.SelectedIndex);
             xQuest.ID = iID;
+            try
+            {
+                if (!String.IsNullOrEmpty(imgQuestion.Source.ToString()))
+                    xQuest.AppData = imgQuestion.Source.ToString();
+            }
+            catch (Exception)
+            {
+            }
             SaveAnwers(xQuest);
             m_lxQuestions.Add(xQuest);
             iID++;
@@ -170,41 +178,6 @@ namespace TestVerktygWPF.View
             btnSaveTest.IsEnabled = true;
             Clear(false);
         }
-
-        //private bool CheckCboAlternatives()
-        //{
-        //    List<ComboBox> listCbo = new List<ComboBox>();
-        //    foreach (var item in _StackPanel.Children)
-        //    {
-        //        if (item.GetType() == typeof(ComboBox))
-        //        {
-        //            ComboBox cboAnswer = new ComboBox();
-        //            listCbo.Add(cboAnswer);
-        //        }
-        //    }
-
-        //    for (int i = 0; i < listCbo.Count; i++)
-        //    {
-        //        if (listCbo[i].SelectedIndex == -1)
-        //        {
-
-        //            return true;
-        //        }
-
-        //        else if (i >= 1)
-        //        {
-        //            for (int j = i + 1; j < listCbo.Count; j++)
-        //            {
-        //                if (listCbo[i] == listCbo[j])
-        //                {
-        //                    return true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return false;
-
-        //}
 
         private string GetQuestionType(int Selected)
         {
@@ -307,6 +280,7 @@ namespace TestVerktygWPF.View
                 xTest.IsAutoCorrect = false;
 
             xTest.Name = txtBoxTestName.Text;
+            
             
             xTestHandler.CreateTest(xTest, m_lxQuestions, m_lxAnswer, theTeacher.ID);
 
@@ -434,6 +408,7 @@ namespace TestVerktygWPF.View
                 m_lxAnswer.Clear();
             }
             _StackPanel.Children.Clear();
+            imgQuestion.Source = null;
             SelectionBox.SelectedIndex = 0;
             for (int i = 0; i < 3; i++)
             {
@@ -453,6 +428,13 @@ namespace TestVerktygWPF.View
                 List<Answer> lxAwnser = new List<Answer>();
                 Console.WriteLine(listViewAddedQuestions.SelectedIndex);
                 txtBoxQuestion.Text = m_lxQuestions[listViewAddedQuestions.SelectedIndex].Name;
+                if (!String.IsNullOrEmpty(m_lxQuestions[listViewAddedQuestions.SelectedIndex].AppData))
+                {
+                    Uri imgUri = new Uri(m_lxQuestions[listViewAddedQuestions.SelectedIndex].AppData);
+                    BitmapImage imgBitMap = new BitmapImage(imgUri);
+                    imgQuestion.Source = imgBitMap;
+                }
+
                 foreach (var item in m_lxAnswer)
                 {
                     if (item.QuestionFk == m_lxQuestions[listViewAddedQuestions.SelectedIndex].ID)
@@ -492,7 +474,12 @@ namespace TestVerktygWPF.View
             listViewAddedQuestions.Items.Remove(listViewAddedQuestions.SelectedItem);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnRemoveImg_Click(object sender, RoutedEventArgs e)
+        {
+            imgQuestion.Source = null;
+        }
+
+        private void btnFindImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";

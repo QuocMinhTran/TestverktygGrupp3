@@ -24,7 +24,7 @@ namespace TestVerktygWPF.View
         public MainPageAdmin(User user)
         {
             InitializeComponent();
-            
+            AdminName.Text = $"Välkomen {user.FirstName} {user.LastName}";
         }
     }
 }

@@ -30,15 +30,17 @@ namespace TestVerktygElev
         private List<StudentAnswer> m_lxStudentAnswer;
         private List<int> m_liIndexes;
         private int m_iIndex = 0;
-        private int m_iTime;
+        private int m_iTime, m_iAmountOfQuestions;
         private int m_iTempID;
         private int m_iStudentTestID;
+        private Student m_xStudent;
         //private int m_iScore = 0;
 
-        public ElevTestPage(int p_IDTest, int p_iStudentTestID)
+        public ElevTestPage(int p_IDTest, int p_iStudentTestID, Student p_xStudent)
         {
             InitializeComponent();
             m_iStudentTestID = p_iStudentTestID;
+            m_xStudent = p_xStudent;
             m_liIndexes = new List<int>();
             m_xRepository = new Repository();
             m_lxStudentAnswer = new List<StudentAnswer>();
@@ -46,6 +48,7 @@ namespace TestVerktygElev
             m_iTime = (int)m_xTest.TimeStampe;
             txtBlockTestName.Text = m_xTest.Name;
             m_lxQuestions = m_xRepository.GetQuestions(p_IDTest);
+            m_iAmountOfQuestions = m_lxQuestions.Count;
             m_lxAnswer = m_xRepository.GetAllAnswers(m_xTest);
             StartTimer();
             SpawnQuestion();
@@ -55,22 +58,38 @@ namespace TestVerktygElev
         {
             List<int> liAnswers = new List<int>();
             List<Answer> lxAnswer;
-            tbQuestion.Text = m_lxQuestions[m_iIndex].Name;
+            txtBlockQuestions.Text = m_lxQuestions[m_iIndex].Name;
             m_iTempID = m_lxQuestions[m_iIndex].ID;
             lxAnswer = m_xRepository.GetAnwsers(m_iTempID);
+            int iCount = m_iIndex + 1;
+            txtBlockQuestionNumber.Text = iCount.ToString() + "/" + m_iAmountOfQuestions.ToString();
+            if (imageImage.Source!= null)
+            {
+                imageImage.Source = null;
+                
+            }
+            if (!string.IsNullOrEmpty(m_lxQuestions[m_iIndex].AppData))
+            {
+                ImageSourceConverter xImageSourceConverter = new ImageSourceConverter();
+                imageImage.MaxHeight = 200;
+                imageImage.MaxWidth = 200;
+                imageImage.Source = (ImageSource)xImageSourceConverter.ConvertFromString(m_lxQuestions[m_iIndex].AppData);
 
+                Console.WriteLine("THERE SHOULD BE A FINE PICUTEREAS");
+            }
             foreach (var item in lxAnswer)
             {
                 m_liIndexes.Add(item.ID);
             }
             for (int i = 0; i < lxAnswer.Count; i++)
             {
-                TextBlock xTextBlock = new TextBlock();
                 Thickness xThickness = new Thickness();
                 xThickness.Top = 10;
+                TextBlock xTextBlock = new TextBlock();
                 xTextBlock.Text = lxAnswer[i].Text;
                 xTextBlock.Margin = xThickness;
                 lbAnswer.Items.Add(xTextBlock);
+
                 switch (m_lxQuestions[m_iIndex].QuestionType)
                 {
                     case "envalsfråga":
@@ -137,7 +156,6 @@ namespace TestVerktygElev
         {
             m_iIndex--;
             if (m_iIndex == 0) btnPrevious.IsEnabled = false;
-
             int iTemp = 0;
             bool bRemoveQuestion = false;
             foreach (var item in lbAnswer.Items)
@@ -181,6 +199,7 @@ namespace TestVerktygElev
             int iTemp = 0;
             btnPrevious.IsEnabled = true;
             bool bRemoveQuestion = false;
+
             foreach (var item in lbAnswer.Items)
             {
                 if (!bRemoveQuestion)
@@ -251,7 +270,7 @@ namespace TestVerktygElev
             StudentAnswer xStudentAnswer = new StudentAnswer();
             xStudentAnswer.StudentTestFk = m_iStudentTestID;
             xStudentAnswer.Answer = m_liIndexes[p_iIndex];
-            xStudentAnswer.OrderPostition = p_iOrderPos+1;
+            xStudentAnswer.OrderPostition = p_iOrderPos + 1;
             xStudentAnswer.Question = m_iTempID;
             m_lxStudentAnswer.Add(xStudentAnswer);
         }
@@ -307,8 +326,8 @@ namespace TestVerktygElev
                     iForScore = 0;
                 }
                 //TODO SAVE TO DATABASE
-                m_xRepository.SaveTest(m_lxStudentAnswer,m_iIndex,30);
-                StatisticPage xStatisticPage = new StatisticPage(m_xTest,iScore);
+                m_xRepository.SaveTest(m_lxStudentAnswer, m_iIndex, m_iTime);
+                StatisticPage xStatisticPage = new StatisticPage(m_xTest, iScore, m_xStudent, m_iTime, m_iIndex);
                 NavigationService.Navigate(xStatisticPage);
             }
 

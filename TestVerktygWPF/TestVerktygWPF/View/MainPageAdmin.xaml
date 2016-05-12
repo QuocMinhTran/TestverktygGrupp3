@@ -18,6 +18,6 @@
         </Grid.ColumnDefinitions>
 
         <!--<Image Grid.Row="1" Width="100" Height="100" Source=""></Image>-->
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Välkommen"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="AdminName"></TextBlock>
     </Grid>
 </Page>

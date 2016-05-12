@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Nya prov som behöver godkännas" Margin="0,20,0,0 "></Label>
@@ -18,6 +18,7 @@
         <ListView x:Name="_ListView"
                   Grid.Column="0"
                   Margin="0,40,0,0" 
+                  Width="400"
                   HorizontalAlignment="Center" 
                   SelectionChanged="_ListView_SelectionChanged">
             <!--<DataGrid.Columns>
@@ -35,9 +36,10 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>-->            
         </ListView>
-        <Popup Placement="Center" AllowsTransparency="True" PopupAnimation="Fade" Name="pup" VerticalOffset="-100" />
-
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1">
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      Height="Auto"
+                      Grid.Column="1">
             <StackPanel Name="splSelectedTest" />
         </ScrollViewer>
 
