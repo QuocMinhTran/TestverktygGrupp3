@@ -32,7 +32,7 @@ namespace TestVerktygElev
             Student xStudent = new Student();
             xStudent.FirstName = "Kom Och";
             xStudent.LastName = " Hjälp Mig";
-            xStudent.ID = 1;
+            xStudent.ID = 7;
             _frame.Navigate(new MainPage(xStudent));
           //  MenuTabs.Visibility = Visibility.Collapsed;
         }
