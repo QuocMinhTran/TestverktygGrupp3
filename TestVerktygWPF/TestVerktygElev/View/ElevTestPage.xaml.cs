@@ -326,7 +326,8 @@ namespace TestVerktygElev
                     iForScore = 0;
                 }
                 //TODO SAVE TO DATABASE
-                m_xRepository.SaveTest(m_lxStudentAnswer, m_iIndex, m_iTime);
+                int m_time = (int)m_xTest.TimeStampe - m_iTime;
+                m_xRepository.SaveTest(m_lxStudentAnswer, m_iIndex, m_time);
                 StatisticPage xStatisticPage = new StatisticPage(m_xTest, iScore, m_xStudent, m_iTime, m_iIndex);
                 NavigationService.Navigate(xStatisticPage);
             }
