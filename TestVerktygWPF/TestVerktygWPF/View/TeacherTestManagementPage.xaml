@@ -10,24 +10,23 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="20,0,20,0">
             <Label>Välj prov ur listan för att skicka till admin</Label>
-            <ListView Name="listViewTestToSend" SelectionChanged="listViewTestToSend_SelectionChanged" SelectionMode="Single">                
+           <ListView Name="listViewTestToSend" SelectionChanged="listViewTestToSend_SelectionChanged" SelectionMode="Single">                
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20,0,20,0" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Label Content="Tidsbegränsning (min)"/>
+
+            <Label Content="Tidsbegränsning" />
             <StackPanel Orientation="Horizontal">
-                <TextBlock Name="txtBoxTestTime" Margin="0,10,10,0" Text="1" />
-                <StackPanel Orientation="Vertical">
-                    <Button Name="btnTimeUp" Content="+" Click="btnTimeUp_Click"/>
-                    <Button Name="btnTimeDown" Content="-" Click="btnTimeDown_Click"/>
-                </StackPanel>
+                <TextBox Name="txtBoxTimeInput" Width="50" />
+                <Label Content="minuter" Margin="5,0,0,0" />
             </StackPanel>
+            
             <Label Content="Startdatum"/>
             <DatePicker Name="DatePickerStartDate"/>
             <Label Content="Slutdatum"/>
@@ -38,7 +37,14 @@
             <ComboBox Name="cbSelectStudent"></ComboBox>-->
             <RadioButton Name="rbnClass" GroupName="choosen" Click="generateList" Content="Klass"/>
             <RadioButton Name="rbnElev" GroupName="choosen" Click="generateList" Content="Elev"/>
-            <Button Name="btnSendTestToAdmin" Margin="0,10,0,0" Content="Skicka till Admin" Click="btnSendTestToAdmin_Click"/>
+            <Button Name="btnSendTestToAdmin" 
+                    Margin="0,10,0,0" 
+                    Content="Skicka till Admin" 
+                    Click="btnSendTestToAdmin_Click"
+                    IsEnabled="False" />
+            <Label Name="lblWarning"
+                   Foreground="Red"
+                   FontWeight="Bold" />
         </StackPanel>
         <ScrollViewer Height="Auto"
                                   VerticalScrollBarVisibility="Auto"
