@@ -26,6 +26,8 @@ namespace TestVerktygElev
 
         public int TestRefFk { get; set; }
 
+        public bool IsChecked { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentAnswer> StudentAnswers { get; set; }
 

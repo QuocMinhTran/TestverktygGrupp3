@@ -62,8 +62,8 @@ namespace TestVerktygElev.ViewModel
                 var querry = from xTest in db.StudentTests
                              join xStudent in db.Students on xTest.StudentRefFk equals xStudent.ID
                              join xAnswers in db.StudentAnswers on xTest.ID equals xAnswers.StudentTestFk
-                             where xTest.ID == p_iTestiD
-                             //where xStudent.ID == p_iStudentiD
+                             where xTest.TestRefFk == p_iTestiD
+                             where xTest.StudentRefFk == p_iStudentiD
                              select xAnswers;
 
                 //var querry = from x in db.StudentAnswers

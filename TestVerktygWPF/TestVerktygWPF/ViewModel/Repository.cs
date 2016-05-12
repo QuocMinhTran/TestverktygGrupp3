@@ -95,7 +95,7 @@ namespace TestVerktygWPF.ViewModel
                 }
                 foreach (var item in lxTests)
                 {
-                    liList.Add(item.ID);
+                    liList.Add(item.TestRefFk);
                 }
             }
             return liList;
