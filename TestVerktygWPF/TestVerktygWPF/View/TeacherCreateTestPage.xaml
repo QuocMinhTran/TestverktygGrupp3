@@ -26,42 +26,50 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="20,0,20,0">
-            <StackPanel.Resources>
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0,5,0,0" />
-                </Style>
-                <Style TargetType="RadioButton">
-                    <Setter Property="Margin" Value="0,5,0,0" />
-                </Style>
-            </StackPanel.Resources>
-            <Label>Fråga</Label>
-            <TextBox Name="txtBoxQuestion"
+        <ScrollViewer Height="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel Grid.Column="0" Margin="20,0,20,0">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="0,5,0,0" />
+                    </Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Margin" Value="0,5,0,0" />
+                    </Style>
+                </StackPanel.Resources>
+                <Label>Fråga</Label>
+                <TextBox Name="txtBoxQuestion"
                      HorizontalAlignment="Left"
                      MinWidth="200" />
-            <Button Content="Hämta bild"
+                <Button Content="Hämta bild"
                     HorizontalAlignment="Left"
-                    Click="Button_Click"/>
-            <Image Name="imgQuestion"  />
+                    Name="btnFindImage"
+                    Click="btnFindImage_Click"/>
+                <Button Content="Ta bort bild"
+                    HorizontalAlignment="Left"
+                    Name="btnRemoveImg"
+                    Click="btnRemoveImg_Click"/>
+                <Image Name="imgQuestion" 
+                   MaxWidth="400"
+                   MaxHeight="400"  />
 
-            <Label Content="Frågetyp" />
-            <ComboBox x:Name="SelectionBox"
+                <Label Content="Frågetyp" />
+                <ComboBox x:Name="SelectionBox"
                       Width="200"
                       SelectionChanged="SelectedQuestionType" 
                       HorizontalAlignment="Left">
-                <ComboBoxItem Content="Enval"/>
-                <ComboBoxItem Content="Flerval"/>
-                <ComboBoxItem Content="Rangordning"/>
-            </ComboBox>
-            <StackPanel Orientation="Horizontal">
-                <Label>Alternativ 1</Label>
-                <Label Name="lblQTypeInstructions" 
+                    <ComboBoxItem Content="Enval"/>
+                    <ComboBoxItem Content="Flerval"/>
+                    <ComboBoxItem Content="Rangordning"/>
+                </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <Label>Alternativ 1</Label>
+                    <Label Name="lblQTypeInstructions" 
                        Margin="100,0,0,0" 
                        HorizontalAlignment="Left" />
-            </StackPanel>
-            <StackPanel x:Name="_StackPanel">
-                
-                <!--<TextBox Name="txtBoxOption1" Width="170"/>
+                </StackPanel>
+                <StackPanel x:Name="_StackPanel">
+
+                    <!--<TextBox Name="txtBoxOption1" Width="170"/>
                 <CheckBox  Margin="10,0,0,0"/>
             </StackPanel>
             <Label>Alternativ 2</Label>
@@ -73,58 +81,62 @@
             <StackPanel Orientation="Horizontal">
                 <TextBox Name="txtBoxOption3" Width="170"/>
                 <CheckBox Margin="10,0,0,0"/>-->
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                <Label Content="Alternativ" />
-                <Button Name="btnAddOption"
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Label Content="Alternativ" />
+                    <Button Name="btnAddOption"
                         Click="AddAlternatives" 
                         Content="+" />
-                <Button Name="btnRemoveOption" 
+                    <Button Name="btnRemoveOption" 
                         Click="RemoveAlternatives" 
                         Content="-" />
-            </StackPanel>
-            <Button Content="Spara fråga"
+                </StackPanel>
+                <Button Content="Spara fråga"
                     Name="btnSaveQuestion"
                     HorizontalAlignment="Center"
                     Click="btnSaveQuestion_Click" />
-            <TextBlock Name="txtBlockWarning"
+                <TextBlock Name="txtBlockWarning"
                        FontWeight="Bold"
                        Foreground="Red"
                        TextWrapping="WrapWithOverflow"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1" Margin="20,0,20,0" >
-            <Label Content="Tillagda frågor" />
-            <ListView Name="listViewAddedQuestions"
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Height="Auto" 
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Column="1">
+            <StackPanel Margin="20,0,20,0" >
+                <Label Content="Tillagda frågor" />
+                <ListView Name="listViewAddedQuestions"
                       SelectionChanged="listViewAddedQuestions_SelectionChanged"
                       SelectionMode="Single"/>
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Redigera Fråga" 
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Redigera Fråga" 
                         Name="btnEditQuestion"
                         Click="EditQ"
                         IsEnabled="False"
                         HorizontalAlignment="Left" />
-                <Button Content="Ta bort Fråga"
+                    <Button Content="Ta bort Fråga"
                         Name="btnRemoveQuestion"
                         Click="btnRemoveQuestion_Click"
                         IsEnabled="False"
                         HorizontalAlignment="Left" />
-            </StackPanel>
-            <Separator Margin="0,8"  />
+                </StackPanel>
+                <Separator Margin="0,8"  />
                 <Label Content="Provnamn" />
                 <TextBox Name="txtBoxTestName"
                          HorizontalAlignment="Left"
                          Width="Auto" />
-            <StackPanel Orientation="Vertical">
-                <Label Content="Autorätta prov?" />
-                <CheckBox Name="chkBoxAutoCorrectTest" />
-            </StackPanel>
-            <Button Content="Spara prov" 
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Autorätta prov?" />
+                    <CheckBox Name="chkBoxAutoCorrectTest" />
+                </StackPanel>
+                <Button Content="Spara prov" 
                     Name="btnSaveTest"
                     Click="btnSaveTest_Click" 
                     HorizontalAlignment="Left"
                     IsEnabled="False"/>
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

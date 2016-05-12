@@ -37,7 +37,9 @@
             </DataGrid.RowDetailsTemplate>-->            
         </ListView>
         
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      Height="Auto"
+                      Grid.Column="1">
             <StackPanel Name="splSelectedTest" />
         </ScrollViewer>
 

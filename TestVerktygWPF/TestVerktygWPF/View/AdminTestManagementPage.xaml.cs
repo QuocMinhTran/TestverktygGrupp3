@@ -34,6 +34,7 @@ namespace TestVerktygWPF.View
 
         private void _ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            splSelectedTest.Children.Clear();
             selectedTest = _ListView.SelectedItem as Test;
             if (selectedTest != null)
             {
@@ -55,6 +56,17 @@ namespace TestVerktygWPF.View
                             splSelectedTest.Children.Add(txtBlock);
                             TextBlock txt = new TextBlock();
                             txt.Text = item.Name;
+                            if (!String.IsNullOrEmpty(item.AppData))
+                            {
+                                Image imgQuestion = new Image();
+                                string imgPath = item.AppData;
+                                Uri imgUri = new Uri(imgPath);
+                                BitmapImage imgBitMap = new BitmapImage(imgUri);
+                                imgQuestion.Source = imgBitMap;
+                                imgQuestion.MaxHeight = 200;
+                                imgQuestion.MaxWidth = 200;
+                                splSelectedTest.Children.Add(imgQuestion);
+                            }
                             splSelectedTest.Children.Add(txt);
 
                             foreach (var a in db.Answers.ToList())
@@ -91,10 +103,13 @@ namespace TestVerktygWPF.View
 
                     Button sendbtn = new Button();
                     Button sendBackbtn = new Button();
+                    StackPanel splSendTestControl = new StackPanel();
+                    splSendTestControl.Orientation = Orientation.Horizontal;
                     sendbtn.Content = "Skicka till studenter";
                     sendBackbtn.Content = "Skicka till lärare";
-                    splSelectedTest.Children.Add(sendbtn);
-                    splSelectedTest.Children.Add(sendBackbtn);
+                    splSendTestControl.Children.Add(sendbtn);
+                    splSendTestControl.Children.Add(sendBackbtn);
+                    splSelectedTest.Children.Add(splSendTestControl);
                     sendbtn.Click += Sendbtn_Click;
                     sendBackbtn.Click += SendBackbtn_Click;
                 }
