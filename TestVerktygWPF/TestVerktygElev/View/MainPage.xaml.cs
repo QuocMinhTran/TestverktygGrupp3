@@ -41,10 +41,10 @@ namespace TestVerktygElev
             if (xTest != null)
             {
                 Console.WriteLine("Test Is Not Null And id is " + xTest.ID);
+
+                ElevTestPage xElevTestPage = new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(m_xStudent.ID, xTest.ID), m_xStudent);
+                NavigationService.Navigate(xElevTestPage);
             }
-            
-            ElevTestPage xElevTestPage= new ElevTestPage(xTest.ID, xRepository.GetStudentTestID(m_xStudent.ID,xTest.ID),m_xStudent);
-            NavigationService.Navigate(xElevTestPage);
 
         }
     }
