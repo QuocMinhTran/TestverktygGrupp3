@@ -33,9 +33,10 @@ namespace TestVerktygElev
             xStudent.FirstName = "Kom Och";
             xStudent.LastName = " Hjälp Mig";
             xStudent.ID = 1;
+            
 
             _frame.Navigate(new MainPage(xStudent));
-            //_frame.Navigate(new StatisticPage(null,1));
+            //_frame.Navigate(new StatisticPage(repo.GetTest(1), 3,xStudent,10,4));
         }
  
 

@@ -40,6 +40,7 @@ namespace TestVerktygWPF.View
             {
                 using (var db = new DbModel())
                 {
+                    int i = 0;
                     //var query = from t in db.Tests
                     //            join q in db.Questions on t.ID equals q.TestFk
                     //            join a in db.Answers on q.ID equals a.QuestionFk
@@ -47,7 +48,7 @@ namespace TestVerktygWPF.View
                     //            select new { QuestionText = q.Name, QuestionType = q.QuestionType, Answer = a.Text };
                     foreach (var item in db.Questions.ToList())
                     {
-                        int i = 0;
+                        
                         if (item.TestFk == selectedTest.ID)
                         {
                             i++;

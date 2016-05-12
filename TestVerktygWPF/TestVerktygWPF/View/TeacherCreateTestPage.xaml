@@ -129,7 +129,7 @@
                          Width="Auto" />
                 <StackPanel Orientation="Vertical">
                     <Label Content="Autorätta prov?" />
-                    <CheckBox Name="chkBoxAutoCorrectTest" />
+                    <CheckBox Name="chkBoxAutoCorrectTest" IsChecked="True"/>
                 </StackPanel>
                 <Button Content="Spara prov" 
                     Name="btnSaveTest"
