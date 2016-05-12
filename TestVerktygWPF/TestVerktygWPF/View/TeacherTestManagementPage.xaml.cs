@@ -50,6 +50,7 @@ namespace TestVerktygWPF.View
                 }
             }
             listViewTestToSend.ItemsSource = tests;
+            listViewTestToSend.DisplayMemberPath = "Name";
         }
 
         private void btnSendTestToAdmin_Click(object sender, RoutedEventArgs e)
@@ -149,6 +150,8 @@ namespace TestVerktygWPF.View
                     //{
                     //    db.UserTests.Remove(item);
                     //}
+
+                    MessageBox.Show("Provet har skickats till Admin");
                     UpdateList();
 
                     ClearSelection();
