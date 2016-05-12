@@ -22,6 +22,7 @@ namespace TestVerktygElev
     public partial class StatisticPage : Page
     {
         private Student m_xStudent;
+        private Test m_xTest;
         public StatisticPage(Test p_xTest,int p_iScore,Student p_xStudent,int p_iTime, int p_iTotalPoint)
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace TestVerktygElev
             double dGrade = (double)p_iScore / (double)p_iTotalPoint ;
             int iTime = (int)p_xTest.TimeStampe - p_iTime;
             m_xStudent = p_xStudent;
+            m_xTest = p_xTest;
             TextBlockTestName.Text = p_xTest.Name;
             if (dGrade >= 0.6)
             {
@@ -52,7 +54,7 @@ namespace TestVerktygElev
         private void TestFunctions(Student p_xStudent)
         {
             Repository xRepository = new Repository();
-            Test xTest = xRepository.GetTest(1);
+            Test xTest = xRepository.GetTest(m_xTest.ID);
             List<Question> lxQuestions = xRepository.GetQuestions(xTest.ID);
             List<Answer> lxAnswers = xRepository.GetAllAnswers(xTest);
             List<StudentAnswer> lxStudentAnswers = new List<StudentAnswer>();
@@ -71,6 +73,7 @@ namespace TestVerktygElev
                         {
                             if (item.Answer == lxAnswers[j].ID)
                             {
+                                Console.WriteLine("asdasdjalksjdlkajsdklkd");
                                 TextBlock xAnswer = new TextBlock();
                                 xAnswer.Text = lxAnswers[j].Text;
 
