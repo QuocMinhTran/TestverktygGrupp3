@@ -26,7 +26,7 @@
             <StackPanel Name="spTest"  Orientation="Vertical" >
                 <TextBlock x:Name="tbNameOfTest" Text="Namn" ></TextBlock>
                 <TextBlock x:Name="tbAverageTimeOnTest" Text="Time"></TextBlock>
-                <TextBlock Text="Bind Elev och betyg"></TextBlock>
+                <TextBlock Name="tbxAvrageGrade"></TextBlock>
                 <ListView Name="lvClassStatistics" Margin="0,10,0,0">
                 </ListView>
 
