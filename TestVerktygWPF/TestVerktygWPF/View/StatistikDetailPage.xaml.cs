@@ -44,6 +44,8 @@ namespace TestVerktygWPF.View
             {
                 TextBlock xBlock = new TextBlock();
                 xBlock.Text = liQuestionses[i].Name;
+                xBlock.FontWeight = FontWeights.Bold;
+                xBlock.FontSize = 18;
                 lvDetails.Items.Add(xBlock);
                 for (int j = 0; j < lxAnswers.Count; j++)
                 {
@@ -53,9 +55,11 @@ namespace TestVerktygWPF.View
                         {
                             if (item.Answer == lxAnswers[j].ID)
                             {
-                                Console.WriteLine("asdasdjalksjdlkajsdklkd");
                                 TextBlock xAnswer = new TextBlock();
                                 xAnswer.Text = lxAnswers[j].Text;
+                                xAnswer.FontSize = 16;
+
+                                TextBlock xCorrectAnswer = new TextBlock();
 
                                 if (lxAnswers[j].RightAnswer && liQuestionses[i].QuestionType != "rangordning")
                                 {
@@ -64,17 +68,33 @@ namespace TestVerktygWPF.View
                                 else if (!lxAnswers[j].RightAnswer && liQuestionses[i].QuestionType != "rangordning")
                                 {
                                     xAnswer.Background = Brushes.Red;
+                                    foreach (var correctAns in lxAnswers)
+                                    {
+                                        if (correctAns.RightAnswer == true)
+                                        {
+                                            xCorrectAnswer.Text = "Korrekt svar: " + correctAns.Text;
+                                        }
+                                    }
                                 }
 
                                 if (lxAnswers[j].OrderPosition == item.OrderPostition && liQuestionses[i].QuestionType == "rangordning")
                                 {
                                     xAnswer.Background = Brushes.Green;
+                                   
                                 }
                                 else if (lxAnswers[j].OrderPosition != item.OrderPostition && liQuestionses[i].QuestionType == "rangordning")
                                 {
                                     xAnswer.Background = Brushes.Red;
+                                    foreach (var correctAns in lxAnswers)
+                                    {
+                                        if (correctAns.RightAnswer == true)
+                                        {
+                                            xCorrectAnswer.Text = "Korrekt svar: " + correctAns.Text;
+                                        }
+                                    }
                                 }
                                 lvDetails.Items.Add(xAnswer);
+                                lvDetails.Items.Add(xCorrectAnswer);
                             }
                         }
                     }
