@@ -25,16 +25,20 @@
             <!--<MenuItem Header="Startsida" Click="Menu_Clicked"></MenuItem>-->
             <MenuItem Header="Logga ut" Click="Menu_Clicked"></MenuItem>            
         </Menu>
-        <StackPanel Margin="10" Grid.Row="1" Name="loginPanel">
-            <Image Source="Assets/Images/NewtonLogo.png" HorizontalAlignment="Center" Grid.Row="0" Stretch="None" />
-            <TextBlock Text="Välkommen till Newtons automatiska provtagare!" HorizontalAlignment="Center" FontSize="20" Margin="10,10"/>
-            <Label Content="Användarnamn" Margin="10,10" FontSize="20"/>
-            <TextBox Name="txtBoxUserNameInput" KeyDown="TextBox_KeyDown" Width="Auto" Margin="10,10" FontSize="20"/>
-            <Label Content="Lösenord" Margin="10,10" FontSize="20"/>
-            <PasswordBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
-            <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
+        <ScrollViewer Height="Auto" 
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="1">
+            <StackPanel Margin="10" Name="loginPanel">
+                <Image Source="Assets/Images/NewtonLogo.png" HorizontalAlignment="Center" Grid.Row="0" Stretch="None" />
+                <TextBlock Text="Välkommen till Newtons automatiska provtagare!" HorizontalAlignment="Center" FontSize="20" Margin="10,10"/>
+                <Label Content="Användarnamn" Margin="10,10" FontSize="20"/>
+                <TextBox Name="txtBoxUserNameInput" KeyDown="TextBox_KeyDown" Width="Auto" Margin="10,10" FontSize="20"/>
+                <Label Content="Lösenord" Margin="10,10" FontSize="20"/>
+                <PasswordBox Name="txtBoxPasswordInput" Width="Auto" KeyDown="TextBox_KeyDown" Margin="10,10" FontSize="20"/>
+                <Button Name="btnLogin" Content="Logga in" Click="btnLogin_Click" Width="Auto" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="20" Padding="5,5"/>
 
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
         <Frame Grid.Row="1" x:Name="_frame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

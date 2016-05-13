@@ -19,7 +19,7 @@ namespace TestVerktygElev.ViewModel
                              join Test in db.Tests on StudentTest.TestRefFk equals Test.ID
                              join StudentStudent in db.Students on StudentTest.StudentRefFk equals StudentStudent.ID into Group
                              from TestGroup in Group
-                             where TestGroup.ID == p_iID
+                             where TestGroup.ID == p_iID && StudentTest.IsChecked == true
                              select Test;
                 foreach (var item in querry)
                 {
