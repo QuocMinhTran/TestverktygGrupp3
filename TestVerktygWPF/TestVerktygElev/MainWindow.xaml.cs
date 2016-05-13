@@ -29,10 +29,6 @@ namespace TestVerktygElev
         public MainWindow()
         {
             InitializeComponent();
-            //Student xStudent = new Student();
-            //xStudent.FirstName = "Kom Och";
-            //xStudent.LastName = " Hjälp Mig";
-            //xStudent.ID = 1;
 
             MenuTabs.Visibility = Visibility.Collapsed;
 

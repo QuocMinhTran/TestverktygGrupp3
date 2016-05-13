@@ -122,11 +122,18 @@ namespace TestVerktygWPF.View
             {
                 var xUserTest = from xu in db.UserTests
                                 join u in db.Users on xu.UserFk equals u.ID
-                                where u.OccupationFk == 2
+                                where u.OccupationFk == 2 && xu.TestFk == selectedTest.ID
                                 select xu;
                 foreach (var item in xUserTest.ToList())
                 {
                     db.UserTests.Remove(item);
+                }
+                var xStudentTest = from xs in db.StudentTests
+                                   where xs.TestRefFk == selectedTest.ID
+                                   select xs;
+                foreach (var item in xStudentTest.ToList())
+                {
+                    db.StudentTests.Remove(item);
                 }
                 db.SaveChanges();
                 Updatelist();

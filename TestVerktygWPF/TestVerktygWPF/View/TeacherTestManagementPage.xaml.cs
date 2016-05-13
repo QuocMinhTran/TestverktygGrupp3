@@ -192,7 +192,7 @@ namespace TestVerktygWPF.View
 
         private bool CheckDates(DateTime? startDate, DateTime? endDate)
         {
-            if (startDate > endDate || startDate == null || endDate == null)
+            if (startDate >= endDate || startDate == null || endDate == null)
             {
                 lblWarning.Content += "Kontrollera start- och slutdatum. \n";
                 DatePickerStartDate.BorderBrush = Brushes.Red;
