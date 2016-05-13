@@ -63,10 +63,10 @@ namespace TestVerktygElev
             lxAnswer = m_xRepository.GetAnwsers(m_iTempID);
             int iCount = m_iIndex + 1;
             txtBlockQuestionNumber.Text = iCount.ToString() + "/" + m_iAmountOfQuestions.ToString();
-            if (imageImage.Source!= null)
+            if (imageImage.Source != null)
             {
                 imageImage.Source = null;
-                
+
             }
             if (!string.IsNullOrEmpty(m_lxQuestions[m_iIndex].AppData))
             {
@@ -278,11 +278,9 @@ namespace TestVerktygElev
         {
             if (NavigationService != null)
             {
-                int iTemp = 0;
                 int iSeIfRight = 0;
                 int iScore = 0;
                 int iForScore = 0;
-                bool bScore = true;
                 for (int i = 0; i < m_lxQuestions.Count; i++)
                 {
                     for (int j = 0; j < m_lxAnswer.Count; j++)
@@ -292,32 +290,36 @@ namespace TestVerktygElev
                             if (item.Answer == m_lxAnswer[j].ID && item.Question == m_lxQuestions[i].ID)
                             {
                                 if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "envalsfråga") iScore++;
-                                if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID != iTemp)
+                                if (m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga")
                                 {
-                                    iScore++;
-                                    iTemp = m_lxQuestions[i].ID;
-                                }
-                                if (!m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga" && m_lxQuestions[i].ID == iTemp)
-                                {
-                                    if (bScore)
-                                    {
-                                        iScore--;
-                                        bScore = false;
-                                    }
-                                }
-                                if (m_lxAnswer[j].OrderPosition == (int)item.OrderPostition)
-                                {
+                                    Console.WriteLine("Rätt SVAR PÅ FRÅGAN");
                                     iForScore++;
                                     iSeIfRight++;
                                 }
-                                else if (m_lxAnswer[j].OrderPosition != (int)item.OrderPostition)
+                                if (!m_lxAnswer[j].RightAnswer && m_lxQuestions[i].QuestionType == "Flervalsfråga")
                                 {
+                                    Console.WriteLine("FEL SVAR PÅ FRÅGAN");
                                     iForScore++;
-                                    iSeIfRight--;
+                                   // iSeIfRight--;
+                                }
+                                Console.WriteLine(m_lxAnswer[j].OrderPosition + " Mera " + item.OrderPostition);
+                                if (m_lxAnswer[j].OrderPosition == (int)item.OrderPostition && m_lxQuestions[i].QuestionType == "rangordning")
+                                {
+                                    Console.WriteLine("HALLJSAN");
+                                    iForScore++;
+                                    iSeIfRight++;
+                                }
+                                else if (m_lxAnswer[j].OrderPosition != (int)item.OrderPostition && m_lxQuestions[i].QuestionType == "rangordning")
+                                {
+                                    Console.WriteLine("NEJSAN");
+
+                                    iForScore++;
+                                   // iSeIfRight--;
                                 }
                             }
                         }
                     }
+                    Console.WriteLine("IForScore : " + iForScore + " Rätt svar " + iSeIfRight);
                     if (iForScore == iSeIfRight && iForScore != 0)
                     {
                         iScore++;
@@ -326,9 +328,9 @@ namespace TestVerktygElev
                     iForScore = 0;
                 }
                 //TODO SAVE TO DATABASE
-                int m_time = (int)m_xTest.TimeStampe - m_iTime;
-                m_xRepository.SaveTest(m_lxStudentAnswer, m_iIndex, m_time);
-                StatisticPage xStatisticPage = new StatisticPage(m_xTest, iScore, m_xStudent, m_iTime, m_iIndex);
+                int iTime = (int)m_xTest.TimeStampe - m_iTime - 1;
+                m_xRepository.SaveTest(m_lxStudentAnswer, m_iAmountOfQuestions, iTime);
+                StatisticPage xStatisticPage = new StatisticPage(m_xTest, iScore, m_xStudent, m_iTime, m_iAmountOfQuestions);
                 NavigationService.Navigate(xStatisticPage);
             }
 

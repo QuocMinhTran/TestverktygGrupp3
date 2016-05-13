@@ -171,6 +171,7 @@ namespace TestVerktygWPF.View
             catch (Exception)
             {
             }
+            
             SaveAnwers(xQuest);
             m_lxQuestions.Add(xQuest);
             iID++;
@@ -245,6 +246,11 @@ namespace TestVerktygWPF.View
                     {
                         if (xCheckbox.IsChecked == true) xAnswer.RightAnswer = true;
                         else xAnswer.RightAnswer = false;
+                    }
+                    TextBlock xTextBlock = Item as TextBlock;
+                    if (xTextBlock != null)
+                    {
+                        xAnswer.OrderPosition = int.Parse(xTextBlock.Text);
                     }
                 }
                 xAnswer.QuestionFk = xQuest.ID;
@@ -344,7 +350,6 @@ namespace TestVerktygWPF.View
                                 lblQTypeInstructions.Content = "Markera ett eller fler korrekta svar";
                                 break;
                             case 2:
-                                //xStackPanel.Children.Add(AddItemComboBox());
                                 xStackPanel.Children.Add(AddItemRanking(j));
                                 lblQTypeInstructions.Content = "Skriv frågorna i stigande ordning";
                                 break;
@@ -355,15 +360,7 @@ namespace TestVerktygWPF.View
                 }
             }
         }
-        //private ComboBox AddItemComboBox()
-        //{
-        //    Thickness xThickness = new Thickness();
-        //    ComboBox xComboBox = new ComboBox();
-        //    xThickness.Left = 10;
-        //    xComboBox.VerticalAlignment = VerticalAlignment.Center;
-        //    xComboBox.Margin = xThickness;
-        //    return xComboBox;
-        //}
+
         private CheckBox AddItemCheckBox(bool correctAnswer = false)
         {
             Thickness xThickness = new Thickness();

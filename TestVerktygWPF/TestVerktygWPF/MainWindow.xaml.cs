@@ -69,6 +69,7 @@ namespace TestVerktygWPF
                 {
                     LoginPage.Visibility = Visibility.Collapsed;
                     LogoutTabs.Visibility = Visibility.Visible;
+                    _Frame.Visibility = Visibility.Visible;
                     SelectedUser = item;
                     if (item.OccupationFk == 2)
                     {
@@ -116,9 +117,7 @@ namespace TestVerktygWPF
                 case "Skicka ut prov":
                     _Frame.Navigate(new TeacherTestManagementPage(SelectedUser));
                     break;
-                case "Rätt prov":
-                    _Frame.Navigate(new TeacherEvaluatePage(SelectedUser));
-                    break;
+               
                 case "Start Lärare":
                     _Frame.Navigate(new MainPageTeacher(SelectedUser));
                     break;
@@ -128,9 +127,7 @@ namespace TestVerktygWPF
                 case "Skapa Prov":
                     _Frame.Navigate(new TeacherCreateTestPage(SelectedUser));
                     break;
-                case "Godkänna Prov":
-                    _Frame.Navigate(new AdminTestDetailManagement(SelectedUser));
-                    break;
+               
             }
         }
         private void AddDataToBase()
@@ -894,7 +891,7 @@ namespace TestVerktygWPF
             TeacherTabs.Visibility = Visibility.Collapsed;
             LogoutTabs.Visibility = Visibility.Collapsed;
             LoginPage.Visibility = Visibility.Visible;
-            SelectedUser = null;
+            //SelectedUser = null;
             txtBoxPasswordInput.Password = "";
         }
     }

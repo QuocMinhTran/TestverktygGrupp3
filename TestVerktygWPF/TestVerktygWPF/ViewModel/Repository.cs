@@ -57,6 +57,7 @@ namespace TestVerktygWPF.ViewModel
 
         internal void SaveAnwnser(Answer itemAnswer)
         {
+            Console.WriteLine(itemAnswer.OrderPosition);
             using (var db = new DbModel())
             {
                 Console.WriteLine(itemAnswer + "SAVING ANWNSER");

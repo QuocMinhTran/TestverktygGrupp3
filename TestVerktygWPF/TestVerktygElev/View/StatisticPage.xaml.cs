@@ -28,7 +28,7 @@ namespace TestVerktygElev
             InitializeComponent();
             string sGrade;
             double dGrade = (double)p_iScore / (double)p_iTotalPoint ;
-            int iTime = (int)p_xTest.TimeStampe - p_iTime;
+            int iTime = (int)p_xTest.TimeStampe - p_iTime - 1;
             m_xStudent = p_xStudent;
             m_xTest = p_xTest;
             TextBlockTestName.Text = p_xTest.Name;
@@ -40,7 +40,7 @@ namespace TestVerktygElev
             else sGrade = "IG";
             if (iTime < 0) iTime = 0;
             TextBlockTime.Text = iTime.ToString();
-            TextBlockGrade.Text = sGrade;
+            TextBlockGrade.Text = sGrade + " " + p_iScore.ToString() + " / " + p_iTotalPoint ;
 
             TestFunctions(p_xStudent);
         }
